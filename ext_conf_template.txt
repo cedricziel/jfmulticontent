@@ -1,0 +1,3 @@
+
+# cat=basic/11; type=boolean; label=Use General Record Storage page only: If set only content can be choosen from the defined General Record Storage page
+useStoragePidOnly=1

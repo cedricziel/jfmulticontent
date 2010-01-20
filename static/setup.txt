@@ -1,0 +1,29 @@
+plugin.tx_jfmulticontent_pi1 {
+	jsLibrary = {$plugin.tx_jfmulticontent_pi1.jsLibrary}
+
+	templateFile = {$plugin.tx_jfmulticontent_pi1.file.templateFile}
+	cssFile = {$plugin.tx_jfmulticontent_pi1.file.cssFile}
+
+	2columnClasses = {$plugin.tx_jfmulticontent_pi1.2columnClasses}
+	3columnClasses = {$plugin.tx_jfmulticontent_pi1.3columnClasses}
+	4columnClasses = {$plugin.tx_jfmulticontent_pi1.4columnClasses}
+	classInner = {$plugin.tx_jfmulticontent_pi1.classInner}
+
+	jQueryNoConflict = {$plugin.tx_jfmulticontent_pi1.jQueryNoConflict}
+	jQueryFixTabHref = {$plugin.tx_jfmulticontent_pi1.jQueryFixTabHref}
+	jQueryLibrary = {$plugin.tx_jfmulticontent_pi1.file.jQueryLibrary}
+	jQueryEasing = {$plugin.tx_jfmulticontent_pi1.file.jQueryEasing}
+	jQueryUI = {$plugin.tx_jfmulticontent_pi1.file.jQueryUI}
+	jQueryUIstyle = {$plugin.tx_jfmulticontent_pi1.file.jQueryUIstyle}
+
+	columnWrap {
+		wrap = <div class="subcl">|</div> |*| <div class="subcl">|</div> |*| <div class="subcr">|</div>
+	}
+	tabWrap {
+		wrap = |
+	}
+	accordionWrap {
+		wrap = |
+	}
+}
+

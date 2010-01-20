@@ -1,0 +1,59 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<TITLE>Multiple Columns Template</TITLE>
+</head>
+<body>
+
+<h1>Multiple Columns</h1>
+
+
+
+<h2>TEMPLATE_COLUMNS:</h2>
+
+<!-- ###TEMPLATE_COLUMNS### begin -->
+<div class="subcolumns">
+	<!-- ###COLUMNS### -->
+	<div ###ATTRIBUTE###>###CONTENT###</div>
+	<!-- ###COLUMNS### -->
+</div>
+<!-- ###TEMPLATE_COLUMNS### end -->
+
+
+
+<h2>TEMPLATE_TAB:</h2>
+
+<!-- ###TEMPLATE_TAB### begin -->
+<div id="###KEY###">
+	<ul>
+		<!-- ###TITLES### -->
+		<li><a href="####KEY###-###ID###">###TITLE###</a></li>
+		<!-- ###TITLES### -->
+	</ul>
+	<!-- ###COLUMNS### -->
+	<div ###ATTRIBUTE### id="###KEY###-###ID###">
+		###CONTENT###
+	</div>
+	<!-- ###COLUMNS### -->
+</div>
+<!-- ###TEMPLATE_TAB### end -->
+
+
+
+<h2>TEMPLATE_ACCORDION:</h2>
+
+<!-- ###TEMPLATE_ACCORDION### begin -->
+<div id="###KEY###">
+	<!-- ###COLUMNS### -->
+	<h3><a href="#">###TITLE###</a></h3>
+	<div ###ATTRIBUTE###>
+		###CONTENT###
+	</div>
+	<!-- ###COLUMNS### -->
+</div>
+<!-- ###TEMPLATE_ACCORDION### end -->
+
+</body>
+</html>
+

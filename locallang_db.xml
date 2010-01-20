@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallang>
+	<meta type="array">
+		<type>database</type>
+		<description>Language labels for database tables/fields belonging to extension 'jfmulticontent'</description>
+	</meta>
+	<data type="array">
+		<languageKey index="default" type="array">
+			<label index="tt_content.list_type_pi1">Multiple Content</label>
+			<label index="tt_content.tx_jfmulticontent.contents">Contents to display</label>
+			<label index="tt_content.tx_jfmulticontent.contents_add">Create new record</label>
+			<label index="tt_content.tx_jfmulticontent.contents_edit">Edit</label>
+
+			<label index="tt_content.tx_jfmulticontent.sheet_general">General</label>
+			<label index="tt_content.tx_jfmulticontent.style">Style</label>
+			<label index="tt_content.tx_jfmulticontent.style.I.0">2 Columns</label>
+			<label index="tt_content.tx_jfmulticontent.style.I.1">3 columns</label>
+			<label index="tt_content.tx_jfmulticontent.style.I.2">4 columns</label>
+			<label index="tt_content.tx_jfmulticontent.style.I.3">Tabs</label>
+			<label index="tt_content.tx_jfmulticontent.style.I.4">Accordion</label>
+			<label index="tt_content.tx_jfmulticontent.column1">Column class 1</label>
+			<label index="tt_content.tx_jfmulticontent.column2">Column class 2</label>
+			<label index="tt_content.tx_jfmulticontent.column3">Column class 3</label>
+			<label index="tt_content.tx_jfmulticontent.column4">Column class 4</label>
+
+			<label index="tt_content.tx_jfmulticontent.sheet_title">Title</label>
+			<label index="tt_content.tx_jfmulticontent.titles">Overwrite titles (One title per line)</label>
+
+			<label index="tt_content.tx_jfmulticontent.sheet_attribute">Attributes</label>
+			<label index="tt_content.tx_jfmulticontent.attributes">Attributes for columns (One set of attributes per line)</label>
+
+			<label index="tt_content.tx_jfmulticontent.sheet_tab">Tabs</label>
+			<label index="tt_content.tx_jfmulticontent.tabCollapsible">Collapsible</label>
+			<label index="tt_content.tx_jfmulticontent.tabFxHeight">FX height</label>
+			<label index="tt_content.tx_jfmulticontent.tabFxOpacity">FX opacity</label>
+			<label index="tt_content.tx_jfmulticontent.tabFxDuration">FX duration</label>
+			<label index="tt_content.tx_jfmulticontent.tabFxDuration.I.0">Default (Normal)</label>
+			<label index="tt_content.tx_jfmulticontent.tabFxDuration.I.1">Slow</label>
+			<label index="tt_content.tx_jfmulticontent.tabFxDuration.I.2">Normal</label>
+			<label index="tt_content.tx_jfmulticontent.tabFxDuration.I.3">Fast</label>
+			<label index="tt_content.tx_jfmulticontent.tabOpen">Opened content</label>
+
+			<label index="tt_content.tx_jfmulticontent.sheet_accordion">Accordion</label>
+			<label index="tt_content.tx_jfmulticontent.accordionAutoHeight">Auto height</label>
+			<label index="tt_content.tx_jfmulticontent.accordionCollapsible">Collapsible</label>
+			<label index="tt_content.tx_jfmulticontent.accordionClosed">Closed at startup</label>
+			<label index="tt_content.tx_jfmulticontent.accordionOpen">Opened content</label>
+			<label index="tt_content.tx_jfmulticontent.accordionEvent">Event</label>
+			<label index="tt_content.tx_jfmulticontent.accordionEvent.I.0">Default (Click)</label>
+			<label index="tt_content.tx_jfmulticontent.accordionEvent.I.1">Click</label>
+			<label index="tt_content.tx_jfmulticontent.accordionEvent.I.2">Mouseover</label>
+			<label index="tt_content.tx_jfmulticontent.accordionAnimated">Animation</label>
+			<label index="tt_content.tx_jfmulticontent.accordionAnimated.I.0">Default (Slide)</label>
+			<label index="tt_content.tx_jfmulticontent.accordionAnimated.I.1">BounceSlide</label>
+			<label index="tt_content.tx_jfmulticontent.accordionAnimated.I.2">easeslide</label>
+			<label index="tt_content.tx_jfmulticontent.accordionTransition">Type of transition</label>
+			<label index="tt_content.tx_jfmulticontent.accordionTransition.I.0">Use Animation</label>
+			<label index="tt_content.tx_jfmulticontent.accordionTransitiondir">Direction of transition</label>
+			<label index="tt_content.tx_jfmulticontent.accordionTransitionduration">Duration of transition (in ms)</label>
+
+		</languageKey>
+		<languageKey index="de" type="array">
+			<label index="tt_content.list_type_pi1">Mehrfache Inhaltselemente</label>
+			<label index="tt_content.tx_jfmulticontent.contents">Inhalte zum anzeigen</label>
+			<label index="tt_content.tx_jfmulticontent.contents_add">Neuer Eintrag erstellen</label>
+			<label index="tt_content.tx_jfmulticontent.contents_edit">Editieren</label>
+
+			<label index="tt_content.tx_jfmulticontent.sheet_general">General</label>
+			<label index="tt_content.tx_jfmulticontent.style">Anzeige</label>
+			<label index="tt_content.tx_jfmulticontent.style.I.0">2 Spalten</label>
+			<label index="tt_content.tx_jfmulticontent.style.I.1">3 Spalten</label>
+			<label index="tt_content.tx_jfmulticontent.style.I.2">4 Spalten</label>
+			<label index="tt_content.tx_jfmulticontent.style.I.3">Tabulator</label>
+			<label index="tt_content.tx_jfmulticontent.style.I.4">Akkordeon</label>
+			<label index="tt_content.tx_jfmulticontent.column1">Spaltenklasse 1</label>
+			<label index="tt_content.tx_jfmulticontent.column2">Spaltenklasse 2</label>
+			<label index="tt_content.tx_jfmulticontent.column3">Spaltenklasse 3</label>
+			<label index="tt_content.tx_jfmulticontent.column4">Spaltenklasse 4</label>
+
+			<label index="tt_content.tx_jfmulticontent.sheet_title">Title</label>
+			<label index="tt_content.tx_jfmulticontent.titles">Titel überschreiben (Ein Titel pro Zeile)</label>
+
+			<label index="tt_content.tx_jfmulticontent.sheet_attribute">Attribute</label>
+			<label index="tt_content.tx_jfmulticontent.attributes">Attribute für Spalten (Ein Attributset pro Zeile)</label>
+
+			<label index="tt_content.tx_jfmulticontent.sheet_tab">Tabulator</label>
+			<label index="tt_content.tx_jfmulticontent.tabCollapsible">Zusammenklappbar</label>
+			<label index="tt_content.tx_jfmulticontent.tabFxHeight">Effekt Höhe</label>
+			<label index="tt_content.tx_jfmulticontent.tabFxOpacity">Effekt Transparents</label>
+			<label index="tt_content.tx_jfmulticontent.tabFxDuration">Effekt länge</label>
+			<label index="tt_content.tx_jfmulticontent.tabFxDuration.I.0">Standard (Normal)</label>
+			<label index="tt_content.tx_jfmulticontent.tabFxDuration.I.1">Langsam</label>
+			<label index="tt_content.tx_jfmulticontent.tabFxDuration.I.2">Normal</label>
+			<label index="tt_content.tx_jfmulticontent.tabFxDuration.I.3">Schnell</label>
+			<label index="tt_content.tx_jfmulticontent.tabOpen">Geöffneter Inhalt</label>
+
+			<label index="tt_content.tx_jfmulticontent.sheet_accordion">Akkordeon</label>
+			<label index="tt_content.tx_jfmulticontent.accordionAutoHeight">Automatische höhe</label>
+			<label index="tt_content.tx_jfmulticontent.accordionCollapsible">Zusammenklappbar</label>
+			<label index="tt_content.tx_jfmulticontent.accordionClosed">Beim start geschlossen</label>
+			<label index="tt_content.tx_jfmulticontent.accordionOpen">Geöffneter Inhalt</label>
+			<label index="tt_content.tx_jfmulticontent.accordionEvent">Ereignis</label>
+			<label index="tt_content.tx_jfmulticontent.accordionEvent.I.0">Standard</label>
+			<label index="tt_content.tx_jfmulticontent.accordionEvent.I.1">Click</label>
+			<label index="tt_content.tx_jfmulticontent.accordionEvent.I.2">Mouseover</label>
+			<label index="tt_content.tx_jfmulticontent.accordionAnimated">Animation</label>
+			<label index="tt_content.tx_jfmulticontent.accordionAnimated.I.0">Standard (Slide)</label>
+			<label index="tt_content.tx_jfmulticontent.accordionAnimated.I.1">Bounce Slide</label>
+			<label index="tt_content.tx_jfmulticontent.accordionTransition">Übergangsart</label>
+			<label index="tt_content.tx_jfmulticontent.accordionTransition.I.0">Benutze Animation</label>
+			<label index="tt_content.tx_jfmulticontent.accordionTransitiondir">Übergangsrichtung</label>
+			<label index="tt_content.tx_jfmulticontent.accordionTransitionduration">Übergangsdauer (in ms)</label>
+
+		</languageKey>
+	</data>
+</T3locallang>
