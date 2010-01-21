@@ -6,52 +6,45 @@
 		<general>
 			<ROOT>
 				<TCEforms>
-					<sheetTitle>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.sheet_general
-					</sheetTitle>
+					<sheetTitle>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.sheet_general</sheetTitle>
 				</TCEforms>
 				<type>array</type>
 				<el>
 					<style>
 						<TCEforms>
 							<exclude>1</exclude>
-							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.style
-							</label>
+							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.style</label>
 							<config>
 								<type>select</type>
 								<size>1</size>
 								<maxitems>1</maxitems>
 								<items type="array">
 									<numIndex index="0" type="array">
-										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.style.I.0
-										</numIndex>
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.style.I.0</numIndex>
 										<numIndex index="1">2colomn</numIndex>
 										<numIndex index="2">EXT:jfmulticontent/selicon_tt_content_tx_jfmulticontent_style_0.gif
 										</numIndex>
 									</numIndex>
 									<numIndex index="1" type="array">
-										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.style.I.1
-										</numIndex>
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.style.I.1</numIndex>
 										<numIndex index="1">3colomn</numIndex>
 										<numIndex index="2">EXT:jfmulticontent/selicon_tt_content_tx_jfmulticontent_style_1.gif
 										</numIndex>
 									</numIndex>
 									<numIndex index="2" type="array">
-										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.style.I.2
-										</numIndex>
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.style.I.2</numIndex>
 										<numIndex index="1">4colomn</numIndex>
 										<numIndex index="2">EXT:jfmulticontent/selicon_tt_content_tx_jfmulticontent_style_2.gif
 										</numIndex>
 									</numIndex>
 									<numIndex index="3" type="array">
-										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.style.I.3
-										</numIndex>
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.style.I.3</numIndex>
 										<numIndex index="1">tab</numIndex>
 										<numIndex index="2">EXT:jfmulticontent/selicon_tt_content_tx_jfmulticontent_style_3.gif
 										</numIndex>
 									</numIndex>
 									<numIndex index="4" type="array">
-										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.style.I.4
-										</numIndex>
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.style.I.4</numIndex>
 										<numIndex index="1">accordion</numIndex>
 										<numIndex index="2">EXT:jfmulticontent/selicon_tt_content_tx_jfmulticontent_style_4.gif
 										</numIndex>
@@ -63,56 +56,48 @@
 					<column1>
 						<TCEforms>
 							<exclude>1</exclude>
-							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.column1
-							</label>
+							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.column1</label>
 							<config>
 								<type>select</type>
 								<size>1</size>
 								<maxitems>1</maxitems>
-								<itemsProcFunc>tx_jfmulticontent_itemsProcFunc->getClassInner
-								</itemsProcFunc>
+								<itemsProcFunc>tx_jfmulticontent_itemsProcFunc->getClassInner</itemsProcFunc>
 							</config>
 						</TCEforms>
 					</column1>
 					<column2>
 						<TCEforms>
 							<exclude>1</exclude>
-							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.column2
-							</label>
+							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.column2</label>
 							<config>
 								<type>select</type>
 								<size>1</size>
 								<maxitems>1</maxitems>
-								<itemsProcFunc>tx_jfmulticontent_itemsProcFunc->getClassInner
-								</itemsProcFunc>
+								<itemsProcFunc>tx_jfmulticontent_itemsProcFunc->getClassInner</itemsProcFunc>
 							</config>
 						</TCEforms>
 					</column2>
 					<column3>
 						<TCEforms>
 							<exclude>1</exclude>
-							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.column3
-							</label>
+							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.column3</label>
 							<config>
 								<type>select</type>
 								<size>1</size>
 								<maxitems>1</maxitems>
-								<itemsProcFunc>tx_jfmulticontent_itemsProcFunc->getClassInner
-								</itemsProcFunc>
+								<itemsProcFunc>tx_jfmulticontent_itemsProcFunc->getClassInner</itemsProcFunc>
 							</config>
 						</TCEforms>
 					</column3>
 					<column4>
 						<TCEforms>
 							<exclude>1</exclude>
-							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.column4
-							</label>
+							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.column4</label>
 							<config>
 								<type>select</type>
 								<size>1</size>
 								<maxitems>1</maxitems>
-								<itemsProcFunc>tx_jfmulticontent_itemsProcFunc->getClassInner
-								</itemsProcFunc>
+								<itemsProcFunc>tx_jfmulticontent_itemsProcFunc->getClassInner</itemsProcFunc>
 							</config>
 						</TCEforms>
 					</column4>
@@ -122,16 +107,14 @@
 		<title>
 			<ROOT>
 				<TCEforms>
-					<sheetTitle>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.sheet_title
-					</sheetTitle>
+					<sheetTitle>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.sheet_title</sheetTitle>
 				</TCEforms>
 				<type>array</type>
 				<el>
 					<titles>
 						<TCEforms>
 							<exclude>1</exclude>
-							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.titles
-							</label>
+							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.titles</label>
 							<config>
 								<type>text</type>
 								<wrap>OFF</wrap>
@@ -146,16 +129,14 @@
 		<attribute>
 			<ROOT>
 				<TCEforms>
-					<sheetTitle>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.sheet_attribute
-					</sheetTitle>
+					<sheetTitle>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.sheet_attribute</sheetTitle>
 				</TCEforms>
 				<type>array</type>
 				<el>
 					<attributes>
 						<TCEforms>
 							<exclude>1</exclude>
-							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.attributes
-							</label>
+							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.attributes</label>
 							<config>
 								<type>text</type>
 								<wrap>OFF</wrap>
@@ -170,16 +151,14 @@
 		<tab>
 			<ROOT>
 				<TCEforms>
-					<sheetTitle>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.sheet_tab
-					</sheetTitle>
+					<sheetTitle>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.sheet_tab</sheetTitle>
 				</TCEforms>
 				<type>array</type>
 				<el>
 					<tabCollapsible>
 						<TCEforms>
 							<exclude>1</exclude>
-							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.tabCollapsible
-							</label>
+							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.tabCollapsible</label>
 							<config>
 								<type>check</type>
 								<default>0</default>
@@ -189,8 +168,7 @@
 					<tabOpen>
 						<TCEforms>
 							<exclude>1</exclude>
-							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.tabOpen
-							</label>
+							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.tabOpen</label>
 							<config>
 								<type>input</type>
 								<size>2</size>
@@ -203,8 +181,7 @@
 					<tabFxHeight>
 						<TCEforms>
 							<exclude>1</exclude>
-							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.tabFxHeight
-							</label>
+							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.tabFxHeight</label>
 							<config>
 								<type>check</type>
 								<default>0</default>
@@ -214,8 +191,7 @@
 					<tabFxOpacity>
 						<TCEforms>
 							<exclude>1</exclude>
-							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.tabFxOpacity
-							</label>
+							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.tabFxOpacity</label>
 							<config>
 								<type>check</type>
 								<default>0</default>
@@ -225,31 +201,26 @@
 					<tabFxDuration>
 						<TCEforms>
 							<exclude>1</exclude>
-							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.tabFxDuration
-							</label>
+							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.tabFxDuration</label>
 							<config>
 								<type>select</type>
 								<size>1</size>
 								<maxitems>1</maxitems>
 								<items type="array">
 									<numIndex index="0" type="array">
-										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.tabFxDuration.I.0
-										</numIndex>
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.tabFxDuration.I.0</numIndex>
 										<numIndex index="1"></numIndex>
 									</numIndex>
 									<numIndex index="1" type="array">
-										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.tabFxDuration.I.1
-										</numIndex>
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.tabFxDuration.I.1</numIndex>
 										<numIndex index="1">slow</numIndex>
 									</numIndex>
 									<numIndex index="2" type="array">
-										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.tabFxDuration.I.2
-										</numIndex>
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.tabFxDuration.I.2</numIndex>
 										<numIndex index="1">normal</numIndex>
 									</numIndex>
 									<numIndex index="3" type="array">
-										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.tabFxDuration.I.3
-										</numIndex>
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.tabFxDuration.I.3</numIndex>
 										<numIndex index="1">fast</numIndex>
 									</numIndex>
 								</items>
@@ -262,16 +233,14 @@
 		<accordion>
 			<ROOT>
 				<TCEforms>
-					<sheetTitle>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.sheet_accordion
-					</sheetTitle>
+					<sheetTitle>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.sheet_accordion</sheetTitle>
 				</TCEforms>
 				<type>array</type>
 				<el>
 					<accordionAutoHeight>
 						<TCEforms>
 							<exclude>1</exclude>
-							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.accordionAutoHeight
-							</label>
+							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.accordionAutoHeight</label>
 							<config>
 								<type>check</type>
 								<default>1</default>
@@ -281,8 +250,7 @@
 					<accordionCollapsible>
 						<TCEforms>
 							<exclude>1</exclude>
-							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.accordionCollapsible
-							</label>
+							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.accordionCollapsible</label>
 							<config>
 								<type>check</type>
 								<default>0</default>
@@ -292,8 +260,7 @@
 					<accordionClosed>
 						<TCEforms>
 							<exclude>1</exclude>
-							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.accordionClosed
-							</label>
+							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.accordionClosed</label>
 							<config>
 								<type>check</type>
 								<default>0</default>
@@ -303,8 +270,7 @@
 					<accordionOpen>
 						<TCEforms>
 							<exclude>1</exclude>
-							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.accordionOpen
-							</label>
+							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.accordionOpen</label>
 							<config>
 								<type>input</type>
 								<size>2</size>
@@ -317,26 +283,22 @@
 					<accordionEvent>
 						<TCEforms>
 							<exclude>1</exclude>
-							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.accordionEvent
-							</label>
+							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.accordionEvent</label>
 							<config>
 								<type>select</type>
 								<size>1</size>
 								<maxitems>1</maxitems>
 								<items type="array">
 									<numIndex index="0" type="array">
-										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.accordionEvent.I.0
-										</numIndex>
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.accordionEvent.I.0</numIndex>
 										<numIndex index="1"></numIndex>
 									</numIndex>
 									<numIndex index="1" type="array">
-										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.accordionEvent.I.1
-										</numIndex>
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.accordionEvent.I.1</numIndex>
 										<numIndex index="1">click</numIndex>
 									</numIndex>
 									<numIndex index="2" type="array">
-										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.accordionEvent.I.2
-										</numIndex>
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.accordionEvent.I.2</numIndex>
 										<numIndex index="1">mouseover</numIndex>
 									</numIndex>
 								</items>
@@ -346,21 +308,18 @@
 					<accordionAnimated>
 						<TCEforms>
 							<exclude>1</exclude>
-							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.accordionAnimated
-							</label>
+							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.accordionAnimated</label>
 							<config>
 								<type>select</type>
 								<size>1</size>
 								<maxitems>1</maxitems>
 								<items type="array">
 									<numIndex index="0" type="array">
-										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.accordionAnimated.I.0
-										</numIndex>
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.accordionAnimated.I.0</numIndex>
 										<numIndex index="1">slide</numIndex>
 									</numIndex>
 									<numIndex index="1" type="array">
-										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.accordionAnimated.I.1
-										</numIndex>
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.accordionAnimated.I.1</numIndex>
 										<numIndex index="1">bounceslide</numIndex>
 									</numIndex>
 								</items>
@@ -370,16 +329,14 @@
 					<accordionTransition>
 						<TCEforms>
 							<exclude>1</exclude>
-							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.accordionTransition
-							</label>
+							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.accordionTransition</label>
 							<config>
 								<type>select</type>
 								<size>1</size>
 								<maxitems>1</maxitems>
 								<items type="array">
 									<numIndex index="0" type="array">
-										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.accordionTransition.I.0
-										</numIndex>
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.accordionTransition.I.0</numIndex>
 										<numIndex index="1"></numIndex>
 									</numIndex>
 									<numIndex index="1" type="array">
@@ -437,8 +394,7 @@
 					<accordionTransitiondir>
 						<TCEforms>
 							<exclude>1</exclude>
-							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.accordionTransitiondir
-							</label>
+							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.accordionTransitiondir</label>
 							<config>
 								<type>select</type>
 								<size>1</size>
@@ -463,8 +419,7 @@
 					<accordionTransitionduration>
 						<TCEforms>
 							<exclude>1</exclude>
-							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.accordionTransitionduration
-							</label>
+							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.accordionTransitionduration</label>
 							<config>
 								<type>input</type>
 								<size>6</size>
