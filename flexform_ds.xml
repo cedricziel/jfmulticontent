@@ -178,6 +178,16 @@
 							</config>
 						</TCEforms>
 					</tabOpen>
+					<tabRandomContent>
+						<TCEforms>
+							<exclude>1</exclude>
+							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.tabRandomContent</label>
+							<config>
+								<type>check</type>
+								<default>0</default>
+							</config>
+						</TCEforms>
+					</tabRandomContent>
 					<tabFxHeight>
 						<TCEforms>
 							<exclude>1</exclude>
@@ -280,6 +290,16 @@
 							</config>
 						</TCEforms>
 					</accordionOpen>
+					<accordionRandomContent>
+						<TCEforms>
+							<exclude>1</exclude>
+							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.accordionRandomContent</label>
+							<config>
+								<type>check</type>
+								<default>0</default>
+							</config>
+						</TCEforms>
+					</accordionRandomContent>
 					<accordionEvent>
 						<TCEforms>
 							<exclude>1</exclude>
@@ -432,5 +452,38 @@
 				</el>
 			</ROOT>
 		</accordion>
+		<autoplay>
+			<ROOT>
+				<TCEforms>
+					<sheetTitle>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.sheet_autoplay</sheetTitle>
+				</TCEforms>
+				<type>array</type>
+				<el>
+					<delayDuration>
+						<TCEforms>
+							<exclude>1</exclude>
+							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.autoplayDuration</label>
+							<config>
+								<type>input</type>
+								<size>6</size>
+								<max>6</max>
+								<default>0</default>
+								<eval>int,nospace</eval>
+							</config>
+						</TCEforms>
+					</delayDuration>
+					<autoplayContinuing>
+						<TCEforms>
+							<exclude>1</exclude>
+							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.autoplayContinuing</label>
+							<config>
+								<type>check</type>
+								<default>0</default>
+							</config>
+						</TCEforms>
+					</autoplayContinuing>
+				</el>
+			</ROOT>
+		</autoplay>
 	</sheets>
 </T3DataStructure>

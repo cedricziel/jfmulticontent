@@ -59,6 +59,7 @@ class tx_jfmulticontent_pi1 extends tslib_pibase {
 	var $css = array();
 	var $titles = array();
 	var $attributes = array();
+	var $cElements = array();
 
 	/**
 	 * The main method of the PlugIn
@@ -89,6 +90,12 @@ class tx_jfmulticontent_pi1 extends tslib_pibase {
 			$this->templateFile = $this->cObj->fileResource($this->conf['templateFile']);
 		} else {
 			return "<p>NO TEMPLATE FOUND!</p>";
+		}
+
+		// get the content ID's
+		$this->cElements = t3lib_div::trimExplode(",", $this->cObj->data['tx_jfmulticontent_contents']);
+		if ($this->contentCount === null) {
+			$this->contentCount = count($this->cElements);
 		}
 
 		// add the CSS file
@@ -164,6 +171,9 @@ class tx_jfmulticontent_pi1 extends tslib_pibase {
 						if ($this->lConf['tabFxDuration'] > 0) {
 							$fx[] = "duration: '{$this->lConf['tabFxDuration']}'";
 						}
+						if ($this->lConf['delayDuration'] > 0) {
+							$rotate = ".tabs('rotate' , {$this->lConf['delayDuration']}, ".($this->lConf['autoplayContinuing'] ? 'true' : 'false').")";
+						}
 						$options = array();
 						if (count($fx) > 0) {
 							$options[] = "fx: {".implode(",", $fx)."}";
@@ -171,7 +181,9 @@ class tx_jfmulticontent_pi1 extends tslib_pibase {
 						if ($this->lConf['tabCollapsible']) {
 							$options[] = "collapsible: true";
 						}
-						if (is_numeric($this->lConf['tabOpen'])) {
+						if ($this->lConf['tabRandomContent']) {
+							$options[] = "selected: Math.floor(Math.random()*{$this->contentCount})";
+						} elseif (is_numeric($this->lConf['tabOpen'])) {
 							$options[] = "selected: ".($this->lConf['tabOpen'] - 1);
 						}
 						if (T3JQUERY === true) {
@@ -195,7 +207,7 @@ class tx_jfmulticontent_pi1 extends tslib_pibase {
 						$this->addCssFile($this->conf['jQueryUIstyle']);
 						$this->addJS("
 {$jQuery}(document).ready(function() { {$fixTabHref}
-	{$jQuery}('#{$this->contentKey}').tabs(".(count($options) ? "{".implode(",", $options)."}" : "").");
+	{$jQuery}('#{$this->contentKey}').tabs(".(count($options) ? "{".implode(",", $options)."}" : "")."){$rotate};
 });");
 						break;
 					}
@@ -222,6 +234,8 @@ class tx_jfmulticontent_pi1 extends tslib_pibase {
 						if ($this->lConf['accordionClosed']) {
 							$options['active'] = "active: false";
 							$options['collapsible'] = "collapsible: true";
+						} elseif ($this->lConf['accordionRandomContent']) {
+							$options['active'] = "active: Math.floor(Math.random()*{$this->contentCount})";
 						} elseif (is_numeric($this->lConf['accordionOpen'])) {
 							$options['active'] = "active: ".($this->lConf['accordionOpen'] - 1);
 						}
@@ -293,11 +307,6 @@ class tx_jfmulticontent_pi1 extends tslib_pibase {
 		$titleCode = $this->cObj->getSubpart($templateCode, "###TITLES###");
 		// Get the column template
 		$columnCode = $this->cObj->getSubpart($templateCode, "###COLUMNS###");
-		// get the content ID's
-		$cElements = t3lib_div::trimExplode(",", $this->cObj->data['tx_jfmulticontent_contents']);
-		if ($this->contentCount === null) {
-			$this->contentCount = count($cElements);
-		}
 		// Define the contentWrap
 		switch (count($this->contentWrap)) {
 			case 1 : {
@@ -351,7 +360,7 @@ class tx_jfmulticontent_pi1 extends tslib_pibase {
 				if ($this->titles[$a] != '') {
 					$markerArray["TITLE"] = $this->titles[$a];
 				} else {
-					$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery('header','tt_content','uid='.intval($cElements[$a]),'','',1);
+					$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery('header','tt_content','uid='.intval($this->cElements[$a]),'','',1);
 					$row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res);
 					$markerArray["TITLE"] = $row['header'];
 				}
@@ -368,7 +377,7 @@ class tx_jfmulticontent_pi1 extends tslib_pibase {
 			// TODO: Remove the title from content
 			$cConf = array(
 				'tables' => 'tt_content',
-				'source' => $cElements[$a],
+				'source' => $this->cElements[$a],
 				'dontCheckPid' => 1,
 			);
 			// wrap the content

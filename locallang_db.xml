@@ -39,12 +39,14 @@
 			<label index="tt_content.tx_jfmulticontent.tabFxDuration.I.2">Normal</label>
 			<label index="tt_content.tx_jfmulticontent.tabFxDuration.I.3">Fast</label>
 			<label index="tt_content.tx_jfmulticontent.tabOpen">Opened content</label>
+			<label index="tt_content.tx_jfmulticontent.tabRandomContent">Open random content</label>
 
 			<label index="tt_content.tx_jfmulticontent.sheet_accordion">Accordion</label>
 			<label index="tt_content.tx_jfmulticontent.accordionAutoHeight">Auto height</label>
 			<label index="tt_content.tx_jfmulticontent.accordionCollapsible">Collapsible</label>
 			<label index="tt_content.tx_jfmulticontent.accordionClosed">Closed at startup</label>
 			<label index="tt_content.tx_jfmulticontent.accordionOpen">Opened content</label>
+			<label index="tt_content.tx_jfmulticontent.accordionRandomContent">Open random content</label>
 			<label index="tt_content.tx_jfmulticontent.accordionEvent">Event</label>
 			<label index="tt_content.tx_jfmulticontent.accordionEvent.I.0">Default (Click)</label>
 			<label index="tt_content.tx_jfmulticontent.accordionEvent.I.1">Click</label>
@@ -58,6 +60,9 @@
 			<label index="tt_content.tx_jfmulticontent.accordionTransitiondir">Direction of transition</label>
 			<label index="tt_content.tx_jfmulticontent.accordionTransitionduration">Duration of transition (in ms)</label>
 
+			<label index="tt_content.tx_jfmulticontent.sheet_autoplay">Autoplay</label>
+			<label index="tt_content.tx_jfmulticontent.autoplayDuration">Delay for autoplay (in ms)</label>
+			<label index="tt_content.tx_jfmulticontent.autoplayContinuing">Continuing</label>
 		</languageKey>
 		<languageKey index="de" type="array">
 			<label index="tt_content.list_type_pi1">Mehrfache Inhaltselemente</label>
@@ -93,12 +98,14 @@
 			<label index="tt_content.tx_jfmulticontent.tabFxDuration.I.2">Normal</label>
 			<label index="tt_content.tx_jfmulticontent.tabFxDuration.I.3">Schnell</label>
 			<label index="tt_content.tx_jfmulticontent.tabOpen">Geöffneter Inhalt</label>
+			<label index="tt_content.tx_jfmulticontent.tabRandomContent">Öffne zufälliger Inhalt</label>
 
 			<label index="tt_content.tx_jfmulticontent.sheet_accordion">Akkordeon</label>
 			<label index="tt_content.tx_jfmulticontent.accordionAutoHeight">Automatische höhe</label>
 			<label index="tt_content.tx_jfmulticontent.accordionCollapsible">Zusammenklappbar</label>
 			<label index="tt_content.tx_jfmulticontent.accordionClosed">Beim start geschlossen</label>
 			<label index="tt_content.tx_jfmulticontent.accordionOpen">Geöffneter Inhalt</label>
+			<label index="tt_content.tx_jfmulticontent.accordionRandomContent">Öffne zufälliger Inhalt</label>
 			<label index="tt_content.tx_jfmulticontent.accordionEvent">Ereignis</label>
 			<label index="tt_content.tx_jfmulticontent.accordionEvent.I.0">Standard</label>
 			<label index="tt_content.tx_jfmulticontent.accordionEvent.I.1">Click</label>
@@ -111,6 +118,9 @@
 			<label index="tt_content.tx_jfmulticontent.accordionTransitiondir">Übergangsrichtung</label>
 			<label index="tt_content.tx_jfmulticontent.accordionTransitionduration">Übergangsdauer (in ms)</label>
 
+			<label index="tt_content.tx_jfmulticontent.sheet_autoplay">Autoplay</label>
+			<label index="tt_content.tx_jfmulticontent.autoplayDuration">Autoplay Wartezeit (in ms)</label>
+			<label index="tt_content.tx_jfmulticontent.autoplayContinuing">Weiterführung der Anomation</label>
 		</languageKey>
 	</data>
 </T3locallang>
