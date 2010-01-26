@@ -254,6 +254,21 @@ class tx_jfmulticontent_pi1 extends tslib_pibase {
 						} else if ($this->lConf['accordionAnimated']) {
 							$options['animated'] = "animated: '{$this->lConf['accordionAnimated']}'";
 						}
+
+						/*
+						if ($this->lConf['delayDuration'] > 0) {
+							//$this->lConf['delayDuration']
+							//$this->lConf['autoplayContinuing']
+							$rotate = "
+	setInterval(\"tx_jfmulticontent_next_accordion('{$this->contentKey}')\", {$this->lConf['delayDuration']});";
+							$this->addJS("
+function tx_jfmulticontent_next_accordion(id) {
+	var active = ({$jQuery}('#'+id).accordion('option', 'active'));
+	{$jQuery}('#'+id).accordion('activate', active+1);
+}");
+						}
+						*/
+
 						// jQuery Accordion
 						if (T3JQUERY === true) {
 							tx_t3jquery::addJqJS();
