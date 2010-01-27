@@ -30,7 +30,7 @@ plugin.tx_jfmulticontent_pi1 {
 	jQueryFixTabHref = 0
 
 	# cat=plugin.tx_jfmulticontent.jquery/file/030; type=file[js]; label=jQuery Library: Location of the jQuery Lib
-	file.jQueryLibrary = EXT:jfmulticontent/res/jquery/js/jquery-1.3.2.min.js
+	file.jQueryLibrary = EXT:jfmulticontent/res/jquery/js/jquery-1.4.1.min.js
 
 	# cat=plugin.tx_jfmulticontent.jquery/file/040; type=file[js]; label=jQuery Easing: Location of the jQuery Easing
 	file.jQueryEasing = EXT:jfmulticontent/res/jquery/js/jquery.easing-1.3.js
