@@ -176,15 +176,15 @@ class tx_jfmulticontent_pi1 extends tslib_pibase {
 						}
 						$options = array();
 						if (count($fx) > 0) {
-							$options[] = "fx: {".implode(",", $fx)."}";
+							$options[] = "fx:{".implode(",", $fx)."}";
 						}
 						if ($this->lConf['tabCollapsible']) {
-							$options[] = "collapsible: true";
+							$options[] = "collapsible:true";
 						}
 						if ($this->lConf['tabRandomContent']) {
-							$options[] = "selected: Math.floor(Math.random()*{$this->contentCount})";
+							$options[] = "selected:Math.floor(Math.random()*{$this->contentCount})";
 						} elseif (is_numeric($this->lConf['tabOpen'])) {
-							$options[] = "selected: ".($this->lConf['tabOpen'] - 1);
+							$options[] = "selected:".($this->lConf['tabOpen'] - 1);
 						}
 						if (T3JQUERY === true) {
 							tx_t3jquery::addJqJS();
@@ -207,7 +207,7 @@ class tx_jfmulticontent_pi1 extends tslib_pibase {
 						$this->addCssFile($this->conf['jQueryUIstyle']);
 						$this->addJS("
 {$jQuery}(document).ready(function() { {$fixTabHref}
-	{$jQuery}('#{$this->contentKey}').tabs(".(count($options) ? "{".implode(",", $options)."}" : "")."){$rotate};
+	{$jQuery}('#{$this->contentKey}').tabs(".(count($options) ? "{".implode(", ", $options)."}" : "")."){$rotate};
 });");
 						break;
 					}
@@ -226,24 +226,24 @@ class tx_jfmulticontent_pi1 extends tslib_pibase {
 						$this->addJS(chr(10).$jQueryNoConflict);
 						$options = array();
 						if (! $this->lConf['accordionAutoHeight']) {
-							$options['autoHeight'] = "autoHeight: false";
+							$options['autoHeight'] = "autoHeight:false";
 						}
 						if ($this->lConf['accordionCollapsible']) {
-							$options['collapsible'] = "collapsible: true";
+							$options['collapsible'] = "collapsible:true";
 						}
 						if ($this->lConf['accordionClosed']) {
-							$options['active'] = "active: false";
-							$options['collapsible'] = "collapsible: true";
+							$options['active'] = "active:false";
+							$options['collapsible'] = "collapsible:true";
 						} elseif ($this->lConf['accordionRandomContent']) {
-							$options['active'] = "active: Math.floor(Math.random()*{$this->contentCount})";
+							$options['active'] = "active:Math.floor(Math.random()*{$this->contentCount})";
 						} elseif (is_numeric($this->lConf['accordionOpen'])) {
-							$options['active'] = "active: ".($this->lConf['accordionOpen'] - 1);
+							$options['active'] = "active:".($this->lConf['accordionOpen'] - 1);
 						}
 						if ($this->lConf['accordionEvent']) {
-							$options['event'] = "event: '{$this->lConf['accordionEvent']}'";
+							$options['event'] = "event:'{$this->lConf['accordionEvent']}'";
 						}
 						if ($this->lConf['accordionTransition']) {
-							$options['animated'] = "animated: '{$this->contentKey}'";
+							$options['animated'] = "animated:'{$this->contentKey}'";
 							$this->addJS("
 {$jQuery}.ui.accordion.animations.{$this->contentKey} = function(options) {
 	this.slide(options, {
@@ -252,23 +252,25 @@ class tx_jfmulticontent_pi1 extends tslib_pibase {
 	});
 };");
 						} else if ($this->lConf['accordionAnimated']) {
-							$options['animated'] = "animated: '{$this->lConf['accordionAnimated']}'";
+							$options['animated'] = "animated:'{$this->lConf['accordionAnimated']}'";
 						}
-
-						/*
+						$continuing = "";
 						if ($this->lConf['delayDuration'] > 0) {
-							//$this->lConf['delayDuration']
-							//$this->lConf['autoplayContinuing']
-							$rotate = "
-	setInterval(\"tx_jfmulticontent_next_accordion('{$this->contentKey}')\", {$this->lConf['delayDuration']});";
+							// does not work if (! $this->lConf['autoplayContinuing']) {}
+							$continuing = "
+	{$jQuery}('#{$this->contentKey}').click(function(){{$jQuery}('#{$this->contentKey}').accordion('option', 'change', '');});";
+							$settimeout = "setTimeout(\"tx_jfmulticontent_next_accordion({$jQuery}('#{$this->contentKey}'),{$this->contentCount})\", {$this->lConf['delayDuration']});";
+							$this->addJS(chr(10).$settimeout);
+							$options['change'] = "change:function(event,ui){{$settimeout}}";
 							$this->addJS("
-function tx_jfmulticontent_next_accordion(id) {
-	var active = ({$jQuery}('#'+id).accordion('option', 'active'));
-	{$jQuery}('#'+id).accordion('activate', active+1);
+function tx_jfmulticontent_next_accordion(id, max) {
+	if ({$jQuery}(id).accordion('option', 'change') != '') {
+		active = {$jQuery}(id).accordion('option', 'active') + 1;
+		active = (active >= max ? 0 : active);
+		{$jQuery}(id).accordion('activate', active);
+	}
 }");
 						}
-						*/
-
 						// jQuery Accordion
 						if (T3JQUERY === true) {
 							tx_t3jquery::addJqJS();
@@ -280,7 +282,7 @@ function tx_jfmulticontent_next_accordion(id) {
 						$this->addCssFile($this->conf['jQueryUIstyle']);
 						$this->addJS("
 {$jQuery}(document).ready(function() {
-	{$jQuery}('#{$this->contentKey}').accordion(".(count($options) ? "{".implode(",", $options)."}" : "").");
+	{$jQuery}('#{$this->contentKey}').accordion(".(count($options) ? "{".implode(", ", $options)."}" : "").");{$continuing}
 });");
 						break;
 					}
