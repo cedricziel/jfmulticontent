@@ -399,10 +399,12 @@ function tx_jfmulticontent_next_accordion(id, max) {
 			);
 			// wrap the content
 			$markerArray["CONTENT"] = $this->cObj->stdWrap($this->cObj->RECORDS($cConf), array('wrap' => $wrap));;
-			// add content to COLUMNS
-			$columns .= $this->cObj->substituteMarkerArray($columnCode, $markerArray, '###|###', 0);
-			// add content to TITLE
-			$titles .= $this->cObj->substituteMarkerArray($titleCode, $markerArray, '###|###', 0);
+			if ($markerArray["CONTENT"]) {
+				// add content to COLUMNS
+				$columns .= $this->cObj->substituteMarkerArray($columnCode, $markerArray, '###|###', 0);
+				// add content to TITLE
+				$titles .= $this->cObj->substituteMarkerArray($titleCode, $markerArray, '###|###', 0);
+			}
 		}
 
 		$return_string = $templateCode;
