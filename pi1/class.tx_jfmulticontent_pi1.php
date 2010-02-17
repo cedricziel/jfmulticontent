@@ -117,10 +117,8 @@ class tx_jfmulticontent_pi1 extends tslib_pibase {
 		// define the jQuery mode and function
 		if ($this->conf['jQueryNoConflict']) {
 			$jQueryNoConflict = "jQuery.noConflict();";
-			$jQuery = "jQuery";
 		} else {
 			$jQueryNoConflict = "";
-			$jQuery = "$";
 		}
 
 		// style
@@ -157,140 +155,122 @@ class tx_jfmulticontent_pi1 extends tslib_pibase {
 						}
 					}
 				}
-				switch ($this->conf['jsLibrary']) {
-					case "jquery" : {
-						// jQuery Tabs
-						$this->addJS(chr(10).$jQueryNoConflict);
-						$fx = array();
-						if ($this->lConf['tabFxHeight']) {
-							$fx[] = "height: 'toggle'";
-						}
-						if ($this->lConf['tabFxOpacity']) {
-							$fx[] = "opacity: 'toggle'";
-						}
-						if ($this->lConf['tabFxDuration'] > 0) {
-							$fx[] = "duration: '{$this->lConf['tabFxDuration']}'";
-						}
-						if ($this->lConf['delayDuration'] > 0) {
-							$rotate = ".tabs('rotate' , {$this->lConf['delayDuration']}, ".($this->lConf['autoplayContinuing'] ? 'true' : 'false').")";
-						}
-						$options = array();
-						if (count($fx) > 0) {
-							$options[] = "fx:{".implode(",", $fx)."}";
-						}
-						if ($this->lConf['tabCollapsible']) {
-							$options[] = "collapsible:true";
-						}
-						if ($this->lConf['tabRandomContent']) {
-							$options[] = "selected:Math.floor(Math.random()*{$this->contentCount})";
-						} elseif (is_numeric($this->lConf['tabOpen'])) {
-							$options[] = "selected:".($this->lConf['tabOpen'] - 1);
-						}
-						if (T3JQUERY === true) {
-							tx_t3jquery::addJqJS();
-						} else {
-							$this->addJsFile($this->conf['jQueryLibrary']);
-							$this->addJsFile($this->conf['jQueryUI']);
-						}
-						// Fix the href problem (optimizing)
-						if ($this->conf['jQueryFixTabHref']) {
-							$fixTabHref = "
-	{$jQuery}('#{$this->contentKey} ul li a').each(function(id, item) {
+				// jQuery Tabs
+				$this->addJS(chr(10).$jQueryNoConflict);
+				$fx = array();
+				if ($this->lConf['tabFxHeight']) {
+					$fx[] = "height: 'toggle'";
+				}
+				if ($this->lConf['tabFxOpacity']) {
+					$fx[] = "opacity: 'toggle'";
+				}
+				if ($this->lConf['tabFxDuration'] > 0) {
+					$fx[] = "duration: '{$this->lConf['tabFxDuration']}'";
+				}
+				if ($this->lConf['delayDuration'] > 0) {
+					$rotate = ".tabs('rotate' , {$this->lConf['delayDuration']}, ".($this->lConf['autoplayContinuing'] ? 'true' : 'false').")";
+				}
+				$options = array();
+				if (count($fx) > 0) {
+					$options[] = "fx:{".implode(",", $fx)."}";
+				}
+				if ($this->lConf['tabCollapsible']) {
+					$options[] = "collapsible:true";
+				}
+				if ($this->lConf['tabRandomContent']) {
+					$options[] = "selected:Math.floor(Math.random()*{$this->contentCount})";
+				} elseif (is_numeric($this->lConf['tabOpen'])) {
+					$options[] = "selected:".($this->lConf['tabOpen'] - 1);
+				}
+				if (T3JQUERY === true) {
+					tx_t3jquery::addJqJS();
+				} else {
+					$this->addJsFile($this->conf['jQueryLibrary']);
+					$this->addJsFile($this->conf['jQueryUI']);
+				}
+				// Fix the href problem (optimizing)
+				if ($this->conf['jQueryFixTabHref']) {
+					$fixTabHref = "
+	jQuery('#{$this->contentKey} ul li a').each(function(id, item) {
 		if (item.href.indexOf('{$this->contentKey}')) {
 			temp = item.href.split('#');
 			item.href = '#'+temp[temp.length-1];
 		}
 	});";
-						} else {
-							$fixTabHref = null;
-						}
-						$this->addCssFile($this->conf['jQueryUIstyle']);
-						$this->addJS("
-{$jQuery}(document).ready(function() { {$fixTabHref}
-	{$jQuery}('#{$this->contentKey}').tabs(".(count($options) ? "{".implode(", ", $options)."}" : "")."){$rotate};
-});");
-						break;
-					}
-					case "mootools" : {
-						// Mootools Tabs?
-						break;
-					}
+				} else {
+					$fixTabHref = null;
 				}
+				$this->addCssFile($this->conf['jQueryUIstyle']);
+				$this->addJS("
+jQuery(document).ready(function() { {$fixTabHref}
+	jQuery('#{$this->contentKey}').tabs(".(count($options) ? "{".implode(", ", $options)."}" : "")."){$rotate};
+});");
 				break;
 			}
 			case "accordion" : {
 				$this->templatePart = "TEMPLATE_ACCORDION";
 				$this->contentWrap = t3lib_div::trimExplode("|*|", $this->conf['accordionWrap.']['wrap']);
-				switch ($this->conf['jsLibrary']) {
-					case "jquery" : {
-						$this->addJS(chr(10).$jQueryNoConflict);
-						$options = array();
-						if (! $this->lConf['accordionAutoHeight']) {
-							$options['autoHeight'] = "autoHeight:false";
-						}
-						if ($this->lConf['accordionCollapsible']) {
-							$options['collapsible'] = "collapsible:true";
-						}
-						if ($this->lConf['accordionClosed']) {
-							$options['active'] = "active:false";
-							$options['collapsible'] = "collapsible:true";
-						} elseif ($this->lConf['accordionRandomContent']) {
-							$options['active'] = "active:Math.floor(Math.random()*{$this->contentCount})";
-						} elseif (is_numeric($this->lConf['accordionOpen'])) {
-							$options['active'] = "active:".($this->lConf['accordionOpen'] - 1);
-						}
-						if ($this->lConf['accordionEvent']) {
-							$options['event'] = "event:'{$this->lConf['accordionEvent']}'";
-						}
-						if ($this->lConf['accordionTransition']) {
-							$options['animated'] = "animated:'{$this->contentKey}'";
-							$this->addJS("
-{$jQuery}.ui.accordion.animations.{$this->contentKey} = function(options) {
+				$this->addJS(chr(10).$jQueryNoConflict);
+				$options = array();
+				if (! $this->lConf['accordionAutoHeight']) {
+					$options['autoHeight'] = "autoHeight:false";
+				}
+				if ($this->lConf['accordionCollapsible']) {
+					$options['collapsible'] = "collapsible:true";
+				}
+				if ($this->lConf['accordionClosed']) {
+					$options['active'] = "active:false";
+					$options['collapsible'] = "collapsible:true";
+				} elseif ($this->lConf['accordionRandomContent']) {
+					$options['active'] = "active:Math.floor(Math.random()*{$this->contentCount})";
+				} elseif (is_numeric($this->lConf['accordionOpen'])) {
+					$options['active'] = "active:".($this->lConf['accordionOpen'] - 1);
+				}
+				if ($this->lConf['accordionEvent']) {
+					$options['event'] = "event:'{$this->lConf['accordionEvent']}'";
+				}
+				if ($this->lConf['accordionTransition']) {
+					$options['animated'] = "animated:'{$this->contentKey}'";
+					$this->addJS("
+jQuery.ui.accordion.animations.{$this->contentKey} = function(options) {
 	this.slide(options, {
 		easing: '".(in_array($this->lConf['accordionTransition'], array("swing", "linear")) ? "" : "ease{$this->lConf['accordionTransitiondir']}")."{$this->lConf['accordionTransition']}',
 		duration: ".(is_numeric($this->lConf['accordionTransitionduration']) ? $this->lConf['accordionTransitionduration'] : 1000)."
 	});
 };");
-						} else if ($this->lConf['accordionAnimated']) {
-							$options['animated'] = "animated:'{$this->lConf['accordionAnimated']}'";
-						}
-						$continuing = "";
-						if ($this->lConf['delayDuration'] > 0) {
-							// does not work if (! $this->lConf['autoplayContinuing']) {}
-							$continuing = "
-	{$jQuery}('#{$this->contentKey}').click(function(){{$jQuery}('#{$this->contentKey}').accordion('option', 'change', '');});";
-							$settimeout = "setTimeout(\"tx_jfmulticontent_next_accordion({$jQuery}('#{$this->contentKey}'),{$this->contentCount})\", {$this->lConf['delayDuration']});";
-							$this->addJS(chr(10).$settimeout);
-							$options['change'] = "change:function(event,ui){{$settimeout}}";
-							$this->addJS("
+				} else if ($this->lConf['accordionAnimated']) {
+					$options['animated'] = "animated:'{$this->lConf['accordionAnimated']}'";
+				}
+				$continuing = "";
+				if ($this->lConf['delayDuration'] > 0) {
+					// does not work if (! $this->lConf['autoplayContinuing']) {}
+					$continuing = "
+	jQuery('#{$this->contentKey}').click(function(){jQuery('#{$this->contentKey}').accordion('option', 'change', '');});";
+					$settimeout = "setTimeout(\"tx_jfmulticontent_next_accordion(jQuery('#{$this->contentKey}'),{$this->contentCount})\", {$this->lConf['delayDuration']});";
+					$this->addJS(chr(10).$settimeout);
+					$options['change'] = "change:function(event,ui){{$settimeout}}";
+					$this->addJS("
 function tx_jfmulticontent_next_accordion(id, max) {
-	if ({$jQuery}(id).accordion('option', 'change') != '') {
-		active = {$jQuery}(id).accordion('option', 'active') + 1;
+	if (jQuery(id).accordion('option', 'change') != '') {
+		active = jQuery(id).accordion('option', 'active') + 1;
 		active = (active >= max ? 0 : active);
-		{$jQuery}(id).accordion('activate', active);
+		jQuery(id).accordion('activate', active);
 	}
 }");
-						}
-						// jQuery Accordion
-						if (T3JQUERY === true) {
-							tx_t3jquery::addJqJS();
-						} else {
-							$this->addJsFile($this->conf['jQueryLibrary']);
-							$this->addJsFile($this->conf['jQueryEasing']);
-							$this->addJsFile($this->conf['jQueryUI']);
-						}
-						$this->addCssFile($this->conf['jQueryUIstyle']);
-						$this->addJS("
-{$jQuery}(document).ready(function() {
-	{$jQuery}('#{$this->contentKey}').accordion(".(count($options) ? "{".implode(", ", $options)."}" : "").");{$continuing}
-});");
-						break;
-					}
-					case "mootools" : {
-						// Mootools Tabs?
-						break;
-					}
 				}
+				// jQuery Accordion
+				if (T3JQUERY === true) {
+					tx_t3jquery::addJqJS();
+				} else {
+					$this->addJsFile($this->conf['jQueryLibrary']);
+					$this->addJsFile($this->conf['jQueryEasing']);
+					$this->addJsFile($this->conf['jQueryUI']);
+				}
+				$this->addCssFile($this->conf['jQueryUIstyle']);
+				$this->addJS("
+jQuery(document).ready(function() {
+	jQuery('#{$this->contentKey}').accordion(".(count($options) ? "{".implode(", ", $options)."}" : "").");{$continuing}
+});");
 				break;
 			}
 			default: {

@@ -1,5 +1,4 @@
 plugin.tx_jfmulticontent_pi1 {
-	jsLibrary = {$plugin.tx_jfmulticontent_pi1.jsLibrary}
 
 	templateFile = {$plugin.tx_jfmulticontent_pi1.file.templateFile}
 	cssFile = {$plugin.tx_jfmulticontent_pi1.file.cssFile}

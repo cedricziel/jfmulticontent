@@ -1,7 +1,4 @@
 plugin.tx_jfmulticontent_pi1 {
-	# cat=plugin.tx_jfmulticontent.basic/enable/010; type=options[jquery]; label=JS Library: JS-Library to use
-	jsLibrary = jquery
-
 
 	# cat=plugin.tx_jfmulticontent.basic/file/010; type=file[html,htm,tmpl,txt]; label=HTML-Template file: Location of the used template
 	file.templateFile = EXT:jfmulticontent/pi1/tx_jfmulticontent_pi1.tmpl
@@ -24,7 +21,7 @@ plugin.tx_jfmulticontent_pi1 {
 
 
 	# cat=plugin.tx_jfmulticontent.jquery/enable/010; type=boolean; label=jQuery noConflict: Use jQuery in noConflict mode
-	jQueryNoConflict = 1
+	jQueryNoConflict = 0
 
 	# cat=plugin.tx_jfmulticontent.jquery/enable/020; type=boolean; label=jQuery fix tab href: Fix the problem of simulatestatic (whole page will be rendered in tab)
 	jQueryFixTabHref = 0
