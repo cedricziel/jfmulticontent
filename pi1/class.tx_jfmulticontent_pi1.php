@@ -414,7 +414,11 @@ jQuery(document).ready(function() {
 			foreach ($this->js as $jsToPut) {
 				$temp_js .= $jsToPut;
 			}
-			$GLOBALS['TSFE']->additionalHeaderData['js_'.$this->extKey] .= t3lib_div::wrapJS($temp_js, true);
+			if ($this->conf['jsInFooter']) {
+				$GLOBALS['TSFE']->additionalFooterData['js_'.$this->extKey] .= t3lib_div::wrapJS($temp_js, true);
+			} else {
+				$GLOBALS['TSFE']->additionalHeaderData['js_'.$this->extKey] .= t3lib_div::wrapJS($temp_js, true);
+			}
 		}
 		// add all defined CSS files
 		if (count($this->cssFiles) > 0) {

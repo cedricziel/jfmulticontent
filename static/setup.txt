@@ -1,19 +1,19 @@
 plugin.tx_jfmulticontent_pi1 {
+	jQueryNoConflict = {$plugin.tx_jfmulticontent_pi1.jQueryNoConflict}
+	jQueryFixTabHref = {$plugin.tx_jfmulticontent_pi1.jQueryFixTabHref}
+	jsInFooter = {$plugin.tx_jfmulticontent_pi1.jsInFooter}
 
 	templateFile = {$plugin.tx_jfmulticontent_pi1.file.templateFile}
 	cssFile = {$plugin.tx_jfmulticontent_pi1.file.cssFile}
+	jQueryLibrary = {$plugin.tx_jfmulticontent_pi1.file.jQueryLibrary}
+	jQueryEasing = {$plugin.tx_jfmulticontent_pi1.file.jQueryEasing}
+	jQueryUI = {$plugin.tx_jfmulticontent_pi1.file.jQueryUI}
+	jQueryUIstyle = {$plugin.tx_jfmulticontent_pi1.file.jQueryUIstyle}
 
 	2columnClasses = {$plugin.tx_jfmulticontent_pi1.2columnClasses}
 	3columnClasses = {$plugin.tx_jfmulticontent_pi1.3columnClasses}
 	4columnClasses = {$plugin.tx_jfmulticontent_pi1.4columnClasses}
 	classInner = {$plugin.tx_jfmulticontent_pi1.classInner}
-
-	jQueryNoConflict = {$plugin.tx_jfmulticontent_pi1.jQueryNoConflict}
-	jQueryFixTabHref = {$plugin.tx_jfmulticontent_pi1.jQueryFixTabHref}
-	jQueryLibrary = {$plugin.tx_jfmulticontent_pi1.file.jQueryLibrary}
-	jQueryEasing = {$plugin.tx_jfmulticontent_pi1.file.jQueryEasing}
-	jQueryUI = {$plugin.tx_jfmulticontent_pi1.file.jQueryUI}
-	jQueryUIstyle = {$plugin.tx_jfmulticontent_pi1.file.jQueryUIstyle}
 
 	columnWrap {
 		wrap = <div class="subcl">|</div> |*| <div class="subcl">|</div> |*| <div class="subcr">|</div>
