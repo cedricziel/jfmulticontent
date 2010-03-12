@@ -390,7 +390,21 @@ jQuery(document).ready(function() {
 		$return_string = $templateCode;
 		$return_string = $this->cObj->substituteSubpart($return_string, '###TITLES###', $titles, 0);
 		$return_string = $this->cObj->substituteSubpart($return_string, '###COLUMNS###', $columns, 0);
-		
+
+		if (isset($this->conf['additionalMarkers'])) {
+			$additonalMarkerArray = array();
+			// get additional markers
+			$additionalMarkers = t3lib_div::trimExplode(',', $this->conf['additionalMarkers']);
+			// get additional marker configuration
+			if(count($additionalMarkers) > 0) {
+				foreach($additionalMarkers as $additonalMarker) {
+					$additonalMarkerArray[strtoupper($additonalMarker)] = $this->cObj->cObjGetSingle($this->conf['additionalMarkerConf.'][$additonalMarker], $this->conf['additionalMarkerConf.'][$additonalMarker.'.']);
+				}
+			}
+			// add addtional marker content to template
+			$return_string = $this->cObj->substituteMarkerArray($return_string, $additonalMarkerArray, '###|###', 0);
+		}
+
 		return $return_string;
 	}
 
