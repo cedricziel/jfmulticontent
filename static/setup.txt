@@ -1,6 +1,5 @@
 plugin.tx_jfmulticontent_pi1 {
 	jQueryNoConflict = {$plugin.tx_jfmulticontent_pi1.jQueryNoConflict}
-	jQueryFixTabHref = {$plugin.tx_jfmulticontent_pi1.jQueryFixTabHref}
 	jsInFooter = {$plugin.tx_jfmulticontent_pi1.jsInFooter}
 
 	templateFile = {$plugin.tx_jfmulticontent_pi1.file.templateFile}

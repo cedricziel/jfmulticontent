@@ -3,9 +3,6 @@ plugin.tx_jfmulticontent_pi1 {
 	# cat=plugin.tx_jfmulticontent/enable/010; type=boolean; label=jQuery noConflict: Use jQuery in noConflict mode
 	jQueryNoConflict = 0
 
-	# cat=plugin.tx_jfmulticontent/enable/020; type=boolean; label=jQuery fix tab href: Fix the problem of simulatestatic (whole page will be rendered in tab)
-	jQueryFixTabHref = 0
-
 	# cat=plugin.tx_jfmulticontent/enable/030; type=boolean; label=Javascript in Footer: If set, the Javascript will be rendered in Footer
 	jsInFooter = 0
 

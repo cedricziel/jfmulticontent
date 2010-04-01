@@ -188,13 +188,15 @@ class tx_jfmulticontent_pi1 extends tslib_pibase {
 					$this->addJsFile($this->conf['jQueryLibrary']);
 					$this->addJsFile($this->conf['jQueryUI']);
 				}
-				// Fix the href problem (optimizing)
-				if ($this->conf['jQueryFixTabHref']) {
+				// Fix the href problem (config.prefixLocalAnchors = all)
+				if ($GLOBALS['TSFE']->config['config']['prefixLocalAnchors']) {
 					$fixTabHref = "
 	jQuery('#{$this->contentKey} ul li a').each(function(id, item) {
-		if (item.href.indexOf('{$this->contentKey}')) {
-			temp = item.href.split('#');
-			item.href = '#'+temp[temp.length-1];
+		var temp = item.href.split('#');
+		var temp_last = temp[temp.length-1];
+		var search = /^".preg_quote($this->contentKey, "/")."/;
+		if (search.test(temp[temp.length-1])) {
+			item.href = '#'+temp_last;
 		}
 	});";
 				} else {
