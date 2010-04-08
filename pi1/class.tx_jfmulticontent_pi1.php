@@ -205,7 +205,7 @@ class tx_jfmulticontent_pi1 extends tslib_pibase {
 				$this->addCssFile($this->conf['jQueryUIstyle']);
 				$this->addJS("
 jQuery(document).ready(function() { {$fixTabHref}
-	jQuery('#{$this->contentKey}').tabs(".(count($options) ? "{".implode(", ", $options)."}" : "")."){$rotate};
+	jQuery('#{$this->contentKey}').tabs(".(count($options) ? "{\n		".implode(",\n		", $options)."\n	}" : "")."){$rotate};
 });");
 				break;
 			}
@@ -271,7 +271,7 @@ function tx_jfmulticontent_next_accordion(id, max) {
 				$this->addCssFile($this->conf['jQueryUIstyle']);
 				$this->addJS("
 jQuery(document).ready(function() {
-	jQuery('#{$this->contentKey}').accordion(".(count($options) ? "{".implode(", ", $options)."}" : "").");{$continuing}
+	jQuery('#{$this->contentKey}').accordion(".(count($options) ? "{\n		".implode(",\n		", $options)."\n	}" : "").");{$continuing}
 });");
 				break;
 			}
@@ -305,14 +305,14 @@ jQuery(document).ready(function() {
 				$options[] = "startStopped: ".($this->lConf['sliderAutoStart'] ? 'false' : 'true');
 				$options[] = "pauseOnHover: ".($this->lConf['sliderPauseOnHover'] ? 'true' : 'false');
 				$options[] = "buildNavigation: ".($this->lConf['sliderNavigation'] ? 'true' : 'false');
-				$options[] = "startText: '".($this->pi_getLL('slider_start'))."'";
-				$options[] = "stopText: '".($this->pi_getLL('slider_stop'))."'";
+				$options[] = "startText: '".t3lib_div::slashJS($this->pi_getLL('slider_start'))."'";
+				$options[] = "stopText: '".t3lib_div::slashJS($this->pi_getLL('slider_stop'))."'";
 				if (trim($this->pi_getLL('slider_panel'))) {
 					$options[] = "navigationFormatter: function(i,p){ var str = '".(t3lib_div::slashJS($this->pi_getLL('slider_panel')))."'; return str.replace('%i%',i); }";
 				}
 				$this->addJS("
 jQuery(document).ready(function(){
-	jQuery('#{$this->contentKey}').anythingSlider(".(count($options) ? "{".implode(", ", $options)."}" : "").");
+	jQuery('#{$this->contentKey}').anythingSlider(".(count($options) ? "{\n		".implode(",\n		", $options)."\n	}" : "").");
 });");
 				break;
 			}
