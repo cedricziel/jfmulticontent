@@ -275,6 +275,47 @@ jQuery(document).ready(function() {
 });");
 				break;
 			}
+			case "slider" : {
+				$this->templatePart = "TEMPLATE_SLIDER";
+				$this->contentWrap = t3lib_div::trimExplode("|*|", $this->conf['sliderWrap.']['wrap']);
+				$this->addJS(chr(10).$jQueryNoConflict);
+				// jQuery Accordion
+				if (T3JQUERY === true) {
+					tx_t3jquery::addJqJS();
+				} else {
+					$this->addJsFile($this->conf['jQueryLibrary']);
+					$this->addJsFile($this->conf['jQueryEasing']);
+				}
+				$this->addJsFile($this->conf['sliderJS']);
+				$this->addCssFile($this->conf['sliderCSS']);
+				// 
+				if ($this->lConf['sliderTransition']) {
+					$options[] = "easing: '".(in_array($this->lConf['sliderTransition'], array("swing", "linear")) ? "" : "ease{$this->lConf['sliderTransitiondir']}")."{$this->lConf['sliderTransition']}'";
+				}
+				if ($this->lConf['sliderTransitionduration'] > 0) {
+					$options[] = "animationTime: {$this->lConf['sliderTransitionduration']}";
+				}
+				if ($this->lConf['delayDuration'] > 0) {
+					$options[] = "autoPlay: true";
+					$options[] = "delay: {$this->lConf['delayDuration']}";
+				} else {
+					$options[] = "autoPlay: false";
+				}
+				$options[] = "hashTags: ".($this->lConf['sliderHashTags'] ? 'true' : 'false');
+				$options[] = "startStopped: ".($this->lConf['sliderAutoStart'] ? 'false' : 'true');
+				$options[] = "pauseOnHover: ".($this->lConf['sliderPauseOnHover'] ? 'true' : 'false');
+				$options[] = "buildNavigation: ".($this->lConf['sliderNavigation'] ? 'true' : 'false');
+				$options[] = "startText: '".($this->pi_getLL('slider_start'))."'";
+				$options[] = "stopText: '".($this->pi_getLL('slider_stop'))."'";
+				if (trim($this->pi_getLL('slider_panel'))) {
+					$options[] = "navigationFormatter: function(i,p){ var str = '".(t3lib_div::slashJS($this->pi_getLL('slider_panel')))."'; return str.replace('%i%',i); }";
+				}
+				$this->addJS("
+jQuery(document).ready(function(){
+	jQuery('#{$this->contentKey}').anythingSlider(".(count($options) ? "{".implode(", ", $options)."}" : "").");
+});");
+				break;
+			}
 			default: {
 				return "<p>NO VALID TEMPLATE SELECTED!</p>";
 			}

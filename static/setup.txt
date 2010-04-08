@@ -8,6 +8,8 @@ plugin.tx_jfmulticontent_pi1 {
 	jQueryEasing = {$plugin.tx_jfmulticontent_pi1.file.jQueryEasing}
 	jQueryUI = {$plugin.tx_jfmulticontent_pi1.file.jQueryUI}
 	jQueryUIstyle = {$plugin.tx_jfmulticontent_pi1.file.jQueryUIstyle}
+	sliderJS = {$plugin.tx_jfmulticontent_pi1.file.sliderJS}
+	sliderCSS = {$plugin.tx_jfmulticontent_pi1.file.sliderCSS}
 
 	2columnClasses = {$plugin.tx_jfmulticontent_pi1.2columnClasses}
 	3columnClasses = {$plugin.tx_jfmulticontent_pi1.3columnClasses}
@@ -21,6 +23,9 @@ plugin.tx_jfmulticontent_pi1 {
 		wrap = |
 	}
 	accordionWrap {
+		wrap = |
+	}
+	sliderWrap {
 		wrap = |
 	}
 }

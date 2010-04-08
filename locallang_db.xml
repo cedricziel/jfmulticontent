@@ -17,6 +17,7 @@
 			<label index="tt_content.tx_jfmulticontent.style.I.2">4 columns</label>
 			<label index="tt_content.tx_jfmulticontent.style.I.3">Tabs</label>
 			<label index="tt_content.tx_jfmulticontent.style.I.4">Accordion</label>
+			<label index="tt_content.tx_jfmulticontent.style.I.5">Slider</label>
 			<label index="tt_content.tx_jfmulticontent.column1">Column class 1</label>
 			<label index="tt_content.tx_jfmulticontent.column2">Column class 2</label>
 			<label index="tt_content.tx_jfmulticontent.column3">Column class 3</label>
@@ -54,6 +55,14 @@
 			<label index="tt_content.tx_jfmulticontent.accordionTransition.I.0">Use Animation</label>
 			<label index="tt_content.tx_jfmulticontent.accordionTransitiondir">Direction of transition</label>
 			<label index="tt_content.tx_jfmulticontent.accordionTransitionduration">Duration of transition (in ms)</label>
+			<label index="tt_content.tx_jfmulticontent.sheet_slider">Slider</label>
+			<label index="tt_content.tx_jfmulticontent.sliderAutoStart">Start autoplay</label>
+			<label index="tt_content.tx_jfmulticontent.sliderPauseOnHover">Pause on mouseover</label>
+			<label index="tt_content.tx_jfmulticontent.sliderNavigation">Show navigation</label>
+			<label index="tt_content.tx_jfmulticontent.sliderHashTags">Change URL (hash tag)</label>
+			<label index="tt_content.tx_jfmulticontent.sliderTransition">Type of transition</label>
+			<label index="tt_content.tx_jfmulticontent.sliderTransitiondir">Direction of transition</label>
+			<label index="tt_content.tx_jfmulticontent.sliderTransitionduration">Duration of transition (in ms)</label>
 			<label index="tt_content.tx_jfmulticontent.sheet_autoplay">Autoplay</label>
 			<label index="tt_content.tx_jfmulticontent.autoplayDuration">Delay for autoplay (in ms)</label>
 			<label index="tt_content.tx_jfmulticontent.autoplayContinuing">Continuing</label>
