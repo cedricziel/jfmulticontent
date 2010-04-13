@@ -8,6 +8,31 @@
 		<languageKey index="default" type="array">
 			<label index="pi1_title">Multiple Content</label>
 			<label index="pi1_plus_wiz_description">Create a multiple content</label>
+			<label index="extmng.updatermsgHeader">Important!</label>
+			<label index="extmng.updatermsg">jfmulticontent 1.0.0 comes with a new updater-script which fix old content elements. You have to run this script if you are updating from 0.x installation.</label>
+			<label index="extmng.updatermsgLink">[Click here to open the updater]</label>
+
+			<label index="updater.back">[&lt;- back]</label>
+			<label index="updater.reload">[reload this page]</label>
+
+			<label index="updater.warningHeader">Important! Please Read!</label>
+			<label index="updater.nothingtodo">Nothing to do</label>
+			<label index="updater.actions">Actions:</label>
+			<label index="updater.updateresults">Update results:</label>
+			<label index="updater.warningMsg">
+				The updater manipulates your database and due to the huge amount of configuration variants it is 
+				possible that it &lt;br&gt;might not produce the expected results.&lt;br&gt;
+				So backup your database (at least the table tt_content) or do a t3d export of your site 
+				&lt;strong&gt;BEFORE&lt;/strong&gt; &lt;br&gt;
+				you click on any of the "DO IT" Buttons.
+			</label>
+
+			<label index="updater.lbl_searchFlexForm">Search "old values" in FF</label>
+			<label index="updater.msg_searchFlexForm">Search for jfmulticontent content elements with old values in flexforms (This fields where moved to another sheet):</label>
+			<label index="updater.foundMsg_searchFlexForm">Found ###COUNT### content elements.</label>
+			<label index="updater.question_searchFlexForm">Should the updater fix this settings?</label>
+			<label index="updater.questionInfo_searchFlexForm">(If you click "DO IT" all old fields will be moved to the new flexform sheet)</label>
+
 		</languageKey>
 	</data>
 	<orig_hash type="array">

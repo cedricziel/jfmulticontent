@@ -80,7 +80,9 @@ class tx_jfmulticontent_pi1 extends tslib_pibase {
 		foreach ($piFlexForm['data'] as $sheet => $data) {
 			foreach ($data as $lang => $value) {
 				foreach ($value as $key => $val) {
-					$this->lConf[$key] = $this->pi_getFFvalue($piFlexForm, $key, $sheet);
+					if (! isset($this->lConf[$key])) {
+						$this->lConf[$key] = $this->pi_getFFvalue($piFlexForm, $key, $sheet);
+					}
 				}
 			}
 		}

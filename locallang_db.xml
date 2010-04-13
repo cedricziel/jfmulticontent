@@ -26,7 +26,7 @@
 			<label index="tt_content.tx_jfmulticontent.titles">Overwrite titles (One title per line)</label>
 			<label index="tt_content.tx_jfmulticontent.sheet_attribute">Attributes</label>
 			<label index="tt_content.tx_jfmulticontent.attributes">Attributes for columns (One set of attributes per line)</label>
-			<label index="tt_content.tx_jfmulticontent.sheet_tab">Tabs</label>
+			<label index="tt_content.tx_jfmulticontent.sheet_options">Options</label>
 			<label index="tt_content.tx_jfmulticontent.tabCollapsible">Collapsible</label>
 			<label index="tt_content.tx_jfmulticontent.tabFxHeight">FX height</label>
 			<label index="tt_content.tx_jfmulticontent.tabFxOpacity">FX opacity</label>
@@ -37,7 +37,6 @@
 			<label index="tt_content.tx_jfmulticontent.tabFxDuration.I.3">Fast</label>
 			<label index="tt_content.tx_jfmulticontent.tabOpen">Opened content</label>
 			<label index="tt_content.tx_jfmulticontent.tabRandomContent">Open random content</label>
-			<label index="tt_content.tx_jfmulticontent.sheet_accordion">Accordion</label>
 			<label index="tt_content.tx_jfmulticontent.accordionAutoHeight">Auto height</label>
 			<label index="tt_content.tx_jfmulticontent.accordionCollapsible">Collapsible</label>
 			<label index="tt_content.tx_jfmulticontent.accordionClosed">Closed at startup</label>
@@ -55,7 +54,6 @@
 			<label index="tt_content.tx_jfmulticontent.accordionTransition.I.0">Use Animation</label>
 			<label index="tt_content.tx_jfmulticontent.accordionTransitiondir">Direction of transition</label>
 			<label index="tt_content.tx_jfmulticontent.accordionTransitionduration">Duration of transition (in ms)</label>
-			<label index="tt_content.tx_jfmulticontent.sheet_slider">Slider</label>
 			<label index="tt_content.tx_jfmulticontent.sliderAutoStart">Start autoplay</label>
 			<label index="tt_content.tx_jfmulticontent.sliderPauseOnHover">Pause on mouseover</label>
 			<label index="tt_content.tx_jfmulticontent.sliderNavigation">Show navigation</label>
