@@ -312,6 +312,11 @@ jQuery(document).ready(function() {
 				if (trim($this->pi_getLL('slider_panel'))) {
 					$options[] = "navigationFormatter: function(i,p){ var str = '".(t3lib_div::slashJS($this->pi_getLL('slider_panel')))."'; return str.replace('%i%',i); }";
 				}
+				if ($this->lConf['sliderRandomContent']) {
+					$options[] = "opened: Math.floor(Math.random()*".($this->contentCount + 1).")";
+				} elseif ($this->lConf['sliderOpen'] > 1) {
+					$options[] = "opened: ".($this->lConf['sliderOpen'] < $this->contentCount ? $this->lConf['sliderOpen'] : $this->contentCount);
+				}
 				$this->addJS("
 jQuery(document).ready(function(){
 	jQuery('#{$this->contentKey}').anythingSlider(".(count($options) ? "{\n		".implode(",\n		", $options)."\n	}" : "").");

@@ -437,6 +437,29 @@
 							</config>
 						</TCEforms>
 					</sliderHashTags>
+					<sliderOpen>
+						<TCEforms>
+							<displayCond>FIELD:style:=:slider</displayCond>
+							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.sliderOpen</label>
+							<config>
+								<type>input</type>
+								<size>2</size>
+								<max>2</max>
+								<default>1</default>
+								<eval>int,nospace</eval>
+							</config>
+						</TCEforms>
+					</sliderOpen>
+					<sliderRandomContent>
+						<TCEforms>
+							<displayCond>FIELD:style:=:slider</displayCond>
+							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.sliderRandomContent</label>
+							<config>
+								<type>check</type>
+								<default>0</default>
+							</config>
+						</TCEforms>
+					</sliderRandomContent>
 					<sliderTransition>
 						<TCEforms>
 							<displayCond>FIELD:style:=:slider</displayCond>

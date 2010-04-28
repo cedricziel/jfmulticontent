@@ -58,6 +58,8 @@
 			<label index="tt_content.tx_jfmulticontent.sliderPauseOnHover">Pause on mouseover</label>
 			<label index="tt_content.tx_jfmulticontent.sliderNavigation">Show navigation</label>
 			<label index="tt_content.tx_jfmulticontent.sliderHashTags">Change URL (hash tag)</label>
+			<label index="tt_content.tx_jfmulticontent.sliderOpen">Opened content</label>
+			<label index="tt_content.tx_jfmulticontent.sliderRandomContent">Open random content</label>
 			<label index="tt_content.tx_jfmulticontent.sliderTransition">Type of transition</label>
 			<label index="tt_content.tx_jfmulticontent.sliderTransitiondir">Direction of transition</label>
 			<label index="tt_content.tx_jfmulticontent.sliderTransitionduration">Duration of transition (in ms)</label>

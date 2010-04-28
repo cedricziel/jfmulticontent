@@ -26,7 +26,7 @@ plugin.tx_jfmulticontent_pi1 {
 	file.jQueryUIstyle = EXT:jfmulticontent/res/jquery/css/theme-1.8/jquery-ui-1.8.custom.css
 
 	# cat=plugin.tx_jfmulticontent/file/070; type=file[js]; label=anythingSlider JS-File: Location of the anythingSlider JS-file
-	file.sliderJS = EXT:jfmulticontent/res/anythingslider/jquery.anythingslider-1.2.js
+	file.sliderJS = EXT:jfmulticontent/res/anythingslider/jquery.anythingslider-1.2.1.js
 
 	# cat=plugin.tx_jfmulticontent/file/080; type=file[css]; label=anythingSlider CSS-File: Location of the anythingSlider CSS-File
 	file.sliderCSS = EXT:jfmulticontent/res/anythingslider/style.css
