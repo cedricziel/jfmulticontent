@@ -35,7 +35,8 @@
 class ext_update
 {
 	var $tstemplates;
-	var $contentElements;
+	var $contentElements = array();
+	var $wrongLanguage = array();
 	var $missingHtmlTemplates = array();
 	var $movedFields = array();
 	var $flexObj;
@@ -57,6 +58,7 @@ class ext_update
 		$this->flexObj = t3lib_div::makeInstance('t3lib_flexformtools');
 		// analyze
 		$this->contentElements = $this->getContentElements();
+		$this->wrongLanguage = $this->getWrongLanguage();
 		if (t3lib_div::_GP('do_update')) {
 			$out .= '<a href="'.t3lib_div::linkThisScript(array('do_update' => '', 'func' => '')).'">'.$GLOBALS['LANG']->sL($this->ll.'back').'</a><br/>';
 			$func = trim(t3lib_div::_GP('func'));
@@ -84,7 +86,9 @@ class ext_update
 			$out .= $this->displayWarning();
 			$out .= '<h3>'.$GLOBALS['LANG']->sL($this->ll.'actions').'</h3>';
 			// Update all flexform
-			$out .= $this->displayUpdateOption('searchFlexForm', count($this->contentElements), 'updateFlexForm');
+			$out .= $this->displayUpdateOption('searchFlexForm',      count($this->contentElements), 'updateFlexForm');
+			// Update 
+			$out .= $this->displayUpdateOption('searchWrongLanguage', count($this->wrongLanguage),   'updateWrongLanguage');
 		}
 		if (t3lib_div::int_from_ver(TYPO3_version) < 4003000) {
 			// add flashmessages styles
@@ -208,12 +212,54 @@ class ext_update
 	}
 
 	/**
+	 * Returns all contents with content from differend languages
+	 * 
+	 * @return string
+	 */
+	function getWrongLanguage()
+	{
+		$select_fields = '*';
+		$from_table = 'tt_content';
+		$where_clause = '
+		CType='.$GLOBALS['TYPO3_DB']->fullQuoteStr('list', $from_table).'
+		AND list_type='.$GLOBALS['TYPO3_DB']->fullQuoteStr('jfmulticontent_pi1', $from_table).'
+		AND deleted=0';
+		$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery($select_fields, $from_table, $where_clause);
+		if ($res) {
+			$resultRows = array();
+			while (($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res))) {
+				$addArray = false;
+				$tempRows = array();
+				$res2 = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
+					$select_fields,
+					$from_table,
+					'uid IN ('.implode(',', $GLOBALS['TYPO3_DB']->fullQuoteArray(t3lib_div::trimExplode(',', $row['tx_jfmulticontent_contents'], true), $from_table)).')
+					AND deleted=0'
+				);
+				while (($row2 = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res2))) {
+					if ($row2['sys_language_uid'] != 0) {
+						$addArray = true;
+						$tempRows[] = $row2['l18n_parent'];
+					} else {
+						$tempRows[] = $row2['uid'];
+					}
+				}
+				if ($addArray === true) {
+					$resultRows[$row['uid']] = $tempRows;
+				}
+			}
+		}
+		return $resultRows;
+	}
+
+	/**
 	 * Update the content elements
 	 * 
 	 * @return string
 	 */
 	function updateFlexForm()
 	{
+		$msg = null;
 		if (count($this->contentElements) > 0 && count($this->sheet_mapping) > 0) {
 			foreach ($this->contentElements as $content_id => $contentElement) {
 				foreach ($this->sheet_mapping as $sheet_old => $sheet_new) {
@@ -233,6 +279,30 @@ class ext_update
 				);
 				if ($GLOBALS['TYPO3_DB']->exec_UPDATEquery($table, $where, $fields_values)) {
 					$msg[] = 'Updated contentElement uid: '.$content_id.', pid: '.$this->contentElements[$content_id]['pid'];
+				}
+			}
+		}
+		return implode('<br/>', $msg);
+	}
+
+	/**
+	 * Update the content elements
+	 * 
+	 * @return string
+	 */
+	function updateWrongLanguage()
+	{
+		$msg = null;
+		if (count($this->wrongLanguage) > 0) {
+			foreach ($this->wrongLanguage as $content_id => $contentElements) {
+				// Update the content
+				$table = 'tt_content';
+				$where = 'uid='.$content_id;
+				$fields_values = array(
+					'tx_jfmulticontent_contents' => implode(',', $contentElements)
+				);
+				if ($GLOBALS['TYPO3_DB']->exec_UPDATEquery($table, $where, $fields_values)) {
+					$msg[] = 'Updated contentElement uid: '.$content_id;
 				}
 			}
 		}

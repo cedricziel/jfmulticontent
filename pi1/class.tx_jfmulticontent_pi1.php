@@ -398,6 +398,12 @@ jQuery(document).ready(function(){
 				// wrap the class
 				$markerArray["ATTRIBUTE"] .= $this->cObj->stdWrap($this->lConf["column".($a+1)], array("wrap" => ' class="'.$this->contentClass[$a].'"', "required" => 1));
 			}
+			// Select the content
+			$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery('*', 'tt_content', 'uid='.intval($this->cElements[$a]), '', '', 1);
+			$row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res);
+			if ($GLOBALS['TSFE']->sys_language_content) {
+				$row = $GLOBALS['TSFE']->sys_page->getRecordOverlay('tt_content', $row, $GLOBALS['TSFE']->sys_language_content, $GLOBALS['TSFE']->sys_language_contentOL);
+			}
 			// render the content
 			$markerArray["ID"] = $a+1;
 			$markerArray["TITLE"] = null;
@@ -407,8 +413,6 @@ jQuery(document).ready(function(){
 				if ($this->titles[$a] != '') {
 					$markerArray["TITLE"] = $this->titles[$a];
 				} else {
-					$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery('header','tt_content','uid='.intval($this->cElements[$a]),'','',1);
-					$row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res);
 					$markerArray["TITLE"] = $row['header'];
 				}
 			}
@@ -424,7 +428,7 @@ jQuery(document).ready(function(){
 			// TODO: Remove the title from content
 			$cConf = array(
 				'tables' => 'tt_content',
-				'source' => $this->cElements[$a],
+				'source' => ($row['_LOCALIZED_UID'] ? $row['_LOCALIZED_UID'] : $row['uid']),
 				'dontCheckPid' => 1,
 			);
 			// wrap the content
