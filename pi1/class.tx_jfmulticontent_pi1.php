@@ -51,6 +51,7 @@ class tx_jfmulticontent_pi1 extends tslib_pibase {
 	var $templatePart = null;
 	var $contentKey = null;
 	var $contentCount = null;
+	var $contentRow = array();
 	var $contentClass = array();
 	var $contentWrap = array();
 	var $jsFiles = array();
@@ -114,6 +115,22 @@ class tx_jfmulticontent_pi1 extends tslib_pibase {
 		// define the attributes
 		if ($this->lConf['attributes']) {
 			$this->attributes = t3lib_div::trimExplode(chr(10), $this->lConf['attributes']);
+		}
+
+		// get the informations for every content
+		for ($a=0; $a < $this->contentCount; $a++) {
+			// Select the content
+			$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery('*', 'tt_content', 'uid='.intval($this->cElements[$a]), '', '', 1);
+			$row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res);
+			if ($GLOBALS['TSFE']->sys_language_content) {
+				$row = $GLOBALS['TSFE']->sys_page->getRecordOverlay('tt_content', $row, $GLOBALS['TSFE']->sys_language_content, $GLOBALS['TSFE']->sys_language_contentOL);
+			}
+			if ($this->titles[$a] != '') {
+				$row['title_overlay'] = $this->titles[$a];
+			} else {
+				$row['title_overlay'] = $row['header'];
+			}
+			$this->contentRow[] = $row;
 		}
 
 		// define the jQuery mode and function
@@ -309,7 +326,14 @@ jQuery(document).ready(function() {
 				$options[] = "buildNavigation: ".($this->lConf['sliderNavigation'] ? 'true' : 'false');
 				$options[] = "startText: '".t3lib_div::slashJS($this->pi_getLL('slider_start'))."'";
 				$options[] = "stopText: '".t3lib_div::slashJS($this->pi_getLL('slider_stop'))."'";
-				if (trim($this->pi_getLL('slider_panel'))) {
+				// define the paneltext
+				if ($this->lConf['sliderPanelFromHeader']) {
+					$tab = array();
+					for ($a=0; $a < $this->contentCount; $a++) {
+						$tab[] = "if(i==".($a+1).") return ".t3lib_div::quoteJSvalue($this->contentRow[$a]['title_overlay']).";";
+					}
+					$options[] = "navigationFormatter: function(i,p){\n			".implode("\n			", $tab)."\n		}";
+				} elseif (trim($this->pi_getLL('slider_panel'))) {
 					$options[] = "navigationFormatter: function(i,p){ var str = '".(t3lib_div::slashJS($this->pi_getLL('slider_panel')))."'; return str.replace('%i%',i); }";
 				}
 				if ($this->lConf['sliderRandomContent']) {
@@ -398,23 +422,13 @@ jQuery(document).ready(function(){
 				// wrap the class
 				$markerArray["ATTRIBUTE"] .= $this->cObj->stdWrap($this->lConf["column".($a+1)], array("wrap" => ' class="'.$this->contentClass[$a].'"', "required" => 1));
 			}
-			// Select the content
-			$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery('*', 'tt_content', 'uid='.intval($this->cElements[$a]), '', '', 1);
-			$row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res);
-			if ($GLOBALS['TSFE']->sys_language_content) {
-				$row = $GLOBALS['TSFE']->sys_page->getRecordOverlay('tt_content', $row, $GLOBALS['TSFE']->sys_language_content, $GLOBALS['TSFE']->sys_language_contentOL);
-			}
 			// render the content
 			$markerArray["ID"] = $a+1;
 			$markerArray["TITLE"] = null;
 			// Title will be selected if not COLUMNS (TAB / ACCORDION)
 			if ($this->templatePart != "TEMPLATE_COLUMNS") {
 				// overwrite the title if set in $this->titles
-				if ($this->titles[$a] != '') {
-					$markerArray["TITLE"] = $this->titles[$a];
-				} else {
-					$markerArray["TITLE"] = $row['header'];
-				}
+				$markerArray["TITLE"] = $this->contentRow[$a]['title_overlay'];
 			}
 			// define the used wrap
 			if ($a == 0) {
@@ -428,11 +442,11 @@ jQuery(document).ready(function(){
 			// TODO: Remove the title from content
 			$cConf = array(
 				'tables' => 'tt_content',
-				'source' => ($row['_LOCALIZED_UID'] ? $row['_LOCALIZED_UID'] : $row['uid']),
+				'source' => ($this->contentRow[$a]['_LOCALIZED_UID'] ? $this->contentRow[$a]['_LOCALIZED_UID'] : $this->contentRow[$a]['uid']),
 				'dontCheckPid' => 1,
 			);
 			// wrap the content
-			$markerArray["CONTENT"] = $this->cObj->stdWrap($this->cObj->RECORDS($cConf), array('wrap' => $wrap));;
+			$markerArray["CONTENT"] = $this->cObj->stdWrap($this->cObj->RECORDS($cConf), array('wrap' => $wrap));
 			if ($markerArray["CONTENT"]) {
 				// add content to COLUMNS
 				$columns .= $this->cObj->substituteMarkerArray($columnCode, $markerArray, '###|###', 0);

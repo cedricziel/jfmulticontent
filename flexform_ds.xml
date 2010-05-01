@@ -460,6 +460,16 @@
 							</config>
 						</TCEforms>
 					</sliderRandomContent>
+					<sliderPanelFromHeader>
+						<TCEforms>
+							<displayCond>FIELD:style:=:slider</displayCond>
+							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.sliderPanelFromHeader</label>
+							<config>
+								<type>check</type>
+								<default>0</default>
+							</config>
+						</TCEforms>
+					</sliderPanelFromHeader>
 					<sliderTransition>
 						<TCEforms>
 							<displayCond>FIELD:style:=:slider</displayCond>
