@@ -637,5 +637,35 @@
 				</el>
 			</ROOT>
 		</attribute>
+		<special>
+			<ROOT>
+				<TCEforms>
+					<sheetTitle>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.sheet_options</sheetTitle>
+				</TCEforms>
+				<type>array</type>
+				<el>
+					<options>
+						<TCEforms>
+							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.options</label>
+							<config>
+								<type>text</type>
+								<wrap>OFF</wrap>
+								<cols>48</cols>
+								<rows>10</rows>
+							</config>
+						</TCEforms>
+					</options>
+					<optionsOverride>
+						<TCEforms>
+							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.optionsOverride</label>
+							<config>
+								<type>check</type>
+								<default>0</default>
+							</config>
+						</TCEforms>
+					</optionsOverride>
+				</el>
+			</ROOT>
+		</special>
 	</sheets>
 </T3DataStructure>

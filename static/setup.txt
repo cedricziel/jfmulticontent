@@ -1,8 +1,10 @@
 plugin.tx_jfmulticontent_pi1 {
 	jQueryNoConflict = {$plugin.tx_jfmulticontent_pi1.jQueryNoConflict}
 	jsInFooter = {$plugin.tx_jfmulticontent_pi1.jsInFooter}
+	jsMinify = {$plugin.tx_jfmulticontent_pi1.jsMinify}
 
 	templateFile = {$plugin.tx_jfmulticontent_pi1.file.templateFile}
+	templateFileJS = {$plugin.tx_jfmulticontent_pi1.file.templateFileJS}
 	cssFile = {$plugin.tx_jfmulticontent_pi1.file.cssFile}
 	jQueryLibrary = {$plugin.tx_jfmulticontent_pi1.file.jQueryLibrary}
 	jQueryEasing = {$plugin.tx_jfmulticontent_pi1.file.jQueryEasing}

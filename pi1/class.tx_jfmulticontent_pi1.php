@@ -48,6 +48,7 @@ class tx_jfmulticontent_pi1 extends tslib_pibase {
 	var $pi_checkCHash = true;
 	var $lConf = array();
 	var $templateFile = null;
+	var $templateFileJS = null;
 	var $templatePart = null;
 	var $contentKey = null;
 	var $contentCount = null;
@@ -91,6 +92,13 @@ class tx_jfmulticontent_pi1 extends tslib_pibase {
 		// The template
 		if ($this->conf['templateFile']) {
 			$this->templateFile = $this->cObj->fileResource($this->conf['templateFile']);
+		} else {
+			return "<p>NO TEMPLATE FOUND!</p>";
+		}
+
+		// The template for JS
+		if ($this->conf['templateFileJS']) {
+			$this->templateFileJS = $this->cObj->fileResource($this->conf['templateFileJS']);
 		} else {
 			return "<p>NO TEMPLATE FOUND!</p>";
 		}
@@ -164,6 +172,7 @@ class tx_jfmulticontent_pi1 extends tslib_pibase {
 				break;
 			}
 			case "tab" : {
+				// jQuery Tabs
 				$this->templatePart = "TEMPLATE_TAB";
 				$this->contentWrap = t3lib_div::trimExplode("|*|", $this->conf['tabWrap.']['wrap']);
 				// the id attribute is not permitted in tabs-style
@@ -174,7 +183,6 @@ class tx_jfmulticontent_pi1 extends tslib_pibase {
 						}
 					}
 				}
-				// jQuery Tabs
 				$this->addJS(chr(10).$jQueryNoConflict);
 				$fx = array();
 				if ($this->lConf['tabFxHeight']) {
@@ -201,34 +209,46 @@ class tx_jfmulticontent_pi1 extends tslib_pibase {
 				} elseif (is_numeric($this->lConf['tabOpen'])) {
 					$options[] = "selected:".($this->lConf['tabOpen'] - 1);
 				}
+				// overwrite all options if set
+				if (trim($this->lConf['options'])) {
+					if ($this->lConf['optionsOverride']) {
+						$options = array($this->lConf['options']);
+					} else {
+						$options[] = $this->lConf['options'];
+					}
+				}
+				// get the Template of the Javascript
+				$markerArray = array();
+				// get the template
+				if (! $templateCode = trim($this->cObj->getSubpart($this->templateFileJS, "###TEMPLATE_TAB_JS###"))) {
+					$templateCode = "alert('Template TEMPLATE_TAB_JS is missing')";
+				}
+				// Fix the href problem (config.prefixLocalAnchors = all)
+				if ($GLOBALS['TSFE']->config['config']['prefixLocalAnchors']) {
+					$fixTabHref = trim($this->cObj->getSubpart($templateCode, "###FIX_HREF###"));
+				} else {
+					$fixTabHref = null;
+				}
+				$templateCode = trim($this->cObj->substituteSubpart($templateCode, '###FIX_HREF###', $fixTabHref, 0));
+				// Replace default values
+				$markerArray["KEY"] = $this->contentKey;
+				$markerArray["PREG_QUOTE_KEY"] = preg_quote($this->contentKey, "/");
+				$markerArray["OPTIONS"] = implode(", ", $options);
+				$markerArray["ROTATE"] = $rotate;
+				$templateCode = $this->cObj->substituteMarkerArray($templateCode, $markerArray, '###|###', 0);
+				// Add all CSS and JS files
 				if (T3JQUERY === true) {
 					tx_t3jquery::addJqJS();
 				} else {
 					$this->addJsFile($this->conf['jQueryLibrary']);
 					$this->addJsFile($this->conf['jQueryUI']);
 				}
-				// Fix the href problem (config.prefixLocalAnchors = all)
-				if ($GLOBALS['TSFE']->config['config']['prefixLocalAnchors']) {
-					$fixTabHref = "
-	jQuery('#{$this->contentKey} ul li a').each(function(id, item) {
-		var temp = item.href.split('#');
-		var temp_last = temp[temp.length-1];
-		var search = /^".preg_quote($this->contentKey, "/")."/;
-		if (search.test(temp[temp.length-1])) {
-			item.href = '#'+temp_last;
-		}
-	});";
-				} else {
-					$fixTabHref = null;
-				}
 				$this->addCssFile($this->conf['jQueryUIstyle']);
-				$this->addJS("
-jQuery(document).ready(function() { {$fixTabHref}
-	jQuery('#{$this->contentKey}').tabs(".(count($options) ? "{\n		".implode(",\n		", $options)."\n	}" : "")."){$rotate};
-});");
+				$this->addJS($templateCode);
 				break;
 			}
 			case "accordion" : {
+				// jQuery Accordion
 				$this->templatePart = "TEMPLATE_ACCORDION";
 				$this->contentWrap = t3lib_div::trimExplode("|*|", $this->conf['accordionWrap.']['wrap']);
 				$this->addJS(chr(10).$jQueryNoConflict);
@@ -250,36 +270,55 @@ jQuery(document).ready(function() { {$fixTabHref}
 				if ($this->lConf['accordionEvent']) {
 					$options['event'] = "event:'{$this->lConf['accordionEvent']}'";
 				}
+				// get the Template of the Javascript
+				$markerArray = array();
+				$markerArray["KEY"]            = $this->contentKey;
+				$markerArray["CONTENT_COUNT"]  = $this->contentCount;
+				$markerArray["EASING"]         = (in_array($this->lConf['accordionTransition'], array("swing", "linear")) ? "" : "ease".$this->lConf['accordionTransitiondir'].$this->lConf['accordionTransition']);
+				$markerArray["TRANS_DURATION"] = (is_numeric($this->lConf['accordionTransitionduration']) ? $this->lConf['accordionTransitionduration'] : 1000);
+				$markerArray["DELAY_DURATION"] = (is_numeric($this->lConf['delayDuration']) ? $this->lConf['delayDuration'] : '0');
+				// get the template for the Javascript
+				if (! $templateCode = trim($this->cObj->getSubpart($this->templateFileJS, "###TEMPLATE_ACCORDION_JS###"))) {
+					$templateCode = "alert('Template TEMPLATE_ACCORDION_JS is missing')";
+				}
+				$easingAnimation = null;
 				if ($this->lConf['accordionTransition']) {
 					$options['animated'] = "animated:'{$this->contentKey}'";
-					$this->addJS("
-jQuery.ui.accordion.animations.{$this->contentKey} = function(options) {
-	this.slide(options, {
-		easing: '".(in_array($this->lConf['accordionTransition'], array("swing", "linear")) ? "" : "ease{$this->lConf['accordionTransitiondir']}")."{$this->lConf['accordionTransition']}',
-		duration: ".(is_numeric($this->lConf['accordionTransitionduration']) ? $this->lConf['accordionTransitionduration'] : 1000)."
-	});
-};");
+					$easingAnimation = trim($this->cObj->getSubpart($templateCode, "###EASING_ANIMATION###"));
 				} else if ($this->lConf['accordionAnimated']) {
 					$options['animated'] = "animated:'{$this->lConf['accordionAnimated']}'";
 				}
-				$continuing = "";
+				// set the easing animation script
+				$templateCode = $this->cObj->substituteSubpart($templateCode, '###EASING_ANIMATION###', $easingAnimation, 0);
+				$continuing = null;
+				$autoPlay = null;
+				$settimeout = null;
 				if ($this->lConf['delayDuration'] > 0) {
 					// does not work if (! $this->lConf['autoplayContinuing']) {}
-					$continuing = "
-	jQuery('#{$this->contentKey}').click(function(){jQuery('#{$this->contentKey}').accordion('option', 'change', '');});";
-					$settimeout = "setTimeout(\"tx_jfmulticontent_next_accordion(jQuery('#{$this->contentKey}'),{$this->contentCount})\", {$this->lConf['delayDuration']});";
-					$this->addJS(chr(10).$settimeout);
+					$continuing = trim($this->cObj->getSubpart($templateCode, "###CONTINUING###"));
+					$autoPlay   = trim($this->cObj->getSubpart($templateCode, "###AUTO_PLAY###"));
+					$settimeout = trim($this->cObj->getSubpart($templateCode, "###SETTIMEOUT###"));
+					$settimeout = $this->cObj->substituteMarkerArray($settimeout, $markerArray, '###|###', 0);
 					$options['change'] = "change:function(event,ui){{$settimeout}}";
-					$this->addJS("
-function tx_jfmulticontent_next_accordion(id, max) {
-	if (jQuery(id).accordion('option', 'change') != '') {
-		active = jQuery(id).accordion('option', 'active') + 1;
-		active = (active >= max ? 0 : active);
-		jQuery(id).accordion('activate', active);
-	}
-}");
 				}
-				// jQuery Accordion
+				$templateCode = $this->cObj->substituteSubpart($templateCode, '###CONTINUING###', $continuing, 0);
+				$templateCode = $this->cObj->substituteSubpart($templateCode, '###AUTO_PLAY###',  $autoPlay, 0);
+				$templateCode = $this->cObj->substituteSubpart($templateCode, '###SETTIMEOUT###', $settimeout, 0);
+				// overwrite all options if set
+				if (trim($this->lConf['options'])) {
+					if ($this->lConf['optionsOverride']) {
+						$options = array($this->lConf['options']);
+					} else {
+						$options['flexform'] = $this->lConf['options'];
+					}
+				}
+
+				// Replace default values
+				$markerArray["OPTIONS"] = implode(", ", $options);
+				// Replace all markers
+				$templateCode = $this->cObj->substituteMarkerArray($templateCode, $markerArray, '###|###', 0);
+
+				// Add all CSS and JS files
 				if (T3JQUERY === true) {
 					tx_t3jquery::addJqJS();
 				} else {
@@ -288,25 +327,14 @@ function tx_jfmulticontent_next_accordion(id, max) {
 					$this->addJsFile($this->conf['jQueryUI']);
 				}
 				$this->addCssFile($this->conf['jQueryUIstyle']);
-				$this->addJS("
-jQuery(document).ready(function() {
-	jQuery('#{$this->contentKey}').accordion(".(count($options) ? "{\n		".implode(",\n		", $options)."\n	}" : "").");{$continuing}
-});");
+				$this->addJS(trim($templateCode));
 				break;
 			}
 			case "slider" : {
+				// anythingslider
 				$this->templatePart = "TEMPLATE_SLIDER";
 				$this->contentWrap = t3lib_div::trimExplode("|*|", $this->conf['sliderWrap.']['wrap']);
 				$this->addJS(chr(10).$jQueryNoConflict);
-				// jQuery Accordion
-				if (T3JQUERY === true) {
-					tx_t3jquery::addJqJS();
-				} else {
-					$this->addJsFile($this->conf['jQueryLibrary']);
-					$this->addJsFile($this->conf['jQueryEasing']);
-				}
-				$this->addJsFile($this->conf['sliderJS']);
-				$this->addCssFile($this->conf['sliderCSS']);
 				// 
 				if ($this->lConf['sliderTransition']) {
 					$options[] = "easing: '".(in_array($this->lConf['sliderTransition'], array("swing", "linear")) ? "" : "ease{$this->lConf['sliderTransitiondir']}")."{$this->lConf['sliderTransition']}'";
@@ -341,10 +369,41 @@ jQuery(document).ready(function() {
 				} elseif ($this->lConf['sliderOpen'] > 1) {
 					$options[] = "opened: ".($this->lConf['sliderOpen'] < $this->contentCount ? $this->lConf['sliderOpen'] : $this->contentCount);
 				}
-				$this->addJS("
-jQuery(document).ready(function(){
-	jQuery('#{$this->contentKey}').anythingSlider(".(count($options) ? "{\n		".implode(",\n		", $options)."\n	}" : "").");
-});");
+				// overwrite all options if set
+				if (trim($this->lConf['options'])) {
+					if ($this->lConf['optionsOverride']) {
+						$options = array($this->lConf['options']);
+					} else {
+						$options[] = $this->lConf['options'];
+					}
+				}
+				// get the Template of the Javascript
+				$markerArray = array();
+				// get the template
+				if (! $templateCode = trim($this->cObj->getSubpart($this->templateFileJS, "###TEMPLATE_SLIDER_JS###"))) {
+					$templateCode = "alert('Template TEMPLATE_SLIDER_JS is missing')";
+				}
+				// Replace default values
+				$markerArray["KEY"] = $this->contentKey;
+				$markerArray["OPTIONS"] = implode(", ", $options);
+				$templateCode = $this->cObj->substituteMarkerArray($templateCode, $markerArray, '###|###', 0);
+				// Fix the href problem (config.prefixLocalAnchors = all)
+				if ($GLOBALS['TSFE']->config['config']['prefixLocalAnchors']) {
+					$fixTabHref = trim($this->cObj->getSubpart($templateCode, "###FIX_HREF###"));
+				} else {
+					$fixTabHref = null;
+				}
+				$templateCode = trim($this->cObj->substituteSubpart($templateCode, '###FIX_HREF###', $fixTabHref, 0));
+				// Add all CSS and JS files
+				if (T3JQUERY === true) {
+					tx_t3jquery::addJqJS();
+				} else {
+					$this->addJsFile($this->conf['jQueryLibrary']);
+					$this->addJsFile($this->conf['jQueryEasing']);
+				}
+				$this->addJsFile($this->conf['sliderJS']);
+				$this->addCssFile($this->conf['sliderCSS']);
+				$this->addJS($templateCode);
 				break;
 			}
 			default: {
@@ -370,7 +429,9 @@ jQuery(document).ready(function(){
 	{
 		$markerArray = array();
 		// get the template
-		$templateCode = $this->cObj->getSubpart($this->templateFile, "###{$this->templatePart}###");
+		if (! $templateCode = $this->cObj->getSubpart($this->templateFile, "###{$this->templatePart}###")) {
+			$templateCode = "<p>Template {$this->templatePart} is missing</p>";
+		}
 		// Replace default values
 		$markerArray["KEY"] = $this->contentKey;
 		$templateCode = $this->cObj->substituteMarkerArray($templateCode, $markerArray, '###|###', 0);
@@ -495,6 +556,9 @@ jQuery(document).ready(function(){
 		if (count($this->js) > 0) {
 			foreach ($this->js as $jsToPut) {
 				$temp_js .= $jsToPut;
+			}
+			if ($this->conf['jsMinify']) {
+				$temp_js = t3lib_div::minifyJavaScript($temp_js);
 			}
 			if ($this->conf['jsInFooter']) {
 				$GLOBALS['TSFE']->additionalFooterData['js_'.$this->extKey] .= t3lib_div::wrapJS($temp_js, true);

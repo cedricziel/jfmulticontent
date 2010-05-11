@@ -67,6 +67,9 @@
 			<label index="tt_content.tx_jfmulticontent.sheet_autoplay">Autoplay</label>
 			<label index="tt_content.tx_jfmulticontent.autoplayDuration">Delay for autoplay (in ms)</label>
 			<label index="tt_content.tx_jfmulticontent.autoplayContinuing">Continuing</label>
+			<label index="tt_content.tx_jfmulticontent.sheet_options">Options</label>
+			<label index="tt_content.tx_jfmulticontent.options">Insert your own options</label>
+			<label index="tt_content.tx_jfmulticontent.optionsOverride">Override all options</label>
 		</languageKey>
 	</data>
 	<orig_hash type="array">
