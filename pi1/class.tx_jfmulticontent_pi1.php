@@ -44,7 +44,7 @@ if (t3lib_extMgm::isLoaded('t3jquery')) {
 class tx_jfmulticontent_pi1 extends tslib_pibase {
 	var $prefixId      = 'tx_jfmulticontent_pi1';               // Same as class name
 	var $scriptRelPath = 'pi1/class.tx_jfmulticontent_pi1.php'; // Path to this script relative to the extension dir.
-	var $extKey        = 'jfmulticontent';                     // The extension key.
+	var $extKey        = 'jfmulticontent';                      // The extension key.
 	var $pi_checkCHash = true;
 	var $lConf = array();
 	var $templateFile = null;
@@ -90,17 +90,12 @@ class tx_jfmulticontent_pi1 extends tslib_pibase {
 		}
 
 		// The template
-		if ($this->conf['templateFile']) {
-			$this->templateFile = $this->cObj->fileResource($this->conf['templateFile']);
-		} else {
-			return "<p>NO TEMPLATE FOUND!</p>";
+		if (! $this->templateFile = $this->cObj->fileResource($this->conf['templateFile'])) {
+			$this->templateFile = $this->cObj->fileResource("EXT:jfmulticontent/pi1/tx_jfmulticontent_pi1.tmpl");
 		}
-
 		// The template for JS
-		if ($this->conf['templateFileJS']) {
-			$this->templateFileJS = $this->cObj->fileResource($this->conf['templateFileJS']);
-		} else {
-			return "<p>NO TEMPLATE FOUND!</p>";
+		if (! $this->templateFileJS = $this->cObj->fileResource($this->conf['templateFileJS'])) {
+			$this->templateFileJS = $this->cObj->fileResource("EXT:jfmulticontent/pi1/tx_jfmulticontent_pi1.js");
 		}
 
 		// get the content ID's
