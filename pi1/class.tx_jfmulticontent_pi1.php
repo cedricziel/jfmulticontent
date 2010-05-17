@@ -178,7 +178,7 @@ class tx_jfmulticontent_pi1 extends tslib_pibase {
 						}
 					}
 				}
-				$this->addJS(chr(10).$jQueryNoConflict);
+				$this->addJS($jQueryNoConflict);
 				$fx = array();
 				if ($this->lConf['tabFxHeight']) {
 					$fx[] = "height: 'toggle'";
@@ -246,7 +246,7 @@ class tx_jfmulticontent_pi1 extends tslib_pibase {
 				// jQuery Accordion
 				$this->templatePart = "TEMPLATE_ACCORDION";
 				$this->contentWrap = t3lib_div::trimExplode("|*|", $this->conf['accordionWrap.']['wrap']);
-				$this->addJS(chr(10).$jQueryNoConflict);
+				$this->addJS($jQueryNoConflict);
 				$options = array();
 				if (! $this->lConf['accordionAutoHeight']) {
 					$options['autoHeight'] = "autoHeight:false";
@@ -329,7 +329,7 @@ class tx_jfmulticontent_pi1 extends tslib_pibase {
 				// anythingslider
 				$this->templatePart = "TEMPLATE_SLIDER";
 				$this->contentWrap = t3lib_div::trimExplode("|*|", $this->conf['sliderWrap.']['wrap']);
-				$this->addJS(chr(10).$jQueryNoConflict);
+				$this->addJS($jQueryNoConflict);
 				// 
 				if ($this->lConf['sliderTransition']) {
 					$options[] = "easing: '".(in_array($this->lConf['sliderTransition'], array("swing", "linear")) ? "" : "ease{$this->lConf['sliderTransitiondir']}")."{$this->lConf['sliderTransition']}'";
@@ -537,13 +537,18 @@ class tx_jfmulticontent_pi1 extends tslib_pibase {
 	 *
 	 * @return void
 	 */
-	function addResources() {
+	function addResources()
+	{
 		// add all defined JS files
 		if (count($this->jsFiles) > 0) {
 			foreach ($this->jsFiles as $jsToLoad) {
-				// Add script only once
-				if (! preg_match("/".preg_quote($this->getPath($jsToLoad), "/")."/", $GLOBALS['TSFE']->additionalHeaderData['jsFile_'.$this->extKey])) {
-					$GLOBALS['TSFE']->additionalHeaderData['jsFile_'.$this->extKey] .= ($this->getPath($jsToLoad) ? '<script src="'.$this->getPath($jsToLoad).'" type="text/javascript"></script>'.chr(10) :'');
+				if (T3JQUERY === true) {
+					tx_t3jquery::addJS('', array('jsfile' => $this->getPath($jsToLoad)));
+				} else {
+					// Add script only once
+					if (! preg_match("/".preg_quote($this->getPath($jsToLoad), "/")."/", $GLOBALS['TSFE']->additionalHeaderData['jsFile_'.$this->extKey])) {
+						$GLOBALS['TSFE']->additionalHeaderData['jsFile_'.$this->extKey] .= ($this->getPath($jsToLoad) ? '<script src="'.$this->getPath($jsToLoad).'" type="text/javascript"></script>'.chr(10) :'');
+					}
 				}
 			}
 		}
@@ -555,10 +560,22 @@ class tx_jfmulticontent_pi1 extends tslib_pibase {
 			if ($this->conf['jsMinify']) {
 				$temp_js = t3lib_div::minifyJavaScript($temp_js);
 			}
-			if ($this->conf['jsInFooter']) {
-				$GLOBALS['TSFE']->additionalFooterData['js_'.$this->extKey] .= t3lib_div::wrapJS($temp_js, true);
+			$conf = array();
+			$conf['jsdata'] = $temp_js;
+			if (T3JQUERY === true && t3lib_div::int_from_ver(t3lib_extMgm::getExtensionVersion('t3jquery')) >= 1002000) {
+				if ($this->conf['jsInFooter']) {
+					$conf['tofooter'] = true;
+					tx_t3jquery::addJS('', $conf);
+				} else {
+					$conf['tofooter'] = false;
+					tx_t3jquery::addJS('', $conf);
+				}
 			} else {
-				$GLOBALS['TSFE']->additionalHeaderData['js_'.$this->extKey] .= t3lib_div::wrapJS($temp_js, true);
+				if ($this->conf['jsInFooter']) {
+					$GLOBALS['TSFE']->additionalFooterData['js_'.$this->extKey] .= t3lib_div::wrapJS($temp_js, true);
+				} else {
+					$GLOBALS['TSFE']->additionalHeaderData['js_'.$this->extKey] .= t3lib_div::wrapJS($temp_js, true);
+				}
 			}
 		}
 		// add all defined CSS files
