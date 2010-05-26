@@ -21,17 +21,17 @@
 								<items type="array">
 									<numIndex index="0" type="array">
 										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.style.I.0</numIndex>
-										<numIndex index="1">2colomn</numIndex>
+										<numIndex index="1">2column</numIndex>
 										<numIndex index="2">EXT:jfmulticontent/selicon_tt_content_tx_jfmulticontent_style_0.gif</numIndex>
 									</numIndex>
 									<numIndex index="1" type="array">
 										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.style.I.1</numIndex>
-										<numIndex index="1">3colomn</numIndex>
+										<numIndex index="1">3column</numIndex>
 										<numIndex index="2">EXT:jfmulticontent/selicon_tt_content_tx_jfmulticontent_style_1.gif</numIndex>
 									</numIndex>
 									<numIndex index="2" type="array">
 										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.style.I.2</numIndex>
-										<numIndex index="1">4colomn</numIndex>
+										<numIndex index="1">4column</numIndex>
 										<numIndex index="2">EXT:jfmulticontent/selicon_tt_content_tx_jfmulticontent_style_2.gif</numIndex>
 									</numIndex>
 									<numIndex index="3" type="array">
@@ -58,7 +58,7 @@
 					
 					<column1>
 						<TCEforms>
-							<displayCond>FIELD:style:IN:2colomn,3colomn,4colomn,5colomn</displayCond>
+							<displayCond>FIELD:style:IN:2column,3column,4column,5column</displayCond>
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.column1</label>
 							<config>
 								<type>select</type>
@@ -70,7 +70,7 @@
 					</column1>
 					<column2>
 						<TCEforms>
-							<displayCond>FIELD:style:IN:2colomn,3colomn,4colomn,5colomn</displayCond>
+							<displayCond>FIELD:style:IN:2column,3column,4column,5column</displayCond>
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.column2</label>
 							<config>
 								<type>select</type>
@@ -82,7 +82,7 @@
 					</column2>
 					<column3>
 						<TCEforms>
-							<displayCond>FIELD:style:IN:3colomn,4colomn,5colomn</displayCond>
+							<displayCond>FIELD:style:IN:3column,4column,5column</displayCond>
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.column3</label>
 							<config>
 								<type>select</type>
@@ -94,7 +94,7 @@
 					</column3>
 					<column4>
 						<TCEforms>
-							<displayCond>FIELD:style:IN:4colomn,5colomn</displayCond>
+							<displayCond>FIELD:style:IN:4column,5column</displayCond>
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.column4</label>
 							<config>
 								<type>select</type>

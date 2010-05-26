@@ -52,7 +52,6 @@ class tx_jfmulticontent_pi1 extends tslib_pibase {
 	var $templatePart = null;
 	var $contentKey = null;
 	var $contentCount = null;
-	var $contentRow = array();
 	var $contentClass = array();
 	var $contentWrap = array();
 	var $jsFiles = array();
@@ -75,18 +74,78 @@ class tx_jfmulticontent_pi1 extends tslib_pibase {
 		$this->conf = $conf;
 		$this->pi_setPiVarDefaults();
 		$this->pi_loadLL();
-
-		// Set the Flexform information
-		$this->pi_initPIflexForm();
-		$piFlexForm = $this->cObj->data['pi_flexform'];
-		foreach ($piFlexForm['data'] as $sheet => $data) {
-			foreach ($data as $lang => $value) {
-				foreach ($value as $key => $val) {
-					if (! isset($this->lConf[$key])) {
-						$this->lConf[$key] = $this->pi_getFFvalue($piFlexForm, $key, $sheet);
+		if ($this->cObj->data['list_type'] == $this->extKey.'_pi1') {
+			// It's a content, all data from flexform
+			// Set the Flexform information
+			$this->pi_initPIflexForm();
+			$piFlexForm = $this->cObj->data['pi_flexform'];
+			foreach ($piFlexForm['data'] as $sheet => $data) {
+				foreach ($data as $lang => $value) {
+					foreach ($value as $key => $val) {
+						if (! isset($this->lConf[$key])) {
+							$this->lConf[$key] = $this->pi_getFFvalue($piFlexForm, $key, $sheet);
+						}
 					}
 				}
 			}
+			// define the titles to overwrite
+			if (trim($this->lConf['titles'])) {
+				$this->titles = t3lib_div::trimExplode(chr(10), $this->lConf['titles']);
+			}
+			// define the attributes
+			if (trim($this->lConf['attributes'])) {
+				$this->attributes = t3lib_div::trimExplode(chr(10), $this->lConf['attributes']);
+			}
+			// get the content ID's
+			$content_ids = t3lib_div::trimExplode(",", $this->cObj->data['tx_jfmulticontent_contents']);
+			// get the informations for every content
+			for ($a=0; $a < count($content_ids); $a++) {
+				// Select the content
+				$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery('*', 'tt_content', 'uid='.intval($content_ids[$a]), '', '', 1);
+				$row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res);
+				if ($GLOBALS['TSFE']->sys_language_content) {
+					$row = $GLOBALS['TSFE']->sys_page->getRecordOverlay('tt_content', $row, $GLOBALS['TSFE']->sys_language_content, $GLOBALS['TSFE']->sys_language_contentOL);
+				}
+				if ($this->titles[$a] == '' || !isset($this->titles[$a])) {
+					$this->titles[$a] = $row['header'];
+				}
+				// define content conf
+				$cConf = array(
+					'tables' => 'tt_content',
+					'source' => ($row['_LOCALIZED_UID'] ? $row['_LOCALIZED_UID'] : $row['uid']),
+					'dontCheckPid' => 1,
+				);
+				$this->cElements[] = $this->cObj->RECORDS($cConf);
+			}
+			// define the key of the element
+			$this->contentKey = 'jfmulticontent_c' . $this->cObj->data['uid'];
+		} else {
+			// TS config will be used
+			if (count($this->conf['config.']) > 0) {
+				foreach ($this->conf['config.'] as $key => $val) {
+					$this->lConf[$key] = trim($val);
+				}
+				// define the key of the element
+				$this->contentKey = $this->lConf['contentKey'];
+			} else {
+				$this->contentKey = 'jfmulticontent_ts1';
+			}
+			// Render the contents
+			if (count($this->conf['contents.']) > 0) {
+				foreach ($this->conf['contents.'] as $key => $contents) {
+					$title = trim($this->cObj->cObjGetSingle($contents['title'], $contents['title.']));
+					$content = trim($this->cObj->cObjGetSingle($contents['content'], $contents['content.']));
+					if ($content) {
+						$this->cElements[] = $content;
+						$this->titles[] = $title;
+					}
+				}
+			}
+		}
+		$this->contentCount = count($this->cElements);
+		// return false, if there is no element
+		if ($this->contentCount == 0) {
+			return false;
 		}
 
 		// The template
@@ -98,43 +157,9 @@ class tx_jfmulticontent_pi1 extends tslib_pibase {
 			$this->templateFileJS = $this->cObj->fileResource("EXT:jfmulticontent/pi1/tx_jfmulticontent_pi1.js");
 		}
 
-		// get the content ID's
-		$this->cElements = t3lib_div::trimExplode(",", $this->cObj->data['tx_jfmulticontent_contents']);
-		if ($this->contentCount === null) {
-			$this->contentCount = count($this->cElements);
-		}
 
 		// add the CSS file
 		$this->addCssFile($this->conf['cssFile']);
-
-		// define the key of the element
-		$this->contentKey = "jfmulticontent_c" . $this->cObj->data['uid'];
-
-		// define the titles to overwrite
-		if ($this->lConf['titles']) {
-			$this->titles = t3lib_div::trimExplode(chr(10), $this->lConf['titles']);
-		}
-
-		// define the attributes
-		if ($this->lConf['attributes']) {
-			$this->attributes = t3lib_div::trimExplode(chr(10), $this->lConf['attributes']);
-		}
-
-		// get the informations for every content
-		for ($a=0; $a < $this->contentCount; $a++) {
-			// Select the content
-			$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery('*', 'tt_content', 'uid='.intval($this->cElements[$a]), '', '', 1);
-			$row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res);
-			if ($GLOBALS['TSFE']->sys_language_content) {
-				$row = $GLOBALS['TSFE']->sys_page->getRecordOverlay('tt_content', $row, $GLOBALS['TSFE']->sys_language_content, $GLOBALS['TSFE']->sys_language_contentOL);
-			}
-			if ($this->titles[$a] != '') {
-				$row['title_overlay'] = $this->titles[$a];
-			} else {
-				$row['title_overlay'] = $row['header'];
-			}
-			$this->contentRow[] = $row;
-		}
 
 		// define the jQuery mode and function
 		if ($this->conf['jQueryNoConflict']) {
@@ -145,21 +170,21 @@ class tx_jfmulticontent_pi1 extends tslib_pibase {
 
 		// style
 		switch ($this->lConf['style']) {
-			case "2colomn" : {
+			case "2column" : {
 				$this->templatePart = "TEMPLATE_COLUMNS";
 				$this->contentCount = 2;
 				$this->contentClass = t3lib_div::trimExplode("|*|", $this->conf['2columnClasses']);
 				$this->contentWrap = t3lib_div::trimExplode("|*|", $this->conf['columnWrap.']['wrap']);
 				break;
 			}
-			case "3colomn" : {
+			case "3column" : {
 				$this->templatePart = "TEMPLATE_COLUMNS";
 				$this->contentCount = 3;
 				$this->contentClass = t3lib_div::trimExplode("|*|", $this->conf['3columnClasses']);
 				$this->contentWrap = t3lib_div::trimExplode("|*|", $this->conf['columnWrap.']['wrap']);
 				break;
 			}
-			case "4colomn" : {
+			case "4column" : {
 				$this->templatePart = "TEMPLATE_COLUMNS";
 				$this->contentCount = 4;
 				$this->contentClass = t3lib_div::trimExplode("|*|", $this->conf['4columnClasses']);
@@ -353,7 +378,7 @@ class tx_jfmulticontent_pi1 extends tslib_pibase {
 				if ($this->lConf['sliderPanelFromHeader']) {
 					$tab = array();
 					for ($a=0; $a < $this->contentCount; $a++) {
-						$tab[] = "if(i==".($a+1).") return ".t3lib_div::quoteJSvalue($this->contentRow[$a]['title_overlay']).";";
+						$tab[] = "if(i==".($a+1).") return ".t3lib_div::quoteJSvalue($this->titles[$a]).";";
 					}
 					$options[] = "navigationFormatter: function(i,p){\n			".implode("\n			", $tab)."\n		}";
 				} elseif (trim($this->pi_getLL('slider_panel'))) {
@@ -481,10 +506,10 @@ class tx_jfmulticontent_pi1 extends tslib_pibase {
 			// render the content
 			$markerArray["ID"] = $a+1;
 			$markerArray["TITLE"] = null;
-			// Title will be selected if not COLUMNS (TAB / ACCORDION)
+			// Title will be selected if not COLUMNS (TAB, ACCORDION and SLIDER)
 			if ($this->templatePart != "TEMPLATE_COLUMNS") {
 				// overwrite the title if set in $this->titles
-				$markerArray["TITLE"] = $this->contentRow[$a]['title_overlay'];
+				$markerArray["TITLE"] = $this->titles[$a];
 			}
 			// define the used wrap
 			if ($a == 0) {
@@ -494,15 +519,8 @@ class tx_jfmulticontent_pi1 extends tslib_pibase {
 			} else {
 				$wrap = $contentWrap_array[1];
 			}
-			// define content conf
-			// TODO: Remove the title from content
-			$cConf = array(
-				'tables' => 'tt_content',
-				'source' => ($this->contentRow[$a]['_LOCALIZED_UID'] ? $this->contentRow[$a]['_LOCALIZED_UID'] : $this->contentRow[$a]['uid']),
-				'dontCheckPid' => 1,
-			);
 			// wrap the content
-			$markerArray["CONTENT"] = $this->cObj->stdWrap($this->cObj->RECORDS($cConf), array('wrap' => $wrap));
+			$markerArray["CONTENT"] = $this->cObj->stdWrap($this->cElements[$a], array('wrap' => $wrap));
 			if ($markerArray["CONTENT"]) {
 				// add content to COLUMNS
 				$columns .= $this->cObj->substituteMarkerArray($columnCode, $markerArray, '###|###', 0);

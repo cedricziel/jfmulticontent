@@ -12,7 +12,7 @@
 			<label index="tt_content.tx_jfmulticontent.contents_edit">Edit</label>
 			<label index="tt_content.tx_jfmulticontent.sheet_general">General</label>
 			<label index="tt_content.tx_jfmulticontent.style">Style</label>
-			<label index="tt_content.tx_jfmulticontent.style.I.0">2 Columns</label>
+			<label index="tt_content.tx_jfmulticontent.style.I.0">2 columns</label>
 			<label index="tt_content.tx_jfmulticontent.style.I.1">3 columns</label>
 			<label index="tt_content.tx_jfmulticontent.style.I.2">4 columns</label>
 			<label index="tt_content.tx_jfmulticontent.style.I.3">Tabs</label>

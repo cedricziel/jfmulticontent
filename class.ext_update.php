@@ -47,6 +47,12 @@ class ext_update
 		"slider"    => "general",
 		"autoplay"  => "general",
 	);
+	var $style_mapping = array(
+		"2colomn" => "2column",
+		"3colomn" => "3column",
+		"4colomn" => "4column",
+	);
+
 
 	/**
 	 * Main function, returning the HTML content of the module
@@ -58,7 +64,8 @@ class ext_update
 		$this->flexObj = t3lib_div::makeInstance('t3lib_flexformtools');
 		// analyze
 		$this->contentElements = $this->getContentElements();
-		$this->wrongLanguage = $this->getWrongLanguage();
+		$this->wrongLanguage   = $this->getWrongLanguage();
+		$this->wrongStyle      = $this->getWrongStyle();
 		if (t3lib_div::_GP('do_update')) {
 			$out .= '<a href="'.t3lib_div::linkThisScript(array('do_update' => '', 'func' => '')).'">'.$GLOBALS['LANG']->sL($this->ll.'back').'</a><br/>';
 			$func = trim(t3lib_div::_GP('func'));
@@ -87,7 +94,9 @@ class ext_update
 			$out .= '<h3>'.$GLOBALS['LANG']->sL($this->ll.'actions').'</h3>';
 			// Update all flexform
 			$out .= $this->displayUpdateOption('searchFlexForm',      count($this->contentElements), 'updateFlexForm');
-			// Update 
+			// Update wrong Style
+			$out .= $this->displayUpdateOption('searchWrongStyle',    count($this->wrongStyle),      'updateWrongStyle');
+			// Update wrong  language
 			$out .= $this->displayUpdateOption('searchWrongLanguage', count($this->wrongLanguage),   'updateWrongLanguage');
 		}
 		if (t3lib_div::int_from_ver(TYPO3_version) < 4003000) {
@@ -212,6 +221,42 @@ class ext_update
 	}
 
 	/**
+	 * Return all contents with wrong styles
+	 * 
+	 * @return string
+	 */
+	function getWrongStyle()
+	{
+		$select_fields = '*';
+		$from_table = 'tt_content';
+		$where_clause = '
+		CType='.$GLOBALS['TYPO3_DB']->fullQuoteStr('list', $from_table).'
+		AND list_type='.$GLOBALS['TYPO3_DB']->fullQuoteStr('jfmulticontent_pi1', $from_table).'
+		AND deleted=0';
+		$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery($select_fields, $from_table, $where_clause);
+		if ($res) {
+			$resultRows = array();
+			while (($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res))) {
+				$ff_parsed = t3lib_div::xml2array($row['pi_flexform']);
+				// Check for old sheet values
+				if (is_array($ff_parsed['data'])) {
+					foreach ($ff_parsed['data'] as $key => $val) {
+						if (array_key_exists($val['lDEF']['style']['vDEF'], $this->style_mapping)) {
+							$resultRows[$row['uid']] = array(
+								'ff'        => $row['pi_flexform'],
+								'ff_parsed' => $ff_parsed,
+								'title'     => $row['title'],
+								'pid'       => $row['pid'],
+							);
+						}
+					}
+				}
+			}
+		}
+		return $resultRows;
+	}
+
+	/**
 	 * Returns all contents with content from differend languages
 	 * 
 	 * @return string
@@ -279,6 +324,31 @@ class ext_update
 				);
 				if ($GLOBALS['TYPO3_DB']->exec_UPDATEquery($table, $where, $fields_values)) {
 					$msg[] = 'Updated contentElement uid: '.$content_id.', pid: '.$this->contentElements[$content_id]['pid'];
+				}
+			}
+		}
+		return implode('<br/>', $msg);
+	}
+
+	/**
+	 * Update the content elements
+	 * 
+	 * @return string
+	 */
+	function updateWrongStyle()
+	{
+		$msg = null;
+		if (count($this->wrongStyle) > 0 && count($this->style_mapping) > 0) {
+			foreach ($this->wrongStyle as $content_id => $contentElement) {
+				$contentElement['ff_parsed']['data']['general']['lDEF']['style']['vDEF'] = $this->style_mapping[$contentElement['ff_parsed']['data']['general']['lDEF']['style']['vDEF']];
+				// Update the content
+				$table = 'tt_content';
+				$where = 'uid='.$content_id;
+				$fields_values = array(
+					'pi_flexform' => $this->flexObj->flexArray2Xml($contentElement['ff_parsed'], 1)
+				);
+				if ($GLOBALS['TYPO3_DB']->exec_UPDATEquery($table, $where, $fields_values)) {
+					$msg[] = 'Updated contentElement uid: '.$content_id.', pid: '.$this->wrongStyle[$content_id]['pid'];
 				}
 			}
 		}

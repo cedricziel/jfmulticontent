@@ -1,2 +1,2 @@
-script=res/anythingslider/jquery.anythingslider-1.2.js
+script=res/anythingslider/jquery.anythingslider-1.2.1.js
 components=jQuery,Core,Accordion,Tabs,Easing

@@ -30,5 +30,178 @@ plugin.tx_jfmulticontent_pi1 {
 	sliderWrap {
 		wrap = |
 	}
+
+	config {
+		contentKey = jfmulticontent_ts1
+		style = 2column
+		column1 = 50
+		column2 = 50
+		column3 = 
+		column4 = 
+		tabCollapsible = 0
+		tabOpen = 1
+		tabRandomContent = 0
+		tabFxHeight = 0
+		tabFxOpacity = 0
+		tabFxDuration = 
+		accordionAutoHeight = 1
+		accordionCollapsible = 0
+		accordionClosed = 0
+		accordionOpen = 1
+		accordionRandomContent = 0
+		accordionEvent = 
+		accordionAnimated = slide
+		accordionTransition = 
+		accordionTransitiondir = In
+		accordionTransitionduration = 1000
+		sliderAutoStart = 0
+		sliderPauseOnHover = 0
+		sliderNavigation = 1
+		sliderHashTags = 0
+		sliderOpen = 1
+		sliderRandomContent = 0
+		sliderPanelFromHeader = 0
+		sliderTransition = swing
+		sliderTransitiondir = In
+		sliderTransitionduration = 1000
+		delayDuration = 0
+		autoplayContinuing = 0
+		options (
+		)
+		optionsOverride = 0
+	}
+	contents {
+		10 {
+			content = CONTENT
+			content {
+				table = tt_content
+				select {
+					orderBy = sorting
+					where = colPos=12
+					begin = 0
+					max = 1
+					languageField = sys_language_uid
+				}
+			}
+			title < .content
+			title.renderObj = COA
+			title.renderObj {
+				10 = TEXT
+				10.field = header
+			}
+		}
+		20 < .10
+		20.content.select.begin = 1
+		20.title.select.begin = 1
+		30 < .10
+		30.content.select.begin = 2
+		30.title.select.begin = 2
+		40 < .10
+		40.content.select.begin = 3
+		40.title.select.begin = 3
+	}
 }
 
+/*
+# Example for accordion in template
+plugin.tx_jfmulticontent_pi1 {
+	config {
+		contentKey = jfmulticontent_accordion
+		style = accordion
+		accordionAutoHeight = 1
+		accordionCollapsible = 0
+		accordionClosed = 0
+		accordionOpen = 1
+		accordionRandomContent = 0
+		accordionEvent = 
+		accordionAnimated = slide
+		accordionTransition = 
+		accordionTransitiondir = In
+		accordionTransitionduration = 1000
+		delayDuration = 0
+		autoplayContinuing = 0
+		options (
+		)
+		optionsOverride = 0
+	}
+	contents {
+		10 {
+			content = CONTENT
+			content {
+				table = tt_content
+				select {
+					orderBy = sorting
+					where = colPos=12
+					begin = 0
+					max = 1
+					languageField = sys_language_uid
+				}
+			}
+			title < .content
+			title.renderObj = COA
+			title.renderObj {
+				10 = TEXT
+				10.field = header
+			}
+		}
+		20 < .10
+		20.content.select.begin = 1
+		20.title.select.begin = 1
+		30 < .10
+		30.content.select.begin = 2
+		30.title.select.begin = 2
+		40 < .10
+		40.content.select.begin = 3
+		40.title.select.begin = 3
+	}
+}
+
+# Example for tab in template
+plugin.tx_jfmulticontent_pi1 {
+	config {
+		contentKey = jfmulticontent_tab
+		style = tab
+		tabCollapsible = 0
+		tabOpen = 1
+		tabRandomContent = 0
+		tabFxHeight = 0
+		tabFxOpacity = 0
+		tabFxDuration = 
+		delayDuration = 0
+		autoplayContinuing = 0
+		options (
+		)
+		optionsOverride = 0
+	}
+	contents {
+		10 {
+			content = CONTENT
+			content {
+				table = tt_content
+				select {
+					orderBy = sorting
+					where = colPos=12
+					begin = 0
+					max = 1
+					languageField = sys_language_uid
+				}
+			}
+			title < .content
+			title.renderObj = COA
+			title.renderObj {
+				10 = TEXT
+				10.field = header
+			}
+		}
+		20 < .10
+		20.content.select.begin = 1
+		20.title.select.begin = 1
+		30 < .10
+		30.content.select.begin = 2
+		30.title.select.begin = 2
+		40 < .10
+		40.content.select.begin = 3
+		40.title.select.begin = 3
+	}
+}
+*/
