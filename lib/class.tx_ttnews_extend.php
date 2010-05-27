@@ -35,6 +35,7 @@ class tx_ttnews_extend
 {
 	var $conf = array();
 	var $cObj = null;
+	var $extKey = 'jfmulticontent';
 
 	function extraCodesProcessor($newsObject)
 	{
