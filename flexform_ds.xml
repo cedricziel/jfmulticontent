@@ -18,6 +18,7 @@
 								<type>select</type>
 								<size>1</size>
 								<maxitems>1</maxitems>
+								<default>2column</default>
 								<items type="array">
 									<numIndex index="0" type="array">
 										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.style.I.0</numIndex>
@@ -58,7 +59,7 @@
 					
 					<column1>
 						<TCEforms>
-							<displayCond>FIELD:style:IN:2column,3column,4column,5column</displayCond>
+							<displayCond>FIELD:style:IN:,2column,3column,4column,5column</displayCond>
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.column1</label>
 							<config>
 								<type>select</type>
@@ -70,7 +71,7 @@
 					</column1>
 					<column2>
 						<TCEforms>
-							<displayCond>FIELD:style:IN:2column,3column,4column,5column</displayCond>
+							<displayCond>FIELD:style:IN:,2column,3column,4column,5column</displayCond>
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.column2</label>
 							<config>
 								<type>select</type>
