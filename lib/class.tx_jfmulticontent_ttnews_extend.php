@@ -25,13 +25,13 @@
 require_once (PATH_t3lib . 'class.t3lib_page.php');
 
 /**
- * 'tx_ttnews_extend' for the 'jfmulticontent' extension.
+ * 'tx_jfmulticontent_ttnews_extend' for the 'jfmulticontent' extension.
  *
  * @author     Juergen Furrer <juergen.furrer@gmail.com>
  * @package    TYPO3
  * @subpackage tx_jfmulticontent
  */
-class tx_ttnews_extend
+class tx_jfmulticontent_ttnews_extend
 {
 	var $conf = array();
 	var $cObj = null;
@@ -229,7 +229,7 @@ class tx_ttnews_extend
 	}
 }
 
-if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/jfmulticontent/lib/class.tx_ttnews_extend.php']) {
-	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/jfmulticontent/lib/class.tx_ttnews_extend.php']);
+if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/jfmulticontent/lib/class.tx_jfmulticontent_ttnews_extend.php']) {
+	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/jfmulticontent/lib/class.tx_jfmulticontent_ttnews_extend.php']);
 }
 ?>
