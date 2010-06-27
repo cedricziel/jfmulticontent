@@ -41,7 +41,8 @@ if (t3lib_extMgm::isLoaded('t3jquery')) {
  * @package    TYPO3
  * @subpackage tx_jfmulticontent
  */
-class tx_jfmulticontent_pi1 extends tslib_pibase {
+class tx_jfmulticontent_pi1 extends tslib_pibase
+{
 	var $prefixId      = 'tx_jfmulticontent_pi1';               // Same as class name
 	var $scriptRelPath = 'pi1/class.tx_jfmulticontent_pi1.php'; // Path to this script relative to the extension dir.
 	var $extKey        = 'jfmulticontent';                      // The extension key.
@@ -53,6 +54,7 @@ class tx_jfmulticontent_pi1 extends tslib_pibase {
 	var $contentKey = null;
 	var $contentCount = null;
 	var $contentClass = array();
+	var $classes = array();
 	var $contentWrap = array();
 	var $jsFiles = array();
 	var $js = array();
@@ -173,6 +175,10 @@ class tx_jfmulticontent_pi1 extends tslib_pibase {
 			case "2column" : {
 				$this->templatePart = "TEMPLATE_COLUMNS";
 				$this->contentCount = 2;
+				$this->classes = array(
+					$this->lConf["column1"],
+					$this->lConf["column2"],
+				);
 				$this->contentClass = t3lib_div::trimExplode("|*|", $this->conf['2columnClasses']);
 				$this->contentWrap = t3lib_div::trimExplode("|*|", $this->conf['columnWrap.']['wrap']);
 				break;
@@ -180,6 +186,11 @@ class tx_jfmulticontent_pi1 extends tslib_pibase {
 			case "3column" : {
 				$this->templatePart = "TEMPLATE_COLUMNS";
 				$this->contentCount = 3;
+				$this->classes = array(
+					$this->lConf["column1"],
+					$this->lConf["column2"],
+					$this->lConf["column3"],
+				);
 				$this->contentClass = t3lib_div::trimExplode("|*|", $this->conf['3columnClasses']);
 				$this->contentWrap = t3lib_div::trimExplode("|*|", $this->conf['columnWrap.']['wrap']);
 				break;
@@ -187,7 +198,27 @@ class tx_jfmulticontent_pi1 extends tslib_pibase {
 			case "4column" : {
 				$this->templatePart = "TEMPLATE_COLUMNS";
 				$this->contentCount = 4;
+				$this->classes = array(
+					$this->lConf["column1"],
+					$this->lConf["column2"],
+					$this->lConf["column3"],
+					$this->lConf["column4"],
+				);
 				$this->contentClass = t3lib_div::trimExplode("|*|", $this->conf['4columnClasses']);
+				$this->contentWrap = t3lib_div::trimExplode("|*|", $this->conf['columnWrap.']['wrap']);
+				break;
+			}
+			case "5column" : {
+				$this->templatePart = "TEMPLATE_COLUMNS";
+				$this->contentCount = 5;
+				$this->classes = array(
+					$this->lConf["column1"],
+					$this->lConf["column2"],
+					$this->lConf["column3"],
+					$this->lConf["column4"],
+					$this->lConf["column5"],
+				);
+				$this->contentClass = t3lib_div::trimExplode("|*|", $this->conf['5columnClasses']);
 				$this->contentWrap = t3lib_div::trimExplode("|*|", $this->conf['columnWrap.']['wrap']);
 				break;
 			}
@@ -499,9 +530,9 @@ class tx_jfmulticontent_pi1 extends tslib_pibase {
 				$markerArray["ATTRIBUTE"] .= ' ' . $this->attributes[$a];
 			}
 			// if the attribute does not have a class entry, the class will be wraped for yaml (c33l, c33l, c33r)
-			if ($this->lConf["column".($a+1)] > 0 && isset($this->contentClass[$a]) && ! preg_match("/class\=/i", $markerArray["ATTRIBUTE"])) {
+			if ($this->classes[$a] && isset($this->contentClass[$a]) && ! preg_match("/class\=/i", $markerArray["ATTRIBUTE"])) {
 				// wrap the class
-				$markerArray["ATTRIBUTE"] .= $this->cObj->stdWrap($this->lConf["column".($a+1)], array("wrap" => ' class="'.$this->contentClass[$a].'"', "required" => 1));
+				$markerArray["ATTRIBUTE"] .= $this->cObj->stdWrap($this->classes[$a], array("wrap" => ' class="'.$this->contentClass[$a].'"', "required" => 1));
 			}
 			// render the content
 			$markerArray["ID"] = $a+1;

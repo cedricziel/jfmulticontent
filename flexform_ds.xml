@@ -36,16 +36,21 @@
 										<numIndex index="2">EXT:jfmulticontent/selicon_tt_content_tx_jfmulticontent_style_2.gif</numIndex>
 									</numIndex>
 									<numIndex index="3" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.style.I.6</numIndex>
+										<numIndex index="1">5column</numIndex>
+										<numIndex index="2">EXT:jfmulticontent/selicon_tt_content_tx_jfmulticontent_style_6.gif</numIndex>
+									</numIndex>
+									<numIndex index="4" type="array">
 										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.style.I.3</numIndex>
 										<numIndex index="1">tab</numIndex>
 										<numIndex index="2">EXT:jfmulticontent/selicon_tt_content_tx_jfmulticontent_style_3.gif</numIndex>
 									</numIndex>
-									<numIndex index="4" type="array">
+									<numIndex index="5" type="array">
 										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.style.I.4</numIndex>
 										<numIndex index="1">accordion</numIndex>
 										<numIndex index="2">EXT:jfmulticontent/selicon_tt_content_tx_jfmulticontent_style_4.gif</numIndex>
 									</numIndex>
-									<numIndex index="5" type="array">
+									<numIndex index="6" type="array">
 										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.style.I.5</numIndex>
 										<numIndex index="1">slider</numIndex>
 										<numIndex index="2">EXT:jfmulticontent/selicon_tt_content_tx_jfmulticontent_style_5.gif</numIndex>
@@ -105,6 +110,18 @@
 							</config>
 						</TCEforms>
 					</column4>
+					<column5>
+						<TCEforms>
+							<displayCond>FIELD:style:IN:5column</displayCond>
+							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.column5</label>
+							<config>
+								<type>select</type>
+								<size>1</size>
+								<maxitems>1</maxitems>
+								<itemsProcFunc>tx_jfmulticontent_itemsProcFunc->getClassInner</itemsProcFunc>
+							</config>
+						</TCEforms>
+					</column5>
 					
 					<!-- TAB -->
 					
@@ -570,6 +587,9 @@
 							</config>
 						</TCEforms>
 					</sliderTransitionduration>
+					
+					<!-- AUTOPLAY -->
+					
 					<delayDuration>
 						<TCEforms>
 							<displayCond>FIELD:style:IN:tab,accordion,slider</displayCond>

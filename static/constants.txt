@@ -47,7 +47,10 @@ plugin.tx_jfmulticontent_pi1 {
 	# cat=plugin.tx_jfmulticontent/typo/030; type=string; label=4 Column Classes: Wrap of the classname for 4 Column
 	4columnClasses = c|l |*| c|l |*| c|l |*| c|r
 
-	# cat=plugin.tx_jfmulticontent/typo/040; type=string; label=Class Inner: Possible values to wrap in column classes
-	classInner = ,20,25,33,38,40,50,60,62,66,75,80
+	# cat=plugin.tx_jfmulticontent/typo/040; type=string; label=5 Column Classes: Wrap of the classname for 5 Column
+	5columnClasses = c|l |*| c|l |*| c|l |*| c|l |*| c|r
+
+	# cat=plugin.tx_jfmulticontent/typo/050; type=string; label=Class Inner: Possible values to wrap in column classes
+	classInner = ,16,20,25,33,38,40,50,60,62,66,75,80
 }
 

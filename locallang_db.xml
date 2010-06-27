@@ -15,6 +15,7 @@
 			<label index="tt_content.tx_jfmulticontent.style.I.0">2 columns</label>
 			<label index="tt_content.tx_jfmulticontent.style.I.1">3 columns</label>
 			<label index="tt_content.tx_jfmulticontent.style.I.2">4 columns</label>
+			<label index="tt_content.tx_jfmulticontent.style.I.6">5 columns</label>
 			<label index="tt_content.tx_jfmulticontent.style.I.3">Tabs</label>
 			<label index="tt_content.tx_jfmulticontent.style.I.4">Accordion</label>
 			<label index="tt_content.tx_jfmulticontent.style.I.5">Slider</label>
@@ -22,6 +23,7 @@
 			<label index="tt_content.tx_jfmulticontent.column2">Column class 2</label>
 			<label index="tt_content.tx_jfmulticontent.column3">Column class 3</label>
 			<label index="tt_content.tx_jfmulticontent.column4">Column class 4</label>
+			<label index="tt_content.tx_jfmulticontent.column5">Column class 5</label>
 			<label index="tt_content.tx_jfmulticontent.sheet_title">Title</label>
 			<label index="tt_content.tx_jfmulticontent.titles">Overwrite titles (One title per line)</label>
 			<label index="tt_content.tx_jfmulticontent.sheet_attribute">Attributes</label>
