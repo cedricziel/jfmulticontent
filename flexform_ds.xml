@@ -62,6 +62,35 @@
 					
 					<!-- COLUMN -->
 					
+					<columnOrder>
+						<TCEforms>
+							<displayCond>FIELD:style:IN:,2column,3column,4column,5column</displayCond>
+							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.columnOrder</label>
+							<config>
+								<type>select</type>
+								<size>1</size>
+								<maxitems>1</maxitems>
+								<default></default>
+								<items type="array">
+									<numIndex index="0" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.columnOrder.I.0</numIndex>
+										<numIndex index="1"></numIndex>
+										<numIndex index="2">EXT:jfmulticontent/selicon_tt_content_tx_jfmulticontent_columnOrder_0.gif</numIndex>
+									</numIndex>
+									<numIndex index="1" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.columnOrder.I.1</numIndex>
+										<numIndex index="1">1</numIndex>
+										<numIndex index="2">EXT:jfmulticontent/selicon_tt_content_tx_jfmulticontent_columnOrder_1.gif</numIndex>
+									</numIndex>
+									<numIndex index="2" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.columnOrder.I.2</numIndex>
+										<numIndex index="1">2</numIndex>
+										<numIndex index="2">EXT:jfmulticontent/selicon_tt_content_tx_jfmulticontent_columnOrder_2.gif</numIndex>
+									</numIndex>
+								</items>
+							</config>
+						</TCEforms>
+					</columnOrder>
 					<column1>
 						<TCEforms>
 							<displayCond>FIELD:style:IN:,2column,3column,4column,5column</displayCond>

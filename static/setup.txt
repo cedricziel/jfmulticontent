@@ -35,6 +35,7 @@ plugin.tx_jfmulticontent_pi1 {
 	config {
 		contentKey = jfmulticontent_ts1
 		style = 2column
+		columnOrder =
 		column1 = 50
 		column2 = 50
 		column3 = 

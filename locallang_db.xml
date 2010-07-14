@@ -19,6 +19,10 @@
 			<label index="tt_content.tx_jfmulticontent.style.I.3">Tabs</label>
 			<label index="tt_content.tx_jfmulticontent.style.I.4">Accordion</label>
 			<label index="tt_content.tx_jfmulticontent.style.I.5">Slider</label>
+			<label index="tt_content.tx_jfmulticontent.columnOrder">Column Order</label>
+			<label index="tt_content.tx_jfmulticontent.columnOrder.I.0">only one row (no repeat)</label>
+			<label index="tt_content.tx_jfmulticontent.columnOrder.I.1">left to right, top to down</label>
+			<label index="tt_content.tx_jfmulticontent.columnOrder.I.2">right to left, top to down</label>
 			<label index="tt_content.tx_jfmulticontent.column1">Column class 1</label>
 			<label index="tt_content.tx_jfmulticontent.column2">Column class 2</label>
 			<label index="tt_content.tx_jfmulticontent.column3">Column class 3</label>
