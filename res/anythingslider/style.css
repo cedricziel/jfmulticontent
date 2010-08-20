@@ -6,7 +6,6 @@ with major improvements by Doug Neiner: http://pixelgraphics.us/
 based on work by Remy Sharp: http://jqueryfordesigners.com/
 */
 
-
 .tx-jfmulticontent-pi1 .anythingSlider {
 	width: 680px;
 	height: 360px;
@@ -16,7 +15,7 @@ based on work by Remy Sharp: http://jqueryfordesigners.com/
 .tx-jfmulticontent-pi1 .anythingSlider .wrapper {
 	width: 600px;
 	overflow: auto;
-	height: 341px;
+	height: 324px;
 	margin: 0 40px;
 	position: absolute;
 	top: 0;
@@ -35,7 +34,7 @@ based on work by Remy Sharp: http://jqueryfordesigners.com/
 	border-bottom: 3px solid #e0a213;
 	margin: 0;
 }
-.tx-jfmulticontent-pi1 .anythingSlider ul li {
+.tx-jfmulticontent-pi1 .anythingSlider .wrapper ul li {
 	display: block;
 	float: left;
 	padding: 0;
@@ -44,13 +43,14 @@ based on work by Remy Sharp: http://jqueryfordesigners.com/
 	margin: 0;
 }
 .tx-jfmulticontent-pi1 .anythingSlider .arrow {
+	z-index: 10;
 	display: block;
 	height: 200px;
 	width: 67px;
 	background: url(images/arrows.png) no-repeat 0 0;
 	text-indent: -9999px;
 	position: absolute;
-	top: 65px;
+	top: -250px;
 	cursor: pointer;
 }
 .tx-jfmulticontent-pi1 .anythingSlider .forward {
@@ -68,12 +68,16 @@ based on work by Remy Sharp: http://jqueryfordesigners.com/
 	background-position: -67px -200px;
 }
 
-.tx-jfmulticontent-pi1 #thumbNav {
+.tx-jfmulticontent-pi1 .thumbNav {
 	position: relative;
 	top: 323px;
 	text-align: center;
 }
-.tx-jfmulticontent-pi1 #thumbNav a {
+.tx-jfmulticontent-pi1 .thumbNav li {
+	display: inline;
+	margin: 0;
+}
+.tx-jfmulticontent-pi1 .thumbNav a {
 	color: black;
 	font: 11px/18px Georgia, Serif;
 	display: inline-block;
@@ -87,14 +91,15 @@ based on work by Remy Sharp: http://jqueryfordesigners.com/
 	-webkit-border-bottom-right-radius: 5px;
 	-webkit-border-bottom-left-radius: 5px;
 }
-.tx-jfmulticontent-pi1 #thumbNav a:hover {
+.tx-jfmulticontent-pi1 .thumbNav a:hover {
 	background-image: none;
 }
-.tx-jfmulticontent-pi1 #thumbNav a.cur {
+.tx-jfmulticontent-pi1 .thumbNav a.cur {
 	background: #e0a213;
 }
 
-.tx-jfmulticontent-pi1 #start-stop {
+.tx-jfmulticontent-pi1 .start-stop {
+	z-index: 10;
 	background: green;
 	background-image: url(images/cellshade.png);
 	background-repeat: repeat-x;
@@ -110,10 +115,10 @@ based on work by Remy Sharp: http://jqueryfordesigners.com/
 	-webkit-border-bottom-right-radius: 5px;
 	-webkit-border-bottom-left-radius: 5px;
 }
-.tx-jfmulticontent-pi1 #start-stop.playing {
+.tx-jfmulticontent-pi1 .start-stop.playing {
 	background-color: red;
 }
-.tx-jfmulticontent-pi1 #start-stop:hover {
+.tx-jfmulticontent-pi1 .start-stop:hover {
 	background-image: none;
 }
 
