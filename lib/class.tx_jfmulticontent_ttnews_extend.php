@@ -58,6 +58,7 @@ class tx_jfmulticontent_ttnews_extend
 					$this->addJsFile($this->conf['jQueryUI']);
 				}
 				$this->addCssFile($this->conf['jQueryUIstyle']);
+				$this->addResources();
 				break;
 			}
 			case 'LIST_SLIDER': {
@@ -71,14 +72,10 @@ class tx_jfmulticontent_ttnews_extend
 				}
 				$this->addJsFile($this->conf['sliderJS']);
 				$this->addCssFile($this->conf['sliderCSS']);
-				break;
-			}
-			default: {
-				$content .= 'CODE "'.$newsObject->theCode.'" not known';
+				$this->addResources();
 				break;
 			}
 		}
-		$this->addResources();
 		return $content;
 	}
 
