@@ -122,10 +122,12 @@ class tx_jfmulticontent_ttnews_extend
 				$conf['tofooter'] = ($this->conf['jsInFooter']);
 				tx_t3jquery::addJS('', $conf);
 			} else {
+				// Add script only once
+				$hash = md5($temp_js);
 				if ($this->conf['jsInFooter'] || $allJsInFooter) {
-					$GLOBALS['TSFE']->additionalFooterData['js_'.$this->extKey] .= t3lib_div::wrapJS($temp_js, true);
+					$GLOBALS['TSFE']->additionalFooterData['js_'.$this->extKey.'_'.$hash] = t3lib_div::wrapJS($temp_js, true);
 				} else {
-					$GLOBALS['TSFE']->additionalHeaderData['js_'.$this->extKey] .= t3lib_div::wrapJS($temp_js, true);
+					$GLOBALS['TSFE']->additionalHeaderData['js_'.$this->extKey.'_'.$hash] = t3lib_div::wrapJS($temp_js, true);
 				}
 			}
 		}
