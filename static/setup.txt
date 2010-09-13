@@ -8,10 +8,14 @@ plugin.tx_jfmulticontent_pi1 {
 	cssFile = {$plugin.tx_jfmulticontent_pi1.file.cssFile}
 	jQueryLibrary = {$plugin.tx_jfmulticontent_pi1.file.jQueryLibrary}
 	jQueryEasing = {$plugin.tx_jfmulticontent_pi1.file.jQueryEasing}
+	jQueryMouseWheel = {$plugin.tx_jfmulticontent_pi1.file.jQueryMouseWheel}
 	jQueryUI = {$plugin.tx_jfmulticontent_pi1.file.jQueryUI}
 	jQueryUIstyle = {$plugin.tx_jfmulticontent_pi1.file.jQueryUIstyle}
 	sliderJS = {$plugin.tx_jfmulticontent_pi1.file.sliderJS}
 	sliderCSS = {$plugin.tx_jfmulticontent_pi1.file.sliderCSS}
+
+	slidedeckJS = {$plugin.tx_jfmulticontent_pi1.file.slidedeckJS}
+	slidedeckCSS = {$plugin.tx_jfmulticontent_pi1.file.slidedeckCSS}
 
 	2columnClasses = {$plugin.tx_jfmulticontent_pi1.2columnClasses}
 	3columnClasses = {$plugin.tx_jfmulticontent_pi1.3columnClasses}
@@ -29,6 +33,9 @@ plugin.tx_jfmulticontent_pi1 {
 		wrap = |
 	}
 	sliderWrap {
+		wrap = |
+	}
+	slidedeckWrap {
 		wrap = |
 	}
 
@@ -66,8 +73,19 @@ plugin.tx_jfmulticontent_pi1 {
 		sliderTransition = swing
 		sliderTransitiondir = In
 		sliderTransitionduration = 1000
+		slidedeckHeight = 300
+		slidedeckTransition = swing
+		slidedeckTransitiondir = 
+		slidedeckTransitionduration = 500
+		slidedeckStart = 1
+		slidedeckActivecorner = 1
+		slidedeckIndex = 1
+		slidedeckScroll = 0
+		slidedeckKeys = 0
+		slidedeckHidespines = 0
 		delayDuration = 0
 		autoplayContinuing = 0
+		autoplayCycle = 0
 		options (
 		)
 		optionsOverride = 0

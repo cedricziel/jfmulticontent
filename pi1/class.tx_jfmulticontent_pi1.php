@@ -457,6 +457,68 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 				$this->addJS($templateCode);
 				break;
 			}
+			case "slidedeck" : {
+				// jQuery Accordion
+				$this->templatePart = "TEMPLATE_SLIDEDECK";
+				$this->contentWrap = t3lib_div::trimExplode("|*|", $this->conf['slidedeckWrap.']['wrap']);
+				$this->addJS($jQueryNoConflict);
+				$options = array();
+				if ($this->lConf['slidedeckTransitionduration']) {
+					$options['speed'] ="speed: {$this->lConf['slidedeckTransitionduration']}";
+				}
+				if ($this->lConf['slidedeckTransition']) {
+					$options['transition'] = "transition: '".(in_array($this->lConf['slidedeckTransition'], array("swing", "linear")) ? "" : "ease{$this->lConf['slidedeckTransitiondir']}")."{$this->lConf['slidedeckTransition']}'";
+				}
+				if ($this->lConf['slidedeckStart']) {
+					$options['start'] = "start: {$this->lConf['slidedeckStart']}";
+				}
+				$options['activeCorner'] = "activeCorner: ".($this->lConf['slidedeckActivecorner'] ? 'true' : 'false');
+				$options['index']        = "index: ".($this->lConf['slidedeckIndex'] ? 'true' : 'false');
+				$options['scroll']       = "scroll: ".($this->lConf['slidedeckScroll'] ? 'true' : 'false');
+				$options['keys']         = "keys: ".($this->lConf['slidedeckKeys'] ? 'true' : 'false');
+				$options['hideSpines']   = "hideSpines: ".($this->lConf['slidedeckHidespines'] ? 'true' : 'false');
+				if ($this->lConf['delayDuration'] > 0) {
+					$options['autoPlay']         = "autoPlay: true";
+					$options['autoPlayInterval'] = "autoPlayInterval: {$this->lConf['delayDuration']}";
+					$options['cycle']            = "cycle: ".($this->lConf['autoplayCycle'] ? 'true' : 'false');
+				}
+				// get the template for the Javascript
+				if (! $templateCode = trim($this->cObj->getSubpart($this->templateFileJS, "###TEMPLATE_SLIDEDECK_JS###"))) {
+					$templateCode = "alert('Template TEMPLATE_SLIDEDECK_JS is missing')";
+				}
+				// overwrite all options if set
+				if (trim($this->lConf['options'])) {
+					if ($this->lConf['optionsOverride']) {
+						$options = array($this->lConf['options']);
+					} else {
+						$options['flexform'] = $this->lConf['options'];
+					}
+				}
+
+				// Replace default values
+				$markerArray = array();
+				$markerArray["KEY"]     = $this->contentKey;
+				$markerArray["HEIGHT"]  = ($this->lConf['slidedeckHeight'] > 0 ? $this->lConf['slidedeckHeight'] : 300);
+				$markerArray["OPTIONS"] = implode(", ", $options);
+				// Replace all markers
+				$templateCode = $this->cObj->substituteMarkerArray($templateCode, $markerArray, '###|###', 0);
+
+				// Add all CSS and JS files
+				if (T3JQUERY === true) {
+					tx_t3jquery::addJqJS();
+				} else {
+					$this->addJsFile($this->conf['jQueryLibrary']);
+					$this->addJsFile($this->conf['jQueryEasing']);
+				}
+				$this->addJsFile($this->conf['slidedeckJS']);
+				$this->addCssFile($this->conf['slidedeckCSS']);
+				if ($this->lConf['slidedeckScroll']) {
+					$this->addJsFile($this->conf['jQueryMouseWheel']);
+				}
+				$this->addJS(trim($templateCode));
+				break;
+
+			}
 			default: {
 				return "<p>NO VALID TEMPLATE SELECTED!</p>";
 			}

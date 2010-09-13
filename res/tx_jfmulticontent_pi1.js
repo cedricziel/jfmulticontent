@@ -68,3 +68,18 @@ jQuery(document).ready(function(){
 });
 <!-- ###TEMPLATE_SLIDER_JS### end -->
 
+
+
+
+
+<h2>TEMPLATE_SLIDEDECK_JS:</h2>
+
+<!-- ###TEMPLATE_SLIDEDECK_JS### begin -->
+jQuery(document).ready(function(){
+	jQuery('####KEY###').parent().css({height: ###HEIGHT###});
+	jQuery('####KEY###').slidedeck({
+		###OPTIONS###
+	});
+});
+<!-- ###TEMPLATE_SLIDEDECK_JS### end -->
+
