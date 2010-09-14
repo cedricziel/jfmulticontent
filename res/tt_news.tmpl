@@ -28,7 +28,7 @@
 
 <hr /><br />
 <h3>TEMPLATE_LIST_ACCORDION</h3>
-<em>shows a list of list in an jQuery UI accordion</em><br />
+<em>shows a list of news in jQuery UI accordion</em><br />
 
 <!-- ###TEMPLATE_LIST_ACCORDION### begin
 	This is the template for the list news, typically displayed on a frontpage
@@ -43,7 +43,8 @@
 				<span class="news-list-date">###NEWS_DATE###</span>
 				<h2><!--###LINK_ITEM###-->###NEWS_TITLE###<!--###LINK_ITEM###--></h2>
 				<!--###LINK_ITEM###-->###NEWS_IMAGE###<!--###LINK_ITEM###-->
-				###NEWS_SUBHEADER###
+				<h3>###NEWS_SUBHEADER###</h3>
+				###NEWS_CONTENT###
 				###CATWRAP_B### ###TEXT_CAT### ###NEWS_CATEGORY### ###NEWS_CATEGORY_IMAGE### ###CATWRAP_E###
 				<hr class="clearer" />
 			</div>
@@ -66,13 +67,15 @@ jQuery(document).ready(function(){
 </script>
 <!-- ###TEMPLATE_LIST_ACCORDION### end -->
 
+
+
 <br />
 <br />
 <br />
 
 <hr /><br />
 <h3>TEMPLATE_LIST_SLIDER</h3>
-<em>shows a list of list in an jQuery UI accordion</em><br />
+<em>shows a list of news in anythingSlider</em><br />
 
 <!-- ###TEMPLATE_LIST_SLIDER### begin
 	This is the template for the list news, typically displayed on a frontpage
@@ -89,7 +92,8 @@ jQuery(document).ready(function(){
 						<span class="news-list-date">###NEWS_DATE###</span>
 						<h2><!--###LINK_ITEM###-->###NEWS_TITLE###<!--###LINK_ITEM###--></h2>
 						<!--###LINK_ITEM###-->###NEWS_IMAGE###<!--###LINK_ITEM###-->
-						###NEWS_SUBHEADER###
+						<h3>###NEWS_SUBHEADER###</h3>
+						###NEWS_CONTENT###
 						###CATWRAP_B### ###TEXT_CAT### ###NEWS_CATEGORY### ###NEWS_CATEGORY_IMAGE### ###CATWRAP_E###
 					</li>
 					<!-- ###NEWS### end-->
@@ -123,6 +127,56 @@ jQuery(document).ready(function(){
 /*]]>*/
 </script>
 <!-- ###TEMPLATE_LIST_SLIDER### end -->
+
+
+
+<br />
+<br />
+<br />
+
+<hr /><br />
+<h3>TEMPLATE_LIST_SLIDEDECK</h3>
+<em>shows a list of news in SlideDeck</em><br />
+
+<!-- ###TEMPLATE_LIST_SLIDEDECK### begin
+	This is the template for the list news, typically displayed on a frontpage
+-->
+<div class="tx-jfmulticontent-pi1">
+	<div id="news-list-container">
+	###NEWS_CATEGORY_ROOTLINE###
+		<div class="skin-slidedeck" style="height: 500px;">
+			<dl id="news-list-slidedesk" class="slidedeck">
+			<!-- ###CONTENT### begin -->
+				<!-- ###NEWS### begin -->
+				<dt>###NEWS_TITLE###</dt>
+				<dd>
+					<span class="news-list-date">###NEWS_DATE###</span>
+					<!--###LINK_ITEM###-->###NEWS_IMAGE###<!--###LINK_ITEM###-->
+					<h3>###NEWS_SUBHEADER###</h3>
+					###NEWS_CONTENT###
+					###CATWRAP_B### ###TEXT_CAT### ###NEWS_CATEGORY### ###NEWS_CATEGORY_IMAGE### ###CATWRAP_E###
+				</dd>
+				<!-- ###NEWS### end -->
+			<!-- ###CONTENT### end -->
+			</dl>
+		</div>
+		<div class="news-list-gotoarchive"><!--###LINK_ARCHIVE###-->###GOTOARCHIVE###<!--###LINK_ARCHIVE###--></div>
+		###BROWSE_LINKS###
+	</div>
+</div>
+<script type="text/javascript">
+/*<![CDATA[*/
+jQuery(document).ready(function(){
+	jQuery('#news-list-slidedesk').slidedeck({
+		speed: 500,
+		transition: 'easeOutBounce'
+	});
+});
+/*]]>*/
+</script>
+<!-- ###TEMPLATE_LIST_SLIDEDECK### end -->
+
+
 
 <br />
 <br />

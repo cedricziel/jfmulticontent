@@ -75,6 +75,21 @@ class tx_jfmulticontent_ttnews_extend
 				$this->addResources();
 				break;
 			}
+			case 'LIST_SLIDEDECK': {
+				$content .= $newsObject->displayList();
+				// Add all CSS and JS files
+				if (T3JQUERY === true) {
+					tx_t3jquery::addJqJS();
+				} else {
+					$this->addJsFile($this->conf['jQueryLibrary'], true);
+					$this->addJsFile($this->conf['jQueryEasing']);
+				}
+				$this->addJsFile($this->conf['slidedeckJS']);
+				$this->addCssFile($this->conf['slidedeckCSS']);
+				$this->addJsFile($this->conf['jQueryMouseWheel']);
+				$this->addResources();
+				break;
+			}
 		}
 		return $content;
 	}

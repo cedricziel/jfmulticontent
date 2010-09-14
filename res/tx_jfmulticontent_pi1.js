@@ -76,7 +76,7 @@ jQuery(document).ready(function(){
 
 <!-- ###TEMPLATE_SLIDEDECK_JS### begin -->
 jQuery(document).ready(function(){
-	jQuery('####KEY###').parent().css({height: ###HEIGHT###});
+	jQuery('####KEY###').css({height: '###HEIGHT###px'});
 	jQuery('####KEY###').slidedeck({
 		###OPTIONS###
 	});

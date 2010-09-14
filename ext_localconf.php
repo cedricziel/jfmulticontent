@@ -15,6 +15,10 @@ if ($confArr['ttNewsCodes']) {
 		0 => "LIST_SLIDER",
 		1 => "LIST_SLIDER"
 	);
+	$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['tt_news']['what_to_display'][] = array(
+		0 => "LIST_SLIDEDECK",
+		1 => "LIST_SLIDEDECK"
+	);
 	$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['tt_news']['extraCodesHook'][] = "EXT:jfmulticontent/lib/class.tx_jfmulticontent_ttnews_extend.php:tx_jfmulticontent_ttnews_extend";
 }
 
