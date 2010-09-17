@@ -14,6 +14,9 @@
 			<label index="extmng.updatermsg">jfmulticontent comes with a new updater-script which fix old content elements. You have to run this script if you are updating from older installation.</label>
 			<label index="extmng.updatermsgLink">[Click here to open the updater]</label>
 
+			<label index="extmng.classInnerHeader">Warning!</label>
+			<label index="extmng.classInner">You have to use the "Update"-Button below to ensure proper working for all functions in this extension.</label>
+
 			<label index="updater.back">[&lt;- back]</label>
 			<label index="updater.reload">[reload this page]</label>
 

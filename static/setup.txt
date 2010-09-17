@@ -21,7 +21,6 @@ plugin.tx_jfmulticontent_pi1 {
 	3columnClasses = {$plugin.tx_jfmulticontent_pi1.3columnClasses}
 	4columnClasses = {$plugin.tx_jfmulticontent_pi1.4columnClasses}
 	5columnClasses = {$plugin.tx_jfmulticontent_pi1.5columnClasses}
-	classInner = {$plugin.tx_jfmulticontent_pi1.classInner}
 
 	columnWrap {
 		wrap = <div class="subcl">|</div> |*| <div class="subcl">|</div> |*| <div class="subcr">|</div>

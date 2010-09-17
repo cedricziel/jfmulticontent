@@ -1,9 +1,13 @@
 
 # cat=basic/enable/10; type=boolean; label=Use General Record Storage page only: If set, only content can be choosen from the defined General Record Storage page
-useStoragePidOnly=1
+useStoragePidOnly = 1
 
 # cat=basic/enable/20; type=boolean; label=Activate tt_news codes: Enables the additional codes in tt_news
-ttNewsCodes=0
+ttNewsCodes = 0
+
+# cat=basic/enable/030; type=string; label=Class Inner: Possible values to wrap in column classes
+classInner = ,16,20,25,33,38,40,50,60,62,66,75,80
 
 # cat=basic/dev/1000; type=user[EXT:jfmulticontent/lib/class.tx_jfmulticontent_tsparserext.php:tx_jfmulticontent_tsparserext->displayMessage]; label=Updater
-updateMessage=0
+updateMessage = 0
+

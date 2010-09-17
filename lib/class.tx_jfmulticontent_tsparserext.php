@@ -50,6 +50,18 @@ class tx_jfmulticontent_tsparserext {
 			$out .= '<link rel="stylesheet" type="text/css" href="' . $cssPath . 'compat/flashmessages.css" media="screen" />';
 		}
 
+		$more = null;
+		$confArr = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['jfmulticontent']);
+		if (! $confArr['classInner'] && ! $_POST['data']['classInner']) {
+			$more = '
+	<div class="typo3-message message-warning">
+		<div class="message-header">' . $GLOBALS['LANG']->sL('LLL:EXT:jfmulticontent/locallang.xml:extmng.classInnerHeader') . '</div>
+		<div class="message-body">
+			' . $GLOBALS['LANG']->sL('LLL:EXT:jfmulticontent/locallang.xml:extmng.classInner') . '
+		</div>
+	</div>';
+		}
+
 		$out .= '
 <div style="position:absolute;top:10px;right:10px; width:300px;">
 	<div class="typo3-message message-information">
@@ -60,6 +72,7 @@ class tx_jfmulticontent_tsparserext {
 			' . $GLOBALS['LANG']->sL('LLL:EXT:jfmulticontent/locallang.xml:extmng.updatermsgLink') . '</a>
 		</div>
 	</div>
+	' . $more . '
 </div>';
 
 		return $out;
