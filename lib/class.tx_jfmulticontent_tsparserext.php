@@ -32,16 +32,15 @@
  * @package    TYPO3
  * @subpackage tx_jfmulticontent
  */
-class tx_jfmulticontent_tsparserext {
-
-
+class tx_jfmulticontent_tsparserext
+{
 	/**
 	 * Shows the update Message
 	 *
 	 * @return	string
 	 */
-	function displayMessage(&$params, &$tsObj) {
-
+	function displayMessage(&$params, &$tsObj)
+	{
 		$out = '';
 
 		if (t3lib_div::int_from_ver(TYPO3_version) < 4003000) {
@@ -50,10 +49,9 @@ class tx_jfmulticontent_tsparserext {
 			$out .= '<link rel="stylesheet" type="text/css" href="' . $cssPath . 'compat/flashmessages.css" media="screen" />';
 		}
 
-		$more = null;
-		$confArr = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['jfmulticontent']);
-		if (! $confArr['classInner'] && ! $_POST['data']['classInner']) {
-			$more = '
+		$checkConfig = null;
+		if ($this->checkConfig() === false) {
+			$checkConfig = '
 	<div class="typo3-message message-warning">
 		<div class="message-header">' . $GLOBALS['LANG']->sL('LLL:EXT:jfmulticontent/locallang.xml:extmng.classInnerHeader') . '</div>
 		<div class="message-body">
@@ -72,12 +70,36 @@ class tx_jfmulticontent_tsparserext {
 			' . $GLOBALS['LANG']->sL('LLL:EXT:jfmulticontent/locallang.xml:extmng.updatermsgLink') . '</a>
 		</div>
 	</div>
-	' . $more . '
+	' . $checkConfig . '
 </div>';
 
 		return $out;
 	}
+
+	/**
+	 * Check the config for a gifen feature
+	 * 
+	 * @return boolean
+	 */
+	function checkConfig()
+	{
+		$confDefault = array(
+			'useStoragePidOnly',
+			'ttNewsCodes',
+			'classInner',
+			'frontendErrorMsg',
+		);
+		$confArr = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['jfmulticontent']);
+		foreach ($confDefault as $val) {
+			if (! isset($confArr[$val]) && ! $_POST['data'][$val]) {
+				return false;
+			}
+		}
+		return true;
+	}
 }
+
+
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/jfmulticontent/lib/class.tx_jfmulticontent_tsparserext.php']) {
 	include_once ($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/jfmulticontent/lib/class.tx_jfmulticontent_tsparserext.php']);
 }

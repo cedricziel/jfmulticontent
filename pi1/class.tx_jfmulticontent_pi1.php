@@ -48,6 +48,7 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 	var $extKey        = 'jfmulticontent';                      // The extension key.
 	var $pi_checkCHash = true;
 	var $lConf = array();
+	var $confArr = array();
 	var $templateFile = null;
 	var $templateFileJS = null;
 	var $templatePart = null;
@@ -76,6 +77,9 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 		$this->conf = $conf;
 		$this->pi_setPiVarDefaults();
 		$this->pi_loadLL();
+		// get the config from EXT
+		$this->confArr = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['jfmulticontent']);
+		// Plugin or template?
 		if ($this->cObj->data['list_type'] == $this->extKey.'_pi1') {
 			// It's a content, all data from flexform
 			// Set the Flexform information
@@ -272,7 +276,7 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 				$markerArray = array();
 				// get the template
 				if (! $templateCode = trim($this->cObj->getSubpart($this->templateFileJS, "###TEMPLATE_TAB_JS###"))) {
-					$templateCode = "alert('Template TEMPLATE_TAB_JS is missing')";
+					$templateCode = $this->outputError("Template TEMPLATE_TAB_JS is missing", true);
 				}
 				// Fix the href problem (config.prefixLocalAnchors = all)
 				if ($GLOBALS['TSFE']->config['config']['prefixLocalAnchors']) {
@@ -330,7 +334,7 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 				$markerArray["DELAY_DURATION"] = (is_numeric($this->lConf['delayDuration']) ? $this->lConf['delayDuration'] : '0');
 				// get the template for the Javascript
 				if (! $templateCode = trim($this->cObj->getSubpart($this->templateFileJS, "###TEMPLATE_ACCORDION_JS###"))) {
-					$templateCode = "alert('Template TEMPLATE_ACCORDION_JS is missing')";
+					$templateCode = $this->outputError("Template TEMPLATE_ACCORDION_JS is missing", true);
 				}
 				$easingAnimation = null;
 				if ($this->lConf['accordionTransition']) {
@@ -432,7 +436,7 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 				$markerArray = array();
 				// get the template
 				if (! $templateCode = trim($this->cObj->getSubpart($this->templateFileJS, "###TEMPLATE_SLIDER_JS###"))) {
-					$templateCode = "alert('Template TEMPLATE_SLIDER_JS is missing')";
+					$templateCode = $this->outputError("Template TEMPLATE_SLIDER_JS is missing", true);
 				}
 				// Replace default values
 				$markerArray["KEY"] = $this->contentKey;
@@ -484,7 +488,7 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 				}
 				// get the template for the Javascript
 				if (! $templateCode = trim($this->cObj->getSubpart($this->templateFileJS, "###TEMPLATE_SLIDEDECK_JS###"))) {
-					$templateCode = "alert('Template TEMPLATE_SLIDEDECK_JS is missing')";
+					$templateCode = $this->outputError("Template TEMPLATE_SLIDEDECK_JS is missing", true);
 				}
 				// overwrite all options if set
 				if (trim($this->lConf['options'])) {
@@ -520,7 +524,7 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 
 			}
 			default: {
-				return "<p>NO VALID TEMPLATE SELECTED!</p>";
+				return $this->outputError("NO VALID TEMPLATE SELECTED", false);
 			}
 		}
 
@@ -543,7 +547,7 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 		$markerArray = array();
 		// get the template
 		if (! $templateCode = $this->cObj->getSubpart($this->templateFile, "###{$this->templatePart}###")) {
-			$templateCode = "<p>Template {$this->templatePart} is missing</p>";
+			$templateCode = $this->outputError("Template {$this->templatePart} is missing", false);
 		}
 		// Replace default values
 		$markerArray["KEY"] = $this->contentKey;
@@ -832,6 +836,23 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 		$_EXTKEY = $key;
 		include(t3lib_extMgm::extPath($key) . 'ext_emconf.php');
 		return $EM_CONF[$key]['version'];
+	}
+
+	/**
+	 * Return a errormessage if needed
+	 * @param string $msg
+	 * @param boolean $js
+	 * @return string
+	 */
+	function outputError($msg='', $js=false)
+	{
+		t3lib_div::devLog($msg, 'jfmulticontent', 3);
+		if ($this->confArr['frontendErrorMsg'] || ! isset($this->confArr['frontendErrorMsg'])) {
+			return ($js ? "alert(".t3lib_div::quoteJSvalue($msg).")" : "<p>{$msg}</p>");
+			
+		} else {
+			return null;
+		}
 	}
 }
 
