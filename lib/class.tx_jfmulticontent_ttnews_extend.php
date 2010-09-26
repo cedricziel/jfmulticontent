@@ -101,6 +101,9 @@ class tx_jfmulticontent_ttnews_extend
 	 */
 	function addResources()
 	{
+		if (t3lib_div::int_from_ver(TYPO3_version) >= 4003000) {
+			$pagerender = $GLOBALS['TSFE']->getPageRenderer();
+		}
 		// Fix moveJsFromHeaderToFooter (add all scripts to the footer)
 		if ($GLOBALS['TSFE']->config['config']['moveJsFromHeaderToFooter']) {
 			$allJsInFooter = true;
@@ -111,14 +114,31 @@ class tx_jfmulticontent_ttnews_extend
 		if (count($this->jsFiles) > 0) {
 			foreach ($this->jsFiles as $jsToLoad) {
 				if (T3JQUERY === true) {
-					tx_t3jquery::addJS('', array('jsfile' => $jsToLoad));
+					$conf = array(
+						'jsfile' => $jsToLoad,
+						'tofooter' => ($this->conf['jsInFooter'] || $allJsInFooter),
+						'jsminify' => $this->conf['jsMinify'],
+					);
+					tx_t3jquery::addJS('', $conf);
 				} else {
-					// Add script only once
-					$hash = md5($this->getPath($jsToLoad));
-					if ($allJsInFooter) {
-						$GLOBALS['TSFE']->additionalFooterData['jsFile_'.$this->extKey.'_'.$hash] = ($this->getPath($jsToLoad) ? '<script src="'.$this->getPath($jsToLoad).'" type="text/javascript"></script>'.chr(10) : '');
+					$file = $this->getPath($jsToLoad);
+					if ($file) {
+						if (t3lib_div::int_from_ver(TYPO3_version) >= 4003000) {
+							if ($allJsInFooter) {
+								$pagerender->addJsFooterFile($file, $type, $this->conf['jsMinify']);
+							} else {
+								$pagerender->addJsFile($file, $type, $this->conf['jsMinify']);
+							}
+						} else {
+							$temp_file = '<script type="text/javascript" src="'.$file.'"></script>';
+							if ($allJsInFooter) {
+								$GLOBALS['TSFE']->additionalFooterData['jsFile_'.$this->extKey.'_'.$file] = $temp_file;
+							} else {
+								$GLOBALS['TSFE']->additionalHeaderData['jsFile_'.$this->extKey.'_'.$file] = $temp_file;
+							}
+						}
 					} else {
-						$GLOBALS['TSFE']->additionalHeaderData['jsFile_'.$this->extKey.'_'.$hash] = ($this->getPath($jsToLoad) ? '<script src="'.$this->getPath($jsToLoad).'" type="text/javascript"></script>'.chr(10) : '');
+						t3lib_div::devLog("'{$jsToLoad}' does not exists!", $this->extKey, 2);
 					}
 				}
 			}
@@ -128,21 +148,33 @@ class tx_jfmulticontent_ttnews_extend
 			foreach ($this->js as $jsToPut) {
 				$temp_js .= $jsToPut;
 			}
-			if ($this->conf['jsMinify']) {
-				$temp_js = t3lib_div::minifyJavaScript($temp_js);
-			}
 			$conf = array();
 			$conf['jsdata'] = $temp_js;
 			if (T3JQUERY === true && t3lib_div::int_from_ver($this->getExtensionVersion('t3jquery')) >= 1002000) {
-				$conf['tofooter'] = ($this->conf['jsInFooter']);
+				$conf['tofooter'] = ($this->conf['jsInFooter'] || $allJsInFooter);
+				$conf['jsminify'] = $this->conf['jsMinify'];
+				$conf['jsinline'] = $this->conf['jsInline'];
 				tx_t3jquery::addJS('', $conf);
 			} else {
 				// Add script only once
 				$hash = md5($temp_js);
-				if ($this->conf['jsInFooter'] || $allJsInFooter) {
-					$GLOBALS['TSFE']->additionalFooterData['js_'.$this->extKey.'_'.$hash] = t3lib_div::wrapJS($temp_js, true);
+				if ($this->conf['jsInline']) {
+					$GLOBALS['TSFE']->inlineJS[$hash] = $temp_css;
+				} elseif (t3lib_div::int_from_ver(TYPO3_version) >= 4003000) {
+					if ($this->conf['jsInFooter'] || $allJsInFooter) {
+						$pagerender->addJsFooterInlineCode($hash, $temp_js, $this->conf['jsMinify']);
+					} else {
+						$pagerender->addJsInlineCode($hash, $temp_js, $this->conf['jsMinify']);
+					}
 				} else {
-					$GLOBALS['TSFE']->additionalHeaderData['js_'.$this->extKey.'_'.$hash] = t3lib_div::wrapJS($temp_js, true);
+					if ($this->conf['jsMinify']) {
+						$temp_js = t3lib_div::minifyJavaScript($temp_js);
+					}
+					if ($this->conf['jsInFooter'] || $allJsInFooter) {
+						$GLOBALS['TSFE']->additionalFooterData['js_'.$this->extKey.'_'.$hash] = t3lib_div::wrapJS($temp_js, true);
+					} else {
+						$GLOBALS['TSFE']->additionalHeaderData['js_'.$this->extKey.'_'.$hash] = t3lib_div::wrapJS($temp_js, true);
+					}
 				}
 			}
 		}
@@ -150,8 +182,16 @@ class tx_jfmulticontent_ttnews_extend
 		if (count($this->cssFiles) > 0) {
 			foreach ($this->cssFiles as $cssToLoad) {
 				// Add script only once
-				$hash = md5($this->getPath($cssToLoad));
-				$GLOBALS['TSFE']->additionalHeaderData['cssFile_'.$this->extKey.'_'.$hash] = ($this->getPath($cssToLoad) ? '<link rel="stylesheet" href="'.$this->getPath($cssToLoad).'" type="text/css" />'.chr(10) :'');
+				$file = $this->getPath($cssToLoad);
+				if ($file) {
+					if (t3lib_div::int_from_ver(TYPO3_version) >= 4003000) {
+						$pagerender->addCssFile($file, 'stylesheet', 'all', '', $this->conf['cssMinify']);
+					} else {
+						$GLOBALS['TSFE']->additionalHeaderData['cssFile_'.$this->extKey.'_'.$file] = '<link rel="stylesheet" type="text/css" href="'.$file.'" medai="all" />'.chr(10);
+					}
+				} else {
+					t3lib_div::devLog("'{$cssToLoad}' does not exists!", $this->extKey, 2);
+				}
 			}
 		}
 		// add all defined CSS Script
@@ -159,10 +199,13 @@ class tx_jfmulticontent_ttnews_extend
 			foreach ($this->css as $cssToPut) {
 				$temp_css .= $cssToPut;
 			}
-			$GLOBALS['TSFE']->additionalHeaderData['css_'.$this->extKey] .= '
-<style type="text/css">
-' . $temp_css . '
-</style>';
+			$hash = md5($temp_css);
+			if (t3lib_div::int_from_ver(TYPO3_version) >= 4003000) {
+				$pagerender->addCssInlineBlock($hash, $temp_css, $this->conf['cssMinify']);
+			} else {
+				// addCssInlineBlock
+				$GLOBALS['TSFE']->additionalCSS['css_'.$this->extKey.'_'.$hash] .= $temp_css;
+			}
 		}
 	}
 

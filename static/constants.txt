@@ -9,6 +9,11 @@ plugin.tx_jfmulticontent_pi1 {
 	# cat=plugin.tx_jfmulticontent/enable/040; type=boolean; label=Minify Javascript: If set, the Javascript will be minified
 	jsMinify = 0
 
+	# cat=plugin.tx_jfmulticontent/enable/050; type=boolean; label=Javascript to Inline: If set, the Javascript will be inserted into the inlineJS, after this, its possible to put it into externel files (config.removeDefaultJS = external)
+	jsInline = 0
+
+	# cat=plugin.tx_jfmulticontent/enable/060; type=boolean; label=Minify CSS: If set, the CSS will be minified
+	cssMinify = 0
 
 
 	# cat=plugin.tx_jfmulticontent/file/010; type=file[html,htm,tmpl,txt]; label=HTML-Template file: Location of the used template
