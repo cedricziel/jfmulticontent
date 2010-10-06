@@ -83,3 +83,18 @@ jQuery(document).ready(function(){
 });
 <!-- ###TEMPLATE_SLIDEDECK_JS### end -->
 
+
+
+
+
+<h2>TEMPLATE_EASYACCORDION_JS:</h2>
+
+<!-- ###TEMPLATE_EASYACCORDION_JS### begin -->
+jQuery(document).ready(function(){
+	jQuery('####KEY###, ####KEY### dl').css({width: '###WIDTH###px'});
+	jQuery('####KEY###').easyAccordion({
+		###OPTIONS###
+	});
+});
+<!-- ###TEMPLATE_EASYACCORDION_JS### end -->
+

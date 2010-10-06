@@ -19,6 +19,9 @@ plugin.tx_jfmulticontent_pi1 {
 	slidedeckJS = {$plugin.tx_jfmulticontent_pi1.file.slidedeckJS}
 	slidedeckCSS = {$plugin.tx_jfmulticontent_pi1.file.slidedeckCSS}
 
+	easyaccordionJS = {$plugin.tx_jfmulticontent_pi1.file.easyaccordionJS}
+	easyaccordionCSS = {$plugin.tx_jfmulticontent_pi1.file.easyaccordionCSS}
+
 	2columnClasses = {$plugin.tx_jfmulticontent_pi1.2columnClasses}
 	3columnClasses = {$plugin.tx_jfmulticontent_pi1.3columnClasses}
 	4columnClasses = {$plugin.tx_jfmulticontent_pi1.4columnClasses}
@@ -37,6 +40,9 @@ plugin.tx_jfmulticontent_pi1 {
 		wrap = |
 	}
 	slidedeckWrap {
+		wrap = |
+	}
+	easyaccordionWrap {
 		wrap = |
 	}
 
@@ -84,6 +90,9 @@ plugin.tx_jfmulticontent_pi1 {
 		slidedeckScroll = 0
 		slidedeckKeys = 0
 		slidedeckHidespines = 0
+		easyaccordionSkin = {$plugin.tx_jfmulticontent_pi1.easyaccordionSkin}
+		easyaccordionWidth = 600
+		easyaccordionSlideNum = 1
 		delayDuration = 0
 		autoplayContinuing = 0
 		autoplayCycle = 0

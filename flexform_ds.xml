@@ -60,6 +60,11 @@
 										<numIndex index="1">slidedeck</numIndex>
 										<numIndex index="2">EXT:jfmulticontent/selicon_tt_content_tx_jfmulticontent_style_7.gif</numIndex>
 									</numIndex>
+									<numIndex index="8" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.style.I.8</numIndex>
+										<numIndex index="1">easyaccordion</numIndex>
+										<numIndex index="2">EXT:jfmulticontent/selicon_tt_content_tx_jfmulticontent_style_8.gif</numIndex>
+									</numIndex>
 								</items>
 							</config>
 						</TCEforms>
@@ -800,11 +805,55 @@
 						</TCEforms>
 					</slidedeckHidespines>
 					
+					<!-- EASYACCORDION -->
+					
+					<easyaccordionSkin>
+						<TCEforms>
+							<displayCond>FIELD:style:=:easyaccordion</displayCond>
+							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.easyaccordionSkin</label>
+							<config>
+								<type>select</type>
+								<size>1</size>
+								<maxitems>1</maxitems>
+								<itemsProcFunc>tx_jfmulticontent_itemsProcFunc->getEasyaccordionSkin</itemsProcFunc>
+								<items type="array">
+									<numIndex index="0" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.easyaccordionSkin.I.0</numIndex>
+										<numIndex index="1"></numIndex>
+									</numIndex>
+								</items>
+							</config>
+						</TCEforms>
+					</easyaccordionSkin>
+					<easyaccordionWidth>
+						<TCEforms>
+							<displayCond>FIELD:style:=:easyaccordion</displayCond>
+							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.easyaccordionWidth</label>
+							<config>
+								<type>input</type>
+								<size>6</size>
+								<max>6</max>
+								<default>600</default>
+								<eval>int,nospace</eval>
+							</config>
+						</TCEforms>
+					</easyaccordionWidth>
+					<easyaccordionSlideNum>
+						<TCEforms>
+							<displayCond>FIELD:style:=:easyaccordion</displayCond>
+							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.easyaccordionSlideNum</label>
+							<config>
+								<type>check</type>
+								<default>1</default>
+							</config>
+						</TCEforms>
+					</easyaccordionSlideNum>
+					
 					<!-- AUTOPLAY -->
 					
 					<delayDuration>
 						<TCEforms>
-							<displayCond>FIELD:style:IN:tab,accordion,slider,slidedeck</displayCond>
+							<displayCond>FIELD:style:IN:tab,accordion,slider,slidedeck,easyaccordion</displayCond>
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.autoplayDuration</label>
 							<config>
 								<type>input</type>

@@ -11,6 +11,9 @@ classInner = ,16,20,25,33,38,40,50,60,62,66,75,80
 # cat=basic/enable/40; type=boolean; label=Enable FE-Errormessages: If set, messages in case of missing templates are displayed in FE (Turn of in production)
 frontendErrorMsg = 1
 
+# cat=basic/file/10; type=string; label=easyAccordion skin folder: Location of the skin folder for easyAccordion
+easyAccordionSkinFolder = EXT:jfmulticontent/res/easyaccordion/skins/
+
 # cat=basic/dev/1000; type=user[EXT:jfmulticontent/lib/class.tx_jfmulticontent_tsparserext.php:tx_jfmulticontent_tsparserext->displayMessage]; label=Updater
 updateMessage = 0
 

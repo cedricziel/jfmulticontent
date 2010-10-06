@@ -52,6 +52,7 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 	var $templateFile = null;
 	var $templateFileJS = null;
 	var $templatePart = null;
+	var $additionalMarker = array();
 	var $contentKey = null;
 	var $contentCount = null;
 	var $contentClass = array();
@@ -94,14 +95,80 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 					}
 				}
 			}
+
+			// Override the config with flexform data
+			$this->conf['config.']['style'] = $this->lConf['style'];
+			// columns
+			$this->conf['config.']['column1']     = $this->lConf['column1'];
+			$this->conf['config.']['column2']     = $this->lConf['column2'];
+			$this->conf['config.']['column3']     = $this->lConf['column3'];
+			$this->conf['config.']['column4']     = $this->lConf['column4'];
+			$this->conf['config.']['column5']     = $this->lConf['column5'];
+			$this->conf['config.']['columnOrder'] = $this->lConf['columnOrder'];
+			// tab
+			$this->conf['config.']['tabCollapsible']   = $this->lConf['tabCollapsible'];
+			$this->conf['config.']['tabOpen']          = $this->lConf['tabOpen'];
+			$this->conf['config.']['tabRandomContent'] = $this->lConf['tabRandomContent'];
+			$this->conf['config.']['tabFxHeight']      = $this->lConf['tabFxHeight'];
+			$this->conf['config.']['tabFxOpacity']     = $this->lConf['tabFxOpacity'];
+			$this->conf['config.']['tabFxDuration']    = $this->lConf['tabFxDuration'];
+			// accordion
+			$this->conf['config.']['accordionAutoHeight']         = $this->lConf['accordionAutoHeight'];
+			$this->conf['config.']['accordionCollapsible']        = $this->lConf['accordionCollapsible'];
+			$this->conf['config.']['accordionClosed']             = $this->lConf['accordionClosed'];
+			$this->conf['config.']['accordionOpen']               = $this->lConf['accordionOpen'];
+			$this->conf['config.']['accordionRandomContent']      = $this->lConf['accordionRandomContent'];
+			$this->conf['config.']['accordionEvent']              = $this->lConf['accordionEvent'];
+			$this->conf['config.']['accordionAnimated']           = $this->lConf['accordionAnimated'];
+			$this->conf['config.']['accordionTransition']         = $this->lConf['accordionTransition'];
+			$this->conf['config.']['accordionTransitiondir']      = $this->lConf['accordionTransitiondir'];
+			$this->conf['config.']['accordionTransitionduration'] = $this->lConf['accordionTransitionduration'];
+			// slider
+			$this->conf['config.']['sliderAutoStart']          = $this->lConf['sliderAutoStart'];
+			$this->conf['config.']['sliderPauseOnHover']       = $this->lConf['sliderPauseOnHover'];
+			$this->conf['config.']['sliderNavigation']         = $this->lConf['sliderNavigation'];
+			$this->conf['config.']['sliderHashTags']           = $this->lConf['sliderHashTags'];
+			$this->conf['config.']['sliderOpen']               = $this->lConf['sliderOpen'];
+			$this->conf['config.']['sliderRandomContent']      = $this->lConf['sliderRandomContent'];
+			$this->conf['config.']['sliderPanelFromHeader']    = $this->lConf['sliderPanelFromHeader'];
+			$this->conf['config.']['sliderTransition']         = $this->lConf['sliderTransition'];
+			$this->conf['config.']['sliderTransitiondir']      = $this->lConf['sliderTransitiondir'];
+			$this->conf['config.']['sliderTransitionduration'] = $this->lConf['sliderTransitionduration'];
+			// slidedeck
+			$this->conf['config.']['slidedeckHeight']             = $this->lConf['slidedeckHeight'];
+			$this->conf['config.']['slidedeckTransition']         = $this->lConf['slidedeckTransition'];
+			$this->conf['config.']['slidedeckTransitiondir']      = $this->lConf['slidedeckTransitiondir'];
+			$this->conf['config.']['slidedeckTransitionduration'] = $this->lConf['slidedeckTransitionduration'];
+			$this->conf['config.']['slidedeckStart']              = $this->lConf['slidedeckStart'];
+			$this->conf['config.']['slidedeckActivecorner']       = $this->lConf['slidedeckActivecorner'];
+			$this->conf['config.']['slidedeckIndex']              = $this->lConf['slidedeckIndex'];
+			$this->conf['config.']['slidedeckScroll']             = $this->lConf['slidedeckScroll'];
+			$this->conf['config.']['slidedeckKeys']               = $this->lConf['slidedeckKeys'];
+			$this->conf['config.']['slidedeckHidespines']         = $this->lConf['slidedeckHidespines'];
+			// easyAccordion
+			if ($this->lConf['easyaccordionSkin']) {
+				$this->conf['config.']['easyaccordionSkin'] = $this->lConf['easyaccordionSkin'];
+			}
+			if ($this->lConf['easyaccordionWidth'] > 0) {
+				$this->conf['config.']['easyaccordionWidth'] = $this->lConf['easyaccordionWidth'];
+			}
+			$this->conf['config.']['easyaccordionSlideNum'] = $this->lConf['easyaccordionSlideNum'];
+			// autoplay
+			$this->conf['config.']['delayDuration']      = $this->lConf['delayDuration'];
+			$this->conf['config.']['autoplayContinuing'] = $this->lConf['autoplayContinuing'];
+			$this->conf['config.']['autoplayCycle']      = $this->lConf['autoplayCycle'];
 			// define the titles to overwrite
-			if (trim($this->lConf['titles'])) {
-				$this->titles = t3lib_div::trimExplode(chr(10), $this->lConf['titles']);
+			if (trim($this->conf['config.']['titles'])) {
+				$this->titles = t3lib_div::trimExplode(chr(10), $this->conf['config.']['titles']);
 			}
 			// define the attributes
-			if (trim($this->lConf['attributes'])) {
-				$this->attributes = t3lib_div::trimExplode(chr(10), $this->lConf['attributes']);
+			if (trim($this->conf['config.']['attributes'])) {
+				$this->attributes = t3lib_div::trimExplode(chr(10), $this->conf['config.']['attributes']);
 			}
+			// options
+			$this->conf['config.']['options']         = $this->lConf['options'];
+			$this->conf['config.']['optionsOverride'] = $this->lConf['optionsOverride'];
+
 			// get the content ID's
 			$content_ids = t3lib_div::trimExplode(",", $this->cObj->data['tx_jfmulticontent_contents']);
 			// get the informations for every content
@@ -127,12 +194,9 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 			$this->contentKey = 'jfmulticontent_c' . $this->cObj->data['uid'];
 		} else {
 			// TS config will be used
-			if (count($this->conf['config.']) > 0) {
-				foreach ($this->conf['config.'] as $key => $val) {
-					$this->lConf[$key] = trim($val);
-				}
-				// define the key of the element
-				$this->contentKey = $this->lConf['contentKey'];
+			// define the key of the element
+			if ($this->conf['config.']['contentKey']) {
+				$this->contentKey = $this->conf['config.']['contentKey'];
 			} else {
 				$this->contentKey = 'jfmulticontent_ts1';
 			}
@@ -156,11 +220,11 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 
 		// The template
 		if (! $this->templateFile = $this->cObj->fileResource($this->conf['templateFile'])) {
-			$this->templateFile = $this->cObj->fileResource("EXT:jfmulticontent/pi1/tx_jfmulticontent_pi1.tmpl");
+			$this->templateFile = $this->cObj->fileResource("EXT:jfmulticontent/res/tx_jfmulticontent_pi1.tmpl");
 		}
 		// The template for JS
 		if (! $this->templateFileJS = $this->cObj->fileResource($this->conf['templateFileJS'])) {
-			$this->templateFileJS = $this->cObj->fileResource("EXT:jfmulticontent/pi1/tx_jfmulticontent_pi1.js");
+			$this->templateFileJS = $this->cObj->fileResource("EXT:jfmulticontent/res/tx_jfmulticontent_pi1.js");
 		}
 
 
@@ -175,13 +239,13 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 		}
 
 		// style
-		switch ($this->lConf['style']) {
+		switch ($this->conf['config.']['style']) {
 			case "2column" : {
 				$this->templatePart = "TEMPLATE_COLUMNS";
 				$this->contentCount = 2;
 				$this->classes = array(
-					$this->lConf["column1"],
-					$this->lConf["column2"],
+					$this->conf['config.']["column1"],
+					$this->conf['config.']["column2"],
 				);
 				$this->contentClass = t3lib_div::trimExplode("|*|", $this->conf['2columnClasses']);
 				$this->contentWrap = t3lib_div::trimExplode("|*|", $this->conf['columnWrap.']['wrap']);
@@ -191,9 +255,9 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 				$this->templatePart = "TEMPLATE_COLUMNS";
 				$this->contentCount = 3;
 				$this->classes = array(
-					$this->lConf["column1"],
-					$this->lConf["column2"],
-					$this->lConf["column3"],
+					$this->conf['config.']["column1"],
+					$this->conf['config.']["column2"],
+					$this->conf['config.']["column3"],
 				);
 				$this->contentClass = t3lib_div::trimExplode("|*|", $this->conf['3columnClasses']);
 				$this->contentWrap = t3lib_div::trimExplode("|*|", $this->conf['columnWrap.']['wrap']);
@@ -203,10 +267,10 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 				$this->templatePart = "TEMPLATE_COLUMNS";
 				$this->contentCount = 4;
 				$this->classes = array(
-					$this->lConf["column1"],
-					$this->lConf["column2"],
-					$this->lConf["column3"],
-					$this->lConf["column4"],
+					$this->conf['config.']["column1"],
+					$this->conf['config.']["column2"],
+					$this->conf['config.']["column3"],
+					$this->conf['config.']["column4"],
 				);
 				$this->contentClass = t3lib_div::trimExplode("|*|", $this->conf['4columnClasses']);
 				$this->contentWrap = t3lib_div::trimExplode("|*|", $this->conf['columnWrap.']['wrap']);
@@ -216,11 +280,11 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 				$this->templatePart = "TEMPLATE_COLUMNS";
 				$this->contentCount = 5;
 				$this->classes = array(
-					$this->lConf["column1"],
-					$this->lConf["column2"],
-					$this->lConf["column3"],
-					$this->lConf["column4"],
-					$this->lConf["column5"],
+					$this->conf['config.']["column1"],
+					$this->conf['config.']["column2"],
+					$this->conf['config.']["column3"],
+					$this->conf['config.']["column4"],
+					$this->conf['config.']["column5"],
 				);
 				$this->contentClass = t3lib_div::trimExplode("|*|", $this->conf['5columnClasses']);
 				$this->contentWrap = t3lib_div::trimExplode("|*|", $this->conf['columnWrap.']['wrap']);
@@ -240,36 +304,36 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 				}
 				$this->addJS($jQueryNoConflict);
 				$fx = array();
-				if ($this->lConf['tabFxHeight']) {
+				if ($this->conf['config.']['tabFxHeight']) {
 					$fx[] = "height: 'toggle'";
 				}
-				if ($this->lConf['tabFxOpacity']) {
+				if ($this->conf['config.']['tabFxOpacity']) {
 					$fx[] = "opacity: 'toggle'";
 				}
-				if ($this->lConf['tabFxDuration'] > 0) {
-					$fx[] = "duration: '{$this->lConf['tabFxDuration']}'";
+				if ($this->conf['config.']['tabFxDuration']) {
+					$fx[] = "duration: '{$this->conf['config.']['tabFxDuration']}'";
 				}
-				if ($this->lConf['delayDuration'] > 0) {
-					$rotate = ".tabs('rotate' , {$this->lConf['delayDuration']}, ".($this->lConf['autoplayContinuing'] ? 'true' : 'false').")";
+				if ($this->conf['config.']['delayDuration'] > 0) {
+					$rotate = ".tabs('rotate' , {$this->conf['config.']['delayDuration']}, ".($this->conf['config.']['autoplayContinuing'] ? 'true' : 'false').")";
 				}
 				$options = array();
 				if (count($fx) > 0) {
 					$options[] = "fx:{".implode(",", $fx)."}";
 				}
-				if ($this->lConf['tabCollapsible']) {
+				if ($this->conf['config.']['tabCollapsible']) {
 					$options[] = "collapsible:true";
 				}
-				if ($this->lConf['tabRandomContent']) {
+				if ($this->conf['config.']['tabRandomContent']) {
 					$options[] = "selected:Math.floor(Math.random()*{$this->contentCount})";
-				} elseif (is_numeric($this->lConf['tabOpen'])) {
-					$options[] = "selected:".($this->lConf['tabOpen'] - 1);
+				} elseif (is_numeric($this->conf['config.']['tabOpen'])) {
+					$options[] = "selected:".($this->conf['config.']['tabOpen'] - 1);
 				}
 				// overwrite all options if set
-				if (trim($this->lConf['options'])) {
-					if ($this->lConf['optionsOverride']) {
-						$options = array($this->lConf['options']);
+				if (trim($this->conf['config.']['options'])) {
+					if ($this->conf['config.']['optionsOverride']) {
+						$options = array($this->conf['config.']['options']);
 					} else {
-						$options[] = $this->lConf['options'];
+						$options[] = $this->conf['config.']['options'];
 					}
 				}
 				// get the Template of the Javascript
@@ -308,48 +372,48 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 				$this->contentWrap = t3lib_div::trimExplode("|*|", $this->conf['accordionWrap.']['wrap']);
 				$this->addJS($jQueryNoConflict);
 				$options = array();
-				if (! $this->lConf['accordionAutoHeight']) {
+				if (! $this->conf['config.']['accordionAutoHeight']) {
 					$options['autoHeight'] = "autoHeight:false";
 				}
-				if ($this->lConf['accordionCollapsible']) {
+				if ($this->conf['config.']['accordionCollapsible']) {
 					$options['collapsible'] = "collapsible:true";
 				}
-				if ($this->lConf['accordionClosed']) {
+				if ($this->conf['config.']['accordionClosed']) {
 					$options['active'] = "active:false";
 					$options['collapsible'] = "collapsible:true";
-				} elseif ($this->lConf['accordionRandomContent']) {
+				} elseif ($this->conf['config.']['accordionRandomContent']) {
 					$options['active'] = "active:Math.floor(Math.random()*{$this->contentCount})";
-				} elseif (is_numeric($this->lConf['accordionOpen'])) {
-					$options['active'] = "active:".($this->lConf['accordionOpen'] - 1);
+				} elseif (is_numeric($this->conf['config.']['accordionOpen'])) {
+					$options['active'] = "active:".($this->conf['config.']['accordionOpen'] - 1);
 				}
-				if ($this->lConf['accordionEvent']) {
-					$options['event'] = "event:'{$this->lConf['accordionEvent']}'";
+				if ($this->conf['config.']['accordionEvent']) {
+					$options['event'] = "event:'{$this->conf['config.']['accordionEvent']}'";
 				}
 				// get the Template of the Javascript
 				$markerArray = array();
 				$markerArray["KEY"]            = $this->contentKey;
 				$markerArray["CONTENT_COUNT"]  = $this->contentCount;
-				$markerArray["EASING"]         = (in_array($this->lConf['accordionTransition'], array("swing", "linear")) ? "" : "ease".$this->lConf['accordionTransitiondir'].$this->lConf['accordionTransition']);
-				$markerArray["TRANS_DURATION"] = (is_numeric($this->lConf['accordionTransitionduration']) ? $this->lConf['accordionTransitionduration'] : 1000);
-				$markerArray["DELAY_DURATION"] = (is_numeric($this->lConf['delayDuration']) ? $this->lConf['delayDuration'] : '0');
+				$markerArray["EASING"]         = (in_array($this->conf['config.']['accordionTransition'], array("swing", "linear")) ? "" : "ease".$this->conf['config.']['accordionTransitiondir'].$this->conf['config.']['accordionTransition']);
+				$markerArray["TRANS_DURATION"] = (is_numeric($this->conf['config.']['accordionTransitionduration']) ? $this->conf['config.']['accordionTransitionduration'] : 1000);
+				$markerArray["DELAY_DURATION"] = (is_numeric($this->conf['config.']['delayDuration']) ? $this->conf['config.']['delayDuration'] : '0');
 				// get the template for the Javascript
 				if (! $templateCode = trim($this->cObj->getSubpart($this->templateFileJS, "###TEMPLATE_ACCORDION_JS###"))) {
 					$templateCode = $this->outputError("Template TEMPLATE_ACCORDION_JS is missing", true);
 				}
 				$easingAnimation = null;
-				if ($this->lConf['accordionTransition']) {
+				if ($this->conf['config.']['accordionTransition']) {
 					$options['animated'] = "animated:'{$this->contentKey}'";
 					$easingAnimation = trim($this->cObj->getSubpart($templateCode, "###EASING_ANIMATION###"));
-				} else if ($this->lConf['accordionAnimated']) {
-					$options['animated'] = "animated:'{$this->lConf['accordionAnimated']}'";
+				} else if ($this->conf['config.']['accordionAnimated']) {
+					$options['animated'] = "animated:'{$this->conf['config.']['accordionAnimated']}'";
 				}
 				// set the easing animation script
 				$templateCode = $this->cObj->substituteSubpart($templateCode, '###EASING_ANIMATION###', $easingAnimation, 0);
 				$continuing = null;
 				$autoPlay = null;
 				$settimeout = null;
-				if ($this->lConf['delayDuration'] > 0) {
-					// does not work if (! $this->lConf['autoplayContinuing']) {}
+				if ($this->conf['config.']['delayDuration'] > 0) {
+					// does not work if (! $this->conf['config.']['autoplayContinuing']) {}
 					$continuing = trim($this->cObj->getSubpart($templateCode, "###CONTINUING###"));
 					$autoPlay   = trim($this->cObj->getSubpart($templateCode, "###AUTO_PLAY###"));
 					$settimeout = trim($this->cObj->getSubpart($templateCode, "###SETTIMEOUT###"));
@@ -360,11 +424,11 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 				$templateCode = $this->cObj->substituteSubpart($templateCode, '###AUTO_PLAY###',  $autoPlay, 0);
 				$templateCode = $this->cObj->substituteSubpart($templateCode, '###SETTIMEOUT###', $settimeout, 0);
 				// overwrite all options if set
-				if (trim($this->lConf['options'])) {
-					if ($this->lConf['optionsOverride']) {
-						$options = array($this->lConf['options']);
+				if (trim($this->conf['config.']['options'])) {
+					if ($this->conf['config.']['optionsOverride']) {
+						$options = array($this->conf['config.']['options']);
 					} else {
-						$options['flexform'] = $this->lConf['options'];
+						$options['flexform'] = $this->conf['config.']['options'];
 					}
 				}
 
@@ -391,26 +455,26 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 				$this->contentWrap = t3lib_div::trimExplode("|*|", $this->conf['sliderWrap.']['wrap']);
 				$this->addJS($jQueryNoConflict);
 				// 
-				if ($this->lConf['sliderTransition']) {
-					$options[] = "easing: '".(in_array($this->lConf['sliderTransition'], array("swing", "linear")) ? "" : "ease{$this->lConf['sliderTransitiondir']}")."{$this->lConf['sliderTransition']}'";
+				if ($this->conf['config.']['sliderTransition']) {
+					$options[] = "easing: '".(in_array($this->conf['config.']['sliderTransition'], array("swing", "linear")) ? "" : "ease{$this->conf['config.']['sliderTransitiondir']}")."{$this->conf['config.']['sliderTransition']}'";
 				}
-				if ($this->lConf['sliderTransitionduration'] > 0) {
-					$options[] = "animationTime: {$this->lConf['sliderTransitionduration']}";
+				if ($this->conf['config.']['sliderTransitionduration'] > 0) {
+					$options[] = "animationTime: {$this->conf['config.']['sliderTransitionduration']}";
 				}
-				if ($this->lConf['delayDuration'] > 0) {
+				if ($this->conf['config.']['delayDuration'] > 0) {
 					$options[] = "autoPlay: true";
-					$options[] = "delay: {$this->lConf['delayDuration']}";
+					$options[] = "delay: {$this->conf['config.']['delayDuration']}";
 				} else {
 					$options[] = "autoPlay: false";
 				}
-				$options[] = "hashTags: ".($this->lConf['sliderHashTags'] ? 'true' : 'false');
-				$options[] = "startStopped: ".($this->lConf['sliderAutoStart'] ? 'false' : 'true');
-				$options[] = "pauseOnHover: ".($this->lConf['sliderPauseOnHover'] ? 'true' : 'false');
-				$options[] = "buildNavigation: ".($this->lConf['sliderNavigation'] ? 'true' : 'false');
+				$options[] = "hashTags: ".($this->conf['config.']['sliderHashTags'] ? 'true' : 'false');
+				$options[] = "startStopped: ".($this->conf['config.']['sliderAutoStart'] ? 'false' : 'true');
+				$options[] = "pauseOnHover: ".($this->conf['config.']['sliderPauseOnHover'] ? 'true' : 'false');
+				$options[] = "buildNavigation: ".($this->conf['config.']['sliderNavigation'] ? 'true' : 'false');
 				$options[] = "startText: '".t3lib_div::slashJS($this->pi_getLL('slider_start'))."'";
 				$options[] = "stopText: '".t3lib_div::slashJS($this->pi_getLL('slider_stop'))."'";
 				// define the paneltext
-				if ($this->lConf['sliderPanelFromHeader']) {
+				if ($this->conf['config.']['sliderPanelFromHeader']) {
 					$tab = array();
 					for ($a=0; $a < $this->contentCount; $a++) {
 						$tab[] = "if(i==".($a+1).") return ".t3lib_div::quoteJSvalue($this->titles[$a]).";";
@@ -419,17 +483,17 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 				} elseif (trim($this->pi_getLL('slider_panel'))) {
 					$options[] = "navigationFormatter: function(i,p){ var str = '".(t3lib_div::slashJS($this->pi_getLL('slider_panel')))."'; return str.replace('%i%',i); }";
 				}
-				if ($this->lConf['sliderRandomContent']) {
+				if ($this->conf['config.']['sliderRandomContent']) {
 					$options[] = "opened: Math.floor(Math.random()*".($this->contentCount + 1).")";
-				} elseif ($this->lConf['sliderOpen'] > 1) {
-					$options[] = "opened: ".($this->lConf['sliderOpen'] < $this->contentCount ? $this->lConf['sliderOpen'] : $this->contentCount);
+				} elseif ($this->conf['config.']['sliderOpen'] > 1) {
+					$options[] = "opened: ".($this->conf['config.']['sliderOpen'] < $this->contentCount ? $this->conf['config.']['sliderOpen'] : $this->contentCount);
 				}
 				// overwrite all options if set
-				if (trim($this->lConf['options'])) {
-					if ($this->lConf['optionsOverride']) {
-						$options = array($this->lConf['options']);
+				if (trim($this->conf['config.']['options'])) {
+					if ($this->conf['config.']['optionsOverride']) {
+						$options = array($this->conf['config.']['options']);
 					} else {
-						$options[] = $this->lConf['options'];
+						$options[] = $this->conf['config.']['options'];
 					}
 				}
 				// get the Template of the Javascript
@@ -462,47 +526,47 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 				break;
 			}
 			case "slidedeck" : {
-				// jQuery Accordion
+				// SlideDeck
 				$this->templatePart = "TEMPLATE_SLIDEDECK";
 				$this->contentWrap = t3lib_div::trimExplode("|*|", $this->conf['slidedeckWrap.']['wrap']);
 				$this->addJS($jQueryNoConflict);
 				$options = array();
-				if ($this->lConf['slidedeckTransitionduration']) {
-					$options['speed'] ="speed: {$this->lConf['slidedeckTransitionduration']}";
+				if ($this->conf['config.']['slidedeckTransitionduration']) {
+					$options['speed'] = "speed: {$this->conf['config.']['slidedeckTransitionduration']}";
 				}
-				if ($this->lConf['slidedeckTransition']) {
-					$options['transition'] = "transition: '".(in_array($this->lConf['slidedeckTransition'], array("swing", "linear")) ? "" : "ease{$this->lConf['slidedeckTransitiondir']}")."{$this->lConf['slidedeckTransition']}'";
+				if ($this->conf['config.']['slidedeckTransition']) {
+					$options['transition'] = "transition: '".(in_array($this->conf['config.']['slidedeckTransition'], array("swing", "linear")) ? "" : "ease{$this->conf['config.']['slidedeckTransitiondir']}")."{$this->conf['config.']['slidedeckTransition']}'";
 				}
-				if ($this->lConf['slidedeckStart']) {
-					$options['start'] = "start: {$this->lConf['slidedeckStart']}";
+				if ($this->conf['config.']['slidedeckStart']) {
+					$options['start'] = "start: {$this->conf['config.']['slidedeckStart']}";
 				}
-				$options['activeCorner'] = "activeCorner: ".($this->lConf['slidedeckActivecorner'] ? 'true' : 'false');
-				$options['index']        = "index: ".($this->lConf['slidedeckIndex'] ? 'true' : 'false');
-				$options['scroll']       = "scroll: ".($this->lConf['slidedeckScroll'] ? 'true' : 'false');
-				$options['keys']         = "keys: ".($this->lConf['slidedeckKeys'] ? 'true' : 'false');
-				$options['hideSpines']   = "hideSpines: ".($this->lConf['slidedeckHidespines'] ? 'true' : 'false');
-				if ($this->lConf['delayDuration'] > 0) {
+				$options['activeCorner'] = "activeCorner: ".($this->conf['config.']['slidedeckActivecorner'] ? 'true' : 'false');
+				$options['index']        = "index: ".($this->conf['config.']['slidedeckIndex'] ? 'true' : 'false');
+				$options['scroll']       = "scroll: ".($this->conf['config.']['slidedeckScroll'] ? 'true' : 'false');
+				$options['keys']         = "keys: ".($this->conf['config.']['slidedeckKeys'] ? 'true' : 'false');
+				$options['hideSpines']   = "hideSpines: ".($this->conf['config.']['slidedeckHidespines'] ? 'true' : 'false');
+				if ($this->conf['config.']['delayDuration'] > 0) {
 					$options['autoPlay']         = "autoPlay: true";
-					$options['autoPlayInterval'] = "autoPlayInterval: {$this->lConf['delayDuration']}";
-					$options['cycle']            = "cycle: ".($this->lConf['autoplayCycle'] ? 'true' : 'false');
+					$options['autoPlayInterval'] = "autoPlayInterval: {$this->conf['config.']['delayDuration']}";
+					$options['cycle']            = "cycle: ".($this->conf['config.']['autoplayCycle'] ? 'true' : 'false');
 				}
+				// overwrite all options if set
+				if (trim($this->conf['config.']['options'])) {
+					if ($this->conf['config.']['optionsOverride']) {
+						$options = array($this->conf['config.']['options']);
+					} else {
+						$options['flexform'] = $this->conf['config.']['options'];
+					}
+				}
+
 				// get the template for the Javascript
 				if (! $templateCode = trim($this->cObj->getSubpart($this->templateFileJS, "###TEMPLATE_SLIDEDECK_JS###"))) {
 					$templateCode = $this->outputError("Template TEMPLATE_SLIDEDECK_JS is missing", true);
 				}
-				// overwrite all options if set
-				if (trim($this->lConf['options'])) {
-					if ($this->lConf['optionsOverride']) {
-						$options = array($this->lConf['options']);
-					} else {
-						$options['flexform'] = $this->lConf['options'];
-					}
-				}
-
 				// Replace default values
 				$markerArray = array();
 				$markerArray["KEY"]     = $this->contentKey;
-				$markerArray["HEIGHT"]  = ($this->lConf['slidedeckHeight'] > 0 ? $this->lConf['slidedeckHeight'] : 300);
+				$markerArray["HEIGHT"]  = ($this->conf['config.']['slidedeckHeight'] > 0 ? $this->conf['config.']['slidedeckHeight'] : 300);
 				$markerArray["OPTIONS"] = implode(", ", $options);
 				// Replace all markers
 				$templateCode = $this->cObj->substituteMarkerArray($templateCode, $markerArray, '###|###', 0);
@@ -516,12 +580,57 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 				}
 				$this->addJsFile($this->conf['slidedeckJS']);
 				$this->addCssFile($this->conf['slidedeckCSS']);
-				if ($this->lConf['slidedeckScroll']) {
+				if ($this->conf['config.']['slidedeckScroll']) {
 					$this->addJsFile($this->conf['jQueryMouseWheel']);
 				}
 				$this->addJS(trim($templateCode));
 				break;
 
+			}
+			case "easyaccordion" : {
+				// easyaccordion
+				$this->templatePart = "TEMPLATE_EASYACCORDION";
+				$this->additionalMarker["SKIN"] = $this->conf['config.']['easyaccordionSkin'];
+				$this->contentWrap = t3lib_div::trimExplode("|*|", $this->conf['easyaccordionWrap.']['wrap']);
+				$this->addJS($jQueryNoConflict);
+				$options = array();
+				if ($this->conf['config.']['delayDuration'] > 0) {
+					$options['autoStart']     = "autoStart: true";
+					$options['slideInterval'] = "slideInterval: {$this->conf['config.']['delayDuration']}";
+				}
+				$options['slideNum'] = "slideNum: ".($this->conf['config.']['easyaccordionSlideNum'] ? 'true' : 'false');
+				// overwrite all options if set
+				if (trim($this->conf['config.']['options'])) {
+					if ($this->conf['config.']['optionsOverride']) {
+						$options = array($this->conf['config.']['options']);
+					} else {
+						$options['flexform'] = $this->conf['config.']['options'];
+					}
+				}
+
+				// get the template for the Javascript
+				if (! $templateCode = trim($this->cObj->getSubpart($this->templateFileJS, "###TEMPLATE_EASYACCORDION_JS###"))) {
+					$templateCode = $this->outputError("Template TEMPLATE_EASYACCORDION_JS is missing", true);
+				}
+				// Replace default values
+				$markerArray = array();
+				$markerArray["KEY"]     = $this->contentKey;
+				$markerArray["WIDTH"]   = ($this->conf['config.']['easyaccordionWidth'] > 0  ? $this->conf['config.']['easyaccordionWidth']  : 600);
+				$markerArray["OPTIONS"] = implode(", ", $options);
+				// Replace all markers
+				$templateCode = $this->cObj->substituteMarkerArray($templateCode, $markerArray, '###|###', 0);
+				
+				// Add all CSS and JS files
+				if (T3JQUERY === true) {
+					tx_t3jquery::addJqJS();
+				} else {
+					$this->addJsFile($this->conf['jQueryLibrary']);
+				}
+				$this->addJsFile($this->conf['easyaccordionJS']);
+				$this->addCssFile($this->conf['easyaccordionCSS']);
+				$this->addCssFile($this->confArr['easyAccordionSkinFolder'] . $this->conf['config.']['easyaccordionSkin'] . "/style.css");
+				$this->addJS(trim($templateCode));
+				break;
 			}
 			default: {
 				return $this->outputError("NO VALID TEMPLATE SELECTED", false);
@@ -544,7 +653,7 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 	 */
 	function renderTemplate()
 	{
-		$markerArray = array();
+		$markerArray = $this->additionalMarker;
 		// get the template
 		if (! $templateCode = $this->cObj->getSubpart($this->templateFile, "###{$this->templatePart}###")) {
 			$templateCode = $this->outputError("Template {$this->templatePart} is missing", false);
@@ -617,8 +726,8 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 				$wrap = $contentWrap_array[1];
 			}
 			// override the CONTENT
-			if ($this->templatePart == "TEMPLATE_COLUMNS" && $this->lConf['columnOrder']) {
-				switch ($this->lConf['columnOrder']) {
+			if ($this->templatePart == "TEMPLATE_COLUMNS" && $this->conf['config.']['columnOrder']) {
+				switch ($this->conf['config.']['columnOrder']) {
 					case 1 : {
 						// left to right, top to down
 						foreach ($this->cElements as $key => $cElements) {

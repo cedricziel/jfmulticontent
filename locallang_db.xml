@@ -20,6 +20,7 @@
 			<label index="tt_content.tx_jfmulticontent.style.I.4">Accordion</label>
 			<label index="tt_content.tx_jfmulticontent.style.I.5">Slider</label>
 			<label index="tt_content.tx_jfmulticontent.style.I.7">SlideDeck</label>
+			<label index="tt_content.tx_jfmulticontent.style.I.8">easyAccordion</label>
 			<label index="tt_content.tx_jfmulticontent.columnOrder">Column Order</label>
 			<label index="tt_content.tx_jfmulticontent.columnOrder.I.0">only one row (no repeat)</label>
 			<label index="tt_content.tx_jfmulticontent.columnOrder.I.1">left to right, top to down</label>
@@ -83,6 +84,10 @@
 			<label index="tt_content.tx_jfmulticontent.slidedeckScroll">Activate mousewheel</label>
 			<label index="tt_content.tx_jfmulticontent.slidedeckKeys">Activate activation keys</label>
 			<label index="tt_content.tx_jfmulticontent.slidedeckHidespines">Hide spines</label>
+			<label index="tt_content.tx_jfmulticontent.easyaccordionSkin">Skin</label>
+			<label index="tt_content.tx_jfmulticontent.easyaccordionSkin.I.0">From Typoscript</label>
+			<label index="tt_content.tx_jfmulticontent.easyaccordionWidth">Width</label>
+			<label index="tt_content.tx_jfmulticontent.easyaccordionSlideNum">Show numbers</label>
 			<label index="tt_content.tx_jfmulticontent.autoplayDuration">Delay for autoplay (in ms)</label>
 			<label index="tt_content.tx_jfmulticontent.autoplayContinuing">Continuing</label>
 			<label index="tt_content.tx_jfmulticontent.autoplayCycle">Cycle</label>
