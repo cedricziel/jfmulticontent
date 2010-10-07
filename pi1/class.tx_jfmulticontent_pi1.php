@@ -158,12 +158,12 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 			$this->conf['config.']['autoplayContinuing'] = $this->lConf['autoplayContinuing'];
 			$this->conf['config.']['autoplayCycle']      = $this->lConf['autoplayCycle'];
 			// define the titles to overwrite
-			if (trim($this->conf['config.']['titles'])) {
-				$this->titles = t3lib_div::trimExplode(chr(10), $this->conf['config.']['titles']);
+			if (trim($this->lConf['titles'])) {
+				$this->titles = t3lib_div::trimExplode(chr(10), $this->lConf['titles']);
 			}
 			// define the attributes
-			if (trim($this->conf['config.']['attributes'])) {
-				$this->attributes = t3lib_div::trimExplode(chr(10), $this->conf['config.']['attributes']);
+			if (trim($this->lConf['attributes'])) {
+				$this->attributes = t3lib_div::trimExplode(chr(10), $this->lConf['attributes']);
 			}
 			// options
 			$this->conf['config.']['options']         = $this->lConf['options'];
