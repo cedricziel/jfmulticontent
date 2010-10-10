@@ -90,8 +90,39 @@ class tx_jfmulticontent_ttnews_extend
 				$this->addResources();
 				break;
 			}
+			case 'LIST_EASYACCORDION': {
+				$content .= $newsObject->displayList();
+				// Add all CSS and JS files
+				if (T3JQUERY === true) {
+					tx_t3jquery::addJqJS();
+				} else {
+					$this->addJsFile($this->conf['jQueryLibrary'], true);
+				}
+				$this->addJsFile($this->conf['easyaccordionJS']);
+				$this->addCssFile($this->conf['easyaccordionCSS']);
+				$confArr = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['jfmulticontent']);
+				$this->addCssFile($confArr['easyAccordionSkinFolder'] . $this->conf['config.']['easyaccordionSkin'] . "/style.css");
+				$this->addResources();
+				break;
+			}
 		}
 		return $content;
+	}
+
+	/**
+	 * Return additional markers for tt_news
+	 * @param $markerArray
+	 * @param $row
+	 * @param $conf
+	 * @param $pObj
+	 * @return array
+	 */
+	function extraGlobalMarkerProcessor(&$pObj, $markerArray)
+	{
+		$conf = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_jfmulticontent_pi1.'];
+		$markerArray['###EASY_ACCORDION_SKIN###'] = $conf['config.']['easyaccordionSkin'];
+
+		return $markerArray;
 	}
 
 	/**

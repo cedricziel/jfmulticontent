@@ -51,7 +51,7 @@
 			jQuery(this).find('dt').each(function(){
 				jQuery(this).css({'width':dtHeight,'top':dtTop,'margin-left':dtOffset});
 				if(settings.slideNum == true){
-					jQuery('<span class="slide-number">'+0+f+'</span>').appendTo(this);
+					jQuery('<span class="slide-number">'+(f<10?'0':'')+f+'</span>').appendTo(this);
 					if(jQuery.browser.msie){	
 						var slideNumLeft = parseInt(jQuery(this).find('.slide-number').css('left')) - 14;
 						jQuery(this).find('.slide-number').css({'left': slideNumLeft})
@@ -60,13 +60,13 @@
 						}
 						if(jQuery.browser.version == 8.0){
 						var slideNumTop = jQuery(this).find('.slide-number').css('bottom');
-						var slideNumTopVal = parseInt(slideNumTop) + parseInt(jQuery(this).css('padding-top'))  - 12; 
-						jQuery(this).find('.slide-number').css({'bottom': slideNumTopVal}); 
+						var slideNumTopVal = parseInt(slideNumTop) + parseInt(jQuery(this).css('padding-top'))  - 12;
+						jQuery(this).find('.slide-number').css({'bottom': slideNumTopVal});
 						}
 					} else {
 						var slideNumTop = jQuery(this).find('.slide-number').css('bottom');
-						var slideNumTopVal = parseInt(slideNumTop) + parseInt(jQuery(this).css('padding-top')); 
-						jQuery(this).find('.slide-number').css({'bottom': slideNumTopVal}); 
+						var slideNumTopVal = parseInt(slideNumTop) + parseInt(jQuery(this).css('padding-top'));
+						jQuery(this).find('.slide-number').css({'bottom': slideNumTopVal});
 					}
 				}
 				f = f + 1;
