@@ -54,12 +54,14 @@ plugin.tx_jfmulticontent_pi1 {
 		column2 = 50
 		column3 = 
 		column4 = 
+
 		tabCollapsible = 0
 		tabOpen = 1
 		tabRandomContent = 0
 		tabFxHeight = 0
 		tabFxOpacity = 0
 		tabFxDuration = 
+
 		accordionAutoHeight = 1
 		accordionCollapsible = 0
 		accordionClosed = 0
@@ -70,16 +72,28 @@ plugin.tx_jfmulticontent_pi1 {
 		accordionTransition = 
 		accordionTransitiondir = In
 		accordionTransitionduration = 1000
-		sliderAutoStart = 0
-		sliderPauseOnHover = 0
-		sliderNavigation = 1
-		sliderHashTags = 0
+
+		sliderWidth = 
+		sliderHeight = 
+		sliderResizeContents = 0
+		sliderTheme = 
 		sliderOpen = 1
 		sliderRandomContent = 0
+		sliderHashTags = 0
+		sliderBuildArrows = 1
+		sliderToggleArrows = 0
+		sliderNavigation = 1
 		sliderPanelFromHeader = 0
+		sliderToggleControls = 0
+		sliderAutoStart = 0
+		sliderPauseOnHover = 0
+		sliderResumeOnVideoEnd = 0
+		sliderStopAtEnd = 0
+		sliderPlayRtl = 0
 		sliderTransition = swing
 		sliderTransitiondir = In
 		sliderTransitionduration = 1000
+
 		slidedeckHeight = 300
 		slidedeckTransition = swing
 		slidedeckTransitiondir = 
@@ -90,9 +104,11 @@ plugin.tx_jfmulticontent_pi1 {
 		slidedeckScroll = 0
 		slidedeckKeys = 0
 		slidedeckHidespines = 0
+
 		easyaccordionSkin = {$plugin.tx_jfmulticontent_pi1.easyaccordionSkin}
 		easyaccordionWidth = 600
 		easyaccordionSlideNum = 1
+
 		delayDuration = 0
 		autoplayContinuing = 0
 		autoplayCycle = 0

@@ -9,6 +9,8 @@
 			<label index="list_mode_1"></label>
 			<label index="slider_start">Go</label>
 			<label index="slider_stop">Stop</label>
+			<label index="slider_forward"><![CDATA[&raquo;]]></label>
+			<label index="slider_back"><![CDATA[&laquo;]]></label>
 			<label index="slider_panel">Panel %i%</label>
 		</languageKey>
 	</data>

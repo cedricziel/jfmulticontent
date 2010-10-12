@@ -124,13 +124,23 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 			$this->conf['config.']['accordionTransitiondir']      = $this->lConf['accordionTransitiondir'];
 			$this->conf['config.']['accordionTransitionduration'] = $this->lConf['accordionTransitionduration'];
 			// slider
-			$this->conf['config.']['sliderAutoStart']          = $this->lConf['sliderAutoStart'];
-			$this->conf['config.']['sliderPauseOnHover']       = $this->lConf['sliderPauseOnHover'];
-			$this->conf['config.']['sliderNavigation']         = $this->lConf['sliderNavigation'];
-			$this->conf['config.']['sliderHashTags']           = $this->lConf['sliderHashTags'];
+			$this->conf['config.']['sliderWidth']              = $this->lConf['sliderWidth'];
+			$this->conf['config.']['sliderHeight']             = $this->lConf['sliderHeight'];
+			$this->conf['config.']['sliderResizeContents']     = $this->lConf['sliderResizeContents'];
+			$this->conf['config.']['sliderTheme']              = $this->lConf['sliderTheme'];
 			$this->conf['config.']['sliderOpen']               = $this->lConf['sliderOpen'];
 			$this->conf['config.']['sliderRandomContent']      = $this->lConf['sliderRandomContent'];
+			$this->conf['config.']['sliderHashTags']           = $this->lConf['sliderHashTags'];
+			$this->conf['config.']['sliderBuildArrows']        = $this->lConf['sliderBuildArrows'];
+			$this->conf['config.']['sliderToggleArrows']       = $this->lConf['sliderToggleArrows'];
+			$this->conf['config.']['sliderNavigation']         = $this->lConf['sliderNavigation'];
 			$this->conf['config.']['sliderPanelFromHeader']    = $this->lConf['sliderPanelFromHeader'];
+			$this->conf['config.']['sliderToggleControls']     = $this->lConf['sliderToggleControls'];
+			$this->conf['config.']['sliderAutoStart']          = $this->lConf['sliderAutoStart'];
+			$this->conf['config.']['sliderPauseOnHover']       = $this->lConf['sliderPauseOnHover'];
+			$this->conf['config.']['sliderResumeOnVideoEnd']   = $this->lConf['sliderResumeOnVideoEnd'];
+			$this->conf['config.']['sliderStopAtEnd']          = $this->lConf['sliderStopAtEnd'];
+			$this->conf['config.']['sliderPlayRtl']            = $this->lConf['sliderPlayRtl'];
 			$this->conf['config.']['sliderTransition']         = $this->lConf['sliderTransition'];
 			$this->conf['config.']['sliderTransitiondir']      = $this->lConf['sliderTransitiondir'];
 			$this->conf['config.']['sliderTransitionduration'] = $this->lConf['sliderTransitionduration'];
@@ -321,12 +331,12 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 					$options[] = "fx:{".implode(",", $fx)."}";
 				}
 				if ($this->conf['config.']['tabCollapsible']) {
-					$options[] = "collapsible:true";
+					$options[] = "collapsible: true";
 				}
 				if ($this->conf['config.']['tabRandomContent']) {
 					$options[] = "selected:Math.floor(Math.random()*{$this->contentCount})";
 				} elseif (is_numeric($this->conf['config.']['tabOpen'])) {
-					$options[] = "selected:".($this->conf['config.']['tabOpen'] - 1);
+					$options[] = "selected: ".($this->conf['config.']['tabOpen'] - 1);
 				}
 				// overwrite all options if set
 				if (trim($this->conf['config.']['options'])) {
@@ -464,15 +474,47 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 				if ($this->conf['config.']['delayDuration'] > 0) {
 					$options[] = "autoPlay: true";
 					$options[] = "delay: {$this->conf['config.']['delayDuration']}";
+					$options[] = "startStopped: ".($this->conf['config.']['sliderAutoStart'] ? 'false' : 'true');
+					$options[] = "stopAtEnd: ".($this->conf['config.']['sliderStopAtEnd'] ? 'true' : 'false');
 				} else {
 					$options[] = "autoPlay: false";
+					// Toggle only if not autoplay
+					$options[] = "toggleArrows: ".($this->conf['config.']['sliderToggleArrows'] ? 'true' : 'false');
+					$options[] = "toggleControls: ".($this->conf['config.']['sliderToggleControls'] ? 'true' : 'false');
 				}
+				if ($this->conf['config.']['sliderWidth']) {
+					$options[] = "width: '".t3lib_div::slashJS($this->conf['config.']['sliderWidth'])."'";
+				}
+				if ($this->conf['config.']['sliderHeight']) {
+					$options[] = "height: '".t3lib_div::slashJS($this->conf['config.']['sliderHeight'])."'";
+				}
+				if ($this->conf['config.']['sliderResizeContents']) {
+					$options[] = "resizeContents: true";
+				}
+				if ($this->conf['config.']['sliderTheme']) {
+					$options[] = "theme: '".t3lib_div::slashJS($this->conf['config.']['sliderTheme'])."'";
+					if (substr($this->confArr['anythingSliderThemeFolder'], 0, 4) === 'EXT:') {
+						list($extKey, $local) = explode('/', substr($this->confArr['anythingSliderThemeFolder'], 4), 2);
+						$anythingSliderThemeFolder = t3lib_extMgm::siteRelPath($extKey) . $local;
+					} else {
+						$anythingSliderThemeFolder = $this->confArr['anythingSliderThemeFolder'];
+					}
+					$options[] = "themeDirectory: '".t3lib_div::slashJS($anythingSliderThemeFolder)."{themeName}/style.css'";
+				}
+				$options[] = "buildArrows: ".($this->conf['config.']['sliderBuildArrows'] ? 'true' : 'false');
+				$options[] = "resumeOnVideoEnd: ".($this->conf['config.']['sliderResumeOnVideoEnd'] ? 'true' : 'false');
+				$options[] = "playRtl: ".($this->conf['config.']['sliderPlayRtl'] ? 'true' : 'false');
 				$options[] = "hashTags: ".($this->conf['config.']['sliderHashTags'] ? 'true' : 'false');
-				$options[] = "startStopped: ".($this->conf['config.']['sliderAutoStart'] ? 'false' : 'true');
 				$options[] = "pauseOnHover: ".($this->conf['config.']['sliderPauseOnHover'] ? 'true' : 'false');
 				$options[] = "buildNavigation: ".($this->conf['config.']['sliderNavigation'] ? 'true' : 'false');
 				$options[] = "startText: '".t3lib_div::slashJS($this->pi_getLL('slider_start'))."'";
 				$options[] = "stopText: '".t3lib_div::slashJS($this->pi_getLL('slider_stop'))."'";
+				if ($this->pi_getLL('slider_forward')) {
+					$options[] = "forwardText: '".t3lib_div::slashJS($this->pi_getLL('slider_forward'))."'";
+				}
+				if ($this->pi_getLL('slider_back')) {
+					$options[] = "backText: '".t3lib_div::slashJS($this->pi_getLL('slider_back'))."'";
+				}
 				// define the paneltext
 				if ($this->conf['config.']['sliderPanelFromHeader']) {
 					$tab = array();
@@ -484,9 +526,9 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 					$options[] = "navigationFormatter: function(i,p){ var str = '".(t3lib_div::slashJS($this->pi_getLL('slider_panel')))."'; return str.replace('%i%',i); }";
 				}
 				if ($this->conf['config.']['sliderRandomContent']) {
-					$options[] = "opened: Math.floor(Math.random()*".($this->contentCount + 1).")";
+					$options[] = "startPanel: Math.floor(Math.random()*".($this->contentCount + 1).")";
 				} elseif ($this->conf['config.']['sliderOpen'] > 1) {
-					$options[] = "opened: ".($this->conf['config.']['sliderOpen'] < $this->contentCount ? $this->conf['config.']['sliderOpen'] : $this->contentCount);
+					$options[] = "startPanel: ".($this->conf['config.']['sliderOpen'] < $this->contentCount ? $this->conf['config.']['sliderOpen'] : $this->contentCount);
 				}
 				// overwrite all options if set
 				if (trim($this->conf['config.']['options'])) {

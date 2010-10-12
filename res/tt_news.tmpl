@@ -83,24 +83,20 @@ jQuery(document).ready(function(){
 <div class="tx-jfmulticontent-pi1">
 	<div id="news-list-container">
 	###NEWS_CATEGORY_ROOTLINE###
-		<div id="news-list-slider" class="anythingSlider">
-			<div class="wrapper">
-				<ul>
-				<!-- ###CONTENT### begin -->
-					<!-- ###NEWS### begin -->
-					<li>
-						<span class="news-list-date">###NEWS_DATE###</span>
-						<h2><!--###LINK_ITEM###-->###NEWS_TITLE###<!--###LINK_ITEM###--></h2>
-						<!--###LINK_ITEM###-->###NEWS_IMAGE###<!--###LINK_ITEM###-->
-						<h3>###NEWS_SUBHEADER###</h3>
-						###NEWS_CONTENT###
-						###CATWRAP_B### ###TEXT_CAT### ###NEWS_CATEGORY### ###NEWS_CATEGORY_IMAGE### ###CATWRAP_E###
-					</li>
-					<!-- ###NEWS### end-->
-				<!-- ###CONTENT###  end -->
-				</ul>
-			</div>
-		</div>
+		<ul id="news-list-slider">
+		<!-- ###CONTENT### begin -->
+			<!-- ###NEWS### begin -->
+			<li>
+				<span class="news-list-date">###NEWS_DATE###</span>
+				<h2><!--###LINK_ITEM###-->###NEWS_TITLE###<!--###LINK_ITEM###--></h2>
+				<!--###LINK_ITEM###-->###NEWS_IMAGE###<!--###LINK_ITEM###-->
+				<h3>###NEWS_SUBHEADER###</h3>
+				###NEWS_CONTENT###
+				###CATWRAP_B### ###TEXT_CAT### ###NEWS_CATEGORY### ###NEWS_CATEGORY_IMAGE### ###CATWRAP_E###
+			</li>
+			<!-- ###NEWS### end-->
+		<!-- ###CONTENT###  end -->
+		</ul>
 		<div class="news-list-gotoarchive"><!--###LINK_ARCHIVE###-->###GOTOARCHIVE###<!--###LINK_ARCHIVE###--></div>
 	###BROWSE_LINKS###
 	</div>
@@ -109,6 +105,8 @@ jQuery(document).ready(function(){
 /*<![CDATA[*/
 jQuery(document).ready(function(){
 	jQuery('#news-list-slider').anythingSlider({
+		width: 580,
+		resizeContents: true,
 		easing: 'easeOutBack',
 		animationTime: 1000,
 		autoPlay: true,

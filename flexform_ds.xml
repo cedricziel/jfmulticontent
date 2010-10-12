@@ -454,46 +454,59 @@
 					
 					<!-- SLIDER -->
 					
-					<sliderAutoStart>
+					<sliderWidth>
 						<TCEforms>
 							<displayCond>FIELD:style:=:slider</displayCond>
-							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.sliderAutoStart</label>
+							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.sliderWidth</label>
+							<config>
+								<type>input</type>
+								<size>16</size>
+								<max>16</max>
+								<eval>string</eval>
+							</config>
+						</TCEforms>
+					</sliderWidth>
+					<sliderHeight>
+						<TCEforms>
+							<displayCond>FIELD:style:=:slider</displayCond>
+							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.sliderHeight</label>
+							<config>
+								<type>input</type>
+								<size>16</size>
+								<max>16</max>
+								<eval>string</eval>
+							</config>
+						</TCEforms>
+					</sliderHeight>
+					<sliderResizeContents>
+						<TCEforms>
+							<displayCond>FIELD:style:=:slider</displayCond>
+							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.sliderResizeContents</label>
 							<config>
 								<type>check</type>
 								<default>0</default>
 							</config>
 						</TCEforms>
-					</sliderAutoStart>
-					<sliderPauseOnHover>
+					</sliderResizeContents>
+					<sliderTheme>
 						<TCEforms>
 							<displayCond>FIELD:style:=:slider</displayCond>
-							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.sliderPauseOnHover</label>
+							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.sliderTheme</label>
 							<config>
-								<type>check</type>
-								<default>0</default>
+								<type>select</type>
+								<size>1</size>
+								<maxitems>1</maxitems>
+								<items type="array">
+									<numIndex index="0" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.sliderTheme.I.0</numIndex>
+										<numIndex index="1"></numIndex>
+									</numIndex>
+								</items>
+								<itemsProcFunc>tx_jfmulticontent_itemsProcFunc->getAnythingSliderThemes</itemsProcFunc>
 							</config>
 						</TCEforms>
-					</sliderPauseOnHover>
-					<sliderNavigation>
-						<TCEforms>
-							<displayCond>FIELD:style:=:slider</displayCond>
-							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.sliderNavigation</label>
-							<config>
-								<type>check</type>
-								<default>1</default>
-							</config>
-						</TCEforms>
-					</sliderNavigation>
-					<sliderHashTags>
-						<TCEforms>
-							<displayCond>FIELD:style:=:slider</displayCond>
-							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.sliderHashTags</label>
-							<config>
-								<type>check</type>
-								<default>0</default>
-							</config>
-						</TCEforms>
-					</sliderHashTags>
+					</sliderTheme>
+
 					<sliderOpen>
 						<TCEforms>
 							<displayCond>FIELD:style:=:slider</displayCond>
@@ -517,6 +530,46 @@
 							</config>
 						</TCEforms>
 					</sliderRandomContent>
+					<sliderHashTags>
+						<TCEforms>
+							<displayCond>FIELD:style:=:slider</displayCond>
+							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.sliderHashTags</label>
+							<config>
+								<type>check</type>
+								<default>0</default>
+							</config>
+						</TCEforms>
+					</sliderHashTags>
+					<sliderBuildArrows>
+						<TCEforms>
+							<displayCond>FIELD:style:=:slider</displayCond>
+							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.sliderBuildArrows</label>
+							<config>
+								<type>check</type>
+								<default>1</default>
+							</config>
+						</TCEforms>
+					</sliderBuildArrows>
+					<sliderToggleArrows>
+						<TCEforms>
+							<displayCond>FIELD:style:=:slider</displayCond>
+							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.sliderToggleArrows</label>
+							<config>
+								<type>check</type>
+								<default>0</default>
+							</config>
+						</TCEforms>
+					</sliderToggleArrows>
+					<sliderNavigation>
+						<TCEforms>
+							<displayCond>FIELD:style:=:slider</displayCond>
+							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.sliderNavigation</label>
+							<config>
+								<type>check</type>
+								<default>1</default>
+							</config>
+						</TCEforms>
+					</sliderNavigation>
 					<sliderPanelFromHeader>
 						<TCEforms>
 							<displayCond>FIELD:style:=:slider</displayCond>
@@ -527,6 +580,67 @@
 							</config>
 						</TCEforms>
 					</sliderPanelFromHeader>
+					<sliderToggleControls>
+						<TCEforms>
+							<displayCond>FIELD:style:=:slider</displayCond>
+							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.sliderToggleControls</label>
+							<config>
+								<type>check</type>
+								<default>0</default>
+							</config>
+						</TCEforms>
+					</sliderToggleControls>
+
+					<sliderAutoStart>
+						<TCEforms>
+							<displayCond>FIELD:style:=:slider</displayCond>
+							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.sliderAutoStart</label>
+							<config>
+								<type>check</type>
+								<default>0</default>
+							</config>
+						</TCEforms>
+					</sliderAutoStart>
+					<sliderPauseOnHover>
+						<TCEforms>
+							<displayCond>FIELD:style:=:slider</displayCond>
+							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.sliderPauseOnHover</label>
+							<config>
+								<type>check</type>
+								<default>0</default>
+							</config>
+						</TCEforms>
+					</sliderPauseOnHover>
+					<sliderResumeOnVideoEnd>
+						<TCEforms>
+							<displayCond>FIELD:style:=:slider</displayCond>
+							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.sliderResumeOnVideoEnd</label>
+							<config>
+								<type>check</type>
+								<default>0</default>
+							</config>
+						</TCEforms>
+					</sliderResumeOnVideoEnd>
+					<sliderStopAtEnd>
+						<TCEforms>
+							<displayCond>FIELD:style:=:slider</displayCond>
+							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.sliderStopAtEnd</label>
+							<config>
+								<type>check</type>
+								<default>0</default>
+							</config>
+						</TCEforms>
+					</sliderStopAtEnd>
+					<sliderPlayRtl>
+						<TCEforms>
+							<displayCond>FIELD:style:=:slider</displayCond>
+							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.sliderPlayRtl</label>
+							<config>
+								<type>check</type>
+								<default>0</default>
+							</config>
+						</TCEforms>
+					</sliderPlayRtl>
 					<sliderTransition>
 						<TCEforms>
 							<displayCond>FIELD:style:=:slider</displayCond>

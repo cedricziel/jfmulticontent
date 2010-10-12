@@ -88,6 +88,7 @@ class tx_jfmulticontent_tsparserext
 			'ttNewsCodes',
 			'classInner',
 			'frontendErrorMsg',
+			'anythingSliderThemeFolder',
 			'easyAccordionSkinFolder',
 		);
 		$confArr = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['jfmulticontent']);
