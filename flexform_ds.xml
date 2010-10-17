@@ -18,54 +18,7 @@
 								<type>select</type>
 								<size>1</size>
 								<maxitems>1</maxitems>
-								<default>2column</default>
-								<items type="array">
-									<numIndex index="0" type="array">
-										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.style.I.0</numIndex>
-										<numIndex index="1">2column</numIndex>
-										<numIndex index="2">EXT:jfmulticontent/selicon_tt_content_tx_jfmulticontent_style_0.gif</numIndex>
-									</numIndex>
-									<numIndex index="1" type="array">
-										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.style.I.1</numIndex>
-										<numIndex index="1">3column</numIndex>
-										<numIndex index="2">EXT:jfmulticontent/selicon_tt_content_tx_jfmulticontent_style_1.gif</numIndex>
-									</numIndex>
-									<numIndex index="2" type="array">
-										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.style.I.2</numIndex>
-										<numIndex index="1">4column</numIndex>
-										<numIndex index="2">EXT:jfmulticontent/selicon_tt_content_tx_jfmulticontent_style_2.gif</numIndex>
-									</numIndex>
-									<numIndex index="3" type="array">
-										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.style.I.6</numIndex>
-										<numIndex index="1">5column</numIndex>
-										<numIndex index="2">EXT:jfmulticontent/selicon_tt_content_tx_jfmulticontent_style_6.gif</numIndex>
-									</numIndex>
-									<numIndex index="4" type="array">
-										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.style.I.3</numIndex>
-										<numIndex index="1">tab</numIndex>
-										<numIndex index="2">EXT:jfmulticontent/selicon_tt_content_tx_jfmulticontent_style_3.gif</numIndex>
-									</numIndex>
-									<numIndex index="5" type="array">
-										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.style.I.4</numIndex>
-										<numIndex index="1">accordion</numIndex>
-										<numIndex index="2">EXT:jfmulticontent/selicon_tt_content_tx_jfmulticontent_style_4.gif</numIndex>
-									</numIndex>
-									<numIndex index="6" type="array">
-										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.style.I.5</numIndex>
-										<numIndex index="1">slider</numIndex>
-										<numIndex index="2">EXT:jfmulticontent/selicon_tt_content_tx_jfmulticontent_style_5.gif</numIndex>
-									</numIndex>
-									<numIndex index="7" type="array">
-										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.style.I.7</numIndex>
-										<numIndex index="1">slidedeck</numIndex>
-										<numIndex index="2">EXT:jfmulticontent/selicon_tt_content_tx_jfmulticontent_style_7.gif</numIndex>
-									</numIndex>
-									<numIndex index="8" type="array">
-										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.style.I.8</numIndex>
-										<numIndex index="1">easyaccordion</numIndex>
-										<numIndex index="2">EXT:jfmulticontent/selicon_tt_content_tx_jfmulticontent_style_8.gif</numIndex>
-									</numIndex>
-								</items>
+								<itemsProcFunc>tx_jfmulticontent_itemsProcFunc->getStyle</itemsProcFunc>
 							</config>
 						</TCEforms>
 					</style>
