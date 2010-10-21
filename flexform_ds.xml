@@ -114,6 +114,16 @@
 							</config>
 						</TCEforms>
 					</column5>
+					<equalize>
+						<TCEforms>
+							<displayCond>FIELD:style:IN:,2column,3column,4column,5column</displayCond>
+							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.equalize</label>
+							<config>
+								<type>check</type>
+								<default>0</default>
+							</config>
+						</TCEforms>
+					</equalize>
 					
 					<!-- TAB -->
 					

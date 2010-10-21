@@ -76,5 +76,8 @@ plugin.tx_jfmulticontent_pi1 {
 	# cat=plugin.tx_jfmulticontent/typo/040; type=string; label=5 Column Classes: Wrap of the classname for 5 Column
 	5columnClasses = c|l |*| c|l |*| c|l |*| c|l |*| c|r
 
+	# cat=plugin.tx_jfmulticontent/typo/050; type=string; label=Equalized class: Used class for equalized columns (equalize)
+	equalizeClass = equalize
+
 }
 

@@ -105,6 +105,7 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 			$this->conf['config.']['column4']     = $this->lConf['column4'];
 			$this->conf['config.']['column5']     = $this->lConf['column5'];
 			$this->conf['config.']['columnOrder'] = $this->lConf['columnOrder'];
+			$this->conf['config.']['equalize']    = $this->lConf['equalize'];
 			// tab
 			$this->conf['config.']['tabCollapsible']   = $this->lConf['tabCollapsible'];
 			$this->conf['config.']['tabOpen']          = $this->lConf['tabOpen'];
@@ -702,6 +703,12 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 		}
 		// Replace default values
 		$markerArray["KEY"] = $this->contentKey;
+		// replace equalizeClass
+		if ($this->conf['config.']['equalize']) {
+			$markerArray["EQUALIZE_CLASS"] = ' '.$this->cObj->stdWrap($this->conf['equalizeClass'], $this->conf['equalizeClass.']);
+		} else {
+			$markerArray["EQUALIZE_CLASS"] = '';
+		}
 		$templateCode = $this->cObj->substituteMarkerArray($templateCode, $markerArray, '###|###', 0);
 		// Get the title template
 		$titleCode = $this->cObj->getSubpart($templateCode, "###TITLES###");
@@ -812,7 +819,6 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 				$titles .= $this->cObj->substituteMarkerArray($titleCode, $markerArray, '###|###', 0);
 			}
 		}
-
 		$return_string = $templateCode;
 		$return_string = $this->cObj->substituteSubpart($return_string, '###TITLES###', $titles, 0);
 		$return_string = $this->cObj->substituteSubpart($return_string, '###COLUMNS###', $columns, 0);

@@ -32,6 +32,7 @@
 			<label index="tt_content.tx_jfmulticontent.column3">Column class 3</label>
 			<label index="tt_content.tx_jfmulticontent.column4">Column class 4</label>
 			<label index="tt_content.tx_jfmulticontent.column5">Column class 5</label>
+			<label index="tt_content.tx_jfmulticontent.equalize">Equalize columns</label>
 			<label index="tt_content.tx_jfmulticontent.sheet_title">Title</label>
 			<label index="tt_content.tx_jfmulticontent.titles">Overwrite titles (One title per line)</label>
 			<label index="tt_content.tx_jfmulticontent.sheet_attribute">Attributes</label>

@@ -21,7 +21,7 @@
 	-webkit-transform: rotate(-90deg);
 	-moz-transform: rotate(-90deg);
 	-moz-transform-origin: 20px 0px;
-	filter: progid: DXImageTransform.Microsoft.BasicImage(rotation=3);
+	filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
 	cursor: pointer;
 }
 .easy-accordion dd {
@@ -50,5 +50,5 @@
 	font-size: 1.1em;
 	-webkit-transform: rotate(90deg);
 	-moz-transform: rotate(90deg);
-	filter: progid: DXImageTransform.Microsoft.BasicImage(rotation=1);
+	filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=1);
 }

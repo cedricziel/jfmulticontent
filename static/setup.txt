@@ -26,6 +26,7 @@ plugin.tx_jfmulticontent_pi1 {
 	3columnClasses = {$plugin.tx_jfmulticontent_pi1.3columnClasses}
 	4columnClasses = {$plugin.tx_jfmulticontent_pi1.4columnClasses}
 	5columnClasses = {$plugin.tx_jfmulticontent_pi1.5columnClasses}
+	equalizeClass = {$plugin.tx_jfmulticontent_pi1.equalizeClass}
 
 	columnWrap {
 		wrap = <div class="subcl">|</div> |*| <div class="subcl">|</div> |*| <div class="subcr">|</div>
@@ -54,6 +55,8 @@ plugin.tx_jfmulticontent_pi1 {
 		column2 = 50
 		column3 = 
 		column4 = 
+		column5 = 
+		equalize = 0
 
 		tabCollapsible = 0
 		tabOpen = 1
