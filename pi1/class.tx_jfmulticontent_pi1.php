@@ -65,7 +65,8 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 	var $titles = array();
 	var $attributes = array();
 	var $cElements = array();
-
+	var $content_id = array();
+	
 	/**
 	 * The main method of the PlugIn
 	 *
@@ -200,6 +201,7 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 					'dontCheckPid' => 1,
 				);
 				$this->cElements[] = $this->cObj->RECORDS($cConf);
+				$this->content_id[$a] = $content_ids[$a];
 			}
 			// define the key of the element
 			$this->contentKey = 'jfmulticontent_c' . $this->cObj->data['uid'];
@@ -217,8 +219,9 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 					$title = trim($this->cObj->cObjGetSingle($contents['title'], $contents['title.']));
 					$content = trim($this->cObj->cObjGetSingle($contents['content'], $contents['content.']));
 					if ($content) {
-						$this->cElements[] = $content;
 						$this->titles[] = $title;
+						$this->cElements[] = $content;
+						$this->content_id[] = $this->cObj->stdWrap($contents['id'], $contents['id.']);
 					}
 				}
 			}
@@ -759,8 +762,9 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 				$markerArray["ATTRIBUTE"] .= $this->cObj->stdWrap($this->classes[$a], array("wrap" => ' class="'.$this->contentClass[$a].'"', "required" => 1));
 			}
 			// render the content
-			$markerArray["ID"] = $a+1;
-			$markerArray["TITLE"] = null;
+			$markerArray["CONTENT_ID"] = $this->content_id[$a];
+			$markerArray["ID"]         = $a+1;
+			$markerArray["TITLE"]      = null;
 			// Title will be selected if not COLUMNS (TAB, ACCORDION and SLIDER)
 			if ($this->templatePart != "TEMPLATE_COLUMNS") {
 				// overwrite the title if set in $this->titles
