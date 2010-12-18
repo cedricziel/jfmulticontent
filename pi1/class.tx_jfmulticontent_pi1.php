@@ -165,6 +165,38 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 				$this->conf['config.']['easyaccordionWidth'] = $this->lConf['easyaccordionWidth'];
 			}
 			$this->conf['config.']['easyaccordionSlideNum'] = $this->lConf['easyaccordionSlideNum'];
+			// booklet
+			if ($this->lConf['bookletWidth']) {
+				$this->conf['config.']['bookletWidth'] = $this->lConf['bookletWidth'];
+			}
+			if ($this->lConf['bookletHeight']) {
+				$this->conf['config.']['bookletHeight'] = $this->lConf['bookletHeight'];
+			}
+			if ($this->lConf['bookletSpeed']) {
+				$this->conf['config.']['bookletSpeed'] = $this->lConf['bookletSpeed'];
+			}
+			if ($this->lConf['bookletStartingPage']) {
+				$this->conf['config.']['bookletStartingPage'] = $this->lConf['bookletStartingPage'];
+			}
+			$this->conf['config.']['bookletRTL'] = $this->lConf['bookletRTL'];
+			if ($this->lConf['bookletTransition']) {
+				$this->conf['config.']['bookletTransition']    = $this->lConf['bookletTransition'];
+			}
+			if ($this->lConf['bookletTransitiondir']) {
+				$this->conf['config.']['bookletTransitiondir'] = $this->lConf['bookletTransitiondir'];
+			}
+			if ($this->lConf['bookletPagePadding']) {
+				$this->conf['config.']['bookletPagePadding'] = $this->lConf['bookletPagePadding'];
+			}
+			$this->conf['config.']['bookletPageNumbers'] = $this->lConf['bookletPageNumbers'];
+			$this->conf['config.']['bookletShadows']     = $this->lConf['bookletShadows'];
+			$this->conf['config.']['bookletClosed']      = $this->lConf['bookletClosed'];
+			$this->conf['config.']['bookletCovers']      = $this->lConf['bookletCovers'];
+			$this->conf['config.']['bookletHash']        = $this->lConf['bookletHash'];
+			$this->conf['config.']['bookletKeyboard']    = $this->lConf['bookletKeyboard'];
+			// $this->conf['config.']['bookletOverlays']    = $this->lConf['bookletOverlays'];
+			$this->conf['config.']['bookletArrows']      = $this->lConf['bookletArrows'];
+			$this->conf['config.']['bookletHovers']      = $this->lConf['bookletHovers'];
 			// autoplay
 			$this->conf['config.']['delayDuration']      = $this->lConf['delayDuration'];
 			$this->conf['config.']['autoplayContinuing'] = $this->lConf['autoplayContinuing'];
@@ -678,6 +710,73 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 				$this->addJS(trim($templateCode));
 				break;
 			}
+			case "booklet" : {
+				// easyaccordion
+				$this->templatePart = "TEMPLATE_BOOKLET";
+				$this->contentWrap = t3lib_div::trimExplode("|*|", $this->conf['bookletWrap.']['wrap']);
+				$this->addJS($jQueryNoConflict);
+				$options = array();
+				if (is_numeric($this->conf['config.']['bookletWidth'])) {
+					$options['width'] = "width: ".$this->conf['config.']['bookletWidth'];
+				}
+				if (is_numeric($this->conf['config.']['bookletHeight'])) {
+					$options['height'] = "height: ".$this->conf['config.']['bookletHeight'];
+				}
+				if (is_numeric($this->conf['config.']['bookletSpeed'])) {
+					$options['speed'] = "speed: ".$this->conf['config.']['bookletSpeed'];
+				}
+				if (is_numeric($this->conf['config.']['bookletStartingPage'])) {
+					$options['startingPage'] = "startingPage: ".$this->conf['config.']['bookletStartingPage'];
+				}
+				if ($this->conf['config.']['bookletRTL']) {
+					$options['direction'] = "direction: 'RTL'";
+				}
+				if ($this->conf['config.']['bookletTransition']) {
+					$options['transition'] = "easing: '".(in_array($this->conf['config.']['bookletTransition'], array("swing", "linear")) ? "" : "ease{$this->conf['config.']['bookletTransitiondir']}")."{$this->conf['config.']['bookletTransition']}'";
+				}
+				if (is_numeric($this->conf['config.']['bookletPagePadding'])) {
+					$options['pagePadding'] = "pagePadding: ".$this->conf['config.']['bookletPagePadding'];
+				}
+				$options['pageNumbers'] = "pageNumbers: ".($this->conf['config.']['bookletPageNumbers'] ? 'true' : 'false');
+				$options['shadows']     = "shadows: ".($this->conf['config.']['bookletShadows'] ? 'true' : 'false');
+				$options['closed']      = "closed: ".($this->conf['config.']['bookletClosed'] ? 'true' : 'false');
+				$options['covers']      = "covers: ".($this->conf['config.']['bookletCovers'] ? 'true' : 'false');
+				$options['hash']        = "hash: ".($this->conf['config.']['bookletHash'] ? 'true' : 'false');
+				$options['keyboard']    = "keyboard: ".($this->conf['config.']['bookletKeyboard'] ? 'true' : 'false');
+				// $options['overlays']    = "overlays: ".($this->conf['config.']['bookletOverlays'] ? 'true' : 'false');
+				$options['arrows']      = "arrows: ".($this->conf['config.']['bookletArrows'] ? 'true' : 'false');
+				$options['hovers']      = "hovers: ".($this->conf['config.']['bookletHovers'] ? 'true' : 'false');
+				// overwrite all options if set
+				if (trim($this->conf['config.']['options'])) {
+					if ($this->conf['config.']['optionsOverride']) {
+						$options = array($this->conf['config.']['options']);
+					} else {
+						$options['flexform'] = $this->conf['config.']['options'];
+					}
+				}
+				// get the template for the Javascript
+				if (! $templateCode = trim($this->cObj->getSubpart($this->templateFileJS, "###TEMPLATE_BOOKLET_JS###"))) {
+					$templateCode = $this->outputError("Template TEMPLATE_BOOKLET_JS is missing", true);
+				}
+				// Replace default values
+				$markerArray = array();
+				$markerArray["KEY"]     = $this->contentKey;
+				$markerArray["OPTIONS"] = implode(", ", $options);
+				// Replace all markers
+				$templateCode = $this->cObj->substituteMarkerArray($templateCode, $markerArray, '###|###', 0);
+				
+				// Add all CSS and JS files
+				if (T3JQUERY === true) {
+					tx_t3jquery::addJqJS();
+				} else {
+					$this->addJsFile($this->conf['jQueryLibrary']);
+					$this->addJsFile($this->conf['jQueryEasing']);
+				}
+				$this->addJsFile($this->conf['bookletJS']);
+				$this->addCssFile($this->conf['bookletCSS']);
+				$this->addJS(trim($templateCode));
+				break;
+			}
 			default: {
 				return $this->outputError("NO VALID TEMPLATE SELECTED", false);
 			}
@@ -937,7 +1036,7 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 					if (t3lib_div::int_from_ver(TYPO3_version) >= 4003000) {
 						$pagerender->addCssFile($file, 'stylesheet', 'all', '', $this->conf['cssMinify']);
 					} else {
-						$GLOBALS['TSFE']->additionalHeaderData['cssFile_'.$this->extKey.'_'.$file] = '<link rel="stylesheet" type="text/css" href="'.$file.'" medai="all" />'.chr(10);
+						$GLOBALS['TSFE']->additionalHeaderData['cssFile_'.$this->extKey.'_'.$file] = '<link rel="stylesheet" type="text/css" href="'.$file.'" media="all" />'.chr(10);
 					}
 				} else {
 					t3lib_div::devLog("'{$cssToLoad}' does not exists!", $this->extKey, 2);

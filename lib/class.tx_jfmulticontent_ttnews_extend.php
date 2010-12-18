@@ -218,7 +218,7 @@ class tx_jfmulticontent_ttnews_extend
 					if (t3lib_div::int_from_ver(TYPO3_version) >= 4003000) {
 						$pagerender->addCssFile($file, 'stylesheet', 'all', '', $this->conf['cssMinify']);
 					} else {
-						$GLOBALS['TSFE']->additionalHeaderData['cssFile_'.$this->extKey.'_'.$file] = '<link rel="stylesheet" type="text/css" href="'.$file.'" medai="all" />'.chr(10);
+						$GLOBALS['TSFE']->additionalHeaderData['cssFile_'.$this->extKey.'_'.$file] = '<link rel="stylesheet" type="text/css" href="'.$file.'" media="all" />'.chr(10);
 					}
 				} else {
 					t3lib_div::devLog("'{$cssToLoad}' does not exists!", $this->extKey, 2);

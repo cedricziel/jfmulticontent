@@ -8,8 +8,37 @@ ttNewsCodes = 0
 # cat=basic/enable/30; type=boolean; label=Enable FE-Errormessages: If set, messages in case of missing templates are displayed in FE (Turn of in production)
 frontendErrorMsg = 1
 
-# cat=basic/basic/10; type=string; label=Available styles: Available values for styles (2column,3column,4column,5column,tab,accordion,slider,slidedeck,easyaccordion)
-availableStyles = 2column,3column,4column,5column,tab,accordion,slider,slidedeck,easyaccordion
+
+# cat=basic/basic/10; type=boolean; label=Enable 2column: Enables the 2column-Style for the backend
+style.2column = 1
+
+# cat=basic/basic/10; type=boolean; label=Enable 3column: Enables the 3column-Style for the backend
+style.3column = 1
+
+# cat=basic/basic/10; type=boolean; label=Enable 4column: Enables the 4column-Style for the backend
+style.4column = 1
+
+# cat=basic/basic/10; type=boolean; label=Enable 5column: Enables the 5column-Style for the backend
+style.5column = 1
+
+# cat=basic/basic/10; type=boolean; label=Enable tab: Enables the tab-Style for the backend
+style.tab = 1
+
+# cat=basic/basic/10; type=boolean; label=Enable accordion: Enables the accordion-Style for the backend
+style.accordion = 1
+
+# cat=basic/basic/10; type=boolean; label=Enable slider: Enables the slider-Style for the backend
+style.slider = 1
+
+# cat=basic/basic/10; type=boolean; label=Enable slidedeck: Enables the slidedeck-Style for the backend
+style.slidedeck = 1
+
+# cat=basic/basic/10; type=boolean; label=Enable easyaccordion: Enables the easyaccordion-Style for the backend
+style.easyaccordion = 1
+
+# cat=basic/basic/10; type=boolean; label=Enable booklet: Enables the booklet-Style for the backend
+style.booklet = 1
+
 
 # cat=basic/basic/20; type=string; label=Class Inner: Possible values to wrap in column classes (,16,20,25,33,38,40,50,60,62,66,75,80)
 classInner = ,16,20,25,33,38,40,50,60,62,66,75,80

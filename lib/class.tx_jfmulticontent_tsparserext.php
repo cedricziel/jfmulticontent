@@ -86,7 +86,7 @@ class tx_jfmulticontent_tsparserext
 		$confDefault = array(
 			'useStoragePidOnly',
 			'ttNewsCodes',
-			'availableStyles',
+			'style.',
 			'classInner',
 			'frontendErrorMsg',
 			'anythingSliderThemeFolder',

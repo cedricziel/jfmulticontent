@@ -22,6 +22,9 @@ plugin.tx_jfmulticontent_pi1 {
 	easyaccordionJS = {$plugin.tx_jfmulticontent_pi1.file.easyaccordionJS}
 	easyaccordionCSS = {$plugin.tx_jfmulticontent_pi1.file.easyaccordionCSS}
 
+	bookletJS = {$plugin.tx_jfmulticontent_pi1.file.bookletJS}
+	bookletCSS = {$plugin.tx_jfmulticontent_pi1.file.bookletCSS}
+
 	2columnClasses = {$plugin.tx_jfmulticontent_pi1.2columnClasses}
 	3columnClasses = {$plugin.tx_jfmulticontent_pi1.3columnClasses}
 	4columnClasses = {$plugin.tx_jfmulticontent_pi1.4columnClasses}
@@ -44,6 +47,9 @@ plugin.tx_jfmulticontent_pi1 {
 		wrap = |
 	}
 	easyaccordionWrap {
+		wrap = |
+	}
+	bookletWrap {
 		wrap = |
 	}
 
@@ -111,6 +117,24 @@ plugin.tx_jfmulticontent_pi1 {
 		easyaccordionSkin = {$plugin.tx_jfmulticontent_pi1.easyaccordionSkin}
 		easyaccordionWidth = 600
 		easyaccordionSlideNum = 1
+
+		bookletWidth = 600
+		bookletHeight = 400
+		bookletSpeed = 1000
+		bookletStartingPage = 0
+		bookletRTL = 0
+		bookletTransition = 
+		bookletTransitiondir = 
+		bookletPagePadding = 10
+		bookletPageNumbers = 1
+		bookletShadows = 1
+		bookletClosed = 0
+		bookletCovers = 0
+		bookletHash = 0
+		bookletKeyboard = 0
+		# bookletOverlays = 1
+		bookletArrows = 0
+		bookletHovers = 1
 
 		delayDuration = 0
 		autoplayContinuing = 0

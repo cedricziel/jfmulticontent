@@ -62,6 +62,12 @@ plugin.tx_jfmulticontent_pi1 {
 	# cat=plugin.tx_jfmulticontent/file/150; type=string; label=easyAccordion skin: Used skin for easyAccordion
 	easyaccordionSkin = orange
 
+	# cat=plugin.tx_jfmulticontent/file/160; type=string; label=Booklet JS-File: Location of the Booklet JS-file
+	file.bookletJS = EXT:jfmulticontent/res/booklet/jquery.booklet.1.1.0.min.js
+
+	# cat=plugin.tx_jfmulticontent/file/170; type=string; label=Booklet CSS-File: Location of the Booklet CSS-file
+	file.bookletCSS = EXT:jfmulticontent/res/booklet/jquery.booklet.1.1.0.css
+
 
 
 	# cat=plugin.tx_jfmulticontent/typo/010; type=string; label=2 Column Classes: Wrap of the classname for 2 Column

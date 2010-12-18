@@ -98,3 +98,17 @@ jQuery(document).ready(function(){
 });
 <!-- ###TEMPLATE_EASYACCORDION_JS### end -->
 
+
+
+
+
+<h2>TEMPLATE_BOOKLET_JS:</h2>
+
+<!-- ###TEMPLATE_BOOKLET_JS### begin -->
+jQuery(document).ready(function(){
+	jQuery('####KEY###').booklet({
+		###OPTIONS###
+	});
+});
+<!-- ###TEMPLATE_BOOKLET_JS### end -->
+
