@@ -106,57 +106,151 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 			$this->conf['config.']['column4']     = $this->lConf['column4'];
 			$this->conf['config.']['column5']     = $this->lConf['column5'];
 			$this->conf['config.']['columnOrder'] = $this->lConf['columnOrder'];
-			$this->conf['config.']['equalize']    = $this->lConf['equalize'];
+			if ($this->lConf['equalize'] < 2) {
+				$this->conf['config.']['equalize'] = $this->lConf['equalize'];
+			}
 			// tab
-			$this->conf['config.']['tabCollapsible']   = $this->lConf['tabCollapsible'];
-			$this->conf['config.']['tabOpen']          = $this->lConf['tabOpen'];
-			$this->conf['config.']['tabRandomContent'] = $this->lConf['tabRandomContent'];
-			$this->conf['config.']['tabFxHeight']      = $this->lConf['tabFxHeight'];
-			$this->conf['config.']['tabFxOpacity']     = $this->lConf['tabFxOpacity'];
-			$this->conf['config.']['tabFxDuration']    = $this->lConf['tabFxDuration'];
+			if ($this->lConf['tabCollapsible'] < 2) {
+				$this->conf['config.']['tabCollapsible'] = $this->lConf['tabCollapsible'];
+			}
+			if ($this->lConf['tabOpen'] > 0) {
+				$this->conf['config.']['tabOpen'] = $this->lConf['tabOpen'];
+			}
+			if ($this->lConf['tabRandomContent'] < 2) {
+				$this->conf['config.']['tabRandomContent'] = $this->lConf['tabRandomContent'];
+			}
+			if ($this->lConf['tabFxHeight'] < 2) {
+				$this->conf['config.']['tabFxHeight'] = $this->lConf['tabFxHeight'];
+			}
+			if ($this->lConf['tabFxOpacity'] < 2) {
+				$this->conf['config.']['tabFxOpacity'] = $this->lConf['tabFxOpacity'];
+			}
+			if ($this->lConf['tabFxDuration'] > 0) {
+				$this->conf['config.']['tabFxDuration'] = $this->lConf['tabFxDuration'];
+			}
 			// accordion
-			$this->conf['config.']['accordionAutoHeight']         = $this->lConf['accordionAutoHeight'];
-			$this->conf['config.']['accordionCollapsible']        = $this->lConf['accordionCollapsible'];
-			$this->conf['config.']['accordionClosed']             = $this->lConf['accordionClosed'];
-			$this->conf['config.']['accordionOpen']               = $this->lConf['accordionOpen'];
-			$this->conf['config.']['accordionRandomContent']      = $this->lConf['accordionRandomContent'];
-			$this->conf['config.']['accordionEvent']              = $this->lConf['accordionEvent'];
-			$this->conf['config.']['accordionAnimated']           = $this->lConf['accordionAnimated'];
-			$this->conf['config.']['accordionTransition']         = $this->lConf['accordionTransition'];
-			$this->conf['config.']['accordionTransitiondir']      = $this->lConf['accordionTransitiondir'];
-			$this->conf['config.']['accordionTransitionduration'] = $this->lConf['accordionTransitionduration'];
+			if ($this->lConf['accordionAutoHeight'] < 2) {
+				$this->conf['config.']['accordionAutoHeight'] = $this->lConf['accordionAutoHeight'];
+			}
+			if ($this->lConf['accordionCollapsible'] < 2) {
+				$this->conf['config.']['accordionCollapsible'] = $this->lConf['accordionCollapsible'];
+			}
+			if ($this->lConf['accordionClosed'] < 2) {
+				$this->conf['config.']['accordionClosed'] = $this->lConf['accordionClosed'];
+			}
+			if (is_numeric($this->lConf['accordionOpen'])) {
+				$this->conf['config.']['accordionOpen'] = $this->lConf['accordionOpen'];
+			}
+			if ($this->lConf['accordionRandomContent'] < 2) {
+				$this->conf['config.']['accordionRandomContent'] = $this->lConf['accordionRandomContent'];
+			}
+			if ($this->lConf['accordionEvent']) {
+				$this->conf['config.']['accordionEvent'] = $this->lConf['accordionEvent'];
+			}
+			if ($this->lConf['accordionAnimated']) {
+				$this->conf['config.']['accordionAnimated'] = $this->lConf['accordionAnimated'];
+			}
+			if ($this->lConf['accordionTransition']) {
+				$this->conf['config.']['accordionTransition'] = $this->lConf['accordionTransition'];
+			}
+			if ($this->lConf['accordionTransitiondir']) {
+				$this->conf['config.']['accordionTransitiondir'] = $this->lConf['accordionTransitiondir'];
+			}
+			if ($this->lConf['accordionTransitionduration'] > 0) {
+				$this->conf['config.']['accordionTransitionduration'] = $this->lConf['accordionTransitionduration'];
+			}
 			// slider
-			$this->conf['config.']['sliderWidth']              = $this->lConf['sliderWidth'];
-			$this->conf['config.']['sliderHeight']             = $this->lConf['sliderHeight'];
-			$this->conf['config.']['sliderResizeContents']     = $this->lConf['sliderResizeContents'];
-			$this->conf['config.']['sliderTheme']              = $this->lConf['sliderTheme'];
-			$this->conf['config.']['sliderOpen']               = $this->lConf['sliderOpen'];
-			$this->conf['config.']['sliderRandomContent']      = $this->lConf['sliderRandomContent'];
-			$this->conf['config.']['sliderHashTags']           = $this->lConf['sliderHashTags'];
-			$this->conf['config.']['sliderBuildArrows']        = $this->lConf['sliderBuildArrows'];
-			$this->conf['config.']['sliderToggleArrows']       = $this->lConf['sliderToggleArrows'];
-			$this->conf['config.']['sliderNavigation']         = $this->lConf['sliderNavigation'];
-			$this->conf['config.']['sliderPanelFromHeader']    = $this->lConf['sliderPanelFromHeader'];
-			$this->conf['config.']['sliderToggleControls']     = $this->lConf['sliderToggleControls'];
-			$this->conf['config.']['sliderAutoStart']          = $this->lConf['sliderAutoStart'];
-			$this->conf['config.']['sliderPauseOnHover']       = $this->lConf['sliderPauseOnHover'];
-			$this->conf['config.']['sliderResumeOnVideoEnd']   = $this->lConf['sliderResumeOnVideoEnd'];
-			$this->conf['config.']['sliderStopAtEnd']          = $this->lConf['sliderStopAtEnd'];
-			$this->conf['config.']['sliderPlayRtl']            = $this->lConf['sliderPlayRtl'];
-			$this->conf['config.']['sliderTransition']         = $this->lConf['sliderTransition'];
-			$this->conf['config.']['sliderTransitiondir']      = $this->lConf['sliderTransitiondir'];
-			$this->conf['config.']['sliderTransitionduration'] = $this->lConf['sliderTransitionduration'];
+			if ($this->lConf['sliderWidth']) {
+				$this->conf['config.']['sliderWidth'] = $this->lConf['sliderWidth'];
+			}
+			if ($this->lConf['sliderHeight']) {
+				$this->conf['config.']['sliderHeight'] = $this->lConf['sliderHeight'];
+			}
+			if ($this->lConf['sliderResizeContents'] < 2) {
+				$this->conf['config.']['sliderResizeContents'] = $this->lConf['sliderResizeContents'];
+			}
+			if ($this->lConf['sliderTheme']) {
+				$this->conf['config.']['sliderTheme'] = $this->lConf['sliderTheme'];
+			}
+			if ($this->lConf['sliderOpen'] > 0) {
+				$this->conf['config.']['sliderOpen'] = $this->lConf['sliderOpen'];
+			}
+			if ($this->lConf['sliderRandomContent'] < 2) {
+				$this->conf['config.']['sliderRandomContent'] = $this->lConf['sliderRandomContent'];
+			}
+			if ($this->lConf['sliderHashTags'] < 2) {
+				$this->conf['config.']['sliderHashTags'] = $this->lConf['sliderHashTags'];
+			}
+			if ($this->lConf['sliderBuildArrows'] < 2) {
+				$this->conf['config.']['sliderBuildArrows'] = $this->lConf['sliderBuildArrows'];
+			}
+			if ($this->lConf['sliderToggleArrows'] < 2) {
+				$this->conf['config.']['sliderToggleArrows'] = $this->lConf['sliderToggleArrows'];
+			}
+			if ($this->lConf['sliderNavigation'] < 2) {
+				$this->conf['config.']['sliderNavigation'] = $this->lConf['sliderNavigation'];
+			}
+			if ($this->lConf['sliderPanelFromHeader'] < 2) {
+				$this->conf['config.']['sliderPanelFromHeader'] = $this->lConf['sliderPanelFromHeader'];
+			}
+			if ($this->lConf['sliderToggleControls'] < 2) {
+				$this->conf['config.']['sliderToggleControls'] = $this->lConf['sliderToggleControls'];
+			}
+			if ($this->lConf['sliderAutoStart'] < 2) {
+				$this->conf['config.']['sliderAutoStart'] = $this->lConf['sliderAutoStart'];
+			}
+			if ($this->lConf['sliderPauseOnHover'] < 2) {
+				$this->conf['config.']['sliderPauseOnHover'] = $this->lConf['sliderPauseOnHover'];
+			}
+			if ($this->lConf['sliderResumeOnVideoEnd'] < 2) {
+				$this->conf['config.']['sliderResumeOnVideoEnd'] = $this->lConf['sliderResumeOnVideoEnd'];
+			}
+			if ($this->lConf['sliderStopAtEnd'] < 2) {
+				$this->conf['config.']['sliderStopAtEnd'] = $this->lConf['sliderStopAtEnd'];
+			}
+			if ($this->lConf['sliderPlayRtl'] < 2) {
+				$this->conf['config.']['sliderPlayRtl'] = $this->lConf['sliderPlayRtl'];
+			}
+			if ($this->lConf['sliderTransition']) {
+				$this->conf['config.']['sliderTransition'] = $this->lConf['sliderTransition'];
+			}
+			if ($this->lConf['sliderTransitiondir']) {
+				$this->conf['config.']['sliderTransitiondir'] = $this->lConf['sliderTransitiondir'];
+			}
+			if ($this->lConf['sliderTransitionduration'] > 0) {
+				$this->conf['config.']['sliderTransitionduration'] = $this->lConf['sliderTransitionduration'];
+			}
 			// slidedeck
-			$this->conf['config.']['slidedeckHeight']             = $this->lConf['slidedeckHeight'];
-			$this->conf['config.']['slidedeckTransition']         = $this->lConf['slidedeckTransition'];
-			$this->conf['config.']['slidedeckTransitiondir']      = $this->lConf['slidedeckTransitiondir'];
-			$this->conf['config.']['slidedeckTransitionduration'] = $this->lConf['slidedeckTransitionduration'];
-			$this->conf['config.']['slidedeckStart']              = $this->lConf['slidedeckStart'];
-			$this->conf['config.']['slidedeckActivecorner']       = $this->lConf['slidedeckActivecorner'];
-			$this->conf['config.']['slidedeckIndex']              = $this->lConf['slidedeckIndex'];
-			$this->conf['config.']['slidedeckScroll']             = $this->lConf['slidedeckScroll'];
-			$this->conf['config.']['slidedeckKeys']               = $this->lConf['slidedeckKeys'];
-			$this->conf['config.']['slidedeckHidespines']         = $this->lConf['slidedeckHidespines'];
+			if ($this->lConf['slidedeckHeight'] > 0) {
+				$this->conf['config.']['slidedeckHeight'] = $this->lConf['slidedeckHeight'];
+			}
+			if ($this->lConf['slidedeckTransition']) {
+				$this->conf['config.']['slidedeckTransition'] = $this->lConf['slidedeckTransition'];
+			}
+			if ($this->lConf['slidedeckTransitiondir']) {
+				$this->conf['config.']['slidedeckTransitiondir'] = $this->lConf['slidedeckTransitiondir'];
+			}
+			if ($this->lConf['slidedeckTransitionduration'] > 0) {
+				$this->conf['config.']['slidedeckTransitionduration'] = $this->lConf['slidedeckTransitionduration'];
+			}
+			if ($this->lConf['slidedeckStart'] > 0) {
+				$this->conf['config.']['slidedeckStart'] = $this->lConf['slidedeckStart'];
+			}
+			if ($this->lConf['slidedeckActivecorner'] < 2) {
+				$this->conf['config.']['slidedeckActivecorner'] = $this->lConf['slidedeckActivecorner'];
+			}
+			if ($this->lConf['slidedeckIndex'] < 2) {
+				$this->conf['config.']['slidedeckIndex'] = $this->lConf['slidedeckIndex'];
+			}
+			if ($this->lConf['slidedeckScroll'] < 2) {
+				$this->conf['config.']['slidedeckScroll'] = $this->lConf['slidedeckScroll'];
+			}
+			if ($this->lConf['slidedeckKeys'] < 2) {
+				$this->conf['config.']['slidedeckKeys'] = $this->lConf['slidedeckKeys'];
+			}
+			if ($this->lConf['slidedeckHidespines'] < 2) {
+				$this->conf['config.']['slidedeckHidespines'] = $this->lConf['slidedeckHidespines'];
+			}
 			// easyAccordion
 			if ($this->lConf['easyaccordionSkin']) {
 				$this->conf['config.']['easyaccordionSkin'] = $this->lConf['easyaccordionSkin'];
@@ -164,43 +258,73 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 			if ($this->lConf['easyaccordionWidth'] > 0) {
 				$this->conf['config.']['easyaccordionWidth'] = $this->lConf['easyaccordionWidth'];
 			}
-			$this->conf['config.']['easyaccordionSlideNum'] = $this->lConf['easyaccordionSlideNum'];
+			if ($this->lConf['easyaccordionSlideNum'] < 2) {
+				$this->conf['config.']['easyaccordionSlideNum'] = $this->lConf['easyaccordionSlideNum'];
+			}
+			// TODO: Add the opened content...
 			// booklet
-			if ($this->lConf['bookletWidth']) {
+			if ($this->lConf['bookletWidth'] > 0) {
 				$this->conf['config.']['bookletWidth'] = $this->lConf['bookletWidth'];
 			}
-			if ($this->lConf['bookletHeight']) {
+			if ($this->lConf['bookletHeight'] > 0) {
 				$this->conf['config.']['bookletHeight'] = $this->lConf['bookletHeight'];
 			}
-			if ($this->lConf['bookletSpeed']) {
+			if ($this->lConf['bookletSpeed'] > 0) {
 				$this->conf['config.']['bookletSpeed'] = $this->lConf['bookletSpeed'];
 			}
-			if ($this->lConf['bookletStartingPage']) {
+			if ($this->lConf['bookletStartingPage'] > 0) {
 				$this->conf['config.']['bookletStartingPage'] = $this->lConf['bookletStartingPage'];
 			}
-			$this->conf['config.']['bookletRTL'] = $this->lConf['bookletRTL'];
+			if ($this->lConf['bookletRTL'] < 2) {
+				$this->conf['config.']['bookletRTL'] = $this->lConf['bookletRTL'];
+			}
 			if ($this->lConf['bookletTransition']) {
 				$this->conf['config.']['bookletTransition']    = $this->lConf['bookletTransition'];
 			}
 			if ($this->lConf['bookletTransitiondir']) {
 				$this->conf['config.']['bookletTransitiondir'] = $this->lConf['bookletTransitiondir'];
 			}
-			if ($this->lConf['bookletPagePadding']) {
+			if ($this->lConf['bookletPagePadding'] != '') {
 				$this->conf['config.']['bookletPagePadding'] = $this->lConf['bookletPagePadding'];
 			}
-			$this->conf['config.']['bookletPageNumbers'] = $this->lConf['bookletPageNumbers'];
-			$this->conf['config.']['bookletShadows']     = $this->lConf['bookletShadows'];
-			$this->conf['config.']['bookletClosed']      = $this->lConf['bookletClosed'];
-			$this->conf['config.']['bookletCovers']      = $this->lConf['bookletCovers'];
-			$this->conf['config.']['bookletHash']        = $this->lConf['bookletHash'];
-			$this->conf['config.']['bookletKeyboard']    = $this->lConf['bookletKeyboard'];
-			// $this->conf['config.']['bookletOverlays']    = $this->lConf['bookletOverlays'];
-			$this->conf['config.']['bookletArrows']      = $this->lConf['bookletArrows'];
-			$this->conf['config.']['bookletHovers']      = $this->lConf['bookletHovers'];
+			if ($this->lConf['bookletPageNumbers'] < 2) {
+				$this->conf['config.']['bookletPageNumbers'] = $this->lConf['bookletPageNumbers'];
+			}
+			if ($this->lConf['bookletShadows'] < 2) {
+				$this->conf['config.']['bookletShadows'] = $this->lConf['bookletShadows'];
+			}
+			if ($this->lConf['bookletClosed'] < 2) {
+				$this->conf['config.']['bookletClosed'] = $this->lConf['bookletClosed'];
+			}
+			if ($this->lConf['bookletCovers'] < 2) {
+				$this->conf['config.']['bookletCovers'] = $this->lConf['bookletCovers'];
+			}
+			if ($this->lConf['bookletHash'] < 2) {
+				$this->conf['config.']['bookletHash'] = $this->lConf['bookletHash'];
+			}
+			if ($this->lConf['bookletKeyboard'] < 2) {
+				$this->conf['config.']['bookletKeyboard'] = $this->lConf['bookletKeyboard'];
+			}
+			// TODO: This option dos not work correct!
+			// if ($this->lConf['bookletKeyboard'] < 2) {
+			// 	$this->conf['config.']['bookletOverlays']    = $this->lConf['bookletOverlays'];
+			// }
+			if ($this->lConf['bookletArrows'] < 2) {
+				$this->conf['config.']['bookletArrows'] = $this->lConf['bookletArrows'];
+			}
+			if ($this->lConf['bookletHovers'] < 2) {
+				$this->conf['config.']['bookletHovers'] = $this->lConf['bookletHovers'];
+			}
 			// autoplay
-			$this->conf['config.']['delayDuration']      = $this->lConf['delayDuration'];
-			$this->conf['config.']['autoplayContinuing'] = $this->lConf['autoplayContinuing'];
-			$this->conf['config.']['autoplayCycle']      = $this->lConf['autoplayCycle'];
+			if ($this->lConf['delayDuration'] > 0) {
+				$this->conf['config.']['delayDuration'] = $this->lConf['delayDuration'];
+			}
+			if ($this->lConf['autoplayContinuing'] < 2) {
+				$this->conf['config.']['autoplayContinuing'] = $this->lConf['autoplayContinuing'];
+			}
+			if ($this->lConf['autoplayCycle'] < 2) {
+				$this->conf['config.']['autoplayCycle'] = $this->lConf['autoplayCycle'];
+			}
 			// define the titles to overwrite
 			if (trim($this->lConf['titles'])) {
 				$this->titles = t3lib_div::trimExplode(chr(10), $this->lConf['titles']);
@@ -418,7 +542,7 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 				$this->contentWrap = t3lib_div::trimExplode("|*|", $this->conf['accordionWrap.']['wrap']);
 				$this->addJS($jQueryNoConflict);
 				$options = array();
-				if (! $this->conf['config.']['accordionAutoHeight']) {
+				if ($this->conf['config.']['accordionAutoHeight'] < 1) {
 					$options['autoHeight'] = "autoHeight:false";
 				}
 				if ($this->conf['config.']['accordionCollapsible']) {

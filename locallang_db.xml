@@ -124,6 +124,10 @@
 			<label index="tt_content.tx_jfmulticontent.sheet_options">Options</label>
 			<label index="tt_content.tx_jfmulticontent.options">Insert your own options</label>
 			<label index="tt_content.tx_jfmulticontent.optionsOverride">Override all options</label>
+
+			<label index="tt_content.pi_flexform.from_ts">From Typoscript</label>
+			<label index="tt_content.pi_flexform.no">No</label>
+			<label index="tt_content.pi_flexform.yes">Yes</label>
 		</languageKey>
 	</data>
 	<orig_hash type="array">

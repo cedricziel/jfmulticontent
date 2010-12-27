@@ -64,14 +64,14 @@ plugin.tx_jfmulticontent_pi1 {
 		column5 = 
 		equalize = 0
 
-		tabCollapsible = 0
+		tabCollapsible = 1
 		tabOpen = 1
 		tabRandomContent = 0
 		tabFxHeight = 0
-		tabFxOpacity = 0
+		tabFxOpacity = 1
 		tabFxDuration = 
 
-		accordionAutoHeight = 1
+		accordionAutoHeight = 0
 		accordionCollapsible = 0
 		accordionClosed = 0
 		accordionOpen = 1

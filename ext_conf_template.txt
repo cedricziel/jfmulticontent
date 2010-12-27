@@ -8,6 +8,9 @@ ttNewsCodes = 0
 # cat=basic/enable/30; type=boolean; label=Enable FE-Errormessages: If set, messages in case of missing templates are displayed in FE (Turn of in production)
 frontendErrorMsg = 1
 
+# cat=basic/enable/40; type=boolean; label=Enable select instead of checkbox: If set, most of checkboxes will turn into selectboxes, so you can choose "from TS"
+useSelectInsteadCheckbox = 0
+
 
 # cat=basic/basic/10; type=boolean; label=Enable 2column: Enables the 2column-Style for the backend
 style.2column = 1

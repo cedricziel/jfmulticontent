@@ -86,6 +86,7 @@ class tx_jfmulticontent_tsparserext
 		$confDefault = array(
 			'useStoragePidOnly',
 			'ttNewsCodes',
+			'useSelectInsteadCheckbox',
 			'style.',
 			'classInner',
 			'frontendErrorMsg',
@@ -94,7 +95,7 @@ class tx_jfmulticontent_tsparserext
 		);
 		$confArr = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['jfmulticontent']);
 		foreach ($confDefault as $val) {
-			if (! isset($confArr[$val]) && ! $_POST['data'][$val]) {
+			if (! isset($confArr[$val]) && ! isset($_POST['data'][$val])) {
 				return false;
 			}
 		}
