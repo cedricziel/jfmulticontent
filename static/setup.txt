@@ -115,6 +115,7 @@ plugin.tx_jfmulticontent_pi1 {
 		slidedeckHidespines = 0
 
 		easyaccordionSkin = {$plugin.tx_jfmulticontent_pi1.easyaccordionSkin}
+		easyaccordionOpen = 1
 		easyaccordionWidth = 600
 		easyaccordionSlideNum = 1
 

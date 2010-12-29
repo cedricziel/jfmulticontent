@@ -959,6 +959,20 @@
 							</config>
 						</TCEforms>
 					</easyaccordionSkin>
+					<easyaccordionOpen>
+						<TCEforms>
+							<displayCond>FIELD:style:=:easyaccordion</displayCond>
+							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.easyaccordionOpen</label>
+							<config>
+								<type>input</type>
+								<size>2</size>
+								<max>2</max>
+								<default></default>
+								<checkbox>0</checkbox>
+								<eval>int</eval>
+							</config>
+						</TCEforms>
+					</easyaccordionOpen>
 					<easyaccordionWidth>
 						<TCEforms>
 							<displayCond>FIELD:style:=:easyaccordion</displayCond>

@@ -255,6 +255,9 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 			if ($this->lConf['easyaccordionSkin']) {
 				$this->conf['config.']['easyaccordionSkin'] = $this->lConf['easyaccordionSkin'];
 			}
+			if ($this->lConf['easyaccordionOpen'] > 0) {
+				$this->conf['config.']['easyaccordionOpen'] = $this->lConf['easyaccordionOpen'];
+			}
 			if ($this->lConf['easyaccordionWidth'] > 0) {
 				$this->conf['config.']['easyaccordionWidth'] = $this->lConf['easyaccordionWidth'];
 			}
@@ -971,6 +974,9 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 				break;
 			}
 		}
+		if ($this->conf['config.']['easyaccordionOpen'] > $this->contentCount) {
+			$this->conf['config.']['easyaccordionOpen'] = $this->contentCount;
+		}
 		// fetch all contents
 		for ($a=0; $a < $this->contentCount; $a++) {
 			$markerArray = array();
@@ -984,6 +990,11 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 				// wrap the class
 				$markerArray["ATTRIBUTE"] .= $this->cObj->stdWrap($this->classes[$a], array("wrap" => ' class="'.$this->contentClass[$a].'"', "required" => 1));
 			}
+			// Set the active class for the active slide
+			if (($a+1) ==  $this->conf['config.']['easyaccordionOpen']) {
+				$markerArray["EASYACCORDION_ACTIVE"] = 'class="active"';
+			}
+			
 			// render the content
 			$markerArray["CONTENT_ID"] = $this->content_id[$a];
 			$markerArray["ID"]         = $a+1;
