@@ -1284,7 +1284,7 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 	 */
 	function outputError($msg='', $js=false)
 	{
-		t3lib_div::devLog($msg, 'jfmulticontent', 3);
+		t3lib_div::devLog($msg, $this->extKey, 3);
 		if ($this->confArr['frontendErrorMsg'] || ! isset($this->confArr['frontendErrorMsg'])) {
 			return ($js ? "alert(".t3lib_div::quoteJSvalue($msg).")" : "<p>{$msg}</p>");
 			

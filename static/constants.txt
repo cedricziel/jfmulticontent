@@ -36,19 +36,19 @@ plugin.tx_jfmulticontent_pi1 {
 	file.jQueryMouseWheel = EXT:jfmulticontent/res/jquery/js/jquery.mousewheel-3.0.2.min.js
 
 	# cat=plugin.tx_jfmulticontent/file/070; type=file[js]; label=jQuery UI: Location of the jQuery UI
-	file.jQueryUI = EXT:jfmulticontent/res/jquery/js/jquery-ui-1.8.5.custom.min.js
+	file.jQueryUI = EXT:jfmulticontent/res/jquery/js/jquery-ui-1.8.9.custom.min.js
 
 	# cat=plugin.tx_jfmulticontent/file/080; type=file[css]; label=jQuery UI style: Location of the jQuery UI CSS
-	file.jQueryUIstyle = EXT:jfmulticontent/res/jquery/css/theme-1.8.5/jquery-ui-1.8.5.custom.css
+	file.jQueryUIstyle = EXT:jfmulticontent/res/jquery/css/theme-1.8.9/jquery-ui-1.8.9.custom.css
 
 	# cat=plugin.tx_jfmulticontent/file/090; type=file[js]; label=anythingSlider JS-File: Location of the anythingSlider JS-file
-	file.sliderJS = EXT:jfmulticontent/res/anythingslider/jquery.anythingslider-1.4.7.js
+	file.sliderJS = EXT:jfmulticontent/res/anythingslider/jquery.anythingslider-1.5.6.3.js
 
 	# cat=plugin.tx_jfmulticontent/file/100; type=file[css]; label=anythingSlider CSS-File: Location of the default anythingSlider CSS-File
 	file.sliderCSS = EXT:jfmulticontent/res/anythingslider/style.css
 
 	# cat=plugin.tx_jfmulticontent/file/110; type=file[js]; label=SlideDeck JS-File: Location of the SlideDeck JS-file
-	file.slidedeckJS = EXT:jfmulticontent/res/slidedeck/jquery.lite-1.1.7.pack.js
+	file.slidedeckJS = EXT:jfmulticontent/res/slidedeck/jquery.lite-1.2.1.min.js
 
 	# cat=plugin.tx_jfmulticontent/file/120; type=file[css]; label=SlideDeck CSS-File: Location of the SlideDeck CSS-File
 	file.slidedeckCSS = EXT:jfmulticontent/res/slidedeck/skins/default/skin.css
