@@ -66,7 +66,7 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 	var $attributes = array();
 	var $cElements = array();
 	var $content_id = array();
-	
+
 	/**
 	 * The main method of the PlugIn
 	 *

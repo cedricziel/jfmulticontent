@@ -27,7 +27,7 @@ plugin.tx_jfmulticontent_pi1 {
 	file.cssFile = EXT:jfmulticontent/res/tx_jfmulticontent_pi1.css
 
 	# cat=plugin.tx_jfmulticontent/file/040; type=file[js]; label=jQuery Library: Location of the jQuery Lib
-	file.jQueryLibrary = EXT:jfmulticontent/res/jquery/js/jquery-1.4.3.min.js
+	file.jQueryLibrary = EXT:jfmulticontent/res/jquery/js/jquery-1.4.4.min.js
 
 	# cat=plugin.tx_jfmulticontent/file/050; type=file[js]; label=jQuery Easing: Location of the jQuery Easing
 	file.jQueryEasing = EXT:jfmulticontent/res/jquery/js/jquery.easing-1.3.js
