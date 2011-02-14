@@ -9,6 +9,7 @@ plugin.tx_jfmulticontent_pi1 {
 	templateFileJS = {$plugin.tx_jfmulticontent_pi1.file.templateFileJS}
 	cssFile = {$plugin.tx_jfmulticontent_pi1.file.cssFile}
 	jQueryLibrary = {$plugin.tx_jfmulticontent_pi1.file.jQueryLibrary}
+	jQueryCookies = {$plugin.tx_jfmulticontent_pi1.file.jQueryCookies}
 	jQueryEasing = {$plugin.tx_jfmulticontent_pi1.file.jQueryEasing}
 	jQueryMouseWheel = {$plugin.tx_jfmulticontent_pi1.file.jQueryMouseWheel}
 	jQueryUI = {$plugin.tx_jfmulticontent_pi1.file.jQueryUI}
@@ -67,6 +68,7 @@ plugin.tx_jfmulticontent_pi1 {
 		tabCollapsible = 1
 		tabOpen = 1
 		tabRandomContent = 0
+		tabCookieExpires = 
 		tabFxHeight = 0
 		tabFxOpacity = 1
 		tabFxDuration = 

@@ -119,6 +119,9 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 			if ($this->lConf['tabRandomContent'] < 2) {
 				$this->conf['config.']['tabRandomContent'] = $this->lConf['tabRandomContent'];
 			}
+			if (strlen($this->lConf['tabCookieExpires']) > 0) {
+				$this->conf['config.']['tabCookieExpires'] = $this->lConf['tabCookieExpires'];
+			}
 			if ($this->lConf['tabFxHeight'] < 2) {
 				$this->conf['config.']['tabFxHeight'] = $this->lConf['tabFxHeight'];
 			}
@@ -491,23 +494,29 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 				}
 				$options = array();
 				if (count($fx) > 0) {
-					$options[] = "fx:{".implode(",", $fx)."}";
+					$options['fx'] = "fx:{".implode(",", $fx)."}";
 				}
 				if ($this->conf['config.']['tabCollapsible']) {
-					$options[] = "collapsible: true";
+					$options['collapsible'] = "collapsible: true";
 				}
 				if ($this->conf['config.']['tabRandomContent']) {
-					$options[] = "selected:Math.floor(Math.random()*{$this->contentCount})";
+					$options['selected'] = "selected:Math.floor(Math.random()*{$this->contentCount})";
 				} elseif (is_numeric($this->conf['config.']['tabOpen'])) {
-					$options[] = "selected: ".($this->conf['config.']['tabOpen'] - 1);
+					$options['selected'] = "selected: ".($this->conf['config.']['tabOpen'] - 1);
 				}
 				// overwrite all options if set
 				if (trim($this->conf['config.']['options'])) {
 					if ($this->conf['config.']['optionsOverride']) {
 						$options = array($this->conf['config.']['options']);
 					} else {
-						$options[] = $this->conf['config.']['options'];
+						$options['options'] = $this->conf['config.']['options'];
 					}
+				}
+				// Add Cookies script, if cookie is active
+				if ($this->conf['config.']['tabCookieExpires'] > 0) {
+					$this->addJsFile($this->conf['jQueryCookies']);
+					unset($options['selected']);
+					$options['cookie'] = "cookie: { expires: ".$this->conf['config.']['tabCookieExpires']." }";
 				}
 				// get the Template of the Javascript
 				$markerArray = array();
@@ -532,7 +541,7 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 				if (T3JQUERY === true) {
 					tx_t3jquery::addJqJS();
 				} else {
-					$this->addJsFile($this->conf['jQueryLibrary']);
+					$this->addJsFile($this->conf['jQueryLibrary'], true);
 					$this->addJsFile($this->conf['jQueryUI']);
 				}
 				$this->addCssFile($this->conf['jQueryUIstyle']);
@@ -614,7 +623,7 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 				if (T3JQUERY === true) {
 					tx_t3jquery::addJqJS();
 				} else {
-					$this->addJsFile($this->conf['jQueryLibrary']);
+					$this->addJsFile($this->conf['jQueryLibrary'], true);
 					$this->addJsFile($this->conf['jQueryEasing']);
 					$this->addJsFile($this->conf['jQueryUI']);
 				}
@@ -722,7 +731,7 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 				if (T3JQUERY === true) {
 					tx_t3jquery::addJqJS();
 				} else {
-					$this->addJsFile($this->conf['jQueryLibrary']);
+					$this->addJsFile($this->conf['jQueryLibrary'], true);
 					$this->addJsFile($this->conf['jQueryEasing']);
 				}
 				$this->addJsFile($this->conf['sliderJS']);
@@ -780,7 +789,7 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 				if (T3JQUERY === true) {
 					tx_t3jquery::addJqJS();
 				} else {
-					$this->addJsFile($this->conf['jQueryLibrary']);
+					$this->addJsFile($this->conf['jQueryLibrary'], true);
 					$this->addJsFile($this->conf['jQueryEasing']);
 				}
 				$this->addJsFile($this->conf['slidedeckJS']);
@@ -829,7 +838,7 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 				if (T3JQUERY === true) {
 					tx_t3jquery::addJqJS();
 				} else {
-					$this->addJsFile($this->conf['jQueryLibrary']);
+					$this->addJsFile($this->conf['jQueryLibrary'], true);
 				}
 				$this->addJsFile($this->conf['easyaccordionJS']);
 				$this->addCssFile($this->conf['easyaccordionCSS']);
@@ -896,7 +905,7 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 				if (T3JQUERY === true) {
 					tx_t3jquery::addJqJS();
 				} else {
-					$this->addJsFile($this->conf['jQueryLibrary']);
+					$this->addJsFile($this->conf['jQueryLibrary'], true);
 					$this->addJsFile($this->conf['jQueryEasing']);
 				}
 				$this->addJsFile($this->conf['bookletJS']);

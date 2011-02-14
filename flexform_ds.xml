@@ -164,6 +164,20 @@
 							</config>
 						</TCEforms>
 					</tabRandomContent>
+					<tabCookieExpires>
+						<TCEforms>
+							<displayCond>FIELD:style:=:tab</displayCond>
+							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.tabCookieExpires</label>
+							<config>
+								<type>input</type>
+								<size>6</size>
+								<max>6</max>
+								<default></default>
+								<checkbox>0</checkbox>
+								<eval>nospace</eval>
+							</config>
+						</TCEforms>
+					</tabCookieExpires>
 					<tabFxHeight>
 						<TCEforms>
 							<displayCond>FIELD:style:=:tab</displayCond>
