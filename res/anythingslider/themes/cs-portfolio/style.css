@@ -44,7 +44,7 @@ div.anythingSlider-cs-portfolio .arrow {
 }
 div.anythingSlider-cs-portfolio .arrow a {
 	display: block;
-	bottom: 0;
+	bottom: 50px;
 	position: absolute;
 	height: 35px;
 	width: 35px;
@@ -122,5 +122,5 @@ div.anythingSlider-cs-portfolio .start-stop.playing:hover {
 
 /* Extra - replace defaults */
 div.anythingSlider-cs-portfolio {
-	padding: 0 23px;
+	padding: 0 23px 50px 0;
 }

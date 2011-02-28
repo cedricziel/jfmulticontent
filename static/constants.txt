@@ -27,7 +27,7 @@ plugin.tx_jfmulticontent_pi1 {
 	file.cssFile = EXT:jfmulticontent/res/tx_jfmulticontent_pi1.css
 
 	# cat=plugin.tx_jfmulticontent/file/040; type=file[js]; label=jQuery Library: Location of the jQuery Lib
-	file.jQueryLibrary = EXT:jfmulticontent/res/jquery/js/jquery-1.5.0.min.js
+	file.jQueryLibrary = EXT:jfmulticontent/res/jquery/js/jquery-1.5.1.min.js
 
 	# cat=plugin.tx_jfmulticontent/file/045; type=file[js]; label=jQuery Cookies: Location of jQuery Cookies
 	file.jQueryCookies = EXT:jfmulticontent/res/jquery/js/jquery.cookies.js
@@ -39,13 +39,13 @@ plugin.tx_jfmulticontent_pi1 {
 	file.jQueryMouseWheel = EXT:jfmulticontent/res/jquery/js/jquery.mousewheel-3.0.2.min.js
 
 	# cat=plugin.tx_jfmulticontent/file/070; type=file[js]; label=jQuery UI: Location of the jQuery UI
-	file.jQueryUI = EXT:jfmulticontent/res/jquery/js/jquery-ui-1.8.9.custom.min.js
+	file.jQueryUI = EXT:jfmulticontent/res/jquery/js/jquery-ui-1.8.10.custom.min.js
 
 	# cat=plugin.tx_jfmulticontent/file/080; type=file[css]; label=jQuery UI style: Location of the jQuery UI CSS
-	file.jQueryUIstyle = EXT:jfmulticontent/res/jquery/css/theme-1.8.9/jquery-ui-1.8.9.custom.css
+	file.jQueryUIstyle = EXT:jfmulticontent/res/jquery/css/theme-1.8.10/jquery-ui-1.8.10.custom.css
 
 	# cat=plugin.tx_jfmulticontent/file/090; type=file[js]; label=anythingSlider JS-File: Location of the anythingSlider JS-file
-	file.sliderJS = EXT:jfmulticontent/res/anythingslider/jquery.anythingslider-1.5.6.3.js
+	file.sliderJS = EXT:jfmulticontent/res/anythingslider/jquery.anythingslider-1.5.7.3.min.js
 
 	# cat=plugin.tx_jfmulticontent/file/100; type=file[css]; label=anythingSlider CSS-File: Location of the default anythingSlider CSS-File
 	file.sliderCSS = EXT:jfmulticontent/res/anythingslider/style.css

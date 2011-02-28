@@ -1,5 +1,5 @@
 /*
-    AnythingSlider v1.4.4 Default (base) theme
+    AnythingSlider v1.4.1+ Default (base) theme
 
     By Chris Coyier: http://css-tricks.com
     with major improvements by Doug Neiner: http://pixelgraphics.us/
@@ -11,6 +11,7 @@ div.anythingSlider {
 	width: 600px;
 	height: 390px;
 	margin: 0 auto;
+	overflow: hidden; /* needed for Opera and Safari */
 }
 
 /****** SET COLORS HERE *******/
@@ -78,6 +79,7 @@ ul.anythingBase {
 ul.anythingBase li.panel {
 	background: transparent;
 	display: block;
+	overflow: hidden;
 	float: left;
 	padding: 0;
 	margin: 0;
@@ -105,6 +107,8 @@ div.anythingSlider .forward a { background-position: 0 -40px; }
 div.anythingSlider .back a { background-position: -88px -40px; }
 div.anythingSlider .forward a:hover, div.anythingSlider .forward a.hover { background-position: 0 -240px; }
 div.anythingSlider .back a:hover, div.anythingSlider .back a.hover { background-position: -88px -240px; }
+div.anythingSlider .forward.disabled { display: none; } /* disabled arrows, hide or reduce opacity: opacity: .5; filter: alpha(opacity=50); */
+div.anythingSlider .back.disabled { display: none; }
 
 /* Navigation Links */
 div.anythingSlider .anythingControls { outline: 0; }
@@ -132,6 +136,10 @@ div.anythingSlider .thumbNav a:hover {
 /* slider autoplay right-to-left, reverse order of nav links to look better */
 div.anythingSlider.rtl .thumbNav a { float: right; } /* reverse order of nav links */
 div.anythingSlider.rtl .thumbNav { float: left; }    /* move nav link group to left */
+div.anythingSlider.rtl .anythingWindow {
+	direction: ltr;
+	unicode-bidi: bidi-override;
+}
 /* div.anythingSlider.rtl .start-stop { float: right; } */ /* move start/stop button - in case you want to switch sides */
 
 /* Autoplay Start/Stop button */
@@ -152,7 +160,7 @@ div.anythingSlider .start-stop {
 }
 div.anythingSlider .start-stop:hover, div.anythingSlider .start-stop.hover { background-image: none; }
 
-.noTransitions {
+div.anythingSlider, div.anythingSlider .anythingWindow, div.anythingSlider .thumbNav a, div.anythingSlider .arrow a, div.anythingSlider .start-stop {
 	transition-duration: 0;
 	-o-transition-duration: 0;
 	-moz-transition-duration: 0;

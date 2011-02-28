@@ -1002,6 +1002,8 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 			// Set the active class for the active slide
 			if (($a+1) ==  $this->conf['config.']['easyaccordionOpen']) {
 				$markerArray["EASYACCORDION_ACTIVE"] = 'class="active"';
+			} else {
+				$markerArray["EASYACCORDION_ACTIVE"] = '';
 			}
 			
 			// render the content
