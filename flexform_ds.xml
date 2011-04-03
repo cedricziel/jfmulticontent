@@ -27,6 +27,7 @@
 					
 					<columnOrder>
 						<TCEforms>
+							<exclude>1</exclude>
 							<displayCond>FIELD:style:IN:,2column,3column,4column,5column</displayCond>
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.columnOrder</label>
 							<config>
@@ -56,6 +57,7 @@
 					</columnOrder>
 					<column1>
 						<TCEforms>
+							<exclude>1</exclude>
 							<displayCond>FIELD:style:IN:,2column,3column,4column,5column</displayCond>
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.column1</label>
 							<config>
@@ -68,6 +70,7 @@
 					</column1>
 					<column2>
 						<TCEforms>
+							<exclude>1</exclude>
 							<displayCond>FIELD:style:IN:,2column,3column,4column,5column</displayCond>
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.column2</label>
 							<config>
@@ -80,6 +83,7 @@
 					</column2>
 					<column3>
 						<TCEforms>
+							<exclude>1</exclude>
 							<displayCond>FIELD:style:IN:3column,4column,5column</displayCond>
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.column3</label>
 							<config>
@@ -92,6 +96,7 @@
 					</column3>
 					<column4>
 						<TCEforms>
+							<exclude>1</exclude>
 							<displayCond>FIELD:style:IN:4column,5column</displayCond>
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.column4</label>
 							<config>
@@ -104,6 +109,7 @@
 					</column4>
 					<column5>
 						<TCEforms>
+							<exclude>1</exclude>
 							<displayCond>FIELD:style:IN:5column</displayCond>
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.column5</label>
 							<config>
@@ -116,6 +122,7 @@
 					</column5>
 					<equalize>
 						<TCEforms>
+							<exclude>1</exclude>
 							<displayCond>FIELD:style:IN:,2column,3column,4column,5column</displayCond>
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.equalize</label>
 							<config>
@@ -130,6 +137,7 @@
 					
 					<tabCollapsible>
 						<TCEforms>
+							<exclude>1</exclude>
 							<displayCond>FIELD:style:=:tab</displayCond>
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.tabCollapsible</label>
 							<config>
@@ -141,6 +149,7 @@
 					</tabCollapsible>
 					<tabOpen>
 						<TCEforms>
+							<exclude>1</exclude>
 							<displayCond>FIELD:style:=:tab</displayCond>
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.tabOpen</label>
 							<config>
@@ -155,6 +164,7 @@
 					</tabOpen>
 					<tabRandomContent>
 						<TCEforms>
+							<exclude>1</exclude>
 							<displayCond>FIELD:style:=:tab</displayCond>
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.tabRandomContent</label>
 							<config>
@@ -166,6 +176,7 @@
 					</tabRandomContent>
 					<tabCookieExpires>
 						<TCEforms>
+							<exclude>1</exclude>
 							<displayCond>FIELD:style:=:tab</displayCond>
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.tabCookieExpires</label>
 							<config>
@@ -180,6 +191,7 @@
 					</tabCookieExpires>
 					<tabFxHeight>
 						<TCEforms>
+							<exclude>1</exclude>
 							<displayCond>FIELD:style:=:tab</displayCond>
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.tabFxHeight</label>
 							<config>
@@ -191,6 +203,7 @@
 					</tabFxHeight>
 					<tabFxOpacity>
 						<TCEforms>
+							<exclude>1</exclude>
 							<displayCond>FIELD:style:=:tab</displayCond>
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.tabFxOpacity</label>
 							<config>
@@ -202,6 +215,7 @@
 					</tabFxOpacity>
 					<tabFxDuration>
 						<TCEforms>
+							<exclude>1</exclude>
 							<displayCond>FIELD:style:=:tab</displayCond>
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.tabFxDuration</label>
 							<config>
@@ -234,6 +248,7 @@
 					
 					<accordionAutoHeight>
 						<TCEforms>
+							<exclude>1</exclude>
 							<displayCond>FIELD:style:=:accordion</displayCond>
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.accordionAutoHeight</label>
 							<config>
@@ -245,6 +260,7 @@
 					</accordionAutoHeight>
 					<accordionCollapsible>
 						<TCEforms>
+							<exclude>1</exclude>
 							<displayCond>FIELD:style:=:accordion</displayCond>
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.accordionCollapsible</label>
 							<config>
@@ -256,6 +272,7 @@
 					</accordionCollapsible>
 					<accordionClosed>
 						<TCEforms>
+							<exclude>1</exclude>
 							<displayCond>FIELD:style:=:accordion</displayCond>
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.accordionClosed</label>
 							<config>
@@ -267,6 +284,7 @@
 					</accordionClosed>
 					<accordionOpen>
 						<TCEforms>
+							<exclude>1</exclude>
 							<displayCond>FIELD:style:=:accordion</displayCond>
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.accordionOpen</label>
 							<config>
@@ -281,6 +299,7 @@
 					</accordionOpen>
 					<accordionRandomContent>
 						<TCEforms>
+							<exclude>1</exclude>
 							<displayCond>FIELD:style:=:accordion</displayCond>
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.accordionRandomContent</label>
 							<config>
@@ -292,6 +311,7 @@
 					</accordionRandomContent>
 					<accordionEvent>
 						<TCEforms>
+							<exclude>1</exclude>
 							<displayCond>FIELD:style:=:accordion</displayCond>
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.accordionEvent</label>
 							<config>
@@ -317,6 +337,7 @@
 					</accordionEvent>
 					<accordionAnimated>
 						<TCEforms>
+							<exclude>1</exclude>
 							<displayCond>FIELD:style:=:accordion</displayCond>
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.accordionAnimated</label>
 							<config>
@@ -342,6 +363,7 @@
 					</accordionAnimated>
 					<accordionTransition>
 						<TCEforms>
+							<exclude>1</exclude>
 							<displayCond>FIELD:style:=:accordion</displayCond>
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.accordionTransition</label>
 							<config>
@@ -407,6 +429,7 @@
 					</accordionTransition>
 					<accordionTransitiondir>
 						<TCEforms>
+							<exclude>1</exclude>
 							<displayCond>FIELD:style:=:accordion</displayCond>
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.accordionTransitiondir</label>
 							<config>
@@ -436,6 +459,7 @@
 					</accordionTransitiondir>
 					<accordionTransitionduration>
 						<TCEforms>
+							<exclude>1</exclude>
 							<displayCond>FIELD:style:=:accordion</displayCond>
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.accordionTransitionduration</label>
 							<config>
@@ -453,6 +477,7 @@
 					
 					<sliderWidth>
 						<TCEforms>
+							<exclude>1</exclude>
 							<displayCond>FIELD:style:=:slider</displayCond>
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.sliderWidth</label>
 							<config>
@@ -465,6 +490,7 @@
 					</sliderWidth>
 					<sliderHeight>
 						<TCEforms>
+							<exclude>1</exclude>
 							<displayCond>FIELD:style:=:slider</displayCond>
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.sliderHeight</label>
 							<config>
@@ -477,6 +503,7 @@
 					</sliderHeight>
 					<sliderResizeContents>
 						<TCEforms>
+							<exclude>1</exclude>
 							<displayCond>FIELD:style:=:slider</displayCond>
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.sliderResizeContents</label>
 							<config>
@@ -488,6 +515,7 @@
 					</sliderResizeContents>
 					<sliderTheme>
 						<TCEforms>
+							<exclude>1</exclude>
 							<displayCond>FIELD:style:=:slider</displayCond>
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.sliderTheme</label>
 							<config>
@@ -506,6 +534,7 @@
 					</sliderTheme>
 					<sliderOpen>
 						<TCEforms>
+							<exclude>1</exclude>
 							<displayCond>FIELD:style:=:slider</displayCond>
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.sliderOpen</label>
 							<config>
@@ -520,6 +549,7 @@
 					</sliderOpen>
 					<sliderRandomContent>
 						<TCEforms>
+							<exclude>1</exclude>
 							<displayCond>FIELD:style:=:slider</displayCond>
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.sliderRandomContent</label>
 							<config>
@@ -531,6 +561,7 @@
 					</sliderRandomContent>
 					<sliderHashTags>
 						<TCEforms>
+							<exclude>1</exclude>
 							<displayCond>FIELD:style:=:slider</displayCond>
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.sliderHashTags</label>
 							<config>
@@ -542,6 +573,7 @@
 					</sliderHashTags>
 					<sliderBuildArrows>
 						<TCEforms>
+							<exclude>1</exclude>
 							<displayCond>FIELD:style:=:slider</displayCond>
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.sliderBuildArrows</label>
 							<config>
@@ -553,6 +585,7 @@
 					</sliderBuildArrows>
 					<sliderToggleArrows>
 						<TCEforms>
+							<exclude>1</exclude>
 							<displayCond>FIELD:style:=:slider</displayCond>
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.sliderToggleArrows</label>
 							<config>
@@ -564,6 +597,7 @@
 					</sliderToggleArrows>
 					<sliderNavigation>
 						<TCEforms>
+							<exclude>1</exclude>
 							<displayCond>FIELD:style:=:slider</displayCond>
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.sliderNavigation</label>
 							<config>
@@ -575,6 +609,7 @@
 					</sliderNavigation>
 					<sliderPanelFromHeader>
 						<TCEforms>
+							<exclude>1</exclude>
 							<displayCond>FIELD:style:=:slider</displayCond>
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.sliderPanelFromHeader</label>
 							<config>
@@ -586,6 +621,7 @@
 					</sliderPanelFromHeader>
 					<sliderToggleControls>
 						<TCEforms>
+							<exclude>1</exclude>
 							<displayCond>FIELD:style:=:slider</displayCond>
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.sliderToggleControls</label>
 							<config>
@@ -597,6 +633,7 @@
 					</sliderToggleControls>
 					<sliderAutoStart>
 						<TCEforms>
+							<exclude>1</exclude>
 							<displayCond>FIELD:style:=:slider</displayCond>
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.sliderAutoStart</label>
 							<config>
@@ -608,6 +645,7 @@
 					</sliderAutoStart>
 					<sliderPauseOnHover>
 						<TCEforms>
+							<exclude>1</exclude>
 							<displayCond>FIELD:style:=:slider</displayCond>
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.sliderPauseOnHover</label>
 							<config>
@@ -619,6 +657,7 @@
 					</sliderPauseOnHover>
 					<sliderResumeOnVideoEnd>
 						<TCEforms>
+							<exclude>1</exclude>
 							<displayCond>FIELD:style:=:slider</displayCond>
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.sliderResumeOnVideoEnd</label>
 							<config>
@@ -630,6 +669,7 @@
 					</sliderResumeOnVideoEnd>
 					<sliderStopAtEnd>
 						<TCEforms>
+							<exclude>1</exclude>
 							<displayCond>FIELD:style:=:slider</displayCond>
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.sliderStopAtEnd</label>
 							<config>
@@ -641,6 +681,7 @@
 					</sliderStopAtEnd>
 					<sliderPlayRtl>
 						<TCEforms>
+							<exclude>1</exclude>
 							<displayCond>FIELD:style:=:slider</displayCond>
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.sliderPlayRtl</label>
 							<config>
@@ -652,6 +693,7 @@
 					</sliderPlayRtl>
 					<sliderTransition>
 						<TCEforms>
+							<exclude>1</exclude>
 							<displayCond>FIELD:style:=:slider</displayCond>
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.sliderTransition</label>
 							<config>
@@ -717,6 +759,7 @@
 					</sliderTransition>
 					<sliderTransitiondir>
 						<TCEforms>
+							<exclude>1</exclude>
 							<displayCond>FIELD:style:=:slider</displayCond>
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.sliderTransitiondir</label>
 							<config>
@@ -746,6 +789,7 @@
 					</sliderTransitiondir>
 					<sliderTransitionduration>
 						<TCEforms>
+							<exclude>1</exclude>
 							<displayCond>FIELD:style:=:slider</displayCond>
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.sliderTransitionduration</label>
 							<config>
@@ -763,6 +807,7 @@
 					
 					<slidedeckHeight>
 						<TCEforms>
+							<exclude>1</exclude>
 							<displayCond>FIELD:style:=:slidedeck</displayCond>
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.slidedeckHeight</label>
 							<config>
@@ -777,6 +822,7 @@
 					</slidedeckHeight>
 					<slidedeckTransition>
 						<TCEforms>
+							<exclude>1</exclude>
 							<displayCond>FIELD:style:=:slidedeck</displayCond>
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.slidedeckTransition</label>
 							<config>
@@ -842,6 +888,7 @@
 					</slidedeckTransition>
 					<slidedeckTransitiondir>
 						<TCEforms>
+							<exclude>1</exclude>
 							<displayCond>FIELD:style:=:slidedeck</displayCond>
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.slidedeckTransitiondir</label>
 							<config>
@@ -871,6 +918,7 @@
 					</slidedeckTransitiondir>
 					<slidedeckTransitionduration>
 						<TCEforms>
+							<exclude>1</exclude>
 							<displayCond>FIELD:style:=:slidedeck</displayCond>
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.slidedeckTransitionduration</label>
 							<config>
@@ -885,6 +933,7 @@
 					</slidedeckTransitionduration>
 					<slidedeckStart>
 						<TCEforms>
+							<exclude>1</exclude>
 							<displayCond>FIELD:style:=:slidedeck</displayCond>
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.slidedeckStart</label>
 							<config>
@@ -899,6 +948,7 @@
 					</slidedeckStart>
 					<slidedeckActivecorner>
 						<TCEforms>
+							<exclude>1</exclude>
 							<displayCond>FIELD:style:=:slidedeck</displayCond>
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.slidedeckActivecorner</label>
 							<config>
@@ -910,6 +960,7 @@
 					</slidedeckActivecorner>
 					<slidedeckIndex>
 						<TCEforms>
+							<exclude>1</exclude>
 							<displayCond>FIELD:style:=:slidedeck</displayCond>
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.slidedeckIndex</label>
 							<config>
@@ -921,6 +972,7 @@
 					</slidedeckIndex>
 					<slidedeckScroll>
 						<TCEforms>
+							<exclude>1</exclude>
 							<displayCond>FIELD:style:=:slidedeck</displayCond>
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.slidedeckScroll</label>
 							<config>
@@ -932,6 +984,7 @@
 					</slidedeckScroll>
 					<slidedeckKeys>
 						<TCEforms>
+							<exclude>1</exclude>
 							<displayCond>FIELD:style:=:slidedeck</displayCond>
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.slidedeckKeys</label>
 							<config>
@@ -943,6 +996,7 @@
 					</slidedeckKeys>
 					<slidedeckHidespines>
 						<TCEforms>
+							<exclude>1</exclude>
 							<displayCond>FIELD:style:=:slidedeck</displayCond>
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.slidedeckHidespines</label>
 							<config>
@@ -957,6 +1011,7 @@
 					
 					<easyaccordionSkin>
 						<TCEforms>
+							<exclude>1</exclude>
 							<displayCond>FIELD:style:=:easyaccordion</displayCond>
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.easyaccordionSkin</label>
 							<config>
@@ -975,6 +1030,7 @@
 					</easyaccordionSkin>
 					<easyaccordionOpen>
 						<TCEforms>
+							<exclude>1</exclude>
 							<displayCond>FIELD:style:=:easyaccordion</displayCond>
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.easyaccordionOpen</label>
 							<config>
@@ -989,6 +1045,7 @@
 					</easyaccordionOpen>
 					<easyaccordionWidth>
 						<TCEforms>
+							<exclude>1</exclude>
 							<displayCond>FIELD:style:=:easyaccordion</displayCond>
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.easyaccordionWidth</label>
 							<config>
@@ -1003,6 +1060,7 @@
 					</easyaccordionWidth>
 					<easyaccordionSlideNum>
 						<TCEforms>
+							<exclude>1</exclude>
 							<displayCond>FIELD:style:=:easyaccordion</displayCond>
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.easyaccordionSlideNum</label>
 							<config>
@@ -1017,6 +1075,7 @@
 					
 					<bookletWidth>
 						<TCEforms>
+							<exclude>1</exclude>
 							<displayCond>FIELD:style:=:booklet</displayCond>
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.bookletWidth</label>
 							<config>
@@ -1031,6 +1090,7 @@
 					</bookletWidth>
 					<bookletHeight>
 						<TCEforms>
+							<exclude>1</exclude>
 							<displayCond>FIELD:style:=:booklet</displayCond>
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.bookletHeight</label>
 							<config>
@@ -1045,6 +1105,7 @@
 					</bookletHeight>
 					<bookletSpeed>
 						<TCEforms>
+							<exclude>1</exclude>
 							<displayCond>FIELD:style:=:booklet</displayCond>
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.bookletSpeed</label>
 							<config>
@@ -1059,6 +1120,7 @@
 					</bookletSpeed>
 					<bookletStartingPage>
 						<TCEforms>
+							<exclude>1</exclude>
 							<displayCond>FIELD:style:=:booklet</displayCond>
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.bookletStartingPage</label>
 							<config>
@@ -1073,6 +1135,7 @@
 					</bookletStartingPage>bookletRTL
 					<bookletRTL>
 						<TCEforms>
+							<exclude>1</exclude>
 							<displayCond>FIELD:style:=:booklet</displayCond>
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.bookletRTL</label>
 							<config>
@@ -1084,6 +1147,7 @@
 					</bookletRTL>
 					<bookletTransition>
 						<TCEforms>
+							<exclude>1</exclude>
 							<displayCond>FIELD:style:=:booklet</displayCond>
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.bookletTransition</label>
 							<config>
@@ -1149,6 +1213,7 @@
 					</bookletTransition>
 					<bookletTransitiondir>
 						<TCEforms>
+							<exclude>1</exclude>
 							<displayCond>FIELD:style:=:booklet</displayCond>
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.bookletTransitiondir</label>
 							<config>
@@ -1178,6 +1243,7 @@
 					</bookletTransitiondir>
 					<bookletPagePadding>
 						<TCEforms>
+							<exclude>1</exclude>
 							<displayCond>FIELD:style:=:booklet</displayCond>
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.bookletPagePadding</label>
 							<config>
@@ -1192,6 +1258,7 @@
 					</bookletPagePadding>
 					<bookletPageNumbers>
 						<TCEforms>
+							<exclude>1</exclude>
 							<displayCond>FIELD:style:=:booklet</displayCond>
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.bookletPageNumbers</label>
 							<config>
@@ -1203,6 +1270,7 @@
 					</bookletPageNumbers>
 					<bookletShadows>
 						<TCEforms>
+							<exclude>1</exclude>
 							<displayCond>FIELD:style:=:booklet</displayCond>
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.bookletShadows</label>
 							<config>
@@ -1214,6 +1282,7 @@
 					</bookletShadows>
 					<bookletClosed>
 						<TCEforms>
+							<exclude>1</exclude>
 							<displayCond>FIELD:style:=:booklet</displayCond>
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.bookletClosed</label>
 							<config>
@@ -1225,6 +1294,7 @@
 					</bookletClosed>
 					<bookletCovers>
 						<TCEforms>
+							<exclude>1</exclude>
 							<displayCond>FIELD:style:=:booklet</displayCond>
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.bookletCovers</label>
 							<config>
@@ -1236,6 +1306,7 @@
 					</bookletCovers>
 					<bookletHash>
 						<TCEforms>
+							<exclude>1</exclude>
 							<displayCond>FIELD:style:=:booklet</displayCond>
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.bookletHash</label>
 							<config>
@@ -1247,6 +1318,7 @@
 					</bookletHash>
 					<bookletKeyboard>
 						<TCEforms>
+							<exclude>1</exclude>
 							<displayCond>FIELD:style:=:booklet</displayCond>
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.bookletKeyboard</label>
 							<config>
@@ -1259,6 +1331,7 @@
 <!-- This option dos not work correct!
 					<bookletOverlays>
 						<TCEforms>
+							<exclude>1</exclude>
 							<displayCond>FIELD:style:=:booklet</displayCond>
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.bookletOverlays</label>
 							<config>
@@ -1271,6 +1344,7 @@
 -->
 					<bookletArrows>
 						<TCEforms>
+							<exclude>1</exclude>
 							<displayCond>FIELD:style:=:booklet</displayCond>
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.bookletArrows</label>
 							<config>
@@ -1282,6 +1356,7 @@
 					</bookletArrows>
 					<bookletHovers>
 						<TCEforms>
+							<exclude>1</exclude>
 							<displayCond>FIELD:style:=:booklet</displayCond>
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.bookletHovers</label>
 							<config>
@@ -1296,6 +1371,7 @@
 					
 					<delayDuration>
 						<TCEforms>
+							<exclude>1</exclude>
 							<displayCond>FIELD:style:IN:tab,accordion,slider,slidedeck,easyaccordion</displayCond>
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.autoplayDuration</label>
 							<config>
@@ -1310,6 +1386,7 @@
 					</delayDuration>
 					<autoplayContinuing>
 						<TCEforms>
+							<exclude>1</exclude>
 							<displayCond>FIELD:style:IN:tab</displayCond>
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.autoplayContinuing</label>
 							<config>
@@ -1321,6 +1398,7 @@
 					</autoplayContinuing>
 					<autoplayCycle>
 						<TCEforms>
+							<exclude>1</exclude>
 							<displayCond>FIELD:style:IN:slidedeck</displayCond>
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.autoplayCycle</label>
 							<config>
@@ -1342,6 +1420,7 @@
 				<el>
 					<titles>
 						<TCEforms>
+							<exclude>1</exclude>
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.titles</label>
 							<config>
 								<type>text</type>
@@ -1363,6 +1442,7 @@
 				<el>
 					<attributes>
 						<TCEforms>
+							<exclude>1</exclude>
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.attributes</label>
 							<config>
 								<type>text</type>
@@ -1384,6 +1464,7 @@
 				<el>
 					<options>
 						<TCEforms>
+							<exclude>1</exclude>
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.options</label>
 							<config>
 								<type>text</type>
@@ -1395,6 +1476,7 @@
 					</options>
 					<optionsOverride>
 						<TCEforms>
+							<exclude>1</exclude>
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.optionsOverride</label>
 							<config>
 								<type>check</type>

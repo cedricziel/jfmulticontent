@@ -23,6 +23,7 @@
 	-o-transform: rotate(-90deg);
 	-o-transform-origin: 123px 122px;
 	-moz-transform-origin: 20px 0px;
+	-ms-transform: rotate(0deg);
 	filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
 	cursor: pointer;
 }
@@ -54,5 +55,6 @@
 	-moz-transform: rotate(90deg);
 	-o-transform: rotate(90deg);
 	-o-transform-origin: 10px 16px;
+	-ms-transform: rotate(0deg);
 	filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=1);
 }
