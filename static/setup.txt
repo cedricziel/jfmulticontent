@@ -146,6 +146,32 @@ plugin.tx_jfmulticontent_pi1 {
 		)
 		optionsOverride = 0
 	}
+	views {
+		content {
+			content = RECORDS
+			content {
+				tables = tt_content
+				source.data = register:uid
+				dontCheckPid = 1
+			}
+			title = TEXT
+			title.data = register:title
+		}
+		page {
+			content = CONTENT
+			content {
+				table = tt_content
+				select {
+					pidInList.data = register:pid
+					orderBy = sorting
+					where = colPos=0
+					languageField = sys_language_uid
+				}
+			}
+			title = TEXT
+			title.data = register:page_title
+		}
+	}
 	contents {
 		10 {
 			content = CONTENT

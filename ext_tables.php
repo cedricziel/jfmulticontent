@@ -4,105 +4,144 @@ if (!defined ('TYPO3_MODE')) {
 }
 
 
+
 // get extension configuration
 $confArr = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['jfmulticontent']);
 
 
+
+$tempColumns = array(
+	'tx_jfmulticontent_view' => array(
+		'exclude' => 1,
+		'onChange' => 'reload',
+		'label' => 'LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.view',
+		'config' => array (
+			'type' => 'select',
+			'size' => 1,
+			'maxitems' => 1,
+			'default' => 'content',
+			'items' => array(
+				array('LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.view.I.0', 'content'),
+				array('LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.view.I.1', 'page'),
+			),
+			'itemsProcFunc' => 'tx_jfmulticontent_itemsProcFunc->getViews',
+		)
+	),
+	'tx_jfmulticontent_pages' => array(
+		'exclude' => 1,
+		'displayCond' => 'FIELD:tx_jfmulticontent_view:IN:page',
+		'label' => 'LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.pages',
+		'config' => array (
+			'type' => 'group',
+			'internal_type' => 'db',
+			'allowed' => 'pages',
+			'size' => 12,
+			'minitems' => 0,
+			'maxitems' => 1000,
+			'wizards' => array(
+				'suggest' => array(
+					'type' => 'suggest',
+				),
+			),
+		)
+	)
+);
+
+
+
 if ($confArr["useStoragePidOnly"]) {
-	$tempColumns = array (
-		'tx_jfmulticontent_contents' => array (
-			'exclude' => 1,
-			'label' => 'LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.contents',
-			'config' => array (
-				'type' => 'select',
-				'foreign_table' => 'tt_content',
-				'foreign_table_where' => 'AND tt_content.pid=###STORAGE_PID### AND tt_content.hidden=0 AND tt_content.deleted=0 AND tt_content.sys_language_uid=0 ORDER BY tt_content.uid',
-				'size' => 12,
-				'minitems' => 0,
-				'maxitems' => 1000,
-				'wizards' => array(
-					'_PADDING'  => 2,
-					'_VERTICAL' => 1,
-					'add' => array(
-						'type'   => 'script',
-						'title'  => 'LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.contents_add',
-						'icon'   => 'add.gif',
-						'script' => 'wizard_add.php',
-						'params' => array(
-							'table'    => 'tt_content',
-							'pid'      => '###STORAGE_PID###',
-							'setValue' => 'prepend'
-						),
-					),
-					'list' => array(
-						'type'   => 'script',
-						'title'  => 'List',
-						'icon'   => 'list.gif',
-						'script' => 'wizard_list.php',
-						'params' => array(
-							'table' => 'tt_content',
-							'pid'   => '###STORAGE_PID###',
-						),
-					),
-					'edit' => array(
-						'type'   => 'popup',
-						'title'  => 'LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.contents_edit',
-						'icon'   => 'edit2.gif',
-						'script' => 'wizard_edit.php',
-						'popup_onlyOpenIfSelected' => 1,
-						'JSopenParams' => 'height=600,width=800,status=0,menubar=0,scrollbars=1',
+	$tempColumns['tx_jfmulticontent_contents'] = array(
+		'exclude' => 1,
+		'displayCond' => 'FIELD:tx_jfmulticontent_view:IN:,content',
+		'label' => 'LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.contents',
+		'config' => array (
+			'type' => 'select',
+			'foreign_table' => 'tt_content',
+			'foreign_table_where' => 'AND tt_content.pid=###STORAGE_PID### AND tt_content.hidden=0 AND tt_content.deleted=0 AND tt_content.sys_language_uid=0 ORDER BY tt_content.uid',
+			'size' => 12,
+			'minitems' => 0,
+			'maxitems' => 1000,
+			'wizards' => array(
+				'_PADDING'  => 2,
+				'_VERTICAL' => 1,
+				'add' => array(
+					'type'   => 'script',
+					'title'  => 'LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.contents_add',
+					'icon'   => 'add.gif',
+					'script' => 'wizard_add.php',
+					'params' => array(
+						'table'    => 'tt_content',
+						'pid'      => '###STORAGE_PID###',
+						'setValue' => 'prepend'
 					),
 				),
-			)
-		),
+				'list' => array(
+					'type'   => 'script',
+					'title'  => 'List',
+					'icon'   => 'list.gif',
+					'script' => 'wizard_list.php',
+					'params' => array(
+						'table' => 'tt_content',
+						'pid'   => '###STORAGE_PID###',
+					),
+				),
+				'edit' => array(
+					'type'   => 'popup',
+					'title'  => 'LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.contents_edit',
+					'icon'   => 'edit2.gif',
+					'script' => 'wizard_edit.php',
+					'popup_onlyOpenIfSelected' => 1,
+					'JSopenParams' => 'height=600,width=800,status=0,menubar=0,scrollbars=1',
+				),
+			),
+		)
 	);
 } else {
-	$tempColumns = array (
-		'tx_jfmulticontent_contents' => array (
-			'exclude' => 1,
-			'label' => 'LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.contents',
-			'config' => array (
-				'type' => 'group',
-				'internal_type' => 'db',
-				'allowed' => 'tt_content',
-				'size' => 12,
-				'minitems' => 0,
-				'maxitems' => 1000,
-				'wizards' => array(
-					'_PADDING'  => 2,
-					'_VERTICAL' => 1,
-					'add' => array(
-						'type'   => 'script',
-						'title'  => 'LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.contents_add',
-						'icon'   => 'add.gif',
-						'script' => 'wizard_add.php',
-						'params' => array(
-							'table'    => 'tt_content',
-							'pid'      => '###STORAGE_PID###',
-							'setValue' => 'prepend'
-						),
-					),
-					'list' => array(
-						'type'   => 'script',
-						'title'  => 'List',
-						'icon'   => 'list.gif',
-						'script' => 'wizard_list.php',
-						'params' => array(
-							'table' => 'tt_content',
-							'pid'   => '###STORAGE_PID###',
-						),
-					),
-					'edit' => array(
-						'type'   => 'popup',
-						'title'  => 'LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.contents_edit',
-						'icon'   => 'edit2.gif',
-						'script' => 'wizard_edit.php',
-						'popup_onlyOpenIfSelected' => 1,
-						'JSopenParams' => 'height=600,width=800,status=0,menubar=0,scrollbars=1',
+	$tempColumns['tx_jfmulticontent_contents'] = array(
+		'exclude' => 1,
+		'displayCond' => 'FIELD:tx_jfmulticontent_view:IN:,content',
+		'label' => 'LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.contents',
+		'config' => array (
+			'type' => 'group',
+			'internal_type' => 'db',
+			'allowed' => 'tt_content',
+			'size' => 12,
+			'minitems' => 0,
+			'maxitems' => 1000,
+			'wizards' => array(
+				'_PADDING'  => 2,
+				'_VERTICAL' => 1,
+				'add' => array(
+					'type'   => 'script',
+					'title'  => 'LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.contents_add',
+					'icon'   => 'add.gif',
+					'script' => 'wizard_add.php',
+					'params' => array(
+						'table'    => 'tt_content',
+						'pid'      => '###STORAGE_PID###',
+						'setValue' => 'prepend'
 					),
 				),
-			)
-		),
+				'list' => array(
+					'type'   => 'script',
+					'title'  => 'List',
+					'icon'   => 'list.gif',
+					'script' => 'wizard_list.php',
+					'params' => array(
+						'table' => 'tt_content',
+						'pid'   => '###STORAGE_PID###',
+					),
+				),
+				'edit' => array(
+					'type'   => 'popup',
+					'title'  => 'LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.contents_edit',
+					'icon'   => 'edit2.gif',
+					'script' => 'wizard_edit.php',
+					'popup_onlyOpenIfSelected' => 1,
+					'JSopenParams' => 'height=600,width=800,status=0,menubar=0,scrollbars=1',
+				),
+			),
+		)
 	);
 }
 
@@ -110,8 +149,9 @@ if ($confArr["useStoragePidOnly"]) {
 t3lib_div::loadTCA('tt_content');
 t3lib_extMgm::addTCAcolumns('tt_content', $tempColumns, 1);
 $TCA['tt_content']['types']['list']['subtypes_excludelist'][$_EXTKEY.'_pi1'] = 'layout,select_key,pages';
-$TCA['tt_content']['types']['list']['subtypes_addlist'][$_EXTKEY.'_pi1'] = 'tx_jfmulticontent_contents,pi_flexform';
-
+$TCA['tt_content']['types']['list']['subtypes_addlist'][$_EXTKEY.'_pi1'] = 'tx_jfmulticontent_view,tx_jfmulticontent_pages,tx_jfmulticontent_contents,pi_flexform';
+// Add reload field to tt_content
+$TCA['tt_content']['ctrl']['requestUpdate'] .= ($TCA['tt_content']['ctrl']['requestUpdate'] ? ',' : ''). 'tx_jfmulticontent_view';
 
 t3lib_extMgm::addPlugin(array(
 	'LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.list_type_pi1',

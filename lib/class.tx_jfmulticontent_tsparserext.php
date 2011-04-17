@@ -60,13 +60,19 @@ class tx_jfmulticontent_tsparserext
 	</div>';
 		}
 
+		if (t3lib_div::int_from_ver(TYPO3_version) < 4005000) {
+			$url = 'index.php?&amp;id=0&amp;CMD[showExt]=jfmulticontent&amp;SET[singleDetails]=updateModule';
+		} else {
+			$url = 'mod.php?&id=0&M=tools_em&CMD[showExt]=jfmulticontent&SET[singleDetails]=updateModule';
+		}
+
 		$out .= '
 <div style="position:absolute;top:10px;right:10px; width:300px;">
 	<div class="typo3-message message-information">
 		<div class="message-header">' . $GLOBALS['LANG']->sL('LLL:EXT:jfmulticontent/locallang.xml:extmng.updatermsgHeader') . '</div>
 		<div class="message-body">
 			' . $GLOBALS['LANG']->sL('LLL:EXT:jfmulticontent/locallang.xml:extmng.updatermsg') . '<br />
-			<a style="text-decoration:underline;" href="index.php?&amp;id=0&amp;CMD[showExt]=jfmulticontent&amp;SET[singleDetails]=updateModule">
+			<a style="text-decoration:underline;" href="' . $url . '">
 			' . $GLOBALS['LANG']->sL('LLL:EXT:jfmulticontent/locallang.xml:extmng.updatermsgLink') . '</a>
 		</div>
 	</div>

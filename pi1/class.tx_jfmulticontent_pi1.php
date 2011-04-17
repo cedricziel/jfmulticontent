@@ -43,29 +43,30 @@ if (t3lib_extMgm::isLoaded('t3jquery')) {
  */
 class tx_jfmulticontent_pi1 extends tslib_pibase
 {
-	var $prefixId      = 'tx_jfmulticontent_pi1';               // Same as class name
-	var $scriptRelPath = 'pi1/class.tx_jfmulticontent_pi1.php'; // Path to this script relative to the extension dir.
-	var $extKey        = 'jfmulticontent';                      // The extension key.
-	var $pi_checkCHash = true;
-	var $lConf = array();
-	var $confArr = array();
-	var $templateFile = null;
-	var $templateFileJS = null;
-	var $templatePart = null;
-	var $additionalMarker = array();
-	var $contentKey = null;
-	var $contentCount = null;
-	var $contentClass = array();
-	var $classes = array();
-	var $contentWrap = array();
-	var $jsFiles = array();
-	var $js = array();
-	var $cssFiles = array();
-	var $css = array();
-	var $titles = array();
-	var $attributes = array();
-	var $cElements = array();
-	var $content_id = array();
+	public $prefixId      = 'tx_jfmulticontent_pi1';
+	public $scriptRelPath = 'pi1/class.tx_jfmulticontent_pi1.php';
+	public $extKey        = 'jfmulticontent';
+	public $pi_checkCHash = true;
+	public $conf = array();
+	private $lConf = array();
+	private $confArr = array();
+	private $templateFile = null;
+	private $templateFileJS = null;
+	private $templatePart = null;
+	private $additionalMarker = array();
+	private $contentKey = null;
+	private $contentCount = null;
+	private $contentClass = array();
+	private $classes = array();
+	private $contentWrap = array();
+	private $jsFiles = array();
+	private $js = array();
+	private $cssFiles = array();
+	private $css = array();
+	private $titles = array();
+	private $attributes = array();
+	private $cElements = array();
+	private $content_id = array();
 
 	/**
 	 * The main method of the PlugIn
@@ -74,8 +75,9 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 	 * @param	array		$conf: The PlugIn configuration
 	 * @return	The content that is displayed on the website
 	 */
-	function main($content, $conf)
+	public function main($content, $conf)
 	{
+		$this->content = $content;
 		$this->conf = $conf;
 		$this->pi_setPiVarDefaults();
 		$this->pi_loadLL();
@@ -99,6 +101,11 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 
 			// Override the config with flexform data
 			$this->conf['config.']['style'] = $this->lConf['style'];
+			if ($this->cObj->data['tx_jfmulticontent_view']) {
+				$this->conf['config.']['view'] = $this->cObj->data['tx_jfmulticontent_view'];
+			} else {
+				$this->conf['config.']['view'] = 'content';
+			}
 			// columns
 			$this->conf['config.']['column1']     = $this->lConf['column1'];
 			$this->conf['config.']['column2']     = $this->lConf['column2'];
@@ -343,37 +350,76 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 			$this->conf['config.']['options']         = $this->lConf['options'];
 			$this->conf['config.']['optionsOverride'] = $this->lConf['optionsOverride'];
 
-			// get the content ID's
-			$content_ids = t3lib_div::trimExplode(",", $this->cObj->data['tx_jfmulticontent_contents']);
-			// get the informations for every content
-			for ($a=0; $a < count($content_ids); $a++) {
-				// Select the content
-				$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery('*', 'tt_content', 'uid='.intval($content_ids[$a]), '', '', 1);
-				$row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res);
-				if ($GLOBALS['TSFE']->sys_language_content) {
-					$row = $GLOBALS['TSFE']->sys_page->getRecordOverlay('tt_content', $row, $GLOBALS['TSFE']->sys_language_content, $GLOBALS['TSFE']->sys_language_contentOL);
+			$view = $this->conf['views.'][$this->conf['config.']['view'].'.'];
+
+			if ($this->conf['config.']['view'] == 'page') {
+				// get the page ID's
+				$page_ids = t3lib_div::trimExplode(",", $this->cObj->data['tx_jfmulticontent_pages']);
+				// get the informations for every page
+				for ($a=0; $a < count($page_ids); $a++) {
+					$row = null;
+					if ($GLOBALS['TSFE']->sys_language_content) {
+						$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery('*', 'pages_language_overlay', 'pid='.intval($page_ids[$a]).' AND sys_language_uid='.$GLOBALS['TSFE']->sys_language_content, '', '', 1);
+						$row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res);
+					}
+					if (! is_array($row)) {
+						$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery('*', 'pages', 'uid='.intval($page_ids[$a]), '', '', 1);
+						$row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res);
+					}
+					if (is_array($row)) {
+						foreach ($row as $key => $val) {
+							$GLOBALS['TSFE']->register['page_'.$key] = $val;
+						}
+					}
+					$GLOBALS['TSFE']->register['pid'] = $page_ids[$a];
+					if ($this->titles[$a] == '' || !isset($this->titles[$a])) {
+						$this->titles[$a] = $this->cObj->cObjGetSingle($view['title'], $view['title.']);
+					}
+					$this->cElements[] = $this->cObj->cObjGetSingle($view['content'], $view['content.']);
+					$this->content_id[$a] = $page_ids[$a];
 				}
-				if ($this->titles[$a] == '' || !isset($this->titles[$a])) {
-					$this->titles[$a] = $row['header'];
+			} else if ($this->conf['config.']['view'] == 'content') {
+				// get the content ID's
+				$content_ids = t3lib_div::trimExplode(",", $this->cObj->data['tx_jfmulticontent_contents']);
+				// get the informations for every content
+				for ($a=0; $a < count($content_ids); $a++) {
+					// Select the content
+					$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery('*', 'tt_content', 'uid='.intval($content_ids[$a]), '', '', 1);
+					$row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res);
+					if ($GLOBALS['TSFE']->sys_language_content) {
+						$row = $GLOBALS['TSFE']->sys_page->getRecordOverlay('tt_content', $row, $GLOBALS['TSFE']->sys_language_content, $GLOBALS['TSFE']->sys_language_contentOL);
+					}
+					$GLOBALS['TSFE']->register['uid'] = ($row['_LOCALIZED_UID'] ? $row['_LOCALIZED_UID'] : $row['uid']);
+					$GLOBALS['TSFE']->register['title'] = (strlen(trim($this->titles[$a])) > 0 ? $this->titles[$a] : $row['header']);
+					if ($this->titles[$a] == '' || !isset($this->titles[$a])) {
+						$this->titles[$a] = $this->cObj->cObjGetSingle($view['title'], $view['title.']);
+						$GLOBALS['TSFE']->register['title'] = $this->titles[$a];
+					}
+					$this->cElements[] = $this->cObj->cObjGetSingle($view['content'], $view['content.']);
+					$this->content_id[$a] = $content_ids[$a];
 				}
-				// define content conf
-				$cConf = array(
-					'tables' => 'tt_content',
-					'source' => ($row['_LOCALIZED_UID'] ? $row['_LOCALIZED_UID'] : $row['uid']),
-					'dontCheckPid' => 1,
-				);
-				$this->cElements[] = $this->cObj->RECORDS($cConf);
-				$this->content_id[$a] = $content_ids[$a];
+			}
+			// HOOK for additional views
+			if (is_array($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['jfmulticontent']['getViews'])) {
+				foreach ($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['jfmulticontent']['getViews'] as $_classRef) {
+					$_procObj = & t3lib_div::getUserObj($_classRef);
+					if ($this->conf['config.']['view'] == $_procObj->getIdentifier()) {
+						$_procObj->main($this->content, $this->conf, $this);
+						$this->titles = $_procObj->getTitles();
+						$this->cElements = $_procObj->getElements();
+						$this->content_id = $_procObj->getIds();
+					}
+				}
 			}
 			// define the key of the element
-			$this->contentKey = 'jfmulticontent_c' . $this->cObj->data['uid'];
+			$this->setContentKey('jfmulticontent_c' . $this->cObj->data['uid']);
 		} else {
 			// TS config will be used
 			// define the key of the element
 			if ($this->conf['config.']['contentKey']) {
-				$this->contentKey = $this->conf['config.']['contentKey'];
+				$this->setContentKey($this->conf['config.']['contentKey']);
 			} else {
-				$this->contentKey = 'jfmulticontent_ts1';
+				$this->setContentKey('jfmulticontent_ts1');
 			}
 			// Render the contents
 			if (count($this->conf['contents.']) > 0) {
@@ -532,8 +578,8 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 				}
 				$templateCode = trim($this->cObj->substituteSubpart($templateCode, '###FIX_HREF###', $fixTabHref, 0));
 				// Replace default values
-				$markerArray["KEY"] = $this->contentKey;
-				$markerArray["PREG_QUOTE_KEY"] = preg_quote($this->contentKey, "/");
+				$markerArray["KEY"] = $this->getContentKey();
+				$markerArray["PREG_QUOTE_KEY"] = preg_quote($this->getContentKey(), "/");
 				$markerArray["OPTIONS"] = implode(", ", $options);
 				$markerArray["ROTATE"] = $rotate;
 				$templateCode = $this->cObj->substituteMarkerArray($templateCode, $markerArray, '###|###', 0);
@@ -573,7 +619,7 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 				}
 				// get the Template of the Javascript
 				$markerArray = array();
-				$markerArray["KEY"]            = $this->contentKey;
+				$markerArray["KEY"]            = $this->getContentKey();
 				$markerArray["CONTENT_COUNT"]  = $this->contentCount;
 				$markerArray["EASING"]         = (in_array($this->conf['config.']['accordionTransition'], array("swing", "linear")) ? "" : "ease".$this->conf['config.']['accordionTransitiondir'].$this->conf['config.']['accordionTransition']);
 				$markerArray["TRANS_DURATION"] = (is_numeric($this->conf['config.']['accordionTransitionduration']) ? $this->conf['config.']['accordionTransitionduration'] : 1000);
@@ -584,7 +630,7 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 				}
 				$easingAnimation = null;
 				if ($this->conf['config.']['accordionTransition']) {
-					$options['animated'] = "animated:'{$this->contentKey}'";
+					$options['animated'] = "animated:'{$this->getContentKey()}'";
 					$easingAnimation = trim($this->cObj->getSubpart($templateCode, "###EASING_ANIMATION###"));
 				} else if ($this->conf['config.']['accordionAnimated']) {
 					$options['animated'] = "animated:'{$this->conf['config.']['accordionAnimated']}'";
@@ -717,7 +763,7 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 					$templateCode = $this->outputError("Template TEMPLATE_SLIDER_JS is missing", true);
 				}
 				// Replace default values
-				$markerArray["KEY"] = $this->contentKey;
+				$markerArray["KEY"] = $this->getContentKey();
 				$markerArray["OPTIONS"] = implode(", ", $options);
 				$templateCode = $this->cObj->substituteMarkerArray($templateCode, $markerArray, '###|###', 0);
 				// Fix the href problem (config.prefixLocalAnchors = all)
@@ -779,7 +825,7 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 				}
 				// Replace default values
 				$markerArray = array();
-				$markerArray["KEY"]     = $this->contentKey;
+				$markerArray["KEY"]     = $this->getContentKey();
 				$markerArray["HEIGHT"]  = ($this->conf['config.']['slidedeckHeight'] > 0 ? $this->conf['config.']['slidedeckHeight'] : 300);
 				$markerArray["OPTIONS"] = implode(", ", $options);
 				// Replace all markers
@@ -828,7 +874,7 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 				}
 				// Replace default values
 				$markerArray = array();
-				$markerArray["KEY"]     = $this->contentKey;
+				$markerArray["KEY"]     = $this->getContentKey();
 				$markerArray["WIDTH"]   = ($this->conf['config.']['easyaccordionWidth'] > 0  ? $this->conf['config.']['easyaccordionWidth']  : 600);
 				$markerArray["OPTIONS"] = implode(", ", $options);
 				// Replace all markers
@@ -896,7 +942,7 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 				}
 				// Replace default values
 				$markerArray = array();
-				$markerArray["KEY"]     = $this->contentKey;
+				$markerArray["KEY"]     = $this->getContentKey();
 				$markerArray["OPTIONS"] = implode(", ", $options);
 				// Replace all markers
 				$templateCode = $this->cObj->substituteMarkerArray($templateCode, $markerArray, '###|###', 0);
@@ -928,11 +974,29 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 	}
 
 	/**
+	 * Set the contentKey
+	 * @param string $contentKey
+	 */
+	public function setContentKey($contentKey=null)
+	{
+		$this->contentKey = ($contentKey == null ? $this->extKey : $contentKey);
+	}
+
+	/**
+	 * Get the contentKey
+	 * @return string
+	 */
+	public function getContentKey()
+	{
+		return $this->contentKey;
+	}
+
+	/**
 	 * Render the template with the defined contents
 	 * 
 	 * @return string
 	 */
-	function renderTemplate()
+	public function renderTemplate()
 	{
 		$markerArray = $this->additionalMarker;
 		// get the template
@@ -940,7 +1004,7 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 			$templateCode = $this->outputError("Template {$this->templatePart} is missing", false);
 		}
 		// Replace default values
-		$markerArray["KEY"] = $this->contentKey;
+		$markerArray["KEY"] = $this->getContentKey();
 		// replace equalizeClass
 		if ($this->conf['config.']['equalize']) {
 			$markerArray["EQUALIZE_CLASS"] = ' '.$this->cObj->stdWrap($this->conf['equalizeClass'], $this->conf['equalizeClass.']);
@@ -1094,7 +1158,7 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 	 *
 	 * @return void
 	 */
-	function addResources()
+	public function addResources()
 	{
 		if (t3lib_div::int_from_ver(TYPO3_version) >= 4003000) {
 			$pagerender = $GLOBALS['TSFE']->getPageRenderer();
@@ -1210,7 +1274,7 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 	 * @param string $path
 	 * return string
 	 */
-	function getPath($path="")
+	private function getPath($path="")
 	{
 		return $GLOBALS['TSFE']->tmpl->getFileName($path);
 	}
@@ -1222,7 +1286,7 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 	 * @param boolean $first
 	 * @return void
 	 */
-	function addJsFile($script="", $first=false)
+	private function addJsFile($script="", $first=false)
 	{
 		if ($this->getPath($script) && ! in_array($script, $this->jsFiles)) {
 			if ($first === true) {
@@ -1239,7 +1303,7 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 	 * @param string $script
 	 * @return void
 	 */
-	function addJS($script="")
+	private function addJS($script="")
 	{
 		if (! in_array($script, $this->js)) {
 			$this->js[] = $script;
@@ -1252,7 +1316,7 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 	 * @param string $script
 	 * @return void
 	 */
-	function addCssFile($script="")
+	private function addCssFile($script="")
 	{
 		if ($this->getPath($script) && ! in_array($script, $this->cssFiles)) {
 			$this->cssFiles[] = $script;
@@ -1265,7 +1329,7 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 	 * @param string $script
 	 * @return void
 	 */
-	function addCSS($script="")
+	private function addCSS($script="")
 	{
 		if (! in_array($script, $this->css)) {
 			$this->css[] = $script;
@@ -1277,7 +1341,7 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 	 * @param string $key
 	 * @return string
 	 */
-	function getExtensionVersion($key)
+	private function getExtensionVersion($key)
 	{
 		if (! t3lib_extMgm::isLoaded($key)) {
 			return '';
@@ -1293,7 +1357,7 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 	 * @param boolean $js
 	 * @return string
 	 */
-	function outputError($msg='', $js=false)
+	private function outputError($msg='', $js=false)
 	{
 		t3lib_div::devLog($msg, $this->extKey, 3);
 		if ($this->confArr['frontendErrorMsg'] || ! isset($this->confArr['frontendErrorMsg'])) {

@@ -34,20 +34,20 @@
  */
 class ext_update
 {
-	var $tstemplates;
-	var $contentElements = array();
-	var $wrongLanguage = array();
-	var $missingHtmlTemplates = array();
-	var $movedFields = array();
-	var $flexObj;
-	var $ll = 'LLL:EXT:jfmulticontent/locallang.xml:updater.';
-	var $sheet_mapping = array(
+	private $tstemplates;
+	private $contentElements = array();
+	private $wrongLanguage = array();
+	private $missingHtmlTemplates = array();
+	private $movedFields = array();
+	private $flexObj;
+	private $ll = 'LLL:EXT:jfmulticontent/locallang.xml:updater.';
+	private $sheet_mapping = array(
 		"tab"       => "general",
 		"accordion" => "general",
 		"slider"    => "general",
 		"autoplay"  => "general",
 	);
-	var $style_mapping = array(
+	private $style_mapping = array(
 		"2colomn" => "2column",
 		"3colomn" => "3column",
 		"4colomn" => "4column",
@@ -59,8 +59,13 @@ class ext_update
 	 *
 	 * @return	string		HTML
 	 */
-	function main() {
+	public function main() {
 		$out = '';
+		if (t3lib_div::int_from_ver(TYPO3_version) < 4003000) {
+			// add flashmessages styles
+			$cssPath = $GLOBALS['BACK_PATH'].t3lib_extMgm::extRelPath('jfmulticontent');
+			$out .= '<link rel="stylesheet" type="text/css" href="'.$cssPath.'compat/flashmessages.css" media="screen" />';
+		}
 		$this->flexObj = t3lib_div::makeInstance('t3lib_flexformtools');
 		// analyze
 		$this->contentElements = $this->getContentElements();
@@ -99,11 +104,7 @@ class ext_update
 			// Update wrong  language
 			$out .= $this->displayUpdateOption('searchWrongLanguage', count($this->wrongLanguage),   'updateWrongLanguage');
 		}
-		if (t3lib_div::int_from_ver(TYPO3_version) < 4003000) {
-			// add flashmessages styles
-			$cssPath = $GLOBALS['BACK_PATH'].t3lib_extMgm::extRelPath('jfmulticontent');
-			$out = '<link rel="stylesheet" type="text/css" href="'.$cssPath.'compat/flashmessages.css" media="screen" />'.$out;
-		}
+
 		return $out;
 	}
 
@@ -114,7 +115,7 @@ class ext_update
 	 * @param string $func
 	 * @return hteml
 	 */
-	function displayUpdateOption($k, $count, $func)
+	private function displayUpdateOption($k, $count, $func)
 	{
 		$msg = $GLOBALS['LANG']->sL($this->ll.'msg_'.$k).' ';
 		$msg .= '<br/><strong>'.str_replace('###COUNT###', $count, $GLOBALS['LANG']->sL($this->ll.'foundMsg_'.$k)).'</strong>';
@@ -136,7 +137,7 @@ class ext_update
 	 * 
 	 * @return html
 	 */
-	function displayWarning()
+	private function displayWarning()
 	{
 		$out = '
 <div style="padding:15px 15px 20px 0;">
@@ -157,7 +158,7 @@ class ext_update
 	 * @param string $fsLabel
 	 * @return html
 	 */
-	function wrapForm($content, $fsLabel)
+	private function wrapForm($content, $fsLabel)
 	{
 		$out = '
 <form action="">
@@ -176,7 +177,7 @@ class ext_update
 	 * @param string $lbl
 	 * @return html
 	 */
-	function getButton($func, $lbl = 'DO IT')
+	private function getButton($func, $lbl = 'DO IT')
 	{
 		$params = array('do_update' => 1, 'func' => $func);
 		$onClick = "document.location='".t3lib_div::linkThisScript($params)."'; return false;";
@@ -189,7 +190,7 @@ class ext_update
 	 * 
 	 * @return array
 	 */
-	function getContentElements()
+	private function getContentElements()
 	{
 		$select_fields = '*';
 		$from_table = 'tt_content';
@@ -225,7 +226,7 @@ class ext_update
 	 * 
 	 * @return string
 	 */
-	function getWrongStyle()
+	private function getWrongStyle()
 	{
 		$select_fields = '*';
 		$from_table = 'tt_content';
@@ -261,7 +262,7 @@ class ext_update
 	 * 
 	 * @return string
 	 */
-	function getWrongLanguage()
+	private function getWrongLanguage()
 	{
 		$select_fields = '*';
 		$from_table = 'tt_content';
@@ -302,7 +303,7 @@ class ext_update
 	 * 
 	 * @return string
 	 */
-	function updateFlexForm()
+	private function updateFlexForm()
 	{
 		$msg = null;
 		if (count($this->contentElements) > 0 && count($this->sheet_mapping) > 0) {
@@ -335,7 +336,7 @@ class ext_update
 	 * 
 	 * @return string
 	 */
-	function updateWrongStyle()
+	private function updateWrongStyle()
 	{
 		$msg = null;
 		if (count($this->wrongStyle) > 0 && count($this->style_mapping) > 0) {
@@ -360,7 +361,7 @@ class ext_update
 	 * 
 	 * @return string
 	 */
-	function updateWrongLanguage()
+	private function updateWrongLanguage()
 	{
 		$msg = null;
 		if (count($this->wrongLanguage) > 0) {
@@ -386,7 +387,7 @@ class ext_update
 	 * @param	string		$what: what should be updated
 	 * @return	boolean
 	 */
-	function access($what = 'all')
+	public function access($what = 'all')
 	{
 		return TRUE;
 	}

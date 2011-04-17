@@ -34,25 +34,23 @@
  * @package	TYPO3
  * @subpackage	tx_jfmulticontent
  */
-class tx_jfmulticontent_pi1_wizicon {
+class tx_jfmulticontent_pi1_wizicon
+{
 	/**
 	 * Processing the wizard items array
 	 *
 	 * @param	array		$wizardItems: The wizard items
 	 * @return	Modified array with wizard items
 	 */
-	function proc($wizardItems)	{
-		global $LANG;
-
+	public function proc($wizardItems)
+	{
 		$LL = $this->includeLocalLang();
-
 		$wizardItems['plugins_tx_jfmulticontent_pi1'] = array(
-			'icon'=>t3lib_extMgm::extRelPath('jfmulticontent').'pi1/ce_wiz.gif',
-			'title'=>$LANG->getLLL('pi1_title',$LL),
-			'description'=>$LANG->getLLL('pi1_plus_wiz_description',$LL),
-			'params'=>'&defVals[tt_content][CType]=list&defVals[tt_content][list_type]=jfmulticontent_pi1'
+			'icon' => t3lib_extMgm::extRelPath('jfmulticontent') . 'pi1/ce_wiz.gif',
+			'title' => $GLOBALS['LANG']->getLLL('pi1_title', $LL),
+			'description' => $GLOBALS['LANG']->getLLL('pi1_plus_wiz_description', $LL),
+			'params' => '&defVals[tt_content][CType]=list&defVals[tt_content][list_type]=jfmulticontent_pi1'
 		);
-
 		return $wizardItems;
 	}
 
@@ -61,10 +59,10 @@ class tx_jfmulticontent_pi1_wizicon {
 	 *
 	 * @return	The array with language labels
 	 */
-	function includeLocalLang()	{
-		$llFile = t3lib_extMgm::extPath('jfmulticontent').'locallang.xml';
+	public function includeLocalLang()
+	{
+		$llFile = t3lib_extMgm::extPath('jfmulticontent') . 'locallang.xml';
 		$LOCAL_LANG = t3lib_div::readLLXMLfile($llFile, $GLOBALS['LANG']->lang);
-
 		return $LOCAL_LANG;
 	}
 }
