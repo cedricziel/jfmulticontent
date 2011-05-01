@@ -81,23 +81,113 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 		$this->conf = $conf;
 		$this->pi_setPiVarDefaults();
 		$this->pi_loadLL();
+
 		// get the config from EXT
 		$this->confArr = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['jfmulticontent']);
+
 		// Plugin or template?
 		if ($this->cObj->data['list_type'] == $this->extKey.'_pi1') {
+
 			// It's a content, all data from flexform
-			// Set the Flexform information
-			$this->pi_initPIflexForm();
-			$piFlexForm = $this->cObj->data['pi_flexform'];
-			foreach ($piFlexForm['data'] as $sheet => $data) {
-				foreach ($data as $lang => $value) {
-					foreach ($value as $key => $val) {
-						if (! isset($this->lConf[$key])) {
-							$this->lConf[$key] = $this->pi_getFFvalue($piFlexForm, $key, $sheet);
-						}
-					}
-				}
-			}
+
+			$this->lConf['style'] = $this->getFlexformData('general', 'style');
+
+			$this->lConf['columnOrder'] = $this->getFlexformData('general', 'columnOrder', in_array($this->lConf['style'], array('2column','3column','4column','5column')));
+			$this->lConf['column1']     = $this->getFlexformData('general', 'column1', in_array($this->lConf['style'], array('2column','3column','4column','5column')));
+			$this->lConf['column2']     = $this->getFlexformData('general', 'column2', in_array($this->lConf['style'], array('2column','3column','4column','5column')));
+			$this->lConf['column3']     = $this->getFlexformData('general', 'column3', in_array($this->lConf['style'], array('3column','4column','5column')));
+			$this->lConf['column4']     = $this->getFlexformData('general', 'column4', in_array($this->lConf['style'], array('4column','5column')));
+			$this->lConf['column5']     = $this->getFlexformData('general', 'column5', in_array($this->lConf['style'], array('5column')));
+			$this->lConf['equalize']    = $this->getFlexformData('general', 'equalize', in_array($this->lConf['style'], array('1column','2column','3column','4column','5column')));
+
+			$debuglog = ($this->lConf['style'] == 'tab');
+			$this->lConf['tabCollapsible']   = $this->getFlexformData('general', 'tabCollapsible', $debuglog);
+			$this->lConf['tabOpen']          = $this->getFlexformData('general', 'tabOpen', $debuglog);
+			$this->lConf['tabRandomContent'] = $this->getFlexformData('general', 'tabRandomContent', $debuglog);
+			$this->lConf['tabCookieExpires'] = $this->getFlexformData('general', 'tabCookieExpires', $debuglog);
+			$this->lConf['tabFxHeight']      = $this->getFlexformData('general', 'tabFxHeight', $debuglog);
+			$this->lConf['tabFxOpacity']     = $this->getFlexformData('general', 'tabFxOpacity', $debuglog);
+			$this->lConf['tabFxDuration']    = $this->getFlexformData('general', 'tabFxDuration', $debuglog);
+
+			$debuglog = ($this->lConf['style'] == 'accordion');
+			$this->lConf['accordionAutoHeight']         = $this->getFlexformData('general', 'accordionAutoHeight', $debuglog);
+			$this->lConf['accordionCollapsible']        = $this->getFlexformData('general', 'accordionCollapsible', $debuglog);
+			$this->lConf['accordionClosed']             = $this->getFlexformData('general', 'accordionClosed', $debuglog);
+			$this->lConf['accordionOpen']               = $this->getFlexformData('general', 'accordionOpen', $debuglog);
+			$this->lConf['accordionRandomContent']      = $this->getFlexformData('general', 'accordionRandomContent', $debuglog);
+			$this->lConf['accordionEvent']              = $this->getFlexformData('general', 'accordionEvent', $debuglog);
+			$this->lConf['accordionAnimated']           = $this->getFlexformData('general', 'accordionAnimated', $debuglog);
+			$this->lConf['accordionTransition']         = $this->getFlexformData('general', 'accordionTransition', $debuglog);
+			$this->lConf['accordionTransitiondir']      = $this->getFlexformData('general', 'accordionTransitiondir', $debuglog);
+			$this->lConf['accordionTransitionduration'] = $this->getFlexformData('general', 'accordionTransitionduration', $debuglog);
+
+			$debuglog = ($this->lConf['style'] == 'slider');
+			$this->lConf['sliderWidth']              = $this->getFlexformData('general', 'sliderWidth', $debuglog);
+			$this->lConf['sliderHeight']             = $this->getFlexformData('general', 'sliderHeight', $debuglog);
+			$this->lConf['sliderResizeContents']     = $this->getFlexformData('general', 'sliderResizeContents', $debuglog);
+			$this->lConf['sliderTheme']              = $this->getFlexformData('general', 'sliderTheme', $debuglog);
+			$this->lConf['sliderOpen']               = $this->getFlexformData('general', 'sliderOpen', $debuglog);
+			$this->lConf['sliderRandomContent']      = $this->getFlexformData('general', 'sliderRandomContent', $debuglog);
+			$this->lConf['sliderHashTags']           = $this->getFlexformData('general', 'sliderHashTags', $debuglog);
+			$this->lConf['sliderBuildArrows']        = $this->getFlexformData('general', 'sliderBuildArrows', $debuglog);
+			$this->lConf['sliderToggleArrows']       = $this->getFlexformData('general', 'sliderToggleArrows', $debuglog);
+			$this->lConf['sliderNavigation']         = $this->getFlexformData('general', 'sliderNavigation', $debuglog);
+			$this->lConf['sliderPanelFromHeader']    = $this->getFlexformData('general', 'sliderPanelFromHeader', $debuglog);
+			$this->lConf['sliderToggleControls']     = $this->getFlexformData('general', 'sliderToggleControls', $debuglog);
+			$this->lConf['sliderAutoStart']          = $this->getFlexformData('general', 'sliderAutoStart', $debuglog);
+			$this->lConf['sliderPauseOnHover']       = $this->getFlexformData('general', 'sliderPauseOnHover', $debuglog);
+			$this->lConf['sliderResumeOnVideoEnd']   = $this->getFlexformData('general', 'sliderResumeOnVideoEnd', $debuglog);
+			$this->lConf['sliderStopAtEnd']          = $this->getFlexformData('general', 'sliderStopAtEnd', $debuglog);
+			$this->lConf['sliderPlayRtl']            = $this->getFlexformData('general', 'sliderPlayRtl', $debuglog);
+			$this->lConf['sliderTransition']         = $this->getFlexformData('general', 'sliderTransition', $debuglog);
+			$this->lConf['sliderTransitiondir']      = $this->getFlexformData('general', 'sliderTransitiondir', $debuglog);
+			$this->lConf['sliderTransitionduration'] = $this->getFlexformData('general', 'sliderTransitionduration', $debuglog);
+
+			$debuglog = ($this->lConf['style'] == 'slidedeck');
+			$this->lConf['slidedeckHeight']             = $this->getFlexformData('general', 'slidedeckHeight', $debuglog);
+			$this->lConf['slidedeckTransition']         = $this->getFlexformData('general', 'slidedeckTransition', $debuglog);
+			$this->lConf['slidedeckTransitiondir']      = $this->getFlexformData('general', 'slidedeckTransitiondir', $debuglog);
+			$this->lConf['slidedeckTransitionduration'] = $this->getFlexformData('general', 'slidedeckTransitionduration', $debuglog);
+			$this->lConf['slidedeckStart']              = $this->getFlexformData('general', 'slidedeckStart', $debuglog);
+			$this->lConf['slidedeckActivecorner']       = $this->getFlexformData('general', 'slidedeckActivecorner', $debuglog);
+			$this->lConf['slidedeckIndex']              = $this->getFlexformData('general', 'slidedeckIndex', $debuglog);
+			$this->lConf['slidedeckScroll']             = $this->getFlexformData('general', 'slidedeckScroll', $debuglog);
+			$this->lConf['slidedeckKeys']               = $this->getFlexformData('general', 'slidedeckKeys', $debuglog);
+			$this->lConf['slidedeckHidespines']         = $this->getFlexformData('general', 'slidedeckHidespines', $debuglog);
+
+			$debuglog = ($this->lConf['style'] == 'easyaccordion');
+			$this->lConf['easyaccordionSkin']     = $this->getFlexformData('general', 'easyaccordionSkin', $debuglog);
+			$this->lConf['easyaccordionOpen']     = $this->getFlexformData('general', 'easyaccordionOpen', $debuglog);
+			$this->lConf['easyaccordionWidth']    = $this->getFlexformData('general', 'easyaccordionWidth', $debuglog);
+			$this->lConf['easyaccordionSlideNum'] = $this->getFlexformData('general', 'easyaccordionSlideNum', $debuglog);
+
+			$debuglog = ($this->lConf['style'] == 'booklet');
+			$this->lConf['bookletWidth']         = $this->getFlexformData('general', 'bookletWidth', $debuglog);
+			$this->lConf['bookletHeight']        = $this->getFlexformData('general', 'bookletHeight', $debuglog);
+			$this->lConf['bookletSpeed']         = $this->getFlexformData('general', 'bookletSpeed', $debuglog);
+			$this->lConf['bookletStartingPage']  = $this->getFlexformData('general', 'bookletStartingPage', $debuglog);
+			$this->lConf['bookletRTL']           = $this->getFlexformData('general', 'bookletRTL', $debuglog);
+			$this->lConf['bookletTransition']    = $this->getFlexformData('general', 'bookletTransition', $debuglog);
+			$this->lConf['bookletTransitiondir'] = $this->getFlexformData('general', 'bookletTransitiondir', $debuglog);
+			$this->lConf['bookletPagePadding']   = $this->getFlexformData('general', 'bookletPagePadding', $debuglog);
+			$this->lConf['bookletPageNumbers']   = $this->getFlexformData('general', 'bookletPageNumbers', $debuglog);
+			$this->lConf['bookletShadows']       = $this->getFlexformData('general', 'bookletShadows', $debuglog);
+			$this->lConf['bookletClosed']        = $this->getFlexformData('general', 'bookletClosed', $debuglog);
+			$this->lConf['bookletCovers']        = $this->getFlexformData('general', 'bookletCovers', $debuglog);
+			$this->lConf['bookletHash']          = $this->getFlexformData('general', 'bookletHash', $debuglog);
+			$this->lConf['bookletKeyboard']      = $this->getFlexformData('general', 'bookletKeyboard', $debuglog);
+			$this->lConf['bookletArrows']        = $this->getFlexformData('general', 'bookletArrows', $debuglog);
+			$this->lConf['bookletHovers']        = $this->getFlexformData('general', 'bookletHovers', $debuglog);
+
+			$this->lConf['delayDuration']      = $this->getFlexformData('general', 'delayDuration', in_array($this->lConf['style'], array('tab','accordion','slider','slidedeck','easyaccordion')));
+			$this->lConf['autoplayContinuing'] = $this->getFlexformData('general', 'autoplayContinuing', ($this->lConf['style'] == 'tab'));
+			$this->lConf['autoplayCycle']      = $this->getFlexformData('general', 'autoplayCycle', ($this->lConf['style'] == 'slidedeck'));
+
+			$this->lConf['titles']     = $this->getFlexformData('title', 'titles');
+			$this->lConf['attributes'] = $this->getFlexformData('attribute', 'attributes');
+
+			$this->lConf['options']         = $this->getFlexformData('special', 'options');
+			$this->lConf['optionsOverride'] = $this->getFlexformData('special', 'optionsOverride');
 
 			// Override the config with flexform data
 			$this->conf['config.']['style'] = $this->lConf['style'];
@@ -404,10 +494,13 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 				foreach ($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['jfmulticontent']['getViews'] as $_classRef) {
 					$_procObj = & t3lib_div::getUserObj($_classRef);
 					if ($this->conf['config.']['view'] == $_procObj->getIdentifier()) {
-						$_procObj->main($this->content, $this->conf, $this);
-						$this->titles = $_procObj->getTitles();
-						$this->cElements = $_procObj->getElements();
-						$this->content_id = $_procObj->getIds();
+						if (! method_exists($_procObj, 'isActive') || (method_exists($_procObj, 'isActive') && $_procObj->isActive())) {
+							// If the methode "isActive" not exists, this will be true...
+							$_procObj->main($this->content, $this->conf, $this);
+							$this->titles = $_procObj->getTitles();
+							$this->cElements = $_procObj->getElements();
+							$this->content_id = $_procObj->getIds();
+						}
 					}
 				}
 			}
@@ -1365,6 +1458,42 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 			
 		} else {
 			return null;
+		}
+	}
+
+	/**
+	 * Extract the requested information from flexform
+	 * @param string $sheet
+	 * @param string $name
+	 * @param boolean $devlog
+	 * @return string
+	 */
+	protected function getFlexformData($sheet='', $name='', $devlog=true)
+	{
+		$this->pi_initPIflexForm();
+		$piFlexForm = $this->cObj->data['pi_flexform'];
+		if (! isset($piFlexForm['data'])) {
+			if ($devlog === true) {
+				t3lib_div::devLog("Flexform Data not set", $this->extKey, 1);
+			}
+			return null;
+		}
+		if (! isset($piFlexForm['data'][$sheet])) {
+			if ($devlog === true) {
+				t3lib_div::devLog("Flexform sheet '{$sheet}' not defined", $this->extKey, 1);
+			}
+			return null;
+		}
+		if (! isset($piFlexForm['data'][$sheet]['lDEF'][$name])) {
+			if ($devlog === true) {
+				t3lib_div::devLog("Flexform Data [{$sheet}][{$name}] does not exist", $this->extKey, 1);
+			}
+			return null;
+		}
+		if (isset($piFlexForm['data'][$sheet]['lDEF'][$name]['vDEF'])) {
+			return $this->pi_getFFvalue($piFlexForm, $name, $sheet);
+		} else {
+			return $piFlexForm['data'][$sheet]['lDEF'][$name];
 		}
 	}
 }
