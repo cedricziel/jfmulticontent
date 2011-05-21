@@ -33,7 +33,7 @@ plugin.tx_jfmulticontent_pi1 {
 	equalizeClass = {$plugin.tx_jfmulticontent_pi1.equalizeClass}
 
 	columnWrap {
-		wrap = <div class="subcl">|</div> |*| <div class="subcl">|</div> |*| <div class="subcr">|</div>
+		wrap = <div class="subcl">|</div> |*| <div class="subc">|</div> |*| <div class="subcr">|</div>
 	}
 	tabWrap {
 		wrap = |
@@ -130,13 +130,18 @@ plugin.tx_jfmulticontent_pi1 {
 		bookletTransitiondir = 
 		bookletPagePadding = 10
 		bookletPageNumbers = 1
+		bookletManual = 0
 		bookletShadows = 1
 		bookletClosed = 0
 		bookletCovers = 0
+		bookletAutoCenter = 0
 		bookletHash = 0
 		bookletKeyboard = 0
-		# bookletOverlays = 1
+		bookletAuto = 0
+		bookletDelay = 5000
+		bookletOverlays = 1
 		bookletArrows = 0
+		bookletArrowsHide = 0
 		bookletHovers = 1
 
 		delayDuration = 0

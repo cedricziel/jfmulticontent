@@ -46,16 +46,16 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 	public $prefixId      = 'tx_jfmulticontent_pi1';
 	public $scriptRelPath = 'pi1/class.tx_jfmulticontent_pi1.php';
 	public $extKey        = 'jfmulticontent';
-	public $pi_checkCHash = true;
+	public $pi_checkCHash = TRUE;
 	public $conf = array();
 	private $lConf = array();
 	private $confArr = array();
-	private $templateFile = null;
-	private $templateFileJS = null;
-	private $templatePart = null;
+	private $templateFile = NULL;
+	private $templateFileJS = NULL;
+	private $templatePart = NULL;
 	private $additionalMarker = array();
-	private $contentKey = null;
-	private $contentCount = null;
+	private $contentKey = NULL;
+	private $contentCount = NULL;
 	private $contentClass = array();
 	private $classes = array();
 	private $contentWrap = array();
@@ -171,12 +171,18 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 			$this->lConf['bookletTransitiondir'] = $this->getFlexformData('general', 'bookletTransitiondir', $debuglog);
 			$this->lConf['bookletPagePadding']   = $this->getFlexformData('general', 'bookletPagePadding', $debuglog);
 			$this->lConf['bookletPageNumbers']   = $this->getFlexformData('general', 'bookletPageNumbers', $debuglog);
+			$this->lConf['bookletManual']        = $this->getFlexformData('general', 'bookletManual', $debuglog);
 			$this->lConf['bookletShadows']       = $this->getFlexformData('general', 'bookletShadows', $debuglog);
 			$this->lConf['bookletClosed']        = $this->getFlexformData('general', 'bookletClosed', $debuglog);
 			$this->lConf['bookletCovers']        = $this->getFlexformData('general', 'bookletCovers', $debuglog);
+			$this->lConf['bookletAutoCenter']    = $this->getFlexformData('general', 'bookletAutoCenter', $debuglog);
 			$this->lConf['bookletHash']          = $this->getFlexformData('general', 'bookletHash', $debuglog);
 			$this->lConf['bookletKeyboard']      = $this->getFlexformData('general', 'bookletKeyboard', $debuglog);
+			$this->lConf['bookletAuto']          = $this->getFlexformData('general', 'bookletAuto', $debuglog);
+			$this->lConf['bookletDelay']         = $this->getFlexformData('general', 'bookletDelay', $debuglog);
+			$this->lConf['bookletOverlays']      = $this->getFlexformData('general', 'bookletOverlays', $debuglog);
 			$this->lConf['bookletArrows']        = $this->getFlexformData('general', 'bookletArrows', $debuglog);
+			$this->lConf['bookletArrowsHide']    = $this->getFlexformData('general', 'bookletArrows', $debuglog);
 			$this->lConf['bookletHovers']        = $this->getFlexformData('general', 'bookletHovers', $debuglog);
 
 			$this->lConf['delayDuration']      = $this->getFlexformData('general', 'delayDuration', in_array($this->lConf['style'], array('tab','accordion','slider','slidedeck','easyaccordion')));
@@ -364,7 +370,6 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 			if ($this->lConf['easyaccordionSlideNum'] < 2) {
 				$this->conf['config.']['easyaccordionSlideNum'] = $this->lConf['easyaccordionSlideNum'];
 			}
-			// TODO: Add the opened content...
 			// booklet
 			if ($this->lConf['bookletWidth'] > 0) {
 				$this->conf['config.']['bookletWidth'] = $this->lConf['bookletWidth'];
@@ -393,6 +398,9 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 			if ($this->lConf['bookletPageNumbers'] < 2) {
 				$this->conf['config.']['bookletPageNumbers'] = $this->lConf['bookletPageNumbers'];
 			}
+			if ($this->lConf['bookletManual'] < 2) {
+				$this->conf['config.']['bookletManual'] = $this->lConf['bookletManual'];
+			}
 			if ($this->lConf['bookletShadows'] < 2) {
 				$this->conf['config.']['bookletShadows'] = $this->lConf['bookletShadows'];
 			}
@@ -402,18 +410,29 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 			if ($this->lConf['bookletCovers'] < 2) {
 				$this->conf['config.']['bookletCovers'] = $this->lConf['bookletCovers'];
 			}
+			if ($this->lConf['bookletAutoCenter'] < 2) {
+				$this->conf['config.']['bookletAutoCenter'] = $this->lConf['bookletAutoCenter'];
+			}
 			if ($this->lConf['bookletHash'] < 2) {
 				$this->conf['config.']['bookletHash'] = $this->lConf['bookletHash'];
 			}
 			if ($this->lConf['bookletKeyboard'] < 2) {
 				$this->conf['config.']['bookletKeyboard'] = $this->lConf['bookletKeyboard'];
 			}
-			// TODO: This option dos not work correct!
-			// if ($this->lConf['bookletKeyboard'] < 2) {
-			// 	$this->conf['config.']['bookletOverlays']    = $this->lConf['bookletOverlays'];
-			// }
+			if ($this->lConf['bookletAuto'] < 2) {
+				$this->conf['config.']['bookletAuto'] = $this->lConf['bookletAuto'];
+			}
+			if ($this->lConf['bookletDelay'] < 2) {
+				$this->conf['config.']['bookletDelay'] = $this->lConf['bookletDelay'];
+			}
+			if ($this->lConf['bookletOverlays'] < 2) {
+				$this->conf['config.']['bookletOverlays'] = $this->lConf['bookletOverlays'];
+			}
 			if ($this->lConf['bookletArrows'] < 2) {
 				$this->conf['config.']['bookletArrows'] = $this->lConf['bookletArrows'];
+			}
+			if ($this->lConf['bookletArrowsHide'] < 2) {
+				$this->conf['config.']['bookletArrowsHide'] = $this->lConf['bookletArrowsHide'];
 			}
 			if ($this->lConf['bookletHovers'] < 2) {
 				$this->conf['config.']['bookletHovers'] = $this->lConf['bookletHovers'];
@@ -447,7 +466,7 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 				$page_ids = t3lib_div::trimExplode(",", $this->cObj->data['tx_jfmulticontent_pages']);
 				// get the informations for every page
 				for ($a=0; $a < count($page_ids); $a++) {
-					$row = null;
+					$row = NULL;
 					if ($GLOBALS['TSFE']->sys_language_content) {
 						$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery('*', 'pages_language_overlay', 'pid='.intval($page_ids[$a]).' AND sys_language_uid='.$GLOBALS['TSFE']->sys_language_content, '', '', 1);
 						$row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res);
@@ -528,9 +547,9 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 			}
 		}
 		$this->contentCount = count($this->cElements);
-		// return false, if there is no element
+		// return FALSE, if there is no element
 		if ($this->contentCount == 0) {
-			return false;
+			return FALSE;
 		}
 
 		// The template
@@ -661,13 +680,13 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 				$markerArray = array();
 				// get the template
 				if (! $templateCode = trim($this->cObj->getSubpart($this->templateFileJS, "###TEMPLATE_TAB_JS###"))) {
-					$templateCode = $this->outputError("Template TEMPLATE_TAB_JS is missing", true);
+					$templateCode = $this->outputError("Template TEMPLATE_TAB_JS is missing", TRUE);
 				}
 				// Fix the href problem (config.prefixLocalAnchors = all)
 				if ($GLOBALS['TSFE']->config['config']['prefixLocalAnchors']) {
 					$fixTabHref = trim($this->cObj->getSubpart($templateCode, "###FIX_HREF###"));
 				} else {
-					$fixTabHref = null;
+					$fixTabHref = NULL;
 				}
 				$templateCode = trim($this->cObj->substituteSubpart($templateCode, '###FIX_HREF###', $fixTabHref, 0));
 				// Replace default values
@@ -677,10 +696,10 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 				$markerArray["ROTATE"] = $rotate;
 				$templateCode = $this->cObj->substituteMarkerArray($templateCode, $markerArray, '###|###', 0);
 				// Add all CSS and JS files
-				if (T3JQUERY === true) {
+				if (T3JQUERY === TRUE) {
 					tx_t3jquery::addJqJS();
 				} else {
-					$this->addJsFile($this->conf['jQueryLibrary'], true);
+					$this->addJsFile($this->conf['jQueryLibrary'], TRUE);
 					$this->addJsFile($this->conf['jQueryUI']);
 				}
 				$this->addCssFile($this->conf['jQueryUIstyle']);
@@ -719,9 +738,9 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 				$markerArray["DELAY_DURATION"] = (is_numeric($this->conf['config.']['delayDuration']) ? $this->conf['config.']['delayDuration'] : '0');
 				// get the template for the Javascript
 				if (! $templateCode = trim($this->cObj->getSubpart($this->templateFileJS, "###TEMPLATE_ACCORDION_JS###"))) {
-					$templateCode = $this->outputError("Template TEMPLATE_ACCORDION_JS is missing", true);
+					$templateCode = $this->outputError("Template TEMPLATE_ACCORDION_JS is missing", TRUE);
 				}
-				$easingAnimation = null;
+				$easingAnimation = NULL;
 				if ($this->conf['config.']['accordionTransition']) {
 					$options['animated'] = "animated:'{$this->getContentKey()}'";
 					$easingAnimation = trim($this->cObj->getSubpart($templateCode, "###EASING_ANIMATION###"));
@@ -730,9 +749,9 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 				}
 				// set the easing animation script
 				$templateCode = $this->cObj->substituteSubpart($templateCode, '###EASING_ANIMATION###', $easingAnimation, 0);
-				$continuing = null;
-				$autoPlay = null;
-				$settimeout = null;
+				$continuing = NULL;
+				$autoPlay = NULL;
+				$settimeout = NULL;
 				if ($this->conf['config.']['delayDuration'] > 0) {
 					// does not work if (! $this->conf['config.']['autoplayContinuing']) {}
 					$continuing = trim($this->cObj->getSubpart($templateCode, "###CONTINUING###"));
@@ -759,10 +778,10 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 				$templateCode = $this->cObj->substituteMarkerArray($templateCode, $markerArray, '###|###', 0);
 
 				// Add all CSS and JS files
-				if (T3JQUERY === true) {
+				if (T3JQUERY === TRUE) {
 					tx_t3jquery::addJqJS();
 				} else {
-					$this->addJsFile($this->conf['jQueryLibrary'], true);
+					$this->addJsFile($this->conf['jQueryLibrary'], TRUE);
 					$this->addJsFile($this->conf['jQueryEasing']);
 					$this->addJsFile($this->conf['jQueryUI']);
 				}
@@ -853,7 +872,7 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 				$markerArray = array();
 				// get the template
 				if (! $templateCode = trim($this->cObj->getSubpart($this->templateFileJS, "###TEMPLATE_SLIDER_JS###"))) {
-					$templateCode = $this->outputError("Template TEMPLATE_SLIDER_JS is missing", true);
+					$templateCode = $this->outputError("Template TEMPLATE_SLIDER_JS is missing", TRUE);
 				}
 				// Replace default values
 				$markerArray["KEY"] = $this->getContentKey();
@@ -863,14 +882,14 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 				if ($GLOBALS['TSFE']->config['config']['prefixLocalAnchors']) {
 					$fixTabHref = trim($this->cObj->getSubpart($templateCode, "###FIX_HREF###"));
 				} else {
-					$fixTabHref = null;
+					$fixTabHref = NULL;
 				}
 				$templateCode = trim($this->cObj->substituteSubpart($templateCode, '###FIX_HREF###', $fixTabHref, 0));
 				// Add all CSS and JS files
-				if (T3JQUERY === true) {
+				if (T3JQUERY === TRUE) {
 					tx_t3jquery::addJqJS();
 				} else {
-					$this->addJsFile($this->conf['jQueryLibrary'], true);
+					$this->addJsFile($this->conf['jQueryLibrary'], TRUE);
 					$this->addJsFile($this->conf['jQueryEasing']);
 				}
 				$this->addJsFile($this->conf['sliderJS']);
@@ -914,7 +933,7 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 
 				// get the template for the Javascript
 				if (! $templateCode = trim($this->cObj->getSubpart($this->templateFileJS, "###TEMPLATE_SLIDEDECK_JS###"))) {
-					$templateCode = $this->outputError("Template TEMPLATE_SLIDEDECK_JS is missing", true);
+					$templateCode = $this->outputError("Template TEMPLATE_SLIDEDECK_JS is missing", TRUE);
 				}
 				// Replace default values
 				$markerArray = array();
@@ -925,10 +944,10 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 				$templateCode = $this->cObj->substituteMarkerArray($templateCode, $markerArray, '###|###', 0);
 
 				// Add all CSS and JS files
-				if (T3JQUERY === true) {
+				if (T3JQUERY === TRUE) {
 					tx_t3jquery::addJqJS();
 				} else {
-					$this->addJsFile($this->conf['jQueryLibrary'], true);
+					$this->addJsFile($this->conf['jQueryLibrary'], TRUE);
 					$this->addJsFile($this->conf['jQueryEasing']);
 				}
 				$this->addJsFile($this->conf['slidedeckJS']);
@@ -963,7 +982,7 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 
 				// get the template for the Javascript
 				if (! $templateCode = trim($this->cObj->getSubpart($this->templateFileJS, "###TEMPLATE_EASYACCORDION_JS###"))) {
-					$templateCode = $this->outputError("Template TEMPLATE_EASYACCORDION_JS is missing", true);
+					$templateCode = $this->outputError("Template TEMPLATE_EASYACCORDION_JS is missing", TRUE);
 				}
 				// Replace default values
 				$markerArray = array();
@@ -974,10 +993,10 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 				$templateCode = $this->cObj->substituteMarkerArray($templateCode, $markerArray, '###|###', 0);
 				
 				// Add all CSS and JS files
-				if (T3JQUERY === true) {
+				if (T3JQUERY === TRUE) {
 					tx_t3jquery::addJqJS();
 				} else {
-					$this->addJsFile($this->conf['jQueryLibrary'], true);
+					$this->addJsFile($this->conf['jQueryLibrary'], TRUE);
 				}
 				$this->addJsFile($this->conf['easyaccordionJS']);
 				$this->addCssFile($this->conf['easyaccordionCSS']);
@@ -1013,13 +1032,16 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 					$options['pagePadding'] = "pagePadding: ".$this->conf['config.']['bookletPagePadding'];
 				}
 				$options['pageNumbers'] = "pageNumbers: ".($this->conf['config.']['bookletPageNumbers'] ? 'true' : 'false');
+				$options['manual']      = "manual: ".($this->conf['config.']['bookletManual'] ? 'true' : 'false');
 				$options['shadows']     = "shadows: ".($this->conf['config.']['bookletShadows'] ? 'true' : 'false');
 				$options['closed']      = "closed: ".($this->conf['config.']['bookletClosed'] ? 'true' : 'false');
 				$options['covers']      = "covers: ".($this->conf['config.']['bookletCovers'] ? 'true' : 'false');
+				$options['autoCenter']  = "autoCenter: ".($this->conf['config.']['bookletAutoCenter'] ? 'true' : 'false');
 				$options['hash']        = "hash: ".($this->conf['config.']['bookletHash'] ? 'true' : 'false');
 				$options['keyboard']    = "keyboard: ".($this->conf['config.']['bookletKeyboard'] ? 'true' : 'false');
-				// $options['overlays']    = "overlays: ".($this->conf['config.']['bookletOverlays'] ? 'true' : 'false');
+				$options['overlays']    = "overlays: ".($this->conf['config.']['bookletOverlays'] ? 'true' : 'false');
 				$options['arrows']      = "arrows: ".($this->conf['config.']['bookletArrows'] ? 'true' : 'false');
+				$options['arrowsHide']  = "arrowsHide: ".($this->conf['config.']['bookletArrowsHide'] ? 'true' : 'false');
 				$options['hovers']      = "hovers: ".($this->conf['config.']['bookletHovers'] ? 'true' : 'false');
 				// overwrite all options if set
 				if (trim($this->conf['config.']['options'])) {
@@ -1031,20 +1053,20 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 				}
 				// get the template for the Javascript
 				if (! $templateCode = trim($this->cObj->getSubpart($this->templateFileJS, "###TEMPLATE_BOOKLET_JS###"))) {
-					$templateCode = $this->outputError("Template TEMPLATE_BOOKLET_JS is missing", true);
+					$templateCode = $this->outputError("Template TEMPLATE_BOOKLET_JS is missing", TRUE);
 				}
 				// Replace default values
 				$markerArray = array();
 				$markerArray["KEY"]     = $this->getContentKey();
-				$markerArray["OPTIONS"] = implode(", ", $options);
+				$markerArray["OPTIONS"] = implode(",\n		", $options);
 				// Replace all markers
 				$templateCode = $this->cObj->substituteMarkerArray($templateCode, $markerArray, '###|###', 0);
 				
 				// Add all CSS and JS files
-				if (T3JQUERY === true) {
+				if (T3JQUERY === TRUE) {
 					tx_t3jquery::addJqJS();
 				} else {
-					$this->addJsFile($this->conf['jQueryLibrary'], true);
+					$this->addJsFile($this->conf['jQueryLibrary'], TRUE);
 					$this->addJsFile($this->conf['jQueryEasing']);
 				}
 				$this->addJsFile($this->conf['bookletJS']);
@@ -1053,7 +1075,7 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 				break;
 			}
 			default: {
-				return $this->outputError("NO VALID TEMPLATE SELECTED", false);
+				return $this->outputError("NO VALID TEMPLATE SELECTED", FALSE);
 			}
 		}
 
@@ -1070,9 +1092,9 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 	 * Set the contentKey
 	 * @param string $contentKey
 	 */
-	public function setContentKey($contentKey=null)
+	public function setContentKey($contentKey=NULL)
 	{
-		$this->contentKey = ($contentKey == null ? $this->extKey : $contentKey);
+		$this->contentKey = ($contentKey == NULL ? $this->extKey : $contentKey);
 	}
 
 	/**
@@ -1094,7 +1116,7 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 		$markerArray = $this->additionalMarker;
 		// get the template
 		if (! $templateCode = $this->cObj->getSubpart($this->templateFile, "###{$this->templatePart}###")) {
-			$templateCode = $this->outputError("Template {$this->templatePart} is missing", false);
+			$templateCode = $this->outputError("Template {$this->templatePart} is missing", FALSE);
 		}
 		// Replace default values
 		$markerArray["KEY"] = $this->getContentKey();
@@ -1133,9 +1155,9 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 			}
 			default: {
 				$contentWrap_array = array(
-					null,
-					null,
-					null
+					NULL,
+					NULL,
+					NULL
 				);
 				break;
 			}
@@ -1166,7 +1188,7 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 			// render the content
 			$markerArray["CONTENT_ID"] = $this->content_id[$a];
 			$markerArray["ID"]         = $a+1;
-			$markerArray["TITLE"]      = null;
+			$markerArray["TITLE"]      = NULL;
 			// Title will be selected if not COLUMNS (TAB, ACCORDION and SLIDER)
 			if ($this->templatePart != "TEMPLATE_COLUMNS") {
 				// overwrite the title if set in $this->titles
@@ -1258,14 +1280,14 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 		}
 		// Fix moveJsFromHeaderToFooter (add all scripts to the footer)
 		if ($GLOBALS['TSFE']->config['config']['moveJsFromHeaderToFooter']) {
-			$allJsInFooter = true;
+			$allJsInFooter = TRUE;
 		} else {
-			$allJsInFooter = false;
+			$allJsInFooter = FALSE;
 		}
 		// add all defined JS files
 		if (count($this->jsFiles) > 0) {
 			foreach ($this->jsFiles as $jsToLoad) {
-				if (T3JQUERY === true) {
+				if (T3JQUERY === TRUE) {
 					$conf = array(
 						'jsfile' => $jsToLoad,
 						'tofooter' => ($this->conf['jsInFooter'] || $allJsInFooter),
@@ -1302,7 +1324,7 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 			}
 			$conf = array();
 			$conf['jsdata'] = $temp_js;
-			if (T3JQUERY === true && t3lib_div::int_from_ver($this->getExtensionVersion('t3jquery')) >= 1002000) {
+			if (T3JQUERY === TRUE && t3lib_div::int_from_ver($this->getExtensionVersion('t3jquery')) >= 1002000) {
 				$conf['tofooter'] = ($this->conf['jsInFooter'] || $allJsInFooter);
 				$conf['jsminify'] = $this->conf['jsMinify'];
 				$conf['jsinline'] = $this->conf['jsInline'];
@@ -1323,9 +1345,9 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 						$temp_js = t3lib_div::minifyJavaScript($temp_js);
 					}
 					if ($this->conf['jsInFooter'] || $allJsInFooter) {
-						$GLOBALS['TSFE']->additionalFooterData['js_'.$this->extKey.'_'.$hash] = t3lib_div::wrapJS($temp_js, true);
+						$GLOBALS['TSFE']->additionalFooterData['js_'.$this->extKey.'_'.$hash] = t3lib_div::wrapJS($temp_js, TRUE);
 					} else {
-						$GLOBALS['TSFE']->additionalHeaderData['js_'.$this->extKey.'_'.$hash] = t3lib_div::wrapJS($temp_js, true);
+						$GLOBALS['TSFE']->additionalHeaderData['js_'.$this->extKey.'_'.$hash] = t3lib_div::wrapJS($temp_js, TRUE);
 					}
 				}
 			}
@@ -1379,10 +1401,10 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 	 * @param boolean $first
 	 * @return void
 	 */
-	private function addJsFile($script="", $first=false)
+	private function addJsFile($script="", $first=FALSE)
 	{
 		if ($this->getPath($script) && ! in_array($script, $this->jsFiles)) {
-			if ($first === true) {
+			if ($first === TRUE) {
 				$this->jsFiles = array_merge(array($script), $this->jsFiles);
 			} else {
 				$this->jsFiles[] = $script;
@@ -1450,14 +1472,14 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 	 * @param boolean $js
 	 * @return string
 	 */
-	private function outputError($msg='', $js=false)
+	private function outputError($msg='', $js=FALSE)
 	{
 		t3lib_div::devLog($msg, $this->extKey, 3);
 		if ($this->confArr['frontendErrorMsg'] || ! isset($this->confArr['frontendErrorMsg'])) {
 			return ($js ? "alert(".t3lib_div::quoteJSvalue($msg).")" : "<p>{$msg}</p>");
 			
 		} else {
-			return null;
+			return NULL;
 		}
 	}
 
@@ -1468,27 +1490,27 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 	 * @param boolean $devlog
 	 * @return string
 	 */
-	protected function getFlexformData($sheet='', $name='', $devlog=true)
+	protected function getFlexformData($sheet='', $name='', $devlog=TRUE)
 	{
 		$this->pi_initPIflexForm();
 		$piFlexForm = $this->cObj->data['pi_flexform'];
 		if (! isset($piFlexForm['data'])) {
-			if ($devlog === true) {
+			if ($devlog === TRUE) {
 				t3lib_div::devLog("Flexform Data not set", $this->extKey, 1);
 			}
-			return null;
+			return NULL;
 		}
 		if (! isset($piFlexForm['data'][$sheet])) {
-			if ($devlog === true) {
+			if ($devlog === TRUE) {
 				t3lib_div::devLog("Flexform sheet '{$sheet}' not defined", $this->extKey, 1);
 			}
-			return null;
+			return NULL;
 		}
 		if (! isset($piFlexForm['data'][$sheet]['lDEF'][$name])) {
-			if ($devlog === true) {
+			if ($devlog === TRUE) {
 				t3lib_div::devLog("Flexform Data [{$sheet}][{$name}] does not exist", $this->extKey, 1);
 			}
-			return null;
+			return NULL;
 		}
 		if (isset($piFlexForm['data'][$sheet]['lDEF'][$name]['vDEF'])) {
 			return $this->pi_getFFvalue($piFlexForm, $name, $sheet);

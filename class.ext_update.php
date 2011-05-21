@@ -274,23 +274,23 @@ class ext_update
 		if ($res) {
 			$resultRows = array();
 			while (($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res))) {
-				$addArray = false;
+				$addArray = FALSE;
 				$tempRows = array();
 				$res2 = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 					$select_fields,
 					$from_table,
-					'uid IN ('.implode(',', $GLOBALS['TYPO3_DB']->fullQuoteArray(t3lib_div::trimExplode(',', $row['tx_jfmulticontent_contents'], true), $from_table)).')
+					'uid IN ('.implode(',', $GLOBALS['TYPO3_DB']->fullQuoteArray(t3lib_div::trimExplode(',', $row['tx_jfmulticontent_contents'], TRUE), $from_table)).')
 					AND deleted=0'
 				);
 				while (($row2 = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res2))) {
 					if ($row2['sys_language_uid'] != 0) {
-						$addArray = true;
+						$addArray = TRUE;
 						$tempRows[] = $row2['l18n_parent'];
 					} else {
 						$tempRows[] = $row2['uid'];
 					}
 				}
-				if ($addArray === true) {
+				if ($addArray === TRUE) {
 					$resultRows[$row['uid']] = $tempRows;
 				}
 			}
@@ -305,7 +305,7 @@ class ext_update
 	 */
 	private function updateFlexForm()
 	{
-		$msg = null;
+		$msg = NULL;
 		if (count($this->contentElements) > 0 && count($this->sheet_mapping) > 0) {
 			foreach ($this->contentElements as $content_id => $contentElement) {
 				foreach ($this->sheet_mapping as $sheet_old => $sheet_new) {
@@ -338,7 +338,7 @@ class ext_update
 	 */
 	private function updateWrongStyle()
 	{
-		$msg = null;
+		$msg = NULL;
 		if (count($this->wrongStyle) > 0 && count($this->style_mapping) > 0) {
 			foreach ($this->wrongStyle as $content_id => $contentElement) {
 				$contentElement['ff_parsed']['data']['general']['lDEF']['style']['vDEF'] = $this->style_mapping[$contentElement['ff_parsed']['data']['general']['lDEF']['style']['vDEF']];
@@ -363,7 +363,7 @@ class ext_update
 	 */
 	private function updateWrongLanguage()
 	{
-		$msg = null;
+		$msg = NULL;
 		if (count($this->wrongLanguage) > 0) {
 			foreach ($this->wrongLanguage as $content_id => $contentElements) {
 				// Update the content

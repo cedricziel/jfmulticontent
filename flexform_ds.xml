@@ -1268,6 +1268,18 @@
 							</config>
 						</TCEforms>
 					</bookletPageNumbers>
+					<bookletManual>
+						<TCEforms>
+							<exclude>1</exclude>
+							<displayCond>FIELD:style:=:booklet</displayCond>
+							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.bookletManual</label>
+							<config>
+								<form_type>user</form_type>
+								<userFunc><![CDATA[EXT:jfmulticontent/lib/class.tx_jfmulticontent_tceFunc.php:&tx_jfmulticontent_tceFunc->getCheckbox]]></userFunc>
+								<checked>1</checked>
+							</config>
+						</TCEforms>
+					</bookletManual>
 					<bookletShadows>
 						<TCEforms>
 							<exclude>1</exclude>
@@ -1304,6 +1316,18 @@
 							</config>
 						</TCEforms>
 					</bookletCovers>
+					<bookletAutoCenter>
+						<TCEforms>
+							<exclude>1</exclude>
+							<displayCond>FIELD:style:=:booklet</displayCond>
+							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.bookletAutoCenter</label>
+							<config>
+								<form_type>user</form_type>
+								<userFunc><![CDATA[EXT:jfmulticontent/lib/class.tx_jfmulticontent_tceFunc.php:&tx_jfmulticontent_tceFunc->getCheckbox]]></userFunc>
+								<checked>0</checked>
+							</config>
+						</TCEforms>
+					</bookletAutoCenter>
 					<bookletHash>
 						<TCEforms>
 							<exclude>1</exclude>
@@ -1328,7 +1352,33 @@
 							</config>
 						</TCEforms>
 					</bookletKeyboard>
-<!-- This option dos not work correct!
+					<bookletAuto>
+						<TCEforms>
+							<exclude>1</exclude>
+							<displayCond>FIELD:style:=:booklet</displayCond>
+							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.bookletAuto</label>
+							<config>
+								<form_type>user</form_type>
+								<userFunc><![CDATA[EXT:jfmulticontent/lib/class.tx_jfmulticontent_tceFunc.php:&tx_jfmulticontent_tceFunc->getCheckbox]]></userFunc>
+								<checked>0</checked>
+							</config>
+						</TCEforms>
+					</bookletAuto>
+					<bookletDelay>
+						<TCEforms>
+							<exclude>1</exclude>
+							<displayCond>FIELD:style:=:booklet</displayCond>
+							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.bookletDelay</label>
+							<config>
+								<type>input</type>
+								<size>6</size>
+								<max>6</max>
+								<default></default>
+								<checkbox>0</checkbox>
+								<eval>int</eval>
+							</config>
+						</TCEforms>
+					</bookletDelay>
 					<bookletOverlays>
 						<TCEforms>
 							<exclude>1</exclude>
@@ -1341,7 +1391,6 @@
 							</config>
 						</TCEforms>
 					</bookletOverlays>
--->
 					<bookletArrows>
 						<TCEforms>
 							<exclude>1</exclude>
@@ -1354,6 +1403,18 @@
 							</config>
 						</TCEforms>
 					</bookletArrows>
+					<bookletArrowsHide>
+						<TCEforms>
+							<exclude>1</exclude>
+							<displayCond>FIELD:style:=:booklet</displayCond>
+							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.bookletArrowsHide</label>
+							<config>
+								<form_type>user</form_type>
+								<userFunc><![CDATA[EXT:jfmulticontent/lib/class.tx_jfmulticontent_tceFunc.php:&tx_jfmulticontent_tceFunc->getCheckbox]]></userFunc>
+								<checked>0</checked>
+							</config>
+						</TCEforms>
+					</bookletArrowsHide>
 					<bookletHovers>
 						<TCEforms>
 							<exclude>1</exclude>

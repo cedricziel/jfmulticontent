@@ -34,7 +34,7 @@ require_once (PATH_t3lib . 'class.t3lib_page.php');
 class tx_jfmulticontent_ttnews_extend
 {
 	var $conf = array();
-	var $cObj = null;
+	var $cObj = NULL;
 	var $extKey = 'jfmulticontent';
 	var $jsFiles = array();
 	var $js = array();
@@ -43,17 +43,17 @@ class tx_jfmulticontent_ttnews_extend
 
 	function extraCodesProcessor($newsObject)
 	{
-		$content = null;
+		$content = NULL;
 		$this->cObj = $newsObject->cObj;
 		$this->conf = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_jfmulticontent_pi1.'];
 		switch ($newsObject->theCode) {
 			case 'LIST_ACCORDION': {
 				$content .= $newsObject->displayList();
 				// Add all CSS and JS files
-				if (T3JQUERY === true) {
+				if (T3JQUERY === TRUE) {
 					tx_t3jquery::addJqJS();
 				} else {
-					$this->addJsFile($this->conf['jQueryLibrary'], true);
+					$this->addJsFile($this->conf['jQueryLibrary'], TRUE);
 					$this->addJsFile($this->conf['jQueryEasing']);
 					$this->addJsFile($this->conf['jQueryUI']);
 				}
@@ -64,10 +64,10 @@ class tx_jfmulticontent_ttnews_extend
 			case 'LIST_SLIDER': {
 				$content .= $newsObject->displayList();
 				// Add all CSS and JS files
-				if (T3JQUERY === true) {
+				if (T3JQUERY === TRUE) {
 					tx_t3jquery::addJqJS();
 				} else {
-					$this->addJsFile($this->conf['jQueryLibrary'], true);
+					$this->addJsFile($this->conf['jQueryLibrary'], TRUE);
 					$this->addJsFile($this->conf['jQueryEasing']);
 				}
 				$this->addJsFile($this->conf['sliderJS']);
@@ -78,10 +78,10 @@ class tx_jfmulticontent_ttnews_extend
 			case 'LIST_SLIDEDECK': {
 				$content .= $newsObject->displayList();
 				// Add all CSS and JS files
-				if (T3JQUERY === true) {
+				if (T3JQUERY === TRUE) {
 					tx_t3jquery::addJqJS();
 				} else {
-					$this->addJsFile($this->conf['jQueryLibrary'], true);
+					$this->addJsFile($this->conf['jQueryLibrary'], TRUE);
 					$this->addJsFile($this->conf['jQueryEasing']);
 				}
 				$this->addJsFile($this->conf['slidedeckJS']);
@@ -93,10 +93,10 @@ class tx_jfmulticontent_ttnews_extend
 			case 'LIST_EASYACCORDION': {
 				$content .= $newsObject->displayList();
 				// Add all CSS and JS files
-				if (T3JQUERY === true) {
+				if (T3JQUERY === TRUE) {
 					tx_t3jquery::addJqJS();
 				} else {
-					$this->addJsFile($this->conf['jQueryLibrary'], true);
+					$this->addJsFile($this->conf['jQueryLibrary'], TRUE);
 				}
 				$this->addJsFile($this->conf['easyaccordionJS']);
 				$this->addCssFile($this->conf['easyaccordionCSS']);
@@ -137,14 +137,14 @@ class tx_jfmulticontent_ttnews_extend
 		}
 		// Fix moveJsFromHeaderToFooter (add all scripts to the footer)
 		if ($GLOBALS['TSFE']->config['config']['moveJsFromHeaderToFooter']) {
-			$allJsInFooter = true;
+			$allJsInFooter = TRUE;
 		} else {
-			$allJsInFooter = false;
+			$allJsInFooter = FALSE;
 		}
 		// add all defined JS files
 		if (count($this->jsFiles) > 0) {
 			foreach ($this->jsFiles as $jsToLoad) {
-				if (T3JQUERY === true) {
+				if (T3JQUERY === TRUE) {
 					$conf = array(
 						'jsfile' => $jsToLoad,
 						'tofooter' => ($this->conf['jsInFooter'] || $allJsInFooter),
@@ -181,7 +181,7 @@ class tx_jfmulticontent_ttnews_extend
 			}
 			$conf = array();
 			$conf['jsdata'] = $temp_js;
-			if (T3JQUERY === true && t3lib_div::int_from_ver($this->getExtensionVersion('t3jquery')) >= 1002000) {
+			if (T3JQUERY === TRUE && t3lib_div::int_from_ver($this->getExtensionVersion('t3jquery')) >= 1002000) {
 				$conf['tofooter'] = ($this->conf['jsInFooter'] || $allJsInFooter);
 				$conf['jsminify'] = $this->conf['jsMinify'];
 				$conf['jsinline'] = $this->conf['jsInline'];
@@ -202,9 +202,9 @@ class tx_jfmulticontent_ttnews_extend
 						$temp_js = t3lib_div::minifyJavaScript($temp_js);
 					}
 					if ($this->conf['jsInFooter'] || $allJsInFooter) {
-						$GLOBALS['TSFE']->additionalFooterData['js_'.$this->extKey.'_'.$hash] = t3lib_div::wrapJS($temp_js, true);
+						$GLOBALS['TSFE']->additionalFooterData['js_'.$this->extKey.'_'.$hash] = t3lib_div::wrapJS($temp_js, TRUE);
 					} else {
-						$GLOBALS['TSFE']->additionalHeaderData['js_'.$this->extKey.'_'.$hash] = t3lib_div::wrapJS($temp_js, true);
+						$GLOBALS['TSFE']->additionalHeaderData['js_'.$this->extKey.'_'.$hash] = t3lib_div::wrapJS($temp_js, TRUE);
 					}
 				}
 			}
@@ -258,10 +258,10 @@ class tx_jfmulticontent_ttnews_extend
 	 * @param boolean $first
 	 * @return void
 	 */
-	function addJsFile($script="", $first=false)
+	function addJsFile($script="", $first=FALSE)
 	{
 		if ($this->getPath($script) && ! in_array($script, $this->jsFiles)) {
-			if ($first === true) {
+			if ($first === TRUE) {
 				$this->jsFiles = array_merge(array($script), $this->jsFiles);
 			} else {
 				$this->jsFiles[] = $script;
@@ -330,27 +330,27 @@ class tx_jfmulticontent_ttnews_extend
 	 * @param boolean $devlog
 	 * @return string
 	 */
-	protected function getFlexformData($sheet='', $name='', $devlog=true)
+	protected function getFlexformData($sheet='', $name='', $devlog=TRUE)
 	{
 		$this->pi_initPIflexForm();
 		$piFlexForm = $this->cObj->data['pi_flexform'];
 		if (! isset($piFlexForm['data'])) {
-			if ($devlog === true) {
+			if ($devlog === TRUE) {
 				t3lib_div::devLog("Flexform Data not set", $this->extKey, 1);
 			}
-			return null;
+			return NULL;
 		}
 		if (! isset($piFlexForm['data'][$sheet])) {
-			if ($devlog === true) {
+			if ($devlog === TRUE) {
 				t3lib_div::devLog("Flexform sheet '{$sheet}' not defined", $this->extKey, 1);
 			}
-			return null;
+			return NULL;
 		}
 		if (! isset($piFlexForm['data'][$sheet]['lDEF'][$name])) {
-			if ($devlog === true) {
+			if ($devlog === TRUE) {
 				t3lib_div::devLog("Flexform Data [{$sheet}][{$name}] does not exist", $this->extKey, 1);
 			}
-			return null;
+			return NULL;
 		}
 		if (isset($piFlexForm['data'][$sheet]['lDEF'][$name]['vDEF'])) {
 			return $this->pi_getFFvalue($piFlexForm, $name, $sheet);
