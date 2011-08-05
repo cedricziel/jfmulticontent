@@ -1298,14 +1298,14 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 					$file = $this->getPath($jsToLoad);
 					if ($file) {
 						if (t3lib_div::int_from_ver(TYPO3_version) >= 4003000) {
-							if ($allJsInFooter) {
+							if ($this->conf['jsInFooter'] || $allJsInFooter) {
 								$pagerender->addJsFooterFile($file, 'text/javascript', $this->conf['jsMinify']);
 							} else {
 								$pagerender->addJsFile($file, 'text/javascript', $this->conf['jsMinify']);
 							}
 						} else {
 							$temp_file = '<script type="text/javascript" src="'.$file.'"></script>';
-							if ($allJsInFooter) {
+							if ($this->conf['jsInFooter'] || $allJsInFooter) {
 								$GLOBALS['TSFE']->additionalFooterData['jsFile_'.$this->extKey.'_'.$file] = $temp_file;
 							} else {
 								$GLOBALS['TSFE']->additionalHeaderData['jsFile_'.$this->extKey.'_'.$file] = $temp_file;

@@ -1,5 +1,5 @@
 /**
- * SlideDeck 1.2.2 Lite - 2011-03-22
+ * SlideDeck 1.2.5 Lite - 2011-06-01
  * Copyright (c) 2011 digital-telepathy (http://www.dtelepathy.com)
  * 
  * Support the developers by purchasing the Pro version at http://www.slidedeck.com/download
@@ -32,13 +32,14 @@
  */
 
 var SlideDeck;
+var SlideDeckSkin = {};
 
 (function($){
-    SlideDeck = function(el,opts){
+    window.SlideDeck = function(el,opts){
         var self = this,
             el = $(el);
         
-        var VERSION = "1.2.2";
+        var VERSION = "1.2.5";
         
         this.options = {
             speed: 500,
@@ -80,18 +81,18 @@ var SlideDeck;
         
         var UA = navigator.userAgent.toLowerCase();
         this.browser = {
-            chrome: UA.match(/chrome/) ? true : false,
-            firefox: UA.match(/firefox/) ? true : false,
-            firefox2: UA.match(/firefox\/2/) ? true : false,
-            firefox30: UA.match(/firefox\/3\.0/) ? true : false,
-            msie: UA.match(/msie/) ? true : false,
-            msie6: (UA.match(/msie 6/) && !UA.match(/msie 7|8/)) ? true : false,
-            msie7: UA.match(/msie 7/) ? true : false,
-            msie8: UA.match(/msie 8/) ? true : false,
-            msie9: UA.match(/msie 9/) ? true : false,
-            chromeFrame: (UA.match(/msie/) && UA.match(/chrome/)) ? true : false,
-            opera: UA.match(/opera/) ? true : false,
-            safari: (UA.match(/safari/) && !UA.match(/chrome/)) ? true : false
+	        chrome: UA.match(/chrome/) ? true : false,
+	        firefox: UA.match(/firefox/) ? true : false,
+	        firefox2: UA.match(/firefox\/2/) ? true : false,
+	        firefox30: UA.match(/firefox\/3\.0/) ? true : false,
+	        msie: UA.match(/msie/) ? true : false,
+	        msie6: (UA.match(/msie 6/) && !UA.match(/msie 7|8/)) ? true : false,
+	        msie7: UA.match(/msie 7/) ? true : false,
+	        msie8: UA.match(/msie 8/) ? true : false,
+	        msie9: UA.match(/msie 9/) ? true : false,
+	        chromeFrame: (UA.match(/msie/) && UA.match(/chrome/)) ? true : false,
+	        opera: UA.match(/opera/) ? true : false,
+	        safari: (UA.match(/safari/) && !UA.match(/chrome/)) ? true : false
         };
         for(var b in this.browser){
             if(this.browser[b] === true){
@@ -333,7 +334,7 @@ var SlideDeck;
                     if( !self.browser.msie9 ){
                         spineStyles.top = (self.browser.msie) ? 0 : (height - spine_half_width) + "px";
                         spineStyles.marginLeft = ((self.browser.msie) ? 0 : (0 - spine_half_width)) + "px";
-                        spineStyles.filter = 'progid:DXImageTransform.Microsoft.BasicImage(rotation=3)';
+	                    spineStyles.filter = 'progid:DXImageTransform.Microsoft.BasicImage(rotation=3)';
                     }
 
                     spine.css( spineStyles ).addClass(self.classes.spine).addClass(self.classes.spine + "_" + (i + 1));
