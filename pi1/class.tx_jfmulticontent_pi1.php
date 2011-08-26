@@ -507,6 +507,21 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 					$this->cElements[] = $this->cObj->cObjGetSingle($view['content'], $view['content.']);
 					$this->content_id[$a] = $content_ids[$a];
 				}
+			} else if ($this->conf['config.']['view'] == 'irre') {
+				// get the content ID's
+				$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery('*', 'tt_content', 'tx_jfmulticontent_irre_parentid='.intval($this->cObj->data['uid']).'', '', '');//  AND tx_jfmulticontent_irre_parenttable=\'tt_content\'
+				$a = 0;
+				while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res)) {
+					$GLOBALS['TSFE']->register['uid'] = $row['uid'];
+					$GLOBALS['TSFE']->register['title'] = (strlen(trim($this->titles[$a])) > 0 ? $this->titles[$a] : $row['header']);
+					if ($this->titles[$a] == '' || !isset($this->titles[$a])) {
+						$this->titles[$a] = $this->cObj->cObjGetSingle($view['title'], $view['title.']);
+						$GLOBALS['TSFE']->register['title'] = $this->titles[$a];
+					}
+					$this->cElements[] = $this->cObj->cObjGetSingle($view['content'], $view['content.']);
+					$this->content_id[$a] = $content_ids[$a];
+					$a ++;
+				}
 			}
 			// HOOK for additional views
 			if (is_array($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['jfmulticontent']['getViews'])) {
@@ -560,10 +575,6 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 		if (! $this->templateFileJS = $this->cObj->fileResource($this->conf['templateFileJS'])) {
 			$this->templateFileJS = $this->cObj->fileResource("EXT:jfmulticontent/res/tx_jfmulticontent_pi1.js");
 		}
-
-
-		// add the CSS file
-		$this->addCssFile($this->conf['cssFile']);
 
 		// define the jQuery mode and function
 		if ($this->conf['jQueryNoConflict']) {
@@ -812,15 +823,14 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 					$options[] = "toggleArrows: ".($this->conf['config.']['sliderToggleArrows'] ? 'true' : 'false');
 					$options[] = "toggleControls: ".($this->conf['config.']['sliderToggleControls'] ? 'true' : 'false');
 				}
-				if ($this->conf['config.']['sliderWidth']) {
-					$options[] = "width: '".t3lib_div::slashJS($this->conf['config.']['sliderWidth'])."'";
-				}
-				if ($this->conf['config.']['sliderHeight']) {
-					$options[] = "height: '".t3lib_div::slashJS($this->conf['config.']['sliderHeight'])."'";
+				if ($this->conf['config.']['sliderWidth'] || $this->conf['config.']['sliderHeight']) {
+					$this->addCSS("#{$this->getContentKey()} {
+".($this->conf['config.']['sliderWidth'] ?  "	width: {$this->conf['config.']['sliderWidth']};\n" : "") . ($this->conf['config.']['sliderHeight'] ? "	height: {$this->conf['config.']['sliderHeight']};\n" : "")."}");
 				}
 				if ($this->conf['config.']['sliderResizeContents']) {
 					$options[] = "resizeContents: true";
 				}
+				$this->addCssFile($this->conf['sliderCSS']);
 				if ($this->conf['config.']['sliderTheme']) {
 					$options[] = "theme: '".t3lib_div::slashJS($this->conf['config.']['sliderTheme'])."'";
 					if (substr($this->confArr['anythingSliderThemeFolder'], 0, 4) === 'EXT:') {
@@ -829,7 +839,7 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 					} else {
 						$anythingSliderThemeFolder = $this->confArr['anythingSliderThemeFolder'];
 					}
-					$options[] = "themeDirectory: '".t3lib_div::slashJS($anythingSliderThemeFolder)."{themeName}/style.css'";
+					$this->addCssFile(t3lib_div::slashJS($anythingSliderThemeFolder).$this->conf['config.']['sliderTheme'].'/style.css');
 				}
 				$options[] = "buildArrows: ".($this->conf['config.']['sliderBuildArrows'] ? 'true' : 'false');
 				$options[] = "resumeOnVideoEnd: ".($this->conf['config.']['sliderResumeOnVideoEnd'] ? 'true' : 'false');
@@ -893,7 +903,6 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 					$this->addJsFile($this->conf['jQueryEasing']);
 				}
 				$this->addJsFile($this->conf['sliderJS']);
-				$this->addCssFile($this->conf['sliderCSS']);
 				$this->addJS($templateCode);
 				break;
 			}
@@ -1078,6 +1087,9 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 				return $this->outputError("NO VALID TEMPLATE SELECTED", FALSE);
 			}
 		}
+
+		// add the CSS file
+		$this->addCssFile($this->conf['cssFile']);
 
 		// Add the ressources
 		$this->addResources();
@@ -1333,7 +1345,7 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 				// Add script only once
 				$hash = md5($temp_js);
 				if ($this->conf['jsInline']) {
-					$GLOBALS['TSFE']->inlineJS[$hash] = $temp_css;
+					$GLOBALS['TSFE']->inlineJS[$hash] = $temp_js;
 				} elseif (t3lib_div::int_from_ver(TYPO3_version) >= 4003000) {
 					if ($this->conf['jsInFooter'] || $allJsInFooter) {
 						$pagerender->addJsFooterInlineCode($hash, $temp_js, $this->conf['jsMinify']);

@@ -152,16 +152,6 @@ plugin.tx_jfmulticontent_pi1 {
 		optionsOverride = 0
 	}
 	views {
-		content {
-			content = RECORDS
-			content {
-				tables = tt_content
-				source.data = register:uid
-				dontCheckPid = 1
-			}
-			title = TEXT
-			title.data = register:title
-		}
 		page {
 			content = CONTENT
 			content {
@@ -175,6 +165,26 @@ plugin.tx_jfmulticontent_pi1 {
 			}
 			title = TEXT
 			title.data = register:page_title
+		}
+		content {
+			content = RECORDS
+			content {
+				tables = tt_content
+				source.data = register:uid
+				dontCheckPid = 1
+			}
+			title = TEXT
+			title.data = register:title
+		}
+		irre {
+			content = RECORDS
+			content {
+				tables = tt_content
+				source.data = register:uid
+				dontCheckPid = 1
+			}
+			title = TEXT
+			title.data = register:title
 		}
 	}
 	contents {

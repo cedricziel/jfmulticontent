@@ -10,8 +10,10 @@
 			<label index="tt_content.tx_jfmulticontent.view">View</label>
 			<label index="tt_content.tx_jfmulticontent.view.I.0">Contents</label>
 			<label index="tt_content.tx_jfmulticontent.view.I.1">Pages</label>
+			<label index="tt_content.tx_jfmulticontent.view.I.2">Inline content</label>
 			<label index="tt_content.tx_jfmulticontent.pages">Pages to display</label>
 			<label index="tt_content.tx_jfmulticontent.contents">Contents to display</label>
+			<label index="tt_content.tx_jfmulticontent.irre">Insert inline content</label>
 			<label index="tt_content.tx_jfmulticontent.contents_add">Create new record</label>
 			<label index="tt_content.tx_jfmulticontent.contents_edit">Edit</label>
 			<label index="tt_content.tx_jfmulticontent.sheet_general">General</label>

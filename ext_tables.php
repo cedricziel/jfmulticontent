@@ -23,6 +23,7 @@ $tempColumns = array(
 			'items' => array(
 				array('LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.view.I.0', 'content'),
 				array('LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.view.I.1', 'page'),
+				array('LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.view.I.2', 'irre'),
 			),
 			'itemsProcFunc' => 'tx_jfmulticontent_itemsProcFunc->getViews',
 		)
@@ -44,7 +45,33 @@ $tempColumns = array(
 				),
 			),
 		)
-	)
+	),
+	'tx_jfmulticontent_irre' => Array (
+		'exclude' => 1,
+		'displayCond' => 'FIELD:tx_jfmulticontent_view:IN:irre',
+		'label' => 'LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.irre',
+		'config' => array (
+			'type' => 'inline',
+			'foreign_table' => 'tt_content',
+			'foreign_field' => 'tx_jfmulticontent_irre_parentid',
+			'foreign_sortby' => 'sorting',
+			'foreign_label' => 'header',
+			'maxitems' => 1000,
+			'appearance' => array(
+				'showSynchronizationLink' => FALSE,
+				'showAllLocalizationLink' => FALSE,
+				'showPossibleLocalizationRecords' => FALSE,
+				'showRemovedLocalizationRecords' => FALSE,
+				'expandSingle' => TRUE,
+				'newRecordLinkAddTitle' => TRUE,
+				'useSortable' => TRUE,
+			),
+			'behaviour' => array(
+				'localizeChildrenAtParentLocalization' => 1,
+				'localizationMode' => 'select',
+			),
+		)
+	),
 );
 
 
@@ -149,7 +176,7 @@ if ($confArr["useStoragePidOnly"]) {
 t3lib_div::loadTCA('tt_content');
 t3lib_extMgm::addTCAcolumns('tt_content', $tempColumns, 1);
 $TCA['tt_content']['types']['list']['subtypes_excludelist'][$_EXTKEY.'_pi1'] = 'layout,select_key,pages';
-$TCA['tt_content']['types']['list']['subtypes_addlist'][$_EXTKEY.'_pi1'] = 'tx_jfmulticontent_view,tx_jfmulticontent_pages,tx_jfmulticontent_contents,pi_flexform';
+$TCA['tt_content']['types']['list']['subtypes_addlist'][$_EXTKEY.'_pi1'] = 'tx_jfmulticontent_view,tx_jfmulticontent_pages,tx_jfmulticontent_contents,tx_jfmulticontent_irre,pi_flexform';
 // Add reload field to tt_content
 $TCA['tt_content']['ctrl']['requestUpdate'] .= ($TCA['tt_content']['ctrl']['requestUpdate'] ? ',' : ''). 'tx_jfmulticontent_view';
 
@@ -165,6 +192,10 @@ t3lib_extMgm::addPiFlexFormValue($_EXTKEY.'_pi1', 'FILE:EXT:'.$_EXTKEY.'/flexfor
 
 if (TYPO3_MODE == 'BE') {
 	$TBE_MODULES_EXT['xMOD_db_new_content_el']['addElClasses']['tx_jfmulticontent_pi1_wizicon'] = t3lib_extMgm::extPath($_EXTKEY).'pi1/class.tx_jfmulticontent_pi1_wizicon.php';
+	if (! isset($TCA['tt_content']['columns']['colPos']['config']['items'][$confArr['colPosOfIrreContent']])) {
+		// Add the new colPos to the array, only if the ID does not exist...
+		$TCA['tt_content']['columns']['colPos']['config']['items'][$confArr['colPosOfIrreContent']] = array ($_EXTKEY.'||'.$_EXTKEY.'||||||||', $confArr['colPosOfIrreContent']);
+	}
 }
 
 

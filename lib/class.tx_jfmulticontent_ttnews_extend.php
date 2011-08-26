@@ -190,7 +190,7 @@ class tx_jfmulticontent_ttnews_extend
 				// Add script only once
 				$hash = md5($temp_js);
 				if ($this->conf['jsInline']) {
-					$GLOBALS['TSFE']->inlineJS[$hash] = $temp_css;
+					$GLOBALS['TSFE']->inlineJS[$hash] = $temp_js;
 				} elseif (t3lib_div::int_from_ver(TYPO3_version) >= 4003000) {
 					if ($this->conf['jsInFooter'] || $allJsInFooter) {
 						$pagerender->addJsFooterInlineCode($hash, $temp_js, $this->conf['jsMinify']);

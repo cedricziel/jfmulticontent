@@ -11,6 +11,10 @@ frontendErrorMsg = 1
 # cat=basic/enable/40; type=boolean; label=Enable select instead of checkbox: If set, most of checkboxes will turn into selectboxes, so you can choose "from TS"
 useSelectInsteadCheckbox = 0
 
+# cat=basic/enable/50; type=integer; label=colPos of IRRE Content: Select the colPos where the tt_content will be saved in IRRE-view
+colPosOfIrreContent = 93
+
+
 
 # cat=basic/basic/10; type=boolean; label=Enable 2column: Enables the 2column-Style for the backend
 style.2column = 1
@@ -41,6 +45,7 @@ style.easyaccordion = 1
 
 # cat=basic/basic/10; type=boolean; label=Enable booklet: Enables the booklet-Style for the backend
 style.booklet = 1
+
 
 
 # cat=basic/basic/20; type=string; label=Class Inner: Possible values to wrap in column classes (,16,20,25,33,38,40,50,60,62,66,75,80)
