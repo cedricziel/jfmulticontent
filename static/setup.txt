@@ -16,6 +16,7 @@ plugin.tx_jfmulticontent_pi1 {
 	jQueryUIstyle = {$plugin.tx_jfmulticontent_pi1.file.jQueryUIstyle}
 	sliderJS = {$plugin.tx_jfmulticontent_pi1.file.sliderJS}
 	sliderCSS = {$plugin.tx_jfmulticontent_pi1.file.sliderCSS}
+	sliderCSSie7 = {$plugin.tx_jfmulticontent_pi1.file.sliderCSSie7}
 
 	slidedeckJS = {$plugin.tx_jfmulticontent_pi1.file.slidedeckJS}
 	slidedeckCSS = {$plugin.tx_jfmulticontent_pi1.file.slidedeckCSS}

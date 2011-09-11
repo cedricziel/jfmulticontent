@@ -13,6 +13,9 @@
  *
  *  The GNU General Public License can be found at
  *  http://www.gnu.org/copyleft/gpl.html.
+ *  A copy is found in the textfile GPL.txt and important notices to the license
+ *  from the author is found in LICENSE.txt distributed with these scripts.
+ *
  *
  *  This script is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -22,117 +25,41 @@
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-require_once (PATH_t3lib . 'class.t3lib_page.php');
+if (t3lib_extMgm::isLoaded('t3jquery')) {
+	require_once(t3lib_extMgm::extPath('t3jquery').'class.tx_t3jquery.php');
+}
 
 /**
- * 'tx_jfmulticontent_ttnews_extend' for the 'jfmulticontent' extension.
+ * This class implements a all needed functions to add Javascripts and Stylesheets to a page
  *
  * @author     Juergen Furrer <juergen.furrer@gmail.com>
  * @package    TYPO3
  * @subpackage tx_jfmulticontent
  */
-class tx_jfmulticontent_ttnews_extend
+class tx_jfmulticontent_pagerenderer
 {
-	var $conf = array();
-	var $cObj = NULL;
-	var $extKey = 'jfmulticontent';
-	var $jsFiles = array();
-	var $js = array();
-	var $cssFiles = array();
-	var $css = array();
-	var $piFlexForm = array();
+	public $conf = array();
+	public $extKey = 'jfmulticontent';
+	private $jsFiles = array();
+	private $js = array();
+	private $cssFiles = array();
+	private $cssFilesInc = array();
+	private $css = array();
 
-	function extraCodesProcessor($newsObject)
-	{
-		$content = NULL;
-		$this->cObj = $newsObject->cObj;
-		$this->conf = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_jfmulticontent_pi1.'];
-		switch ($newsObject->theCode) {
-			case 'LIST_ACCORDION': {
-				$content .= $newsObject->displayList();
-				// Add all CSS and JS files
-				if (T3JQUERY === TRUE) {
-					tx_t3jquery::addJqJS();
-				} else {
-					$this->addJsFile($this->conf['jQueryLibrary'], TRUE);
-					$this->addJsFile($this->conf['jQueryEasing']);
-					$this->addJsFile($this->conf['jQueryUI']);
-				}
-				$this->addCssFile($this->conf['jQueryUIstyle']);
-				$this->addResources();
-				break;
-			}
-			case 'LIST_SLIDER': {
-				$content .= $newsObject->displayList();
-				// Add all CSS and JS files
-				if (T3JQUERY === TRUE) {
-					tx_t3jquery::addJqJS();
-				} else {
-					$this->addJsFile($this->conf['jQueryLibrary'], TRUE);
-					$this->addJsFile($this->conf['jQueryEasing']);
-				}
-				$this->addJsFile($this->conf['sliderJS']);
-				$this->addCssFile($this->conf['sliderCSS']);
-				$this->addResources();
-				break;
-			}
-			case 'LIST_SLIDEDECK': {
-				$content .= $newsObject->displayList();
-				// Add all CSS and JS files
-				if (T3JQUERY === TRUE) {
-					tx_t3jquery::addJqJS();
-				} else {
-					$this->addJsFile($this->conf['jQueryLibrary'], TRUE);
-					$this->addJsFile($this->conf['jQueryEasing']);
-				}
-				$this->addJsFile($this->conf['slidedeckJS']);
-				$this->addCssFile($this->conf['slidedeckCSS']);
-				$this->addJsFile($this->conf['jQueryMouseWheel']);
-				$this->addResources();
-				break;
-			}
-			case 'LIST_EASYACCORDION': {
-				$content .= $newsObject->displayList();
-				// Add all CSS and JS files
-				if (T3JQUERY === TRUE) {
-					tx_t3jquery::addJqJS();
-				} else {
-					$this->addJsFile($this->conf['jQueryLibrary'], TRUE);
-				}
-				$this->addJsFile($this->conf['easyaccordionJS']);
-				$this->addCssFile($this->conf['easyaccordionCSS']);
-				$confArr = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['jfmulticontent']);
-				$this->addCssFile($confArr['easyAccordionSkinFolder'] . $this->conf['config.']['easyaccordionSkin'] . "/style.css");
-				$this->addResources();
-				break;
-			}
-		}
-		return $content;
+	/**
+	 * Set the configuration for the pagerenderer
+	 * @param array $conf
+	 */
+	public function setConf($conf) {
+		$this->conf = $conf;
 	}
 
 	/**
-	 * Return additional markers for tt_news
-	 * @param $markerArray
-	 * @param $row
-	 * @param $conf
-	 * @param $pObj
-	 * @return array
-	 */
-	function extraGlobalMarkerProcessor(&$pObj, $markerArray)
-	{
-		$conf = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_jfmulticontent_pi1.'];
-		$markerArray['###EASY_ACCORDION_SKIN###'] = $conf['config.']['easyaccordionSkin'];
-
-		return $markerArray;
-	}
-
-	/**
-	 * Include all defined resources (JS / CSS)
-	 *
-	 * @return void
-	 */
-	function addResources()
-	{
+	* Include all defined resources (JS / CSS)
+	*
+	* @return void
+	*/
+	public function addResources() {
 		if (t3lib_div::int_from_ver(TYPO3_version) >= 4003000) {
 			$pagerender = $GLOBALS['TSFE']->getPageRenderer();
 		}
@@ -226,6 +153,19 @@ class tx_jfmulticontent_ttnews_extend
 				}
 			}
 		}
+		// add all defined CSS files for IE
+		if (count($this->cssFilesInc) > 0) {
+			foreach ($this->cssFilesInc as $cssToLoad) {
+				// Add script only once
+				$file = $this->getPath($cssToLoad['file']);
+				if ($file) {
+					// Theres no possibility to add conditions for IE by pagerenderer, so this will be added in additionalHeaderData
+					$GLOBALS['TSFE']->additionalHeaderData['cssFile_'.$this->extKey.'_'.$file] = '<!--[if '.$cssToLoad['rule'].']><link rel="stylesheet" type="text/css" href="'.$file.'" media="all" /><![endif]-->'.chr(10);
+				} else {
+					t3lib_div::devLog("'{$cssToLoad['file']}' does not exists!", $this->extKey, 2);
+				}
+			}
+		}
 		// add all defined CSS Script
 		if (count($this->css) > 0) {
 			foreach ($this->css as $cssToPut) {
@@ -243,24 +183,22 @@ class tx_jfmulticontent_ttnews_extend
 
 	/**
 	 * Return the webbased path
-	 * 
+	 *
 	 * @param string $path
 	 * return string
 	 */
-	function getPath($path="")
-	{
+	public function getPath($path="") {
 		return $GLOBALS['TSFE']->tmpl->getFileName($path);
 	}
 
 	/**
 	 * Add additional JS file
-	 * 
+	 *
 	 * @param string $script
 	 * @param boolean $first
 	 * @return void
 	 */
-	function addJsFile($script="", $first=FALSE)
-	{
+	public function addJsFile($script="", $first=FALSE) {
 		if ($this->getPath($script) && ! in_array($script, $this->jsFiles)) {
 			if ($first === TRUE) {
 				$this->jsFiles = array_merge(array($script), $this->jsFiles);
@@ -272,12 +210,11 @@ class tx_jfmulticontent_ttnews_extend
 
 	/**
 	 * Add JS to header
-	 * 
+	 *
 	 * @param string $script
 	 * @return void
 	 */
-	function addJS($script="")
-	{
+	public function addJS($script="") {
 		if (! in_array($script, $this->js)) {
 			$this->js[] = $script;
 		}
@@ -285,25 +222,39 @@ class tx_jfmulticontent_ttnews_extend
 
 	/**
 	 * Add additional CSS file
-	 * 
+	 *
 	 * @param string $script
 	 * @return void
 	 */
-	function addCssFile($script="")
-	{
+	public function addCssFile($script="") {
 		if ($this->getPath($script) && ! in_array($script, $this->cssFiles)) {
 			$this->cssFiles[] = $script;
 		}
 	}
 
 	/**
+	 * Add additional CSS file to include into IE only
+	 *
+	 * @param string $script
+	 * @param string $include for example use "lte IE 7"
+	 * @return void
+	 */
+	public function addCssFileInc($script="", $include='IE') {
+		if ($this->getPath($script) && ! in_array($script, $this->cssFiles) && $include) {
+			$this->cssFilesInc[] = array(
+				'file' => $script,
+				'rule' => $include,
+			);
+		}
+	}
+
+	/**
 	 * Add CSS to header
-	 * 
+	 *
 	 * @param string $script
 	 * @return void
 	 */
-	function addCSS($script="")
-	{
+	public function addCSS($script="") {
 		if (! in_array($script, $this->css)) {
 			$this->css[] = $script;
 		}
@@ -314,8 +265,7 @@ class tx_jfmulticontent_ttnews_extend
 	 * @param string $key
 	 * @return string
 	 */
-	function getExtensionVersion($key)
-	{
+	public function getExtensionVersion($key) {
 		if (! t3lib_extMgm::isLoaded($key)) {
 			return '';
 		}
@@ -323,57 +273,11 @@ class tx_jfmulticontent_ttnews_extend
 		include(t3lib_extMgm::extPath($key) . 'ext_emconf.php');
 		return $EM_CONF[$key]['version'];
 	}
-
-	/**
-	* Set the piFlexform data
-	*
-	* @return void
-	*/
-	protected function setFlexFormData()
-	{
-		if (! count($this->piFlexForm)) {
-			$this->pi_initPIflexForm();
-			$this->piFlexForm = $this->cObj->data['pi_flexform'];
-		}
-	}
-
-	/**
-	 * Extract the requested information from flexform
-	 * @param string $sheet
-	 * @param string $name
-	 * @param boolean $devlog
-	 * @return string
-	 */
-	protected function getFlexformData($sheet='', $name='', $devlog=TRUE)
-	{
-		$this->setFlexFormData();
-		if (! isset($this->piFlexForm['data'])) {
-			if ($devlog === TRUE) {
-				t3lib_div::devLog("Flexform Data not set", $this->extKey, 1);
-			}
-			return NULL;
-		}
-		if (! isset($this->piFlexForm['data'][$sheet])) {
-			if ($devlog === TRUE) {
-				t3lib_div::devLog("Flexform sheet '{$sheet}' not defined", $this->extKey, 1);
-			}
-			return NULL;
-		}
-		if (! isset($this->piFlexForm['data'][$sheet]['lDEF'][$name])) {
-			if ($devlog === TRUE) {
-				t3lib_div::devLog("Flexform Data [{$sheet}][{$name}] does not exist", $this->extKey, 1);
-			}
-			return NULL;
-		}
-		if (isset($this->piFlexForm['data'][$sheet]['lDEF'][$name]['vDEF'])) {
-			return $this->pi_getFFvalue($this->piFlexForm, $name, $sheet);
-		} else {
-			return $this->piFlexForm['data'][$sheet]['lDEF'][$name];
-		}
-	}
 }
 
-if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/jfmulticontent/lib/class.tx_jfmulticontent_ttnews_extend.php']) {
-	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/jfmulticontent/lib/class.tx_jfmulticontent_ttnews_extend.php']);
+
+if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/jfmulticontent/lib/class.tx_jfmulticontent_pagerenderer.php']) {
+	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/jfmulticontent/lib/class.tx_jfmulticontent_pagerenderer.php']);
 }
+
 ?>
