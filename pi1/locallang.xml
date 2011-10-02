@@ -12,6 +12,9 @@
 			<label index="slider_forward"><![CDATA[&raquo;]]></label>
 			<label index="slider_back"><![CDATA[&laquo;]]></label>
 			<label index="slider_panel">Panel %i%</label>
+			<label index="default_quote_title_template">###TITLE###</label>
+			<label index="tab_quote_title_template">###TITLE###</label>
+			<label index="accordion_quote_title_template">###TITLE###</label>
 		</languageKey>
 	</data>
 	<orig_hash type="array">

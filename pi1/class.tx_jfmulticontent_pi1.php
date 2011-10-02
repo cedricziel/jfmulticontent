@@ -458,26 +458,36 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 				$page_ids = t3lib_div::trimExplode(",", $this->cObj->data['tx_jfmulticontent_pages']);
 				// get the informations for every page
 				for ($a=0; $a < count($page_ids); $a++) {
-					$row = NULL;
-					if ($GLOBALS['TSFE']->sys_language_content) {
-						$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery('*', 'pages_language_overlay', 'pid='.intval($page_ids[$a]).' AND sys_language_uid='.$GLOBALS['TSFE']->sys_language_content, '', '', 1);
-						$row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res);
-					}
-					if (! is_array($row)) {
-						$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery('*', 'pages', 'uid='.intval($page_ids[$a]), '', '', 1);
-						$row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res);
-					}
-					if (is_array($row)) {
-						foreach ($row as $key => $val) {
-							$GLOBALS['TSFE']->register['page_'.$key] = $val;
-						}
-					}
+
 					$GLOBALS['TSFE']->register['pid'] = $page_ids[$a];
+
+					if ($this->confArr['useOwnUserFuncForPages']) {
+						// TemplaVoila will render the content with a userFunc
+						$content = $this->cObj->cObjGetSingle($view['content'], $view['content.']);
+						$this->cElements[] = $content;
+					} else {
+						$row = NULL;
+						if ($GLOBALS['TSFE']->sys_language_content) {
+							$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery('*', 'pages_language_overlay', 'deleted=0 AND hidden=0 AND pid='.intval($page_ids[$a]).' AND sys_language_uid='.$GLOBALS['TSFE']->sys_language_content, '', '', 1);
+							$row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res);
+						}
+						if (! is_array($row)) {
+							$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery('*', 'pages', 'deleted=0 AND hidden=0 AND uid='.intval($page_ids[$a]), '', '', 1);
+							$row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res);
+						}
+						if (is_array($row)) {
+							foreach ($row as $key => $val) {
+								$GLOBALS['TSFE']->register['page_'.$key] = $val;
+							}
+						}
+
+						$this->cElements[] = $this->cObj->cObjGetSingle($view['content'], $view['content.']);
+						$this->content_id[$a] = $page_ids[$a];
+					}
+
 					if ($this->titles[$a] == '' || !isset($this->titles[$a])) {
 						$this->titles[$a] = $this->cObj->cObjGetSingle($view['title'], $view['title.']);
 					}
-					$this->cElements[] = $this->cObj->cObjGetSingle($view['content'], $view['content.']);
-					$this->content_id[$a] = $page_ids[$a];
 				}
 			} else if ($this->conf['config.']['view'] == 'content') {
 				// get the content ID's
@@ -677,7 +687,7 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 				if ($this->conf['config.']['tabCookieExpires'] > 0) {
 					$this->pagerenderer->addJsFile($this->conf['jQueryCookies']);
 					unset($options['selected']);
-					$options['cookie'] = "cookie: { expires: ".$this->conf['config.']['tabCookieExpires']." }";
+					$options['cookie'] = "cookie: { expires: ".$this->conf['config.']['tabCookieExpires'].", path:'/{$this->getContentKey()}' }";
 				}
 				// get the Template of the Javascript
 				$markerArray = array();
@@ -1200,7 +1210,7 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 			} else {
 				$markerArray["EASYACCORDION_ACTIVE"] = '';
 			}
-			
+
 			// render the content
 			$markerArray["CONTENT_ID"] = $this->content_id[$a];
 			$markerArray["ID"]         = $a+1;
@@ -1256,6 +1266,11 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 				// wrap the content
 				$markerArray["CONTENT"] = $this->cObj->stdWrap($this->cElements[$a], array('wrap' => $wrap));
 			}
+			// Generate the QUOTE_TITLE
+			$markerArray["DEFAULT_QUOTE_TITLE"]   = htmlspecialchars($this->cObj->substituteMarkerArray($this->pi_getLL('default_quote_title_template'), $markerArray, '###|###', 0));
+			$markerArray["TAB_QUOTE_TITLE"]       = htmlspecialchars($this->cObj->substituteMarkerArray($this->pi_getLL('tab_quote_title_template'), $markerArray, '###|###', 0));
+			$markerArray["ACCORDION_QUOTE_TITLE"] = htmlspecialchars($this->cObj->substituteMarkerArray($this->pi_getLL('accordion_quote_title_template'), $markerArray, '###|###', 0));
+
 			if ($markerArray["CONTENT"]) {
 				// add content to COLUMNS
 				$columns .= $this->cObj->substituteMarkerArray($columnCode, $markerArray, '###|###', 0);

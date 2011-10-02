@@ -93,6 +93,7 @@ class tx_jfmulticontent_tsparserext
 			'useStoragePidOnly',
 			'ttNewsCodes',
 			'useSelectInsteadCheckbox',
+			'useOwnUserFuncForPages',
 			'colPosOfIrreContent',
 			'style.',
 			'classInner',

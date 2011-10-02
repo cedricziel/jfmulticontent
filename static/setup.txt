@@ -223,7 +223,41 @@ plugin.tx_jfmulticontent_pi1 {
 	}
 }
 
+
+
+
 /*
+# Example page-view for templavoila
+includeLibs.jfmulticontent = EXT:jfmulticontent/class.tx_jfmulticontent.php
+plugin.tx_jfmulticontent_pi1 {
+	views.page >
+	views {
+		page {
+			content = COA
+			content {
+				10 = USER
+				10 {
+					userFunc = tx_jfmulticontent->getContentFromTemplavoilaField
+					field = field_feature
+					pageID.data = register:pid
+					contentRender = RECORDS
+					contentRender {
+						tables = tt_content
+						source.data = register:uid
+						dontCheckPid = 1
+					}
+				}
+				20 < .10
+				20 {
+					field = field_content_block_1
+				}
+			}
+			title = TEXT
+			title.data = register:page_title
+		}
+	}
+}
+
 # Example for accordion in template
 plugin.tx_jfmulticontent_pi1 {
 	config {
