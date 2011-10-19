@@ -27,7 +27,7 @@ plugin.tx_jfmulticontent_pi1 {
 	file.cssFile = EXT:jfmulticontent/res/tx_jfmulticontent_pi1.css
 
 	# cat=plugin.tx_jfmulticontent/file/040; type=file[js]; label=jQuery Library: Location of the jQuery Lib
-	file.jQueryLibrary = EXT:jfmulticontent/res/jquery/js/jquery-1.6.3.min.js
+	file.jQueryLibrary = EXT:jfmulticontent/res/jquery/js/jquery-1.6.4.min.js
 
 	# cat=plugin.tx_jfmulticontent/file/045; type=file[js]; label=jQuery Cookies: Location of jQuery Cookies
 	file.jQueryCookies = EXT:jfmulticontent/res/jquery/js/jquery.cookies.js

@@ -1,2 +1,2 @@
 script=
-components=jQuery,Core,Widget,Mouse,Position,Draggable,Accordion,Tabs,Easing
+components=jQuery,Core,Widget,Mouse,Position,Draggable,Accordion,Tabs,Easing,Cookie
