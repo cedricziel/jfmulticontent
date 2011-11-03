@@ -124,6 +124,7 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 			$this->lConf['sliderBuildArrows']        = $this->getFlexformData('general', 'sliderBuildArrows', $debuglog);
 			$this->lConf['sliderToggleArrows']       = $this->getFlexformData('general', 'sliderToggleArrows', $debuglog);
 			$this->lConf['sliderNavigation']         = $this->getFlexformData('general', 'sliderNavigation', $debuglog);
+			$this->lConf['sliderStartStop']          = $this->getFlexformData('general', 'sliderStartStop', $debuglog);
 			$this->lConf['sliderPanelFromHeader']    = $this->getFlexformData('general', 'sliderPanelFromHeader', $debuglog);
 			$this->lConf['sliderToggleControls']     = $this->getFlexformData('general', 'sliderToggleControls', $debuglog);
 			$this->lConf['sliderAutoStart']          = $this->getFlexformData('general', 'sliderAutoStart', $debuglog);
@@ -134,6 +135,7 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 			$this->lConf['sliderTransition']         = $this->getFlexformData('general', 'sliderTransition', $debuglog);
 			$this->lConf['sliderTransitiondir']      = $this->getFlexformData('general', 'sliderTransitiondir', $debuglog);
 			$this->lConf['sliderTransitionduration'] = $this->getFlexformData('general', 'sliderTransitionduration', $debuglog);
+			$this->lConf['sliderAutoplay']           = $this->getFlexformData('general', 'sliderAutoplay', $debuglog);
 
 			$debuglog = ($this->lConf['style'] == 'slidedeck');
 			$this->lConf['slidedeckHeight']             = $this->getFlexformData('general', 'slidedeckHeight', $debuglog);
@@ -288,6 +290,9 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 			if ($this->lConf['sliderNavigation'] < 2) {
 				$this->conf['config.']['sliderNavigation'] = $this->lConf['sliderNavigation'];
 			}
+			if ($this->lConf['sliderStartStop'] < 2) {
+				$this->conf['config.']['sliderStartStop'] = $this->lConf['sliderStartStop'];
+			}
 			if ($this->lConf['sliderPanelFromHeader'] < 2) {
 				$this->conf['config.']['sliderPanelFromHeader'] = $this->lConf['sliderPanelFromHeader'];
 			}
@@ -317,6 +322,9 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 			}
 			if ($this->lConf['sliderTransitionduration'] > 0) {
 				$this->conf['config.']['sliderTransitionduration'] = $this->lConf['sliderTransitionduration'];
+			}
+			if ($this->lConf['sliderAutoplay'] < 2) {
+				$this->conf['config.']['sliderAutoplay'] = $this->lConf['sliderAutoplay'];
 			}
 			// slidedeck
 			if ($this->lConf['slidedeckHeight'] > 0) {
@@ -814,13 +822,16 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 				if ($this->conf['config.']['sliderTransitionduration'] > 0) {
 					$options[] = "animationTime: {$this->conf['config.']['sliderTransitionduration']}";
 				}
-				if ($this->conf['config.']['delayDuration'] > 0) {
+				if ($this->conf['config.']['sliderAutoplay']) {
 					$options[] = "autoPlay: true";
+				} else {
+					$options[] = "autoPlay: false";
+				}
+				if ($this->conf['config.']['delayDuration'] > 0) {
 					$options[] = "delay: {$this->conf['config.']['delayDuration']}";
 					$options[] = "startStopped: ".($this->conf['config.']['sliderAutoStart'] ? 'false' : 'true');
 					$options[] = "stopAtEnd: ".($this->conf['config.']['sliderStopAtEnd'] ? 'true' : 'false');
 				} else {
-					$options[] = "autoPlay: false";
 					// Toggle only if not autoplay
 					$options[] = "toggleArrows: ".($this->conf['config.']['sliderToggleArrows'] ? 'true' : 'false');
 					$options[] = "toggleControls: ".($this->conf['config.']['sliderToggleControls'] ? 'true' : 'false');
@@ -861,6 +872,8 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 				$options[] = "hashTags: ".($this->conf['config.']['sliderHashTags'] ? 'true' : 'false');
 				$options[] = "pauseOnHover: ".($this->conf['config.']['sliderPauseOnHover'] ? 'true' : 'false');
 				$options[] = "buildNavigation: ".($this->conf['config.']['sliderNavigation'] ? 'true' : 'false');
+				$options[] = "buildStartStop: ".($this->conf['config.']['sliderStartStop'] ? 'true' : 'false');
+				
 				$options[] = "startText: '".t3lib_div::slashJS($this->pi_getLL('slider_start'))."'";
 				$options[] = "stopText: '".t3lib_div::slashJS($this->pi_getLL('slider_stop'))."'";
 				if ($this->pi_getLL('slider_forward')) {

@@ -1,5 +1,5 @@
 /**
- * SlideDeck 1.2.5 Lite - 2011-06-01
+ * SlideDeck 1.3.0 Lite - 2011-10-14
  * Copyright (c) 2011 digital-telepathy (http://www.dtelepathy.com)
  * 
  * Support the developers by purchasing the Pro version at http://www.slidedeck.com/download
@@ -28,7 +28,7 @@
  *     $(el).slidedeck(opts);
  * 
  * @param {HTMLObject} el    The <DL> element to extend as a SlideDeck
- * @param {Object} opts        An object to pass custom override options to
+ * @param {Object} opts      An object to pass custom override options to
  */
 
 var SlideDeck;
@@ -39,7 +39,7 @@ var SlideDeckSkin = {};
         var self = this,
             el = $(el);
         
-        var VERSION = "1.2.5";
+        var VERSION = "1.3.0";
         
         this.options = {
             speed: 500,
@@ -52,7 +52,8 @@ var SlideDeckSkin = {};
             autoPlay: false,
             autoPlayInterval: 5000,
             hideSpines: false,
-            cycle: false
+            cycle: false,
+            slideTransition: 'slide'
         };
         
         this.classes = {
@@ -71,6 +72,7 @@ var SlideDeckSkin = {};
         
         this.current = 1;
         this.deck = el;
+        this.former = -1;
         this.spines = el.children('dt');
         this.slides = el.children('dd');
         this.controlTo = 1;
@@ -123,6 +125,27 @@ var SlideDeckSkin = {};
             slide_width,
             spine_half_width;
         
+        // Used by some slide transitions to lockout progress while the SlideDeck animates looping around
+        this.looping = false;
+        
+        // Get the CSS3 browser prefix
+        var prefix = "";
+        switch(self.browser._this){
+            case "firefox":
+            case "firefox3":
+                prefix = "-moz-";
+            break;
+            
+            case "chrome":
+            case "safari":
+                prefix = "-webkit-";
+            break;
+            
+            case "opera":
+                prefix = "-o-";
+            break;
+        }
+        
         var FixIEAA = function(spine){
             if(self.browser.msie && !self.browser.msie9){
                 var bgColor = spine.css('background-color');
@@ -139,7 +162,7 @@ var SlideDeckSkin = {};
                     }
                 }
                 bgColor = bgColor.replace("#","");
-                cParts = {
+                var cParts = {
                     r: bgColor.substr(0,2),
                     g: bgColor.substr(2,2),
                     b: bgColor.substr(4,2)
@@ -241,6 +264,50 @@ var SlideDeckSkin = {};
         };
         
         
+        /**
+         * Modify the positioning and z-indexing for slides upon build
+         * 
+         * @param string transition The slideTransition being used to determine how to build the slides
+         * @param integer i The index of the slide to be modified
+         */
+        var buildSlideTransition = function(transition, i){
+            var slideCSS = {
+                display: 'block'
+            };
+            slideCSS[prefix + 'transform-origin'] = "50% 50%";
+            slideCSS[prefix + 'transform'] = "";
+            
+            if(i < self.current) {
+                var offset = i * spine_outer_width;
+                if(self.options.hideSpines === true){
+                    if(i == self.current - 1){
+                        offset = 0;
+                    } else {
+                        offset = 0 - (self.options.start - i - 1) * el.width();
+                    }
+                }
+            } else {
+                var offset = i * spine_outer_width + slide_width;
+                if(self.options.hideSpines === true){
+                    offset = (i + 1 - self.options.start) * el.width();
+                }
+            }
+
+            switch(transition){
+                case "slide":
+                default:
+                    slideCSS.left = offset;
+                    slideCSS.zIndex = 1;
+                    // Other things to modify the slideCSS specifically for default transitions
+                break;
+            }
+            
+            self.slides.eq(i).css(prefix + 'transition', "").css(slideCSS);
+            
+            return offset;
+        };
+        
+        
         var buildDeck = function(){
             if($.inArray(el.css('position'),['position','absolute','fixed'])){
                 el.css('position', 'relative');
@@ -273,32 +340,22 @@ var SlideDeckSkin = {};
                         }
                         slide.addClass(self.classes.active);
                     }
-                    offset = i * spine_outer_width;
-                    if(self.options.hideSpines === true){
-                        if(i == self.current - 1){
-                            offset = 0;
-                        } else {
-                            offset = 0 - (self.options.start - i - 1) * el.width();
-                        }
-                    }
-                } else {
-                    offset = i * spine_outer_width + slide_width;
-                    if(self.options.hideSpines === true){
-                        offset = (i + 1 - self.options.start) * el.width();
-                    }
                 }
                 
                 self.slide_width = (slide_width - sPad.left - sPad.right - sBorder.left - sBorder.right);
                 
-                slide.css({
+                var slideCSS = {
                     position: 'absolute',
-                    left: offset,
                     zIndex: 1,
                     height: (height - sPad.top - sPad.bottom - sBorder.top - sBorder.bottom) + "px",
                     width: self.slide_width + "px",
                     margin: 0,
                     paddingLeft: sPad.left + spine_outer_width + "px"
-                }).addClass(self.classes.slide).addClass(self.classes.slide + "_" + (i + 1));
+                };
+                
+                var offset = buildSlideTransition(self.options.slideTransition, i);
+                
+                slide.css(slideCSS).addClass(self.classes.slide).addClass(self.classes.slide + "_" + (i + 1));
                 
                 if (self.options.hideSpines !== true) {
                     var spinePad = {
@@ -341,7 +398,7 @@ var SlideDeckSkin = {};
                     
                     if(self.browser.msie9){
                         spine[0].style.msTransform = 'rotate(270deg)';
-                        spine[0].style.msTransformOrigin = Math.round(parseInt(el[0].style.height) / 2) + 'px ' + Math.round(parseInt(el[0].style.height) / 2) + 'px';
+                        spine[0].style.msTransformOrigin = Math.round(parseInt(el[0].style.height, 10) / 2) + 'px ' + Math.round(parseInt(el[0].style.height, 10) / 2) + 'px';
                     }
                     
                 } else {
@@ -509,81 +566,149 @@ var SlideDeckSkin = {};
         };
 
 
-        var slide = function(ind,params){
-            ind = getValidSlide(ind);
-            
-            // Determine if we are moving forward in the SlideDeck or backward, 
-            // this is used to determine when the callback should be run
-            var forward = true;
-            if(ind < self.current){
-                forward = false;
+        var completeCallback = function(params){
+            var afterFunctions = [];
+            if(typeof(self.options.complete) == "function"){
+                afterFunctions.push(function(){ self.options.complete(self); });
+            }
+            switch(typeof(params)){
+                case "function":    // Only function passed
+                    afterFunctions.push(function(){ params(self); });
+                break;
+                case "object":        // One of a pair of functions passed
+                    afterFunctions.push(function(){ params.complete(self); });
+                break;
             }
             
-            var classReset = [self.classes.active, self.classes.next, self.classes.previous].join(' ');
-            self.current = ind;
-            self.spines.removeClass(classReset);
-            self.slides.removeClass(classReset);
-            el.find('.' + self.classes.activeCorner).hide();
-            
-            $(self.spines[self.current - 2]).addClass(self.classes.previous);
-            $(self.spines[self.current]).addClass(self.classes.next);
-            
-            for (var i = 0; i < self.slides.length; i++) {
-                var pos = 0;
-                if(self.options.hideSpines !== true){
-                    var spine = $(self.spines[i]);
-                }
-                var slide = $(self.slides[i]);
-                if (i < self.current) {
-                    if (i == (self.current - 1)) {
-                        slide.addClass(self.classes.active);
-                        if(self.options.hideSpines !== true){
-                            spine.addClass(self.classes.active);
-                            spine.next('.' + self.classes.activeCorner).show();
-                        }
-                    }
-                    pos = i * spine_outer_width;
-                } else {
-                    pos = i * spine_outer_width + slide_width;
-                }
+            var callbackFunction = function(){
+                self.looping = false;
                 
-                if(self.options.hideSpines === true){
-                    pos = (i - self.current + 1) * el.width();
+                for(var z=0; z<afterFunctions.length; z++){
+                    afterFunctions[z]();
                 }
-
-                var animOpts = {
-                    duration: self.options.speed,
-                    easing: self.options.transition
-                };
-
-                slide.stop().animate({
-                    left: pos + "px",
-                    width: self.slide_width + "px"
-                }, animOpts);
-
-                if(self.options.hideSpines !== true){
-                    FixIEAA(spine);
-                    if(spine.css('left') != pos+"px"){
-                        spine.stop().animate({
-                            left: pos + "px"
-                        },{
-                            duration: self.options.speed,
-                            easing: self.options.transition
-                        });
-
-                        spine.next('.' + self.classes.activeCorner).stop().animate({
-                            left: pos + spine_outer_width + "px"
-                        },{
-                            duration: self.options.speed,
-                            easing: self.options.transition
-                        });
-                    }
-                }
-                
-            }
-            updateBug();
+            };
+            
+            return callbackFunction;
         };
         
+        
+        var transitions = {
+            /**
+             * Classic SlideDeck transition: Slide
+             * 
+             * This transition will take a stack or line of slides and move them all to the left or
+             * the right keeping their order.
+             */
+            slide: function(ind, params, forward){
+                for (var i = 0; i < self.slides.length; i++) {
+                    var pos = 0;
+                    if(self.options.hideSpines !== true){
+                        var spine = $(self.spines[i]);
+                    }
+                    var slide = $(self.slides[i]);
+                    if (i < self.current) {
+                        if (i == (self.current - 1)) {
+                            slide.addClass(self.classes.active);
+                            if(self.options.hideSpines !== true){
+                                spine.addClass(self.classes.active);
+                                spine.next('.' + self.classes.activeCorner).show();
+                            }
+                        }
+                        pos = i * spine_outer_width;
+                    }
+                    else {
+                        pos = i * spine_outer_width + slide_width;
+                    }
+                    
+                    if(self.options.hideSpines === true){
+                        pos = (i - self.current + 1) * el.width();
+                    }
+
+                    var animOpts = {
+                        duration: self.options.speed,
+                        easing: self.options.transition
+                    };
+
+                    // Detect a function to run after animating
+                    if(i == (forward === true && self.current - 1) || i == (forward === false && self.current)){
+                        if(i === 0) {
+                            animOpts.complete = completeCallback(params);
+                        }
+                    }
+
+                    slide.stop().animate({
+                        left: pos + "px",
+                        width: self.slide_width + "px"
+                    }, animOpts);
+                    
+                    if(self.options.hideSpines !== true){
+                        FixIEAA(spine);
+                        if(spine.css('left') != pos+"px"){
+                            spine.stop().animate({
+                                left: pos + "px"
+                            },{
+                                duration: self.options.speed,
+                                easing: self.options.transition
+                            });
+
+                            spine.next('.' + self.classes.activeCorner).stop().animate({
+                                left: pos + spine_outer_width + "px"
+                            },{
+                                duration: self.options.speed,
+                                easing: self.options.transition
+                            });
+                        }
+                    }
+                }
+            }
+        };
+        
+        
+        var slide = function(ind, params){
+            ind = getValidSlide(ind);
+            
+            if ((ind <= self.controlTo || self.options.controlProgress !== true) && self.looping === false) {
+                // Determine if we are moving forward in the SlideDeck or backward, 
+                // this is used to determine when the callback should be run
+                var forward = true;
+                if(ind < self.current){
+                    forward = false;
+                }
+                
+                var classReset = [self.classes.active, self.classes.next, self.classes.previous].join(' ');
+                
+                self.former = self.current;
+                self.current = ind;
+                
+                // Detect a function to run before animating
+                if (typeof(self.options.before) == "function") {
+                    self.options.before(self);
+                }
+                if (typeof(params) != "undefined") {
+                    if (typeof(params.before) == "function") {
+                        params.before(self);
+                    }
+                }
+                
+                self.spines.removeClass(classReset);
+                self.slides.removeClass(classReset);
+                el.find('.' + self.classes.activeCorner).hide();
+                
+                self.spines.eq(self.current - 2).addClass(self.classes.previous);
+                self.spines.eq(self.current).addClass(self.classes.next);
+                
+                if(self.current != self.former){
+                    var slideTransition = 'slide';
+                    if(typeof(transitions[self.options.slideTransition]) != 'undefined'){
+                        slideTransition = self.options.slideTransition;
+                    }
+                    
+                    transitions[slideTransition](ind, params, forward);
+                }
+                
+                updateBug();
+            }
+        };
         
         var setOption = function(opts, val){
             var newOpts = opts;
@@ -663,6 +788,7 @@ var SlideDeckSkin = {};
         
         
         var initialize = function(opts){
+            // Halt all processing for unsupported browsers
             if((self.browser.opera && self.browser.version < "10.5") || self.browser.msie6 || self.browser.firefox2 || self.browser.firefox30){
                 if(typeof(console) != "undefined"){
                     if(typeof(console.error) == "function"){
@@ -677,13 +803,18 @@ var SlideDeckSkin = {};
                     self.options[key] = opts[key];
                 }
             }
+            // Override hideSpines option if no spines are present in the DOM
             if(self.spines.length < 1){
                 self.options.hideSpines = true;
             }
+            // Turn off activeCorner if hideSpines is on
             if(self.options.hideSpines === true){
                 self.options.activeCorner = false;
             }
-        
+            
+            // Force self.options.slideTransition to "slide" as it is the only option for Lite
+            self.options.slideTransition = 'slide';
+            
             self.current = Math.min(self.slides.length,Math.max(1,self.options.start));
             
             if(el.height() > 0){
@@ -706,9 +837,9 @@ var SlideDeckSkin = {};
         var loaded = function(func){
             var thisTimer;
             thisTimer = setInterval(function(){
-                if(self.isLoaded == true){
+                if(self.isLoaded === true){
                     clearInterval(thisTimer);
-                    func();
+                    func(self);
                 }
             }, 20);
         };
@@ -751,6 +882,11 @@ var SlideDeckSkin = {};
         this.setOption = function(opts,val){
             setOption(opts,val);
             return self;
+        };
+        
+        // Fallback for vertical function calls to prevent trigger of JavaScript error when run even with Lite library
+        this.vertical = function(){
+            return false;
         };
         
         initialize(opts);

@@ -95,6 +95,7 @@ plugin.tx_jfmulticontent_pi1 {
 		sliderBuildArrows = 1
 		sliderToggleArrows = 0
 		sliderNavigation = 1
+		sliderStartStop = 1
 		sliderPanelFromHeader = 0
 		sliderToggleControls = 0
 		sliderAutoStart = 0
@@ -105,6 +106,7 @@ plugin.tx_jfmulticontent_pi1 {
 		sliderTransition = swing
 		sliderTransitiondir = In
 		sliderTransitionduration = 1000
+		sliderAutoplay = 0
 
 		slidedeckHeight = 300
 		slidedeckTransition = swing
