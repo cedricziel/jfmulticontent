@@ -84,7 +84,7 @@ if ($confArr["useStoragePidOnly"]) {
 		'config' => array (
 			'type' => 'select',
 			'foreign_table' => 'tt_content',
-			'foreign_table_where' => 'AND tt_content.pid=###STORAGE_PID### AND tt_content.hidden=0 AND tt_content.deleted=0 AND tt_content.sys_language_uid=0 ORDER BY tt_content.uid',
+			'foreign_table_where' => 'AND tt_content.pid=###STORAGE_PID### AND tt_content.hidden=0 AND tt_content.deleted=0 AND tt_content.sys_language_uid IN (0,-1) ORDER BY tt_content.uid',
 			'size' => 12,
 			'minitems' => 0,
 			'maxitems' => 1000,

@@ -1,5 +1,5 @@
 ﻿/*
-	AnythingSlider v1.7.13
+	AnythingSlider v1.7.18
 	Original by Chris Coyier: http://css-tricks.com
 	Get the latest version: https://github.com/ProLoser/AnythingSlider
 
@@ -138,11 +138,11 @@
 			// Fix tabbing through the page, but don't change the view if the link is in view (showMultiple = true)
 			base.$items.delegate('a', 'focus.AnythingSlider', function(e){
 				var panel = $(this).closest('.panel'),
-				 indx = base.$items.index(panel) + base.adj;
+				 indx = base.$items.index(panel) + base.adj; // index can be -1 in nested sliders - issue #208
 				base.$items.find('.focusedLink').removeClass('focusedLink');
 				$(this).addClass('focusedLink');
 				base.$window.scrollLeft(0);
-				if ( (indx >= base.currentPage + o.showMultiple || indx < base.currentPage)) {
+				if ( ( indx !== -1 && (indx >= base.currentPage + o.showMultiple || indx < base.currentPage) ) ) {
 					base.gotoPage(indx);
 					e.preventDefault();
 				}
@@ -181,6 +181,7 @@
 			base.pages = base.$items.length;
 			base.dir = (o.vertical) ? 'top' : 'left';
 			o.showMultiple = (o.vertical) ? 1 : parseInt(o.showMultiple,10) || 1; // only integers allowed
+			o.navigationSize = (o.navigationSize === false) ? 0 : parseInt(o.navigationSize,10) || 0;
 
 			if (o.showMultiple > 1) {
 				if (o.showMultiple > base.pages) { o.showMultiple = base.pages; }
@@ -269,8 +270,8 @@
 					});
 				});
 
-				// Add navigation tab scrolling
-				if (o.navigationSize !== false && parseInt(o.navigationSize,10) < base.pages) {
+				// Add navigation tab scrolling - use !! in case someone sets the size to zero
+				if (!!o.navigationSize && o.navigationSize < base.pages) {
 					if (!base.$controls.find('.anythingNavWindow').length){
 						base.$nav
 							.before('<ul><li class="prev"><a href="#"><span>' + o.backText + '</span></a></li></ul>')
@@ -309,13 +310,15 @@
 		};
 
 		base.navWindow = function(n){
-			var p = base.pages - o.navigationSize + 1;
-			n = (n <= 1) ? 1 : (n > 1 && n < p) ? n : p;
-			if (n !== base.navLeft) {
-				base.$controls.find('.anythingNavWindow').animate(
-					{ scrollLeft: base.navWidth(1, n), width: base.navWidth(n, n + o.navigationSize) },
-					{ queue: false, duration: o.animationTime });
-				base.navLeft = n;
+			if (!!o.navigationSize && o.navigationSize < base.pages && base.navWidths) {
+				var p = base.pages - o.navigationSize + 1;
+				n = (n <= 1) ? 1 : (n > 1 && n < p) ? n : p;
+				if (n !== base.navLeft) {
+					base.$controls.find('.anythingNavWindow').animate(
+						{ scrollLeft: base.navWidth(1, n), width: base.navWidth(n, n + o.navigationSize) },
+						{ queue: false, duration: o.animationTime });
+					base.navLeft = n;
+				}
 			}
 		};
 
@@ -409,11 +412,11 @@
 					w = base.width;
 					h = base.height;
 					$(this).css({ width: w, height: h });
-					if (c.length && c[0].tagName === "EMBED") { c.attr(fullsize); } // needed for IE7; also c.length > 1 in IE7
-					if (c[0].tagName === "OBJECT") { c.find('embed').attr(fullsize); }
-					// resize panel contents, if solitary (wrapped content or solitary image)
-					if (c.length === 1){
-						c.css(fullsize);
+					if (c.length) {
+						if (c[0].tagName === "EMBED") { c.attr(fullsize); } // needed for IE7; also c.length > 1 in IE7
+						if (c[0].tagName === "OBJECT") { c.find('embed').attr(fullsize); }
+						// resize panel contents, if solitary (wrapped content or solitary image)
+						if (c.length === 1){ c.css(fullsize); }
 					}
 				} else {
 					// get panel width & height and save it
@@ -424,7 +427,7 @@
 					}
 					$(this).css('width', w); // set width of panel
 					h = (c.length === 1 ? c.outerHeight(true) : $(this).height()); // get height after setting width
-					if (h <= base.outerPad) { h = base.height; } // if height less than the outside padding, then set it to the preset height
+					if (h <= base.outerPad[1]) { h = base.height; } // if height less than the outside padding, then set it to the preset height
 					$(this).css('height', h);
 				}
 				base.panelSize[i] = [w,h,edge];
@@ -603,11 +606,12 @@
 			var h = base.win.location.hash,
 				i = h.indexOf('&'),
 				n = h.match(base.regex);
-			if (n === null && !/^#&/.test(h)) {
+			// test for "/#/" or "/#!/" used by the jquery address plugin - $('#/') breaks jQuery
+			if (n === null && !/^#&/.test(h) && !/#!?\//.test(h)) {
 				// #quote2&panel1-3&panel3-3
 				h = h.substring(0, (i >= 0 ? i : h.length));
 				// ensure the element is in the same slider
-				n = ($(h).closest('.anythingBase')[0] === base.el) ? $(h).closest('.panel').index() : null;
+				n = ($(h).length && $(h).closest('.anythingBase')[0] === base.el) ? $(h).closest('.panel').index() : null;
 			} else if (n !== null) {
 				// #&panel1-3&panel3-3
 				n = (o.hashTags) ? parseInt(n[1],10) : null;
@@ -757,6 +761,7 @@
 
 		// Video
 		resumeOnVideoEnd    : true,      // If true & the slideshow is active & a supported video is playing, it will pause the autoplay until the video is complete
+		resumeOnVisible     : true,      // If true the video will resume playing (if previously paused, except for YouTube iframe - known issue); if false, the video remains paused.
 		addWmodeToObject    : "opaque",  // If your slider has an embedded object, the script will automatically add a wmode parameter with this setting
 		isVideoPlaying      : function(base){ return false; } // return true if video is playing or false if not - used by video extension
 
