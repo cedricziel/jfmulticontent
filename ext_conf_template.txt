@@ -17,7 +17,10 @@ useOwnUserFuncForPages = 0
 # cat=basic/enable/60; type=boolean; label=Open external links in page-view: If set, the external link in page-view will be opened
 openExternalLink = 0
 
-# cat=basic/enable/70; type=integer; label=colPos of IRRE Content: Select the colPos where the tt_content will be saved in IRRE-view
+# cat=basic/enable/70; type=boolean; label=Show empty content: if set, an empty content will be shown as well
+showEmptyContent = 0
+
+# cat=basic/enable/80; type=integer; label=colPos of IRRE Content: Select the colPos where the tt_content will be saved in IRRE-view
 colPosOfIrreContent = 93
 
 

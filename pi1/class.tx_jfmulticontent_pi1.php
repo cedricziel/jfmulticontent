@@ -1321,7 +1321,7 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 			$markerArray["TAB_QUOTE_TITLE"]       = htmlspecialchars($this->cObj->substituteMarkerArray($this->pi_getLL('tab_quote_title_template'), $markerArray, '###|###', 0));
 			$markerArray["ACCORDION_QUOTE_TITLE"] = htmlspecialchars($this->cObj->substituteMarkerArray($this->pi_getLL('accordion_quote_title_template'), $markerArray, '###|###', 0));
 
-			if ($addContent) {
+			if ($markerArray["CONTENT"] || ($addContent && $this->confArr['showEmptyContent'])) {
 				// add content to COLUMNS
 				$columns .= $this->cObj->substituteMarkerArray($columnCode, $markerArray, '###|###', 0);
 				// add content to TITLE

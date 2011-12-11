@@ -95,6 +95,7 @@ class tx_jfmulticontent_tsparserext
 			'useSelectInsteadCheckbox',
 			'useOwnUserFuncForPages',
 			'openExternalLink',
+			'showEmptyContent',
 			'colPosOfIrreContent',
 			'style.',
 			'classInner',
