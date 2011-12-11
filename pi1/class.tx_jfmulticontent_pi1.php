@@ -53,6 +53,7 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 	private $titles = array();
 	private $attributes = array();
 	private $cElements = array();
+	private $rels = array();
 	private $content_id = array();
 	private $piFlexForm = array();
 	private $pagerenderer = NULL;
@@ -471,8 +472,8 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 
 					if ($this->confArr['useOwnUserFuncForPages']) {
 						// TemplaVoila will render the content with a userFunc
-						$content = $this->cObj->cObjGetSingle($view['content'], $view['content.']);
-						$this->cElements[] = $content;
+						$this->cElements[] = $this->cObj->cObjGetSingle($view['content'], $view['content.']);
+						$this->rels[] = $this->cObj->cObjGetSingle($view['rel'], $view['rel.']);
 					} else {
 						$row = NULL;
 						if ($GLOBALS['TSFE']->sys_language_content) {
@@ -490,6 +491,7 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 						}
 
 						$this->cElements[] = $this->cObj->cObjGetSingle($view['content'], $view['content.']);
+						$this->rels[] = $this->cObj->cObjGetSingle($view['rel'], $view['rel.']);
 						$this->content_id[$a] = $page_ids[$a];
 					}
 
@@ -515,6 +517,7 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 						$GLOBALS['TSFE']->register['title'] = $this->titles[$a];
 					}
 					$this->cElements[] = $this->cObj->cObjGetSingle($view['content'], $view['content.']);
+					$this->rels[] = $this->cObj->cObjGetSingle($view['rel'], $view['rel.']);
 					$this->content_id[$a] = $content_ids[$a];
 				}
 			} else if ($this->conf['config.']['view'] == 'irre') {
@@ -529,6 +532,7 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 						$GLOBALS['TSFE']->register['title'] = $this->titles[$a];
 					}
 					$this->cElements[] = $this->cObj->cObjGetSingle($view['content'], $view['content.']);
+					$this->rels[] = $this->cObj->cObjGetSingle($view['rel'], $view['rel.']);
 					$this->content_id[$a] = $content_ids[$a];
 					$a ++;
 				}
@@ -544,6 +548,9 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 							$this->titles = $_procObj->getTitles();
 							$this->cElements = $_procObj->getElements();
 							$this->content_id = $_procObj->getIds();
+							if (method_exists($_procObj, 'getRels')) {
+								$this->rels = $_procObj->getRels();
+							}
 						}
 					}
 				}
@@ -566,6 +573,7 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 					if ($content) {
 						$this->titles[] = $title;
 						$this->cElements[] = $content;
+						$this->rels[] = $this->cObj->cObjGetSingle($contents['rel'], $contents['rel.']);
 						$this->content_id[] = $this->cObj->stdWrap($contents['id'], $contents['id.']);
 					}
 				}
@@ -691,18 +699,21 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 						$options['options'] = $this->conf['config.']['options'];
 					}
 				}
+
 				// Add Cookies script, if cookie is active
 				if ($this->conf['config.']['tabCookieExpires'] > 0) {
 					$this->pagerenderer->addJsFile($this->conf['jQueryCookies']);
 					unset($options['selected']);
 					$options['cookie'] = "cookie: { expires: ".$this->conf['config.']['tabCookieExpires'].", path:'/{$this->getContentKey()}' }";
 				}
+
 				// get the Template of the Javascript
 				$markerArray = array();
 				// get the template
 				if (! $templateCode = trim($this->cObj->getSubpart($this->templateFileJS, "###TEMPLATE_TAB_JS###"))) {
 					$templateCode = $this->outputError("Template TEMPLATE_TAB_JS is missing", TRUE);
 				}
+
 				// Fix the href problem (config.prefixLocalAnchors = all)
 				if ($GLOBALS['TSFE']->config['config']['prefixLocalAnchors']) {
 					$fixTabHref = trim($this->cObj->getSubpart($templateCode, "###FIX_HREF###"));
@@ -710,12 +721,22 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 					$fixTabHref = NULL;
 				}
 				$templateCode = trim($this->cObj->substituteSubpart($templateCode, '###FIX_HREF###', $fixTabHref, 0));
+
+				// app the open-link-template
+				if ($this->confArr['openExternalLink']) {
+					$openExtLink = trim($this->cObj->getSubpart($templateCode, "###OPEN_EXTERNAL_LINK###"));
+				} else {
+					$openExtLink = NULL;
+				}
+				$templateCode = trim($this->cObj->substituteSubpart($templateCode, '###OPEN_EXTERNAL_LINK###', $openExtLink, 0));
+
 				// Replace default values
 				$markerArray["KEY"] = $this->getContentKey();
 				$markerArray["PREG_QUOTE_KEY"] = preg_quote($this->getContentKey(), "/");
 				$markerArray["OPTIONS"] = implode(", ", $options);
 				$markerArray["ROTATE"] = $rotate;
 				$templateCode = $this->cObj->substituteMarkerArray($templateCode, $markerArray, '###|###', 0);
+
 				// Add all CSS and JS files
 				if (T3JQUERY === TRUE) {
 					tx_t3jquery::addJqJS();
@@ -757,6 +778,7 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 				$markerArray["EASING"]         = (in_array($this->conf['config.']['accordionTransition'], array("swing", "linear")) ? "" : "ease".$this->conf['config.']['accordionTransitiondir'].$this->conf['config.']['accordionTransition']);
 				$markerArray["TRANS_DURATION"] = (is_numeric($this->conf['config.']['accordionTransitionduration']) ? $this->conf['config.']['accordionTransitionduration'] : 1000);
 				$markerArray["DELAY_DURATION"] = (is_numeric($this->conf['config.']['delayDuration']) ? $this->conf['config.']['delayDuration'] : '0');
+
 				// get the template for the Javascript
 				if (! $templateCode = trim($this->cObj->getSubpart($this->templateFileJS, "###TEMPLATE_ACCORDION_JS###"))) {
 					$templateCode = $this->outputError("Template TEMPLATE_ACCORDION_JS is missing", TRUE);
@@ -768,6 +790,15 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 				} else if ($this->conf['config.']['accordionAnimated']) {
 					$options['animated'] = "animated:'{$this->conf['config.']['accordionAnimated']}'";
 				}
+
+				// app the open-link-template
+				if ($this->confArr['openExternalLink']) {
+					$openExtLink = trim($this->cObj->getSubpart($templateCode, "###OPEN_EXTERNAL_LINK###"));
+				} else {
+					$openExtLink = NULL;
+				}
+				$templateCode = trim($this->cObj->substituteSubpart($templateCode, '###OPEN_EXTERNAL_LINK###', $openExtLink, 0));
+
 				// set the easing animation script
 				$templateCode = $this->cObj->substituteSubpart($templateCode, '###EASING_ANIMATION###', $easingAnimation, 0);
 				$continuing = NULL;
@@ -784,6 +815,7 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 				$templateCode = $this->cObj->substituteSubpart($templateCode, '###CONTINUING###', $continuing, 0);
 				$templateCode = $this->cObj->substituteSubpart($templateCode, '###AUTO_PLAY###',  $autoPlay, 0);
 				$templateCode = $this->cObj->substituteSubpart($templateCode, '###SETTIMEOUT###', $settimeout, 0);
+
 				// overwrite all options if set
 				if (trim($this->conf['config.']['options'])) {
 					if ($this->conf['config.']['optionsOverride']) {
@@ -1241,6 +1273,7 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 			} else {
 				$wrap = $contentWrap_array[1];
 			}
+			$addContent = FALSE;
 			// override the CONTENT
 			if ($this->templatePart == "TEMPLATE_COLUMNS" && $this->conf['config.']['columnOrder']) {
 				switch ($this->conf['config.']['columnOrder']) {
@@ -1250,6 +1283,7 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 							$test = ($key - $a) / $this->contentCount;
 							if (intval($test) == $test) {
 								$markerArray["CONTENT"] .= $this->cObj->stdWrap($this->cElements[$key], array('wrap' => $wrap));
+								$addContent = TRUE;
 							}
 						}
 						break;
@@ -1260,6 +1294,7 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 							$test = ($key - ($this->contentCount - ($a + 1))) / $this->contentCount;
 							if (intval($test) == $test) {
 								$markerArray["CONTENT"] .= $this->cObj->stdWrap($this->cElements[$key], array('wrap' => $wrap));
+								$addContent = TRUE;
 							}
 						}
 						break;
@@ -1278,13 +1313,15 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 			} else {
 				// wrap the content
 				$markerArray["CONTENT"] = $this->cObj->stdWrap($this->cElements[$a], array('wrap' => $wrap));
+				$addContent = TRUE;
 			}
+			$markerArray["REL"] = htmlspecialchars($this->rels[$a]);
 			// Generate the QUOTE_TITLE
 			$markerArray["DEFAULT_QUOTE_TITLE"]   = htmlspecialchars($this->cObj->substituteMarkerArray($this->pi_getLL('default_quote_title_template'), $markerArray, '###|###', 0));
 			$markerArray["TAB_QUOTE_TITLE"]       = htmlspecialchars($this->cObj->substituteMarkerArray($this->pi_getLL('tab_quote_title_template'), $markerArray, '###|###', 0));
 			$markerArray["ACCORDION_QUOTE_TITLE"] = htmlspecialchars($this->cObj->substituteMarkerArray($this->pi_getLL('accordion_quote_title_template'), $markerArray, '###|###', 0));
 
-			if ($markerArray["CONTENT"]) {
+			if ($addContent) {
 				// add content to COLUMNS
 				$columns .= $this->cObj->substituteMarkerArray($columnCode, $markerArray, '###|###', 0);
 				// add content to TITLE

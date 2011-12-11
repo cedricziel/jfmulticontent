@@ -14,7 +14,10 @@ useSelectInsteadCheckbox = 0
 # cat=basic/enable/50; type=boolean; label=Enable own userFunc in page mode: If set, you have to do the pagerendering with a own userFunc (e.g.: TemplaVoila, see documentation)
 useOwnUserFuncForPages = 0
 
-# cat=basic/enable/60; type=integer; label=colPos of IRRE Content: Select the colPos where the tt_content will be saved in IRRE-view
+# cat=basic/enable/60; type=boolean; label=Open external links in page-view: If set, the external link in page-view will be opened
+openExternalLink = 0
+
+# cat=basic/enable/70; type=integer; label=colPos of IRRE Content: Select the colPos where the tt_content will be saved in IRRE-view
 colPosOfIrreContent = 93
 
 

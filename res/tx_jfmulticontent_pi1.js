@@ -1,3 +1,47 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<TITLE>Multi Content JS-Template</TITLE>
+</head>
+<body>
+
+<h1>Multi Content JS-Template</h1>
+
+<br />
+<br />
+<br />
+
+<em>Common markers:</em>
+KEY - Unique key of the multicontent
+OPTIONS - Set the JS-options defined in FlexForm
+
+<em>Tabs markers:</em>
+OPEN_EXTERNAL_LINK - Subpart for the JS to open the url in the rel-attribute (only if openExternalLink is set in EXT-Config)
+PREG_QUOTE_KEY - Unique key of the multicontent preg_quoted
+FIX_HREF - Subpart to fix hrefs when config.prefixLocalAnchors is set
+ROTATE - Set the JS for autoplay
+
+<em>Accordion markers:</em>
+OPEN_EXTERNAL_LINK - Subpart for the JS to open the url in the rel-attribute (only if openExternalLink is set in EXT-Config)
+CONTENT_COUNT - Count of the contents
+EASING_ANIMATION - Subpart for the easing definition
+EASING - Used easing transition
+TRANS_DURATION - Duration of the transition
+DELAY_DURATION - Delay of the autolpay
+AUTO_PLAY - Subpart for the autoplay
+SETTIMEOUT - Subpart for timer of autoplay
+CONTINUING - Subpart to stop the autoplay in case of user action
+
+<em>Slidedeck markers:</em>
+HEIGHT - Set the defined height of the easyaccordion
+
+<em>Easyaccordion markers:</em>
+WIDTH - Set the defined width of the easyaccordion
+
+
+
+
 
 <!-- ###TEMPLATE_TAB_JS### begin -->
 jQuery(document).ready(function(){
@@ -14,6 +58,14 @@ jQuery(document).ready(function(){
 	jQuery('####KEY###').tabs({
 		###OPTIONS###
 	})###ROTATE###;
+	<!-- ###OPEN_EXTERNAL_LINK### -->
+	jQuery('####KEY###').bind('tabsselect', function(e, ui) {
+		var rel = jQuery(ui.tab).attr('rel');
+		if (rel.length > 0) {
+			document.location.href = rel;
+		}
+	});
+	<!-- ###OPEN_EXTERNAL_LINK### -->
 });
 <!-- ###TEMPLATE_TAB_JS### end -->
 
@@ -26,6 +78,14 @@ jQuery(document).ready(function(){
 	jQuery('####KEY###').accordion({
 		###OPTIONS###
 	});
+	<!-- ###OPEN_EXTERNAL_LINK### -->
+	jQuery('####KEY###').bind('accordionchangestart', function(e, ui) {
+		var rel = jQuery(ui.newHeader).find('a').attr('rel');
+		if (rel.length > 0) {
+			document.location.href = rel;
+		}
+	});
+	<!-- ###OPEN_EXTERNAL_LINK### -->
 	<!-- ###SETTIMEOUT### -->
 	setTimeout("tx_jfmulticontent_next_accordion(jQuery('####KEY###'),###CONTENT_COUNT###)", ###DELAY_DURATION###);
 	<!-- ###SETTIMEOUT### -->
@@ -112,3 +172,12 @@ jQuery(document).ready(function(){
 });
 <!-- ###TEMPLATE_BOOKLET_JS### end -->
 
+
+
+
+
+</pre>
+
+
+</body>
+</html>

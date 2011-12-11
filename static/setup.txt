@@ -168,6 +168,28 @@ plugin.tx_jfmulticontent_pi1 {
 			}
 			title = TEXT
 			title.data = register:page_title
+			rel = COA
+			rel {
+				if.equals.data = register:page_doktype
+				if.value = 3
+				10 = CASE
+				10 {
+					key.data = register:page_urltype
+					1 = TEXT
+					1.value = http://
+					2 = TEXT
+					2.value = ftp://
+					3 = TEXT
+					3.value = mailto:
+					4 = TEXT
+					4.value = https://
+					default.value = 
+				}
+				20 = TEXT
+				20 {
+					data = register:page_url
+				}
+			}
 		}
 		content {
 			content = RECORDS
@@ -178,6 +200,7 @@ plugin.tx_jfmulticontent_pi1 {
 			}
 			title = TEXT
 			title.data = register:title
+			rel >
 		}
 		irre {
 			content = RECORDS
@@ -188,6 +211,7 @@ plugin.tx_jfmulticontent_pi1 {
 			}
 			title = TEXT
 			title.data = register:title
+			rel >
 		}
 	}
 	contents {
@@ -209,6 +233,7 @@ plugin.tx_jfmulticontent_pi1 {
 				10 = TEXT
 				10.field = header
 			}
+			rel >
 		}
 		20 < .10
 		20.id = 2

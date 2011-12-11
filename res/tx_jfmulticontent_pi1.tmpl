@@ -6,10 +6,28 @@
 </head>
 <body>
 
-<h1>Multi Content</h1>
+<h1>Multi Content Template</h1>
 
+<br />
+<br />
+<br />
 
+<em>Common markers:</em>
+KEY - Unique key of the multicontent
+ID - ID of the contentn
+REL - the rel value, rendered as cObject views.page.rel
+TITLES - Subpart for the title
+TITLE - Title of the contentn
+COLUMNS - Subpart for the content
+ATTRIBUTE - Attribute for the content
+CONTENT - The rendered content
 
+<em>Columns markers:</em>
+EQUALIZE_CLASS - Sets the class to equalize the columns height
+
+<em>Easyaccordion markers:</em>
+SKIN - Sets the selected skin-name
+EASYACCORDION_ACTIVE - Sets the active content (class)
 
 
 <h2>TEMPLATE_COLUMNS:</h2>
@@ -32,7 +50,7 @@
 <div id="###KEY###">
 	<ul>
 		<!-- ###TITLES### -->
-		<li><a href="####KEY###-###ID###">###TITLE###</a></li>
+		<li><a href="####KEY###-###ID###" rel="###REL###">###TITLE###</a></li>
 		<!-- ###TITLES### -->
 	</ul>
 	<!-- ###COLUMNS### -->
@@ -52,7 +70,7 @@
 <!-- ###TEMPLATE_ACCORDION### begin -->
 <div id="###KEY###">
 	<!-- ###COLUMNS### -->
-	<h3><a href="####KEY###-###ID###">###TITLE###</a></h3>
+	<h3><a href="####KEY###-###ID###" rel="###REL###">###TITLE###</a></h3>
 	<div ###ATTRIBUTE###>
 		###CONTENT###
 	</div>

@@ -94,6 +94,7 @@ class tx_jfmulticontent_tsparserext
 			'ttNewsCodes',
 			'useSelectInsteadCheckbox',
 			'useOwnUserFuncForPages',
+			'openExternalLink',
 			'colPosOfIrreContent',
 			'style.',
 			'classInner',
