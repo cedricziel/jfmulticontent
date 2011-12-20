@@ -61,7 +61,7 @@ jQuery(document).ready(function(){
 	<!-- ###OPEN_EXTERNAL_LINK### -->
 	jQuery('####KEY###').bind('tabsselect', function(e, ui) {
 		var rel = jQuery(ui.tab).attr('rel');
-		if (rel.length > 0) {
+		if (typeof(rel) != 'undefined' && rel.length > 0) {
 			document.location.href = rel;
 		}
 	});
@@ -81,7 +81,7 @@ jQuery(document).ready(function(){
 	<!-- ###OPEN_EXTERNAL_LINK### -->
 	jQuery('####KEY###').bind('accordionchangestart', function(e, ui) {
 		var rel = jQuery(ui.newHeader).find('a').attr('rel');
-		if (rel.length > 0) {
+		if (typeof(rel) != 'undefined' && rel.length > 0) {
 			document.location.href = rel;
 		}
 	});

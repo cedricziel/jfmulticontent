@@ -211,7 +211,7 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 			if ($this->lConf['tabCollapsible'] < 2) {
 				$this->conf['config.']['tabCollapsible'] = $this->lConf['tabCollapsible'];
 			}
-			if ($this->lConf['tabOpen'] > 0) {
+			if ($this->lConf['tabOpen'] >= 0) {
 				$this->conf['config.']['tabOpen'] = $this->lConf['tabOpen'];
 			}
 			if ($this->lConf['tabRandomContent'] < 2) {
@@ -239,7 +239,7 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 			if ($this->lConf['accordionClosed'] < 2) {
 				$this->conf['config.']['accordionClosed'] = $this->lConf['accordionClosed'];
 			}
-			if (is_numeric($this->lConf['accordionOpen'])) {
+			if ($this->lConf['accordionOpen'] > 0) {
 				$this->conf['config.']['accordionOpen'] = $this->lConf['accordionOpen'];
 			}
 			if ($this->lConf['accordionRandomContent'] < 2) {
@@ -691,6 +691,7 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 				} elseif (is_numeric($this->conf['config.']['tabOpen'])) {
 					$options['selected'] = "selected: ".($this->conf['config.']['tabOpen'] - 1);
 				}
+
 				// overwrite all options if set
 				if (trim($this->conf['config.']['options'])) {
 					if ($this->conf['config.']['optionsOverride']) {
@@ -701,7 +702,7 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 				}
 
 				// Add Cookies script, if cookie is active
-				if ($this->conf['config.']['tabCookieExpires'] > 0) {
+				if ($this->conf['config.']['tabCookieExpires'] > 0 && $this->conf['config.']['tabOpen'] != -1) {
 					$this->pagerenderer->addJsFile($this->conf['jQueryCookies']);
 					unset($options['selected']);
 					$options['cookie'] = "cookie: { expires: ".$this->conf['config.']['tabCookieExpires'].", path:'/{$this->getContentKey()}' }";
@@ -765,7 +766,7 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 					$options['collapsible'] = "collapsible:true";
 				} elseif ($this->conf['config.']['accordionRandomContent']) {
 					$options['active'] = "active:Math.floor(Math.random()*{$this->contentCount})";
-				} elseif (is_numeric($this->conf['config.']['accordionOpen'])) {
+				} elseif ($this->conf['config.']['accordionOpen'] > 0) {
 					$options['active'] = "active:".($this->conf['config.']['accordionOpen'] - 1);
 				}
 				if ($this->conf['config.']['accordionEvent']) {

@@ -157,8 +157,7 @@
 								<size>2</size>
 								<max>2</max>
 								<default></default>
-								<checkbox>0</checkbox>
-								<eval>int</eval>
+								<eval>nospace</eval>
 							</config>
 						</TCEforms>
 					</tabOpen>
