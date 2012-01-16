@@ -73,6 +73,9 @@ plugin.tx_jfmulticontent_pi1 {
 		tabFxHeight = 0
 		tabFxOpacity = 1
 		tabFxDuration = 
+		tabOptions (
+		)
+		tabOptionsOverride = 0
 
 		accordionAutoHeight = 0
 		accordionCollapsible = 0
@@ -84,6 +87,9 @@ plugin.tx_jfmulticontent_pi1 {
 		accordionTransition = 
 		accordionTransitiondir = In
 		accordionTransitionduration = 1000
+		accordionOptions (
+		)
+		accordionOptionsOverride = 0
 
 		sliderWidth = 
 		sliderHeight = 
@@ -107,6 +113,9 @@ plugin.tx_jfmulticontent_pi1 {
 		sliderTransitiondir = In
 		sliderTransitionduration = 1000
 		sliderAutoplay = 0
+		sliderOptions (
+		)
+		sliderOptionsOverride = 0
 
 		slidedeckHeight = 300
 		slidedeckTransition = swing
@@ -118,11 +127,17 @@ plugin.tx_jfmulticontent_pi1 {
 		slidedeckScroll = 0
 		slidedeckKeys = 0
 		slidedeckHidespines = 0
+		slidedeckOptions (
+		)
+		slidedeckOptionsOverride = 0
 
 		easyaccordionSkin = {$plugin.tx_jfmulticontent_pi1.easyaccordionSkin}
 		easyaccordionOpen = 1
 		easyaccordionWidth = 600
 		easyaccordionSlideNum = 1
+		easyaccordionOptions (
+		)
+		easyaccordionOptionsOverride = 0
 
 		bookletWidth = 600
 		bookletHeight = 400
@@ -146,13 +161,13 @@ plugin.tx_jfmulticontent_pi1 {
 		bookletArrows = 0
 		bookletArrowsHide = 0
 		bookletHovers = 1
+		bookletOptions (
+		)
+		bookletOptionsOverride = 0
 
 		delayDuration = 0
 		autoplayContinuing = 0
 		autoplayCycle = 0
-		options (
-		)
-		optionsOverride = 0
 	}
 	views {
 		page {

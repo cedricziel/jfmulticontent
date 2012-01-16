@@ -457,8 +457,10 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 				$this->attributes = t3lib_div::trimExplode(chr(10), $this->lConf['attributes']);
 			}
 			// options
-			$this->conf['config.']['options']         = $this->lConf['options'];
-			$this->conf['config.']['optionsOverride'] = $this->lConf['optionsOverride'];
+			if ($this->lConf['optionsOverride'] || trim($this->lConf['options'])) {
+				$this->conf['config.'][$this->lConf['style'].'Options'] = $this->lConf['options'];
+				$this->conf['config.'][$this->lConf['style'].'OptionsOverride'] = $this->lConf['optionsOverride'];
+			}
 
 			$view = $this->conf['views.'][$this->conf['config.']['view'].'.'];
 
@@ -522,7 +524,7 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 				}
 			} else if ($this->conf['config.']['view'] == 'irre') {
 				// get the content ID's
-				$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery('*', 'tt_content', 'tx_jfmulticontent_irre_parentid='.intval($this->cObj->data['uid']).'', '', '');//  AND tx_jfmulticontent_irre_parenttable=\'tt_content\'
+				$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery('*', 'tt_content', 'tx_jfmulticontent_irre_parentid='.intval($this->cObj->data['uid']).' AND deleted = 0 AND hidden = 0', '', '');//  AND tx_jfmulticontent_irre_parenttable=\'tt_content\'
 				$a = 0;
 				while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res)) {
 					$GLOBALS['TSFE']->register['uid'] = $row['uid'];
@@ -693,11 +695,11 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 				}
 
 				// overwrite all options if set
-				if (trim($this->conf['config.']['options'])) {
-					if ($this->conf['config.']['optionsOverride']) {
-						$options = array($this->conf['config.']['options']);
-					} else {
-						$options['options'] = $this->conf['config.']['options'];
+				if ($this->conf['config.']['tabOptionsOverride']) {
+					$options = array($this->conf['config.']['tabOptions']);
+				} else {
+					if ($this->conf['config.']['tabOptions']) {
+						$options['options'] = $this->conf['config.']['tabOptions'];
 					}
 				}
 
@@ -818,11 +820,11 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 				$templateCode = $this->cObj->substituteSubpart($templateCode, '###SETTIMEOUT###', $settimeout, 0);
 
 				// overwrite all options if set
-				if (trim($this->conf['config.']['options'])) {
-					if ($this->conf['config.']['optionsOverride']) {
-						$options = array($this->conf['config.']['options']);
-					} else {
-						$options['flexform'] = $this->conf['config.']['options'];
+				if ($this->conf['config.']['accordionOptionsOverride']) {
+					$options = array($this->conf['config.']['accordionOptions']);
+				} else {
+					if ($this->conf['config.']['accordionOptions']) {
+						$options['options'] = $this->conf['config.']['accordionOptions'];
 					}
 				}
 
@@ -915,6 +917,7 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 				if ($this->pi_getLL('slider_back')) {
 					$options[] = "backText: '".t3lib_div::slashJS($this->pi_getLL('slider_back'))."'";
 				}
+
 				// define the paneltext
 				if ($this->conf['config.']['sliderPanelFromHeader']) {
 					$tab = array();
@@ -930,14 +933,16 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 				} elseif ($this->conf['config.']['sliderOpen'] > 1) {
 					$options[] = "startPanel: ".($this->conf['config.']['sliderOpen'] < $this->contentCount ? $this->conf['config.']['sliderOpen'] : $this->contentCount);
 				}
+
 				// overwrite all options if set
-				if (trim($this->conf['config.']['options'])) {
-					if ($this->conf['config.']['optionsOverride']) {
-						$options = array($this->conf['config.']['options']);
-					} else {
-						$options[] = $this->conf['config.']['options'];
+				if ($this->conf['config.']['sliderOptionsOverride']) {
+					$options = array($this->conf['config.']['sliderOptions']);
+				} else {
+					if ($this->conf['config.']['sliderOptions']) {
+						$options[] = $this->conf['config.']['sliderOptions'];
 					}
 				}
+
 				// get the Template of the Javascript
 				$markerArray = array();
 				// get the template
@@ -991,12 +996,13 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 					$options['autoPlayInterval'] = "autoPlayInterval: {$this->conf['config.']['delayDuration']}";
 					$options['cycle']            = "cycle: ".($this->conf['config.']['autoplayCycle'] ? 'true' : 'false');
 				}
+
 				// overwrite all options if set
-				if (trim($this->conf['config.']['options'])) {
-					if ($this->conf['config.']['optionsOverride']) {
-						$options = array($this->conf['config.']['options']);
-					} else {
-						$options['flexform'] = $this->conf['config.']['options'];
+				if ($this->conf['config.']['slidedeckOptionsOverride']) {
+					$options = array($this->conf['config.']['slidedeckOptions']);
+				} else {
+					if ($this->conf['config.']['slidedeckOptions']) {
+						$options['options'] = $this->conf['config.']['slidedeckOptions'];
 					}
 				}
 
@@ -1026,7 +1032,6 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 				}
 				$this->pagerenderer->addJS(trim($templateCode));
 				break;
-
 			}
 			case "easyaccordion" : {
 				// easyaccordion
@@ -1040,12 +1045,13 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 					$options['slideInterval'] = "slideInterval: {$this->conf['config.']['delayDuration']}";
 				}
 				$options['slideNum'] = "slideNum: ".($this->conf['config.']['easyaccordionSlideNum'] ? 'true' : 'false');
+
 				// overwrite all options if set
-				if (trim($this->conf['config.']['options'])) {
-					if ($this->conf['config.']['optionsOverride']) {
-						$options = array($this->conf['config.']['options']);
-					} else {
-						$options['flexform'] = $this->conf['config.']['options'];
+				if ($this->conf['config.']['optionsOverride']) {
+					$options = array($this->conf['config.']['slideOptions']);
+				} else {
+					if ($this->conf['config.']['slideOptions']) {
+						$options['options'] = $this->conf['config.']['slideOptions'];
 					}
 				}
 
@@ -1112,25 +1118,29 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 				$options['arrows']      = "arrows: ".($this->conf['config.']['bookletArrows'] ? 'true' : 'false');
 				$options['arrowsHide']  = "arrowsHide: ".($this->conf['config.']['bookletArrowsHide'] ? 'true' : 'false');
 				$options['hovers']      = "hovers: ".($this->conf['config.']['bookletHovers'] ? 'true' : 'false');
+
 				// overwrite all options if set
-				if (trim($this->conf['config.']['options'])) {
-					if ($this->conf['config.']['optionsOverride']) {
-						$options = array($this->conf['config.']['options']);
-					} else {
-						$options['flexform'] = $this->conf['config.']['options'];
+				if ($this->conf['config.']['bookletOptionsOverride']) {
+					$options = array($this->conf['config.']['bookletOptions']);
+				} else {
+					if ($this->conf['config.']['bookletOptions']) {
+						$options['options'] = $this->conf['config.']['bookletOptions'];
 					}
 				}
+
 				// get the template for the Javascript
 				if (! $templateCode = trim($this->cObj->getSubpart($this->templateFileJS, "###TEMPLATE_BOOKLET_JS###"))) {
 					$templateCode = $this->outputError("Template TEMPLATE_BOOKLET_JS is missing", TRUE);
 				}
+
 				// Replace default values
 				$markerArray = array();
 				$markerArray["KEY"]     = $this->getContentKey();
 				$markerArray["OPTIONS"] = implode(",\n		", $options);
+
 				// Replace all markers
 				$templateCode = $this->cObj->substituteMarkerArray($templateCode, $markerArray, '###|###', 0);
-				
+
 				// Add all CSS and JS files
 				if (T3JQUERY === TRUE) {
 					tx_t3jquery::addJqJS();
