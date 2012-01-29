@@ -25,6 +25,9 @@ CONTENT - The rendered content
 <em>Columns markers:</em>
 EQUALIZE_CLASS - Sets the class to equalize the columns height
 
+<em>Tabs markers:</em>
+TAB_KEY - Defined by TS (plugin.tx_jfmulticontent_pi1.tabKey)
+
 <em>Easyaccordion markers:</em>
 SKIN - Sets the selected skin-name
 EASYACCORDION_ACTIVE - Sets the active content (class)
@@ -50,11 +53,11 @@ EASYACCORDION_ACTIVE - Sets the active content (class)
 <div id="###KEY###">
 	<ul>
 		<!-- ###TITLES### -->
-		<li><a href="####KEY###-###ID###" rel="###REL###">###TITLE###</a></li>
+		<li><a href="####TAB_KEY###" rel="###REL###">###TITLE###</a></li>
 		<!-- ###TITLES### -->
 	</ul>
 	<!-- ###COLUMNS### -->
-	<div ###ATTRIBUTE### id="###KEY###-###ID###">
+	<div ###ATTRIBUTE### id="###TAB_KEY###">
 		###CONTENT###
 	</div>
 	<!-- ###COLUMNS### -->

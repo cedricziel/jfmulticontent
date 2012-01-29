@@ -39,6 +39,11 @@ plugin.tx_jfmulticontent_pi1 {
 	tabWrap {
 		wrap = |
 	}
+	tabKey = TEXT
+	tabKey {
+		value = {register:key}-{register:id}
+		insertData = 1
+	}
 	accordionWrap {
 		wrap = |
 	}

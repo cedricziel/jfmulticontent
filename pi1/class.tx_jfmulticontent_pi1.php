@@ -1195,6 +1195,9 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 	 */
 	public function renderTemplate()
 	{
+		// set the register:key for TS manipulation
+		$GLOBALS['TSFE']->register['key'] = $this->getContentKey();
+
 		$markerArray = $this->additionalMarker;
 		// get the template
 		if (! $templateCode = $this->cObj->getSubpart($this->templateFile, "###{$this->templatePart}###")) {
@@ -1271,11 +1274,18 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 			$markerArray["CONTENT_ID"] = $this->content_id[$a];
 			$markerArray["ID"]         = $a+1;
 			$markerArray["TITLE"]      = NULL;
+
 			// Title will be selected if not COLUMNS (TAB, ACCORDION and SLIDER)
 			if ($this->templatePart != "TEMPLATE_COLUMNS") {
 				// overwrite the title if set in $this->titles
 				$markerArray["TITLE"] = $this->titles[$a];
 			}
+
+			$GLOBALS['TSFE']->register['content_id'] = $markerArray["CONTENT_ID"];
+			$GLOBALS['TSFE']->register['id']         = $markerArray["ID"];
+			$GLOBALS['TSFE']->register['title']      = $markerArray["TITLE"];
+			$markerArray["TAB_KEY"] = $this->cObj->cObjGetSingle($this->conf['tabKey'], $this->conf['tabKey.']);
+
 			// define the used wrap
 			if ($a == 0) {
 				$wrap = $contentWrap_array[0];
