@@ -14,7 +14,10 @@ plugin.tx_jfmulticontent_pi1 {
 	jQueryMouseWheel = {$plugin.tx_jfmulticontent_pi1.file.jQueryMouseWheel}
 	jQueryUI = {$plugin.tx_jfmulticontent_pi1.file.jQueryUI}
 	jQueryUIstyle = {$plugin.tx_jfmulticontent_pi1.file.jQueryUIstyle}
+
 	sliderJS = {$plugin.tx_jfmulticontent_pi1.file.sliderJS}
+	sliderJSvideo = {$plugin.tx_jfmulticontent_pi1.file.sliderJSvideo}
+
 	sliderCSS = {$plugin.tx_jfmulticontent_pi1.file.sliderCSS}
 	sliderCSSie7 = {$plugin.tx_jfmulticontent_pi1.file.sliderCSSie7}
 

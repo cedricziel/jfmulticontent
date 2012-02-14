@@ -1,5 +1,5 @@
-﻿/*
-	AnythingSlider v1.7.18
+/*
+	AnythingSlider v1.7.24
 	Original by Chris Coyier: http://css-tricks.com
 	Get the latest version: https://github.com/ProLoser/AnythingSlider
 
@@ -45,12 +45,12 @@
 			base.win = window;
 			base.$win = $(base.win);
 
-			base.$controls = $('<div class="anythingControls"></div>').appendTo( (o.appendControlsTo !== null && $(o.appendControlsTo).length) ? $(o.appendControlsTo) : base.$wrapper);
+			base.$controls = $('<div class="anythingControls"></div>').appendTo( (o.appendControlsTo && $(o.appendControlsTo).length) ? $(o.appendControlsTo) : base.$wrapper);
 			base.$startStop = $('<a href="#" class="start-stop"></a>');
 			if (o.buildStartStop) {
-				base.$startStop.appendTo( (o.appendStartStopTo !== null && $(o.appendStartStopTo).length) ? $(o.appendStartStopTo) : base.$controls );
+				base.$startStop.appendTo( (o.appendStartStopTo && $(o.appendStartStopTo).length) ? $(o.appendStartStopTo) : base.$controls );
 			}
-			base.$nav = $('<ul class="thumbNav" />').appendTo( (o.appendNavigationTo !== null && $(o.appendNavigationTo).length) ? $(o.appendNavigationTo) : base.$controls );
+			base.$nav = $('<ul class="thumbNav" />').appendTo( (o.appendNavigationTo && $(o.appendNavigationTo).length) ? $(o.appendNavigationTo) : base.$controls );
 
 			// Set up a few defaults & get details
 			base.flag    = false; // event flag to prevent multiple calls (used in control click/focusin)
@@ -204,17 +204,17 @@
 			// This supports the "infinite" scrolling, also ensures any cloned elements don't duplicate an ID
 			// Moved removeAttr before addClass otherwise IE7 ignores the addClass: http://bugs.jquery.com/ticket/9871
 			if (o.infiniteSlides && base.pages > 1) {
-				base.$el.prepend( base.$items.filter(':last').clone().removeAttr('id').addClass('cloned') );
+				base.$el.prepend( base.$items.filter(':last').clone().addClass('cloned') );
 				// Add support for multiple sliders shown at the same time
 				if (o.showMultiple > 1) {
-					base.$el.append( base.$items.filter(':lt(' + o.showMultiple + ')').clone().removeAttr('id').addClass('cloned').addClass('multiple') );
+					base.$el.append( base.$items.filter(':lt(' + o.showMultiple + ')').clone().addClass('cloned multiple') );
 				} else {
-					base.$el.append( base.$items.filter(':first').clone().removeAttr('id').addClass('cloned') );
+					base.$el.append( base.$items.filter(':first').clone().addClass('cloned') );
 				}
 				base.$el.find('.cloned').each(function(){
 					// disable all focusable elements in cloned panels to prevent shifting the panels by tabbing
 					$(this).find('a,input,textarea,select,button,area').attr('disabled', 'disabled');
-					$(this).find('[id]').removeAttr('id');
+					$(this).find('[id]').andSelf().removeAttr('id');
 				});
 			}
 
@@ -225,8 +225,9 @@
 			// Set the dimensions of each panel
 			if (o.resizeContents) {
 				base.$items.css('width', base.width);
-				base.$wrapper.css('width', base.getDim(base.currentPage)[0]);
-				base.$wrapper.add(base.$items).css('height', base.height);
+				base.$wrapper
+					.css('width', base.getDim(base.currentPage)[0])
+					.add(base.$items).css('height', base.height);
 			} else {
 				base.$win.load(function(){ base.setDimensions(); }); // set dimensions after all images load
 			}
@@ -246,20 +247,20 @@
 				base.$items.filter(':not(.cloned)').each(function(i) {
 					var index = i + 1;
 					t = ((index === 1) ? 'first' : '') + ((index === base.pages) ? 'last' : '');
-					$a = $('<a href="#"></a>').addClass('panel' + index).wrap('<li class="' + t + '" />');
+					$a = $('<a class="panel' + index + '" href="#"><span></span></a>').wrap('<li class="' + t + '" />');
 					base.$nav.append($a.parent()); // use $a.parent() so it will add <li> instead of only the <a> to the <ul>
 
 					// If a formatter function is present, use it
 					if ($.isFunction(o.navigationFormatter)) {
 						t = o.navigationFormatter(index, $(this));
-						$a.html('<span>' + t + '</span>');
 						// Add formatting to title attribute if text is hidden
-						if (parseInt($a.find('span').css('text-indent'),10) < 0) { $a.addClass(o.tooltipClass).attr('title', t); }
+						if ($a.find('span').css('visibility') === 'hidden') { $a.addClass(o.tooltipClass).attr('title', t); }
 					} else {
-						$a.html('<span>' + index + '</span>');
+						t = index;
 					}
 
-					$a.bind(o.clickControls, function(e) {
+					$a
+					.bind(o.clickControls, function(e) {
 						if (!base.flag && o.enableNavigation) {
 							// prevent running functions twice (once for click, second time for focusin)
 							base.flag = true; setTimeout(function(){ base.flag = false; }, 100);
@@ -267,7 +268,8 @@
 							if (o.hashTags) { base.setHash(index); }
 						}
 						e.preventDefault();
-					});
+					})
+					.find('span').html(t);
 				});
 
 				// Add navigation tab scrolling - use !! in case someone sets the size to zero
@@ -350,10 +352,13 @@
 			});
 
 			// Append elements to page
-			base.$back.appendTo( (o.appendBackTo !== null && $(o.appendBackTo).length) ? $(o.appendBackTo) : base.$wrapper );
-			base.$forward.appendTo( (o.appendForwardTo !== null && $(o.appendForwardTo).length) ? $(o.appendForwardTo) : base.$wrapper );
+			base.$back.appendTo( (o.appendBackTo && $(o.appendBackTo).length) ? $(o.appendBackTo) : base.$wrapper );
+			base.$forward.appendTo( (o.appendForwardTo && $(o.appendForwardTo).length) ? $(o.appendForwardTo) : base.$wrapper );
 
-			base.$arrowWidth = base.$forward.width(); // assuming the left & right arrows are the same width - used for toggle
+			base.arrowWidth = base.$forward.width(); // assuming the left & right arrows are the same width - used for toggle
+			base.arrowRight = parseInt(base.$forward.css('right'), 10);
+			base.arrowLeft = parseInt(base.$back.css('left'), 10);
+
 		};
 
 		// Creates the Start/Stop button
@@ -394,7 +399,7 @@
 
 		// Set panel dimensions to either resize content or adjust panel to content
 		base.setDimensions = function(){
-			var w, h, c, edge = 0,
+			var w, h, c, t, edge = 0,
 				fullsize = { width: '100%', height: '100%' },
 				// determine panel width
 				pw = (o.showMultiple > 1) ? base.width || base.$window.width()/o.showMultiple : base.$window.width(),
@@ -406,12 +411,13 @@
 				base.width = pw = (o.showMultiple > 1) ? w/o.showMultiple : w;
 			}
 			base.$items.each(function(i){
-				c = $(this).children();
+				t = $(this);
+				c = t.children();
 				if (o.resizeContents){
 					// resize panel
 					w = base.width;
 					h = base.height;
-					$(this).css({ width: w, height: h });
+					t.css({ width: w, height: h });
 					if (c.length) {
 						if (c[0].tagName === "EMBED") { c.attr(fullsize); } // needed for IE7; also c.length > 1 in IE7
 						if (c[0].tagName === "OBJECT") { c.find('embed').attr(fullsize); }
@@ -420,15 +426,15 @@
 					}
 				} else {
 					// get panel width & height and save it
-					w = $(this).width() || base.width; // if image hasn't finished loading, width will be zero, so set it to base width instead
+					w = t.width() || base.width; // if image hasn't finished loading, width will be zero, so set it to base width instead
 					if (c.length === 1 && w >= winw){
 						w = (c.width() >= winw) ? pw : c.width(); // get width of solitary child
 						c.css('max-width', w);   // set max width for all children
 					}
-					$(this).css('width', w); // set width of panel
-					h = (c.length === 1 ? c.outerHeight(true) : $(this).height()); // get height after setting width
+					t.css('width', w); // set width of panel
+					h = (c.length === 1 ? c.outerHeight(true) : t.height()); // get height after setting width
 					if (h <= base.outerPad[1]) { h = base.height; } // if height less than the outside padding, then set it to the preset height
-					$(this).css('height', h);
+					t.css('height', h);
 				}
 				base.panelSize[i] = [w,h,edge];
 				edge += (o.vertical) ? h : w;
@@ -486,15 +492,16 @@
 			// pause YouTube videos before scrolling or prevent change if playing
 			if (autoplay && o.isVideoPlaying(base)) { return; }
 
+			base.exactPage = page;
 			if (page > base.pages + 1 - base.adj) { page = (!o.infiniteSlides && !o.stopAtEnd) ? 1 : base.pages; }
 			if (page < base.adj ) { page = (!o.infiniteSlides && !o.stopAtEnd) ? base.pages : 1; }
+			if (!o.infiniteSlides) { base.exactPage = page; } // exact page used by the fx extension
 			base.currentPage = ( page > base.pages ) ? base.pages : ( page < 1 ) ? 1 : base.currentPage;
 			base.$currentPage = base.$items.eq(base.currentPage - base.adj);
-			base.exactPage = page;
-			base.targetPage = (page === 0) ? base.pages - base.adj : (page > base.pages) ? 1 - base.adj : page - base.adj;
-			base.$targetPage = base.$items.eq( base.targetPage );
+			base.targetPage = (page === 0) ? base.pages : (page > base.pages) ? 1 : page;
+			base.$targetPage = base.$items.eq( base.targetPage - 1 );
 			time = time || o.animationTime;
-			// don't trigger events when time = 1 - to prevent FX from firing multiple times on page resize
+			// don't trigger events when time < 0 - to prevent FX from firing multiple times on page resize
 			if (time >= 0) { base.$el.trigger('slide_init', base); }
 
 			base.slideControls(true, false);
@@ -639,8 +646,8 @@
 			}
 			if (o.buildArrows && o.toggleArrows) {
 				if (!base.hovered && base.playing) { sign = 1; op = 0; } // don't animate arrows during slideshow
-				base.$forward.stop(true,true).delay(t1).animate({ right: sign * base.$arrowWidth, opacity: op }, o.animationTime/2);
-				base.$back.stop(true,true).delay(t1).animate({ left: sign * base.$arrowWidth, opacity: op }, o.animationTime/2);
+				base.$forward.stop(true,true).delay(t1).animate({ right: base.arrowRight + (sign * base.arrowWidth), opacity: op }, o.animationTime/2);
+				base.$back.stop(true,true).delay(t1).animate({ left: base.arrowLeft + (sign * base.arrowWidth), opacity: op }, o.animationTime/2);
 			}
 		};
 
@@ -708,11 +715,14 @@
 		buildNavigation     : true,      // If true, builds a list of anchor links to link to each panel
 		buildStartStop      : true,      // ** If true, builds the start/stop button
 
+/*
+		// commented out as this will reduce the size of the minified version
 		appendForwardTo     : null,      // Append forward arrow to a HTML element (jQuery Object, selector or HTMLNode), if not null
 		appendBackTo        : null,      // Append back arrow to a HTML element (jQuery Object, selector or HTMLNode), if not null
 		appendControlsTo    : null,      // Append controls (navigation + start-stop) to a HTML element (jQuery Object, selector or HTMLNode), if not null
 		appendNavigationTo  : null,      // Append navigation buttons to a HTML element (jQuery Object, selector or HTMLNode), if not null
 		appendStartStopTo   : null,      // Append start-stop button to a HTML element (jQuery Object, selector or HTMLNode), if not null
+*/
 
 		toggleArrows        : false,     // If true, side navigation arrows will slide out on hovering & hide @ other times
 		toggleControls      : false,     // if true, slide in controls (navigation + play/stop button) on hover and slide change, hide @ other times
@@ -751,7 +761,18 @@
 		animationTime       : 600,       // How long the slideshow transition takes (in milliseconds)
 		delayBeforeAnimate  : 0,         // How long to pause slide animation before going to the desired slide (used if you want your "out" FX to show).
 
-		// Callbacks - removed from options to reduce size - they still work
+/*
+		// Callbacks - commented out to reduce size of the minified version - they still work
+		onBeforeInitialize  : function(e, slider) {}, // Callback before the plugin initializes
+		onInitialized       : function(e, slider) {}, // Callback when the plugin finished initializing
+		onShowStart         : function(e, slider) {}, // Callback on slideshow start
+		onShowStop          : function(e, slider) {}, // Callback after slideshow stops
+		onShowPause         : function(e, slider) {}, // Callback when slideshow pauses
+		onShowUnpause       : function(e, slider) {}, // Callback when slideshow unpauses - may not trigger properly if user clicks on any controls
+		onSlideInit         : function(e, slider) {}, // Callback when slide initiates, before control animation
+		onSlideBegin        : function(e, slider) {}, // Callback before slide animates
+		onSlideComplete     : function(slider) {},    // Callback when slide completes - no event variable!
+*/
 
 		// Interactivity
 		clickForwardArrow   : "click",         // Event used to activate forward arrow functionality (e.g. add jQuery mobile's "swiperight")

@@ -524,7 +524,8 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 				}
 			} else if ($this->conf['config.']['view'] == 'irre') {
 				// get the content ID's
-				$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery('*', 'tt_content', 'tx_jfmulticontent_irre_parentid='.intval($this->cObj->data['uid']).' AND deleted = 0 AND hidden = 0', '', '');//  AND tx_jfmulticontent_irre_parenttable=\'tt_content\'
+				$elementUID = ($this->cObj->data['_LOCALIZED_UID'])?$this->cObj->data['_LOCALIZED_UID']:$this->cObj->data['uid'];
+				$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery('*', 'tt_content', 'tx_jfmulticontent_irre_parentid='.intval($elementUID).' AND deleted = 0 AND hidden = 0', '', '');// AND tx_jfmulticontent_irre_parenttable=\'tt_content\'
 				$a = 0;
 				while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res)) {
 					$GLOBALS['TSFE']->register['uid'] = $row['uid'];
@@ -968,6 +969,9 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 					$this->pagerenderer->addJsFile($this->conf['jQueryEasing']);
 				}
 				$this->pagerenderer->addJsFile($this->conf['sliderJS']);
+				if ($this->conf['config.']['sliderResumeOnVideoEnd']) {
+					$this->pagerenderer->addJsFile($this->conf['sliderJSvideo']);
+				}
 				$this->pagerenderer->addJS($templateCode);
 				break;
 			}

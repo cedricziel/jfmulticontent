@@ -1,5 +1,5 @@
 /**
- * SlideDeck 1.3.0 Lite - 2011-10-14
+ * SlideDeck 1.3.2 Lite - 2011-11-17
  * Copyright (c) 2011 digital-telepathy (http://www.dtelepathy.com)
  * 
  * Support the developers by purchasing the Pro version at http://www.slidedeck.com/download
@@ -39,7 +39,7 @@ var SlideDeckSkin = {};
         var self = this,
             el = $(el);
         
-        var VERSION = "1.3.0";
+        var VERSION = "1.3.2";
         
         this.options = {
             speed: 500,
@@ -206,7 +206,7 @@ var SlideDeckSkin = {};
             if(!document.getElementById(BUG.id)){
                 var bugLink = document.createElement('A');
                     bugLink.id = BUG.id;
-                    bugLink.href = "http://www.slidedeck.com/?utm_source=LiteUser&utm_medium=Link&utm_campaign=SDbug";
+                    bugLink.href = "http://www.slidedeck.com/ref?utm_source=LiteUser&utm_medium=Link&utm_campaign=SDbug";
                     bugLink.target = "_blank";
                 var bugImg = document.createElement('IMG');
                     bugImg.src = (document.location.protocol == "https:" ? "https:" : "http:") + "//www.slidedeck.com/6885858486f31043e5839c735d99457f045affd0/" + VERSION + "/lite";
@@ -500,9 +500,14 @@ var SlideDeckSkin = {};
             
             // Setup Mouse Wheel Interaction
             if(typeof($.event.special.mousewheel) != "undefined"){
-                el.bind("mousewheel", function(event){
+                el.bind("mousewheel", function(event, mousewheeldelta){
                     if(self.options.scroll !== false){
+                        //Initial mousewheel assignment (legacy)
                         var delta = event.detail ? event.detail : event.wheelDelta;
+                        // Try new mousewheel assignment:
+                        if( typeof(delta) == 'undefined' ){
+                            delta = 0 - mousewheeldelta;
+                        }
                         if(self.browser.msie || self.browser.safari || self.browser.chrome){
                             delta = 0 - delta;
                         }
@@ -556,6 +561,7 @@ var SlideDeckSkin = {};
             if(self.options.autoPlay === true){
                 autoPlay();
             }
+            
             self.isLoaded = true;
         };
         
@@ -690,14 +696,14 @@ var SlideDeckSkin = {};
                     }
                 }
                 
-                self.spines.removeClass(classReset);
-                self.slides.removeClass(classReset);
-                el.find('.' + self.classes.activeCorner).hide();
-                
-                self.spines.eq(self.current - 2).addClass(self.classes.previous);
-                self.spines.eq(self.current).addClass(self.classes.next);
-                
                 if(self.current != self.former){
+                    self.spines.removeClass(classReset);
+                    self.slides.removeClass(classReset);
+                    el.find('.' + self.classes.activeCorner).hide();
+                    
+                    self.spines.eq(self.current - 2).addClass(self.classes.previous);
+                    self.spines.eq(self.current).addClass(self.classes.next);
+                    
                     var slideTransition = 'slide';
                     if(typeof(transitions[self.options.slideTransition]) != 'undefined'){
                         slideTransition = self.options.slideTransition;
