@@ -98,6 +98,7 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 			$this->lConf['tabOpen']          = $this->getFlexformData('general', 'tabOpen', $debuglog);
 			$this->lConf['tabRandomContent'] = $this->getFlexformData('general', 'tabRandomContent', $debuglog);
 			$this->lConf['tabCookieExpires'] = $this->getFlexformData('general', 'tabCookieExpires', $debuglog);
+			$this->lConf['tabCookieRoot']    = $this->getFlexformData('general', 'tabCookieRoot', $debuglog);
 			$this->lConf['tabFxHeight']      = $this->getFlexformData('general', 'tabFxHeight', $debuglog);
 			$this->lConf['tabFxOpacity']     = $this->getFlexformData('general', 'tabFxOpacity', $debuglog);
 			$this->lConf['tabFxDuration']    = $this->getFlexformData('general', 'tabFxDuration', $debuglog);
@@ -219,6 +220,9 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 			}
 			if (strlen($this->lConf['tabCookieExpires']) > 0) {
 				$this->conf['config.']['tabCookieExpires'] = $this->lConf['tabCookieExpires'];
+			}
+			if ($this->lConf['tabCookieRoot'] < 2) {
+				$this->conf['config.']['tabCookieRoot'] = $this->lConf['tabCookieRoot'];
 			}
 			if ($this->lConf['tabFxHeight'] < 2) {
 				$this->conf['config.']['tabFxHeight'] = $this->lConf['tabFxHeight'];
@@ -708,7 +712,11 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 				if ($this->conf['config.']['tabCookieExpires'] > 0 && $this->conf['config.']['tabOpen'] != -1) {
 					$this->pagerenderer->addJsFile($this->conf['jQueryCookies']);
 					unset($options['selected']);
-					$options['cookie'] = "cookie: { expires: ".$this->conf['config.']['tabCookieExpires'].", path:'/{$this->getContentKey()}' }";
+					$cookie_path = t3lib_div::getIndpEnv('REQUEST_URI');
+					if ($this->lConf['tabCookieRoot'] || preg_match("/^\/index.php/i", $cookie_path)) {
+						$cookie_path = "/";
+					}
+					$options['cookie'] = "cookie: { expires: ".$this->conf['config.']['tabCookieExpires'].", path:'$cookie_path' }";
 				}
 
 				// get the Template of the Javascript

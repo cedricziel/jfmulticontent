@@ -78,6 +78,7 @@ plugin.tx_jfmulticontent_pi1 {
 		tabOpen = 1
 		tabRandomContent = 0
 		tabCookieExpires = 
+		tabCookieRoot = 0
 		tabFxHeight = 0
 		tabFxOpacity = 1
 		tabFxDuration = 

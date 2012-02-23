@@ -56,6 +56,7 @@
 			<label index="tt_content.tx_jfmulticontent.tabOpen">Opened content</label>
 			<label index="tt_content.tx_jfmulticontent.tabRandomContent">Open random content</label>
 			<label index="tt_content.tx_jfmulticontent.tabCookieExpires">Cookie expiration (If set, the "opened" option will be ignored)</label>
+			<label index="tt_content.tx_jfmulticontent.tabCookieRoot">Set cookie path to root "/"</label>
 			<label index="tt_content.tx_jfmulticontent.accordionAutoHeight">Auto height</label>
 			<label index="tt_content.tx_jfmulticontent.accordionCollapsible">Collapsible</label>
 			<label index="tt_content.tx_jfmulticontent.accordionClosed">Closed at startup</label>

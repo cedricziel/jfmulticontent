@@ -188,6 +188,18 @@
 							</config>
 						</TCEforms>
 					</tabCookieExpires>
+					<tabCookieRoot>
+						<TCEforms>
+							<exclude>1</exclude>
+							<displayCond>FIELD:style:=:tab</displayCond>
+							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.tabCookieRoot</label>
+							<config>
+								<form_type>user</form_type>
+								<userFunc><![CDATA[EXT:jfmulticontent/lib/class.tx_jfmulticontent_tceFunc.php:&tx_jfmulticontent_tceFunc->getCheckbox]]></userFunc>
+								<checked>0</checked>
+							</config>
+						</TCEforms>
+					</tabCookieRoot>
 					<tabFxHeight>
 						<TCEforms>
 							<exclude>1</exclude>
