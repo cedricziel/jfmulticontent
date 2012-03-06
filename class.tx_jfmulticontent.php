@@ -45,7 +45,6 @@ class tx_jfmulticontent
 			$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery('*', 'pages', 'deleted=0 AND hidden=0 AND uid='.intval($pageID), '', '', 1);
 			$row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res);
 		}
-		$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery('*', $this->datenbank, "deleted = 0 AND hidden = 0 and pid = '".$PageId."'", '', "$OrderName $OrderSpalte", '0,10');
 
 		if (is_array($row)) {
 			foreach ($row as $key => $val) {
