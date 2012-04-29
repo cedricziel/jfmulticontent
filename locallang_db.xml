@@ -79,6 +79,7 @@
 			<label index="tt_content.tx_jfmulticontent.sliderResizeContents">Resize contents</label>
 			<label index="tt_content.tx_jfmulticontent.sliderTheme">Theme</label>
 			<label index="tt_content.tx_jfmulticontent.sliderTheme.I.0">default</label>
+			<label index="tt_content.tx_jfmulticontent.sliderMode">Mode</label>
 			<label index="tt_content.tx_jfmulticontent.sliderOpen">Opened content</label>
 			<label index="tt_content.tx_jfmulticontent.sliderRandomContent">Open random content</label>
 			<label index="tt_content.tx_jfmulticontent.sliderHashTags">Change URL (hash tag)</label>

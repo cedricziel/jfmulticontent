@@ -543,6 +543,25 @@
 							</config>
 						</TCEforms>
 					</sliderTheme>
+					<sliderMode>
+						<TCEforms>
+							<exclude>1</exclude>
+							<displayCond>FIELD:style:=:slider</displayCond>
+							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.sliderMode</label>
+							<config>
+								<type>select</type>
+								<size>1</size>
+								<maxitems>1</maxitems>
+								<items type="array">
+									<numIndex index="0" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.from_ts</numIndex>
+										<numIndex index="1"></numIndex>
+									</numIndex>
+								</items>
+								<itemsProcFunc>tx_jfmulticontent_itemsProcFunc->getAnythingSliderModes</itemsProcFunc>
+							</config>
+						</TCEforms>
+					</sliderMode>
 					<sliderOpen>
 						<TCEforms>
 							<exclude>1</exclude>

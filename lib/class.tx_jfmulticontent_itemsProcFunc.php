@@ -37,8 +37,7 @@ class tx_jfmulticontent_itemsProcFunc
 	 * Get defined views for dropdown (from hook)
 	 * @return array
 	 */
-	public function getViews($config, $item)
-	{
+	public function getViews($config, $item) {
 		$optionList = array();
 		if (is_array($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['jfmulticontent']['getViews'])) {
 			foreach ($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['jfmulticontent']['getViews'] as $_classRef) {
@@ -60,8 +59,7 @@ class tx_jfmulticontent_itemsProcFunc
 	 * @param array $config
 	 * @param array $item
 	 */
-	public function getStyle($config, $item)
-	{
+	public function getStyle($config, $item) {
 		$allStyles = array(
 			array(
 				$GLOBALS['LANG']->sL('LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.style.I.0'),
@@ -152,11 +150,10 @@ class tx_jfmulticontent_itemsProcFunc
 	 * Get defined Class inner for dropdown
 	 * @return array
 	 */
-	public function getClassInner($config, $item)
-	{
+	public function getClassInner($config, $item) {
 		$confArr = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['jfmulticontent']);
 		$availableClasses = t3lib_div::trimExplode(",", $confArr['classInner']);
-		if (count($availableClasses) < 1) {
+		if (count($availableClasses) < 1 || ! $confArr['classInner']) {
 			$availableClasses = array('','16','20','25','33','38','40','50','60','62','66','75','80');
 		}
 		$pageTS = t3lib_BEfunc::getPagesTSconfig($config['row']['pid']);
@@ -187,8 +184,7 @@ class tx_jfmulticontent_itemsProcFunc
 	 * Get all themes for anythingSlider
 	 * @return array
 	 */
-	public function getAnythingSliderThemes($config, $item)
-	{
+	public function getAnythingSliderThemes($config, $item) {
 		$confArr = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['jfmulticontent']);
 		if (! is_dir(t3lib_div::getFileAbsFileName($confArr['anythingSliderThemeFolder']))) {
 			// if the defined folder does not exist, define the default folder
@@ -212,11 +208,44 @@ class tx_jfmulticontent_itemsProcFunc
 	}
 
 	/**
+	 * Get all modes for anythingSlider
+	 * @return array
+	 */
+	public function getAnythingSliderModes($config, $item) {
+		$confArr = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['jfmulticontent']);
+		$availableModes = t3lib_div::trimExplode(",", $confArr['anythingSliderModes']);
+		if (count($availableModes) < 1 || ! $confArr['anythingSliderModes']) {
+			$availableModes = array('horizontal', 'vertical', 'fade');
+		}
+		$pageTS = t3lib_BEfunc::getPagesTSconfig($config['row']['pid']);
+		$jfmulticontentModes = t3lib_div::trimExplode(",", $pageTS['mod.']['jfmulticontent.']['anythingSliderModes'], TRUE);
+		$optionList = array();
+		if (count($jfmulticontentModes) > 0) {
+			foreach ($availableModes as $key => $availableMode) {
+				if (in_array(trim($availableMode), $jfmulticontentModes)) {
+					$optionList[] = array(
+						trim($availableMode),
+						trim($availableMode),
+					);
+				}
+			}
+		} else {
+			foreach ($availableModes as $key => $availableMode) {
+				$optionList[] = array(
+					trim($availableMode),
+					trim($availableMode),
+				);
+			}
+		}
+		$config['items'] = array_merge($config['items'], $optionList);
+		return $config;
+	}
+
+	/**
 	 * Get all skins for easyAccordion
 	 * @return array
 	 */
-	public function getEasyaccordionSkin($config, $item)
-	{
+	public function getEasyaccordionSkin($config, $item) {
 		$confArr = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['jfmulticontent']);
 		if (! is_dir(t3lib_div::getFileAbsFileName($confArr['easyAccordionSkinFolder']))) {
 			// if the defined folder does not exist, define the default folder

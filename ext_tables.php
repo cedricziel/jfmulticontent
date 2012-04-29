@@ -194,7 +194,7 @@ if (TYPO3_MODE == 'BE') {
 	$TBE_MODULES_EXT['xMOD_db_new_content_el']['addElClasses']['tx_jfmulticontent_pi1_wizicon'] = t3lib_extMgm::extPath($_EXTKEY).'pi1/class.tx_jfmulticontent_pi1_wizicon.php';
 	if (! isset($TCA['tt_content']['columns']['colPos']['config']['items'][$confArr['colPosOfIrreContent']])) {
 		// Add the new colPos to the array, only if the ID does not exist...
-		$TCA['tt_content']['columns']['colPos']['config']['items'][$confArr['colPosOfIrreContent']] = array ($_EXTKEY.'||'.$_EXTKEY.'||||||||', $confArr['colPosOfIrreContent']);
+		$TCA['tt_content']['columns']['colPos']['config']['items'][$confArr['colPosOfIrreContent']] = array ($_EXTKEY, $confArr['colPosOfIrreContent']);
 	}
 }
 

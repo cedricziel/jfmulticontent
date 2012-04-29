@@ -120,6 +120,7 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 			$this->lConf['sliderHeight']             = $this->getFlexformData('general', 'sliderHeight', $debuglog);
 			$this->lConf['sliderResizeContents']     = $this->getFlexformData('general', 'sliderResizeContents', $debuglog);
 			$this->lConf['sliderTheme']              = $this->getFlexformData('general', 'sliderTheme', $debuglog);
+			$this->lConf['sliderMode']               = $this->getFlexformData('general', 'sliderMode', $debuglog);
 			$this->lConf['sliderOpen']               = $this->getFlexformData('general', 'sliderOpen', $debuglog);
 			$this->lConf['sliderRandomContent']      = $this->getFlexformData('general', 'sliderRandomContent', $debuglog);
 			$this->lConf['sliderHashTags']           = $this->getFlexformData('general', 'sliderHashTags', $debuglog);
@@ -276,6 +277,9 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 			}
 			if ($this->lConf['sliderTheme']) {
 				$this->conf['config.']['sliderTheme'] = $this->lConf['sliderTheme'];
+			}
+			if ($this->lConf['sliderMode']) {
+				$this->conf['config.']['sliderMode'] = $this->lConf['sliderMode'];
 			}
 			if ($this->lConf['sliderOpen'] > 0) {
 				$this->conf['config.']['sliderOpen'] = $this->lConf['sliderOpen'];
@@ -909,6 +913,9 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 						$anythingSliderThemeFolder = $this->confArr['anythingSliderThemeFolder'];
 					}
 					$this->pagerenderer->addCssFile(t3lib_div::slashJS($anythingSliderThemeFolder).$this->conf['config.']['sliderTheme'].'/style.css');
+				}
+				if ($this->conf['config.']['sliderMode']) {
+					$options[] = "mode: '".$this->conf['config.']['sliderMode']."'";
 				}
 				$options[] = "buildArrows: ".($this->conf['config.']['sliderBuildArrows'] ? 'true' : 'false');
 				$options[] = "resumeOnVideoEnd: ".($this->conf['config.']['sliderResumeOnVideoEnd'] ? 'true' : 'false');

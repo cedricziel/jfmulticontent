@@ -17,6 +17,7 @@ plugin.tx_jfmulticontent_pi1 {
 
 	sliderJS = {$plugin.tx_jfmulticontent_pi1.file.sliderJS}
 	sliderJSvideo = {$plugin.tx_jfmulticontent_pi1.file.sliderJSvideo}
+	sliderJSfx = {$plugin.tx_jfmulticontent_pi1.file.sliderJSfx}
 
 	sliderCSS = {$plugin.tx_jfmulticontent_pi1.file.sliderCSS}
 	sliderCSSie7 = {$plugin.tx_jfmulticontent_pi1.file.sliderCSSie7}
@@ -104,6 +105,7 @@ plugin.tx_jfmulticontent_pi1 {
 		sliderHeight = 
 		sliderResizeContents = 0
 		sliderTheme = 
+		sliderMode = horizontal
 		sliderOpen = 1
 		sliderRandomContent = 0
 		sliderHashTags = 0
