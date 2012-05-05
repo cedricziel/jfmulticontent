@@ -1,5 +1,5 @@
 /*!
-	AnythingSlider v1.8
+	AnythingSlider v1.8.2
 	Original by Chris Coyier: http://css-tricks.com
 	Get the latest version: https://github.com/ProLoser/AnythingSlider
 
@@ -14,7 +14,6 @@
 		return "Panel #" + index; // This would have each tab with the text 'Panel #X' where X = index
 	}
 */
-
 ;(function($) {
 
 	$.anythingSlider = function(el, options) {
@@ -162,13 +161,14 @@
 				// Added setTimeout (zero time) to ensure animation is complete... see this bug report: http://bugs.jquery.com/ticket/7157
 				base.$el.bind('slide_complete', function(){
 					setTimeout(function(){ o.onSlideComplete(base); }, 0);
+					return false;
 				});
 			}
 			base.initialized = true;
 			base.$el.trigger('initialized', base);
 
 			// trigger the slideshow
-			base.startStop(base.playing);
+			base.startStop(o.autoPlay);
 
 		};
 
