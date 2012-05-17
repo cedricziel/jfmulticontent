@@ -1218,6 +1218,11 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 		$GLOBALS['TSFE']->register['key'] = $this->getContentKey();
 
 		$markerArray = $this->additionalMarker;
+
+		// Define string with all classes
+		$markerArray["COLUMN_CLASSES"] = implode('', $this->classes);
+		$GLOBALS['TSFE']->register['COLUMN_CLASSES'] = $markerArray["COLUMN_CLASSES"];
+
 		// get the template
 		if (! $templateCode = $this->cObj->getSubpart($this->templateFile, "###{$this->templatePart}###")) {
 			$templateCode = $this->outputError("Template {$this->templatePart} is missing", FALSE);
