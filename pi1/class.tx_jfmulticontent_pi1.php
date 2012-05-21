@@ -520,7 +520,7 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 					if ($GLOBALS['TSFE']->sys_language_content) {
 						$row = $GLOBALS['TSFE']->sys_page->getRecordOverlay('tt_content', $row, $GLOBALS['TSFE']->sys_language_content, $GLOBALS['TSFE']->sys_language_contentOL);
 					}
-					$GLOBALS['TSFE']->register['uid'] = ($row['_LOCALIZED_UID'] ? $row['_LOCALIZED_UID'] : $row['uid']);
+					$GLOBALS['TSFE']->register['uid'] = $row['uid'];
 					$GLOBALS['TSFE']->register['title'] = (strlen(trim($this->titles[$a])) > 0 ? $this->titles[$a] : $row['header']);
 					if ($this->titles[$a] == '' || !isset($this->titles[$a])) {
 						$this->titles[$a] = $this->cObj->cObjGetSingle($view['title'], $view['title.']);
@@ -536,6 +536,9 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 				$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery('*', 'tt_content', 'tx_jfmulticontent_irre_parentid='.intval($elementUID).' AND deleted = 0 AND hidden = 0', '', '');// AND tx_jfmulticontent_irre_parenttable=\'tt_content\'
 				$a = 0;
 				while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res)) {
+					if ($GLOBALS['TSFE']->sys_language_content) {
+						$row = $GLOBALS['TSFE']->sys_page->getRecordOverlay('tt_content', $row, $GLOBALS['TSFE']->sys_language_content, $GLOBALS['TSFE']->sys_language_contentOL);
+					}
 					$GLOBALS['TSFE']->register['uid'] = $row['uid'];
 					$GLOBALS['TSFE']->register['title'] = (strlen(trim($this->titles[$a])) > 0 ? $this->titles[$a] : $row['header']);
 					if ($this->titles[$a] == '' || !isset($this->titles[$a])) {
