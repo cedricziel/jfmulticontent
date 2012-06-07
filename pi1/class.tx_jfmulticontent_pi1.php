@@ -547,7 +547,7 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 					}
 					$this->cElements[] = $this->cObj->cObjGetSingle($view['content'], $view['content.']);
 					$this->rels[] = $this->cObj->cObjGetSingle($view['rel'], $view['rel.']);
-					$this->content_id[$a] = $content_ids[$a];
+					$this->content_id[$a] = $row['uid'];
 					$a ++;
 				}
 			}

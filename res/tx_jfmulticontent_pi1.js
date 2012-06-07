@@ -46,7 +46,7 @@ WIDTH - Set the defined width of the easyaccordion
 <!-- ###TEMPLATE_TAB_JS### begin -->
 jQuery(document).ready(function(){
 	<!-- ###FIX_HREF### -->
-	jQuery('####KEY### ul li a').each(function(id, item){
+	jQuery('####KEY### > ul li a').each(function(id, item){
 		var temp = item.href.split('#');
 		var temp_last = temp[temp.length-1];
 		if (jQuery('####KEY### #'+temp_last).length) {
