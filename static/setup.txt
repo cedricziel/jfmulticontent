@@ -117,6 +117,7 @@ plugin.tx_jfmulticontent_pi1 {
 		sliderToggleControls = 0
 		sliderAutoStart = 0
 		sliderPauseOnHover = 0
+		sliderAllowRapidChange = 0
 		sliderResumeOnVideoEnd = 0
 		sliderStopAtEnd = 0
 		sliderPlayRtl = 0

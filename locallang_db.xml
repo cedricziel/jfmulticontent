@@ -91,6 +91,7 @@
 			<label index="tt_content.tx_jfmulticontent.sliderToggleControls">Toggle Controls</label>
 			<label index="tt_content.tx_jfmulticontent.sliderAutoStart">Start autoplay</label>
 			<label index="tt_content.tx_jfmulticontent.sliderPauseOnHover">Pause on mouseover</label>
+			<label index="tt_content.tx_jfmulticontent.sliderAllowRapidChange">Allow rapid change</label>
 			<label index="tt_content.tx_jfmulticontent.sliderResumeOnVideoEnd">Resume on video end</label>
 			<label index="tt_content.tx_jfmulticontent.sliderStopAtEnd">Stop at end</label>
 			<label index="tt_content.tx_jfmulticontent.sliderPlayRtl">Play rtl</label>

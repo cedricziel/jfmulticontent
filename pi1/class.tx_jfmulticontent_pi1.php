@@ -132,6 +132,7 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 			$this->lConf['sliderToggleControls']     = $this->getFlexformData('general', 'sliderToggleControls', $debuglog);
 			$this->lConf['sliderAutoStart']          = $this->getFlexformData('general', 'sliderAutoStart', $debuglog);
 			$this->lConf['sliderPauseOnHover']       = $this->getFlexformData('general', 'sliderPauseOnHover', $debuglog);
+			$this->lConf['sliderAllowRapidChange']   = $this->getFlexformData('general', 'sliderAllowRapidChange', $debuglog);
 			$this->lConf['sliderResumeOnVideoEnd']   = $this->getFlexformData('general', 'sliderResumeOnVideoEnd', $debuglog);
 			$this->lConf['sliderStopAtEnd']          = $this->getFlexformData('general', 'sliderStopAtEnd', $debuglog);
 			$this->lConf['sliderPlayRtl']            = $this->getFlexformData('general', 'sliderPlayRtl', $debuglog);
@@ -313,6 +314,9 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 			}
 			if ($this->lConf['sliderPauseOnHover'] < 2) {
 				$this->conf['config.']['sliderPauseOnHover'] = $this->lConf['sliderPauseOnHover'];
+			}
+			if ($this->lConf['sliderAllowRapidChange'] < 2) {
+				$this->conf['config.']['sliderAllowRapidChange'] = $this->lConf['sliderAllowRapidChange'];
 			}
 			if ($this->lConf['sliderResumeOnVideoEnd'] < 2) {
 				$this->conf['config.']['sliderResumeOnVideoEnd'] = $this->lConf['sliderResumeOnVideoEnd'];
@@ -921,6 +925,7 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 					$options[] = "mode: '".$this->conf['config.']['sliderMode']."'";
 				}
 				$options[] = "buildArrows: ".($this->conf['config.']['sliderBuildArrows'] ? 'true' : 'false');
+				$options[] = "allowRapidChange: ".($this->conf['config.']['sliderAllowRapidChange'] ? 'true' : 'false');
 				$options[] = "resumeOnVideoEnd: ".($this->conf['config.']['sliderResumeOnVideoEnd'] ? 'true' : 'false');
 				$options[] = "playRtl: ".($this->conf['config.']['sliderPlayRtl'] ? 'true' : 'false');
 				$options[] = "hashTags: ".($this->conf['config.']['sliderHashTags'] ? 'true' : 'false');

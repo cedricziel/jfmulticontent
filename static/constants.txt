@@ -39,19 +39,19 @@ plugin.tx_jfmulticontent_pi1 {
 	file.jQueryMouseWheel = EXT:jfmulticontent/res/jquery/js/jquery.mousewheel-3.0.6.min.js
 
 	# cat=plugin.tx_jfmulticontent/file/070; type=file[js]; label=jQuery UI: Location of the jQuery UI
-	file.jQueryUI = EXT:jfmulticontent/res/jquery/js/jquery-ui-1.8.20.custom.min.js
+	file.jQueryUI = EXT:jfmulticontent/res/jquery/js/jquery-ui-1.8.21.custom.min.js
 
 	# cat=plugin.tx_jfmulticontent/file/080; type=file[css]; label=jQuery UI style: Location of the jQuery UI CSS
-	file.jQueryUIstyle = EXT:jfmulticontent/res/jquery/css/theme-1.8.20/jquery-ui-1.8.20.custom.css
+	file.jQueryUIstyle = EXT:jfmulticontent/res/jquery/css/theme-1.8.21/jquery-ui-1.8.21.custom.css
 
 	# cat=plugin.tx_jfmulticontent/file/090; type=file[js]; label=anythingSlider JS-File: Location of the anythingSlider JS-file
-	file.sliderJS = EXT:jfmulticontent/res/anythingslider/jquery.anythingslider-1.8.2.min.js
+	file.sliderJS = EXT:jfmulticontent/res/anythingslider/jquery.anythingslider-1.8.6.min.js
 
 	# cat=plugin.tx_jfmulticontent/file/095; type=file[js]; label=anythingSlider Video JS-File: Location of the anythingSlider Video JS-file
-	file.sliderJSvideo = EXT:jfmulticontent/res/anythingslider/jquery.anythingslider-1.8.2.video.min.js
+	file.sliderJSvideo = EXT:jfmulticontent/res/anythingslider/jquery.anythingslider-1.8.6.video.min.js
 
 	# cat=plugin.tx_jfmulticontent/file/095; type=file[js]; label=anythingSlider FX JS-File: Location of the anythingSlider FX JS-file
-	file.sliderJSfx = EXT:jfmulticontent/res/anythingslider/jquery.anythingslider-1.8.2.fx.min.js
+	file.sliderJSfx = EXT:jfmulticontent/res/anythingslider/jquery.anythingslider-1.8.6.fx.min.js
 
 	# cat=plugin.tx_jfmulticontent/file/100; type=file[css]; label=anythingSlider CSS-File: Location of the default anythingSlider CSS-File
 	file.sliderCSS = EXT:jfmulticontent/res/anythingslider/style.css
@@ -74,10 +74,10 @@ plugin.tx_jfmulticontent_pi1 {
 	# cat=plugin.tx_jfmulticontent/file/150; type=string; label=easyAccordion skin: Used skin for easyAccordion
 	easyaccordionSkin = orange
 
-	# cat=plugin.tx_jfmulticontent/file/160; type=string; label=Booklet JS-File: Location of the Booklet JS-file
+	# cat=plugin.tx_jfmulticontent/file/160; type=file[js]; label=Booklet JS-File: Location of the Booklet JS-file
 	file.bookletJS = EXT:jfmulticontent/res/booklet/jquery.booklet-1.3.0.min.js
 
-	# cat=plugin.tx_jfmulticontent/file/170; type=string; label=Booklet CSS-File: Location of the Booklet CSS-file
+	# cat=plugin.tx_jfmulticontent/file/170; type=file[css]; label=Booklet CSS-File: Location of the Booklet CSS-file
 	file.bookletCSS = EXT:jfmulticontent/res/booklet/jquery.booklet-1.3.0.css
 
 

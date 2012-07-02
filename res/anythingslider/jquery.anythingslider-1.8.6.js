@@ -1,5 +1,5 @@
 /*!
-	AnythingSlider v1.8.2
+	AnythingSlider v1.8.6
 	Original by Chris Coyier: http://css-tricks.com
 	Get the latest version: https://github.com/ProLoser/AnythingSlider
 
@@ -47,9 +47,16 @@
 			base.win = window;
 			base.$win = $(base.win);
 
-			base.$controls = $('<div class="anythingControls"></div>').appendTo( (o.appendControlsTo && $(o.appendControlsTo).length) ? $(o.appendControlsTo) : base.$wrapper);
-			base.$nav = $('<ul class="thumbNav"><li><a><span></span></a></li></ul>').appendTo( (o.appendNavigationTo && $(o.appendNavigationTo).length) ? $(o.appendNavigationTo) : base.$controls );
+			base.$controls = $('<div class="anythingControls"></div>');
+			base.$nav = $('<ul class="thumbNav"><li><a><span></span></a></li></ul>');
 			base.$startStop = $('<a href="#" class="start-stop"></a>');
+			
+			if (o.buildStartStop || o.buildNavigation) {
+				base.$controls.appendTo( (o.appendControlsTo && $(o.appendControlsTo).length) ? $(o.appendControlsTo) : base.$wrapper);
+			}
+			if (o.buildNavigation) {
+				base.$nav.appendTo( (o.appendNavigationTo && $(o.appendNavigationTo).length) ? $(o.appendNavigationTo) : base.$controls );
+			}
 			if (o.buildStartStop) {
 				base.$startStop.appendTo( (o.appendStartStopTo && $(o.appendStartStopTo).length) ? $(o.appendStartStopTo) : base.$controls );
 			}
@@ -65,7 +72,7 @@
 			base.slideshow = false; // slideshow flag needed to correctly trigger slideshow events
 			base.hovered = false; // actively hovering over the slider
 			base.panelSize = [];  // will contain dimensions and left position of each panel
-			base.currentPage = o.startPanel = parseInt(o.startPanel,10) || 1; // make sure this isn't a string
+			base.currentPage = base.targetPage = o.startPanel = parseInt(o.startPanel,10) || 1; // make sure this isn't a string
 			o.changeBy = parseInt(o.changeBy,10) || 1;
 
 			// set slider type, but keep backward compatibility with the vertical option
@@ -78,6 +85,7 @@
 			}
 
 			base.adj = (o.infiniteSlides) ? 0 : 1; // adjust page limits for infinite or limited modes
+			base.adjustMultiple = 0;
 			base.width = base.$el.width();
 			base.height = base.$el.height();
 			base.outerPad = [ base.$wrapper.innerWidth() - base.$wrapper.width(), base.$wrapper.innerHeight() - base.$wrapper.height() ];
@@ -176,7 +184,6 @@
 		base.updateSlider = function(){
 			// needed for updating the slider
 			base.$el.children('.cloned').remove();
-
 			base.navTextVisible = base.$nav.find('span:first').css('visibility') !== 'hidden';
 			base.$nav.empty();
 			// set currentPage to 1 in case it was zero - occurs when adding slides after removing them all
@@ -200,11 +207,9 @@
 					e.preventDefault();
 				}
 			});
-
 			if (o.showMultiple > 1) {
 				if (o.showMultiple > base.pages) { o.showMultiple = base.pages; }
 				base.adjustMultiple = (o.infiniteSlides && base.pages > 1) ? 0 : o.showMultiple - 1;
-				base.pages = base.$items.length - base.adjustMultiple;
 			}
 
 			// Hide navigation & player if there is only one page
@@ -264,9 +269,15 @@
 			base.$nav.find('a').eq(base.currentPage - 1).addClass('cur'); // update current selection
 
 			if (o.mode === 'fade') {
-				base.$items
-					.eq(base.currentPage-1).css({ opacity: 1 })
-					.siblings().css({ opacity: 0 });
+				var t = base.$items.eq(base.currentPage-1);
+				if (o.resumeOnVisible) {
+					// prevent display: none;
+					t.css({ opacity: 1 }).siblings().css({ opacity: 0 });
+				} else {
+					// allow display: none; - resets video
+					base.$items.css('opacity',1);
+					t.fadeIn(0).siblings().fadeOut(0);
+				}
 			}
 
 		};
@@ -496,11 +507,12 @@
 		};
 
 		base.goForward = function(autoplay) {
-			base.gotoPage(base.currentPage + o.changeBy * (o.playRtl ? -1 : 1), autoplay);
+			// targetPage changes before animation so if rapidly changing pages, it will have the correct current page
+			base.gotoPage(base[ o.allowRapidChange ? 'targetPage' : 'currentPage'] + o.changeBy * (o.playRtl ? -1 : 1), autoplay);
 		};
 
 		base.goBack = function(autoplay) {
-			base.gotoPage(base.currentPage + o.changeBy * (o.playRtl ? 1 : -1), autoplay);
+			base.gotoPage(base[ o.allowRapidChange ? 'targetPage' : 'currentPage'] + o.changeBy * (o.playRtl ? 1 : -1), autoplay);
 		};
 
 		base.gotoPage = function(page, autoplay, callback, time) {
@@ -513,11 +525,22 @@
 			if (/^[#|.]/.test(page) && $(page).length) {
 				page = $(page).closest('.panel').index() + base.adj;
 			}
+
 			// rewind effect occurs here when changeBy > 1
 			if (o.changeBy !== 1){
-				if (page < 0) { page += base.pages; }
-				if (page > base.pages) { page -= base.pages; }
+				var adj = base.pages - base.adjustMultiple;
+				if (page < 1) {
+					page = o.stopAtEnd ? 1 : ( o.infiniteSlides ? base.pages + page : ( o.showMultiple > 1 - page ? 1 : adj ) );
+				}
+				if (page > base.pages) {
+					// 
+					page = o.stopAtEnd ? base.pages : ( o.showMultiple > 1 - page ? 1 : page -= adj );
+				} else if (page >= adj) {
+					// show multiple adjustments
+					page = adj;
+				}
 			}
+
 			if (base.pages <= 1) { return; } // prevents animation
 			base.$lastPage = base.$currentPage;
 			if (typeof(page) !== "number") {
@@ -533,10 +556,10 @@
 			if (page < base.adj ) { page = (!o.infiniteSlides && !o.stopAtEnd) ? base.pages : 1; }
 			if (!o.infiniteSlides) { base.exactPage = page; } // exact page used by the fx extension
 			base.currentPage = ( page > base.pages ) ? base.pages : ( page < 1 ) ? 1 : base.currentPage;
-			base.$currentPage = base.$items.removeClass('activePage').eq(base.currentPage - base.adj);
+			base.$currentPage = base.$items.eq(base.currentPage - base.adj);
 			base.targetPage = (page === 0) ? base.pages : (page > base.pages) ? 1 : page;
 			base.$targetPage = base.$items.eq(base.targetPage - base.adj);
-			time = time || o.animationTime;
+			time = typeof time !== 'undefined' ? time : o.animationTime;
 			// don't trigger events when time < 0 - to prevent FX from firing multiple times on page resize
 			if (time >= 0) { base.$el.trigger('slide_init', base); }
 			// toggle arrows/controls only if there is time to see it - fix issue #317
@@ -557,6 +580,9 @@
 			// delay starting slide animation
 			setTimeout(function(d){
 				var p, empty = true;
+				if (o.allowRapidChange) {
+					base.$wrapper.add(base.$el).add(base.$items).stop(true, true);
+				}
 				// resize slider if content size varies
 				if (!o.resizeContents) {
 					// animating the wrapper resize before the window prevents flickering in Firefox
@@ -569,17 +595,20 @@
 						base.$wrapper.filter(':not(:animated)').animate(d, { queue: false, duration: (time < 0 ? 0 : time), easing: o.easing });
 					}
 				}
+
 				if (o.mode === 'fade') {
 					if (base.$lastPage[0] !== base.$targetPage[0]) {
-						base.$lastPage.fadeTo((time < 0 ? 0 : time), 0);
-						base.$targetPage.fadeTo((time < 0 ? 0 : time), 1, function(){ base.endAnimation(page, callback, time); });
+						base.fadeIt( base.$lastPage, 0, time );
+						base.fadeIt( base.$targetPage, 1, time, function(){ base.endAnimation(page, callback, time); });
+					} else {
+						base.endAnimation(page, callback, time);
 					}
 				} else {
 					d = {};
 					d[base.dir] = -base.panelSize[(o.infiniteSlides && base.pages > 1) ? page : page - 1][2];
 					// Animate Slider
 					base.$el.filter(':not(:animated)').animate(
-						d, { queue: false, duration: time, easing: o.easing, complete: function(){ base.endAnimation(page, callback, time); } }
+						d, { queue: false, duration: time < 0 ? 0 : time, easing: o.easing, complete: function(){ base.endAnimation(page, callback, time); } }
 					);
 				}
 			}, parseInt(o.delayBeforeAnimate, 10) || 0);
@@ -596,8 +625,11 @@
 			}
 			base.exactPage = page;
 			base.setCurrentPage(page, false);
-			// Add active panel class
-			// base.$items.removeClass('activePage').eq(page - base.adj).addClass('activePage');
+
+			if (o.mode === 'fade') {
+				// make sure non current panels are hidden (rapid slide changes)
+				base.fadeIt( base.$items.not(':eq(' + (page - base.adj) + ')'), 0, 0);
+			}
 
 			if (!base.hovered) { base.slideControls(false); }
 
@@ -616,6 +648,15 @@
 			}
 		};
 
+		base.fadeIt = function(el, toOpacity, time, callback){
+			var t = time < 0 ? 0 : time;
+			if (o.resumeOnVisible) {
+				el.filter(':not(:animated)').fadeTo(t, toOpacity, callback);
+			} else {
+				el.filter(':not(:animated)')[ toOpacity === 0 ? 'fadeOut' : 'fadeIn' ](t, callback);
+			}
+		};
+
 		base.setCurrentPage = function(page, move) {
 			page = parseInt(page, 10);
 
@@ -624,8 +665,8 @@
 			if (page < base.adj ) { page = 1; }
 
 			// hide/show arrows based on infinite scroll mode
-			if (!o.infiniteSlides && o.stopAtEnd){
-				base.$forward[ page === base.pages ? 'addClass' : 'removeClass']('disabled');
+			if (o.buildArrows && !o.infiniteSlides && o.stopAtEnd){
+				base.$forward[ page === base.pages - base.adjustMultiple ? 'addClass' : 'removeClass']('disabled');
 				base.$back[ page === 1 ? 'addClass' : 'removeClass']('disabled');
 				if (page === base.pages && base.playing) { base.startStop(); }
 			}
@@ -836,6 +877,7 @@
 		clickBackArrow      : "click",         // Event used to activate back arrow functionality (e.g. add jQuery mobile's "swipeleft")
 		clickControls       : "click focusin", // Events used to activate navigation control functionality
 		clickSlideshow      : "click",         // Event used to activate slideshow play/stop button
+		allowRapidChange    : false,           // If true, allow rapid changing of the active pane, instead of ignoring activity during animation
 
 		// Video
 		resumeOnVideoEnd    : true,      // If true & the slideshow is active & a supported video is playing, it will pause the autoplay until the video is complete
