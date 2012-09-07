@@ -28,6 +28,7 @@
 			<label index="tt_content.tx_jfmulticontent.style.I.7">SlideDeck</label>
 			<label index="tt_content.tx_jfmulticontent.style.I.8">easyAccordion</label>
 			<label index="tt_content.tx_jfmulticontent.style.I.9">Booklet</label>
+			<label index="tt_content.tx_jfmulticontent.style.I.10">TypoScript</label>
 			<label index="tt_content.tx_jfmulticontent.columnOrder">Column Order</label>
 			<label index="tt_content.tx_jfmulticontent.columnOrder.I.0">only one row (no repeat)</label>
 			<label index="tt_content.tx_jfmulticontent.columnOrder.I.1">left to right, top to down</label>
@@ -136,6 +137,7 @@
 			<label index="tt_content.tx_jfmulticontent.bookletArrows">Show arrows</label>
 			<label index="tt_content.tx_jfmulticontent.bookletArrowsHide">Hide arrows if mouseout</label>
 			<label index="tt_content.tx_jfmulticontent.bookletHovers">Hover effect</label>
+			<label index="tt_content.tx_jfmulticontent.typoscriptInfo">All settings will be taken from typoscript!</label>
 			<label index="tt_content.tx_jfmulticontent.autoplayDuration">Delay for autoplay (in ms)</label>
 			<label index="tt_content.tx_jfmulticontent.autoplayContinuing">Continuing</label>
 			<label index="tt_content.tx_jfmulticontent.autoplayCycle">Cycle</label>

@@ -85,107 +85,372 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 
 			$this->lConf['style'] = $this->getFlexformData('general', 'style');
 
-			$this->lConf['columnOrder'] = $this->getFlexformData('general', 'columnOrder', in_array($this->lConf['style'], array('2column','3column','4column','5column')));
-			$this->lConf['column1']     = $this->getFlexformData('general', 'column1', in_array($this->lConf['style'], array('2column','3column','4column','5column')));
-			$this->lConf['column2']     = $this->getFlexformData('general', 'column2', in_array($this->lConf['style'], array('2column','3column','4column','5column')));
-			$this->lConf['column3']     = $this->getFlexformData('general', 'column3', in_array($this->lConf['style'], array('3column','4column','5column')));
-			$this->lConf['column4']     = $this->getFlexformData('general', 'column4', in_array($this->lConf['style'], array('4column','5column')));
-			$this->lConf['column5']     = $this->getFlexformData('general', 'column5', in_array($this->lConf['style'], array('5column')));
-			$this->lConf['equalize']    = $this->getFlexformData('general', 'equalize', in_array($this->lConf['style'], array('1column','2column','3column','4column','5column')));
+			if ($this->lConf['style'] != 'typoscript') {
+				$this->lConf['columnOrder'] = $this->getFlexformData('general', 'columnOrder', in_array($this->lConf['style'], array('2column','3column','4column','5column')));
+				$this->lConf['column1']     = $this->getFlexformData('general', 'column1', in_array($this->lConf['style'], array('2column','3column','4column','5column')));
+				$this->lConf['column2']     = $this->getFlexformData('general', 'column2', in_array($this->lConf['style'], array('2column','3column','4column','5column')));
+				$this->lConf['column3']     = $this->getFlexformData('general', 'column3', in_array($this->lConf['style'], array('3column','4column','5column')));
+				$this->lConf['column4']     = $this->getFlexformData('general', 'column4', in_array($this->lConf['style'], array('4column','5column')));
+				$this->lConf['column5']     = $this->getFlexformData('general', 'column5', in_array($this->lConf['style'], array('5column')));
+				$this->lConf['equalize']    = $this->getFlexformData('general', 'equalize', in_array($this->lConf['style'], array('1column','2column','3column','4column','5column')));
 
-			$debuglog = ($this->lConf['style'] == 'tab');
-			$this->lConf['tabCollapsible']   = $this->getFlexformData('general', 'tabCollapsible', $debuglog);
-			$this->lConf['tabOpen']          = $this->getFlexformData('general', 'tabOpen', $debuglog);
-			$this->lConf['tabRandomContent'] = $this->getFlexformData('general', 'tabRandomContent', $debuglog);
-			$this->lConf['tabCookieExpires'] = $this->getFlexformData('general', 'tabCookieExpires', $debuglog);
-			$this->lConf['tabCookieRoot']    = $this->getFlexformData('general', 'tabCookieRoot', $debuglog);
-			$this->lConf['tabFxHeight']      = $this->getFlexformData('general', 'tabFxHeight', $debuglog);
-			$this->lConf['tabFxOpacity']     = $this->getFlexformData('general', 'tabFxOpacity', $debuglog);
-			$this->lConf['tabFxDuration']    = $this->getFlexformData('general', 'tabFxDuration', $debuglog);
+				$debuglog = ($this->lConf['style'] == 'tab');
+				$this->lConf['tabCollapsible']   = $this->getFlexformData('general', 'tabCollapsible', $debuglog);
+				$this->lConf['tabOpen']          = $this->getFlexformData('general', 'tabOpen', $debuglog);
+				$this->lConf['tabRandomContent'] = $this->getFlexformData('general', 'tabRandomContent', $debuglog);
+				$this->lConf['tabCookieExpires'] = $this->getFlexformData('general', 'tabCookieExpires', $debuglog);
+				$this->lConf['tabCookieRoot']    = $this->getFlexformData('general', 'tabCookieRoot', $debuglog);
+				$this->lConf['tabFxHeight']      = $this->getFlexformData('general', 'tabFxHeight', $debuglog);
+				$this->lConf['tabFxOpacity']     = $this->getFlexformData('general', 'tabFxOpacity', $debuglog);
+				$this->lConf['tabFxDuration']    = $this->getFlexformData('general', 'tabFxDuration', $debuglog);
 
-			$debuglog = ($this->lConf['style'] == 'accordion');
-			$this->lConf['accordionAutoHeight']         = $this->getFlexformData('general', 'accordionAutoHeight', $debuglog);
-			$this->lConf['accordionCollapsible']        = $this->getFlexformData('general', 'accordionCollapsible', $debuglog);
-			$this->lConf['accordionClosed']             = $this->getFlexformData('general', 'accordionClosed', $debuglog);
-			$this->lConf['accordionOpen']               = $this->getFlexformData('general', 'accordionOpen', $debuglog);
-			$this->lConf['accordionRandomContent']      = $this->getFlexformData('general', 'accordionRandomContent', $debuglog);
-			$this->lConf['accordionEvent']              = $this->getFlexformData('general', 'accordionEvent', $debuglog);
-			$this->lConf['accordionAnimated']           = $this->getFlexformData('general', 'accordionAnimated', $debuglog);
-			$this->lConf['accordionTransition']         = $this->getFlexformData('general', 'accordionTransition', $debuglog);
-			$this->lConf['accordionTransitiondir']      = $this->getFlexformData('general', 'accordionTransitiondir', $debuglog);
-			$this->lConf['accordionTransitionduration'] = $this->getFlexformData('general', 'accordionTransitionduration', $debuglog);
+				$debuglog = ($this->lConf['style'] == 'accordion');
+				$this->lConf['accordionAutoHeight']         = $this->getFlexformData('general', 'accordionAutoHeight', $debuglog);
+				$this->lConf['accordionCollapsible']        = $this->getFlexformData('general', 'accordionCollapsible', $debuglog);
+				$this->lConf['accordionClosed']             = $this->getFlexformData('general', 'accordionClosed', $debuglog);
+				$this->lConf['accordionOpen']               = $this->getFlexformData('general', 'accordionOpen', $debuglog);
+				$this->lConf['accordionRandomContent']      = $this->getFlexformData('general', 'accordionRandomContent', $debuglog);
+				$this->lConf['accordionEvent']              = $this->getFlexformData('general', 'accordionEvent', $debuglog);
+				$this->lConf['accordionAnimated']           = $this->getFlexformData('general', 'accordionAnimated', $debuglog);
+				$this->lConf['accordionTransition']         = $this->getFlexformData('general', 'accordionTransition', $debuglog);
+				$this->lConf['accordionTransitiondir']      = $this->getFlexformData('general', 'accordionTransitiondir', $debuglog);
+				$this->lConf['accordionTransitionduration'] = $this->getFlexformData('general', 'accordionTransitionduration', $debuglog);
 
-			$debuglog = ($this->lConf['style'] == 'slider');
-			$this->lConf['sliderWidth']              = $this->getFlexformData('general', 'sliderWidth', $debuglog);
-			$this->lConf['sliderHeight']             = $this->getFlexformData('general', 'sliderHeight', $debuglog);
-			$this->lConf['sliderResizeContents']     = $this->getFlexformData('general', 'sliderResizeContents', $debuglog);
-			$this->lConf['sliderTheme']              = $this->getFlexformData('general', 'sliderTheme', $debuglog);
-			$this->lConf['sliderMode']               = $this->getFlexformData('general', 'sliderMode', $debuglog);
-			$this->lConf['sliderOpen']               = $this->getFlexformData('general', 'sliderOpen', $debuglog);
-			$this->lConf['sliderRandomContent']      = $this->getFlexformData('general', 'sliderRandomContent', $debuglog);
-			$this->lConf['sliderHashTags']           = $this->getFlexformData('general', 'sliderHashTags', $debuglog);
-			$this->lConf['sliderBuildArrows']        = $this->getFlexformData('general', 'sliderBuildArrows', $debuglog);
-			$this->lConf['sliderToggleArrows']       = $this->getFlexformData('general', 'sliderToggleArrows', $debuglog);
-			$this->lConf['sliderNavigation']         = $this->getFlexformData('general', 'sliderNavigation', $debuglog);
-			$this->lConf['sliderStartStop']          = $this->getFlexformData('general', 'sliderStartStop', $debuglog);
-			$this->lConf['sliderPanelFromHeader']    = $this->getFlexformData('general', 'sliderPanelFromHeader', $debuglog);
-			$this->lConf['sliderToggleControls']     = $this->getFlexformData('general', 'sliderToggleControls', $debuglog);
-			$this->lConf['sliderAutoStart']          = $this->getFlexformData('general', 'sliderAutoStart', $debuglog);
-			$this->lConf['sliderPauseOnHover']       = $this->getFlexformData('general', 'sliderPauseOnHover', $debuglog);
-			$this->lConf['sliderAllowRapidChange']   = $this->getFlexformData('general', 'sliderAllowRapidChange', $debuglog);
-			$this->lConf['sliderResumeOnVideoEnd']   = $this->getFlexformData('general', 'sliderResumeOnVideoEnd', $debuglog);
-			$this->lConf['sliderStopAtEnd']          = $this->getFlexformData('general', 'sliderStopAtEnd', $debuglog);
-			$this->lConf['sliderPlayRtl']            = $this->getFlexformData('general', 'sliderPlayRtl', $debuglog);
-			$this->lConf['sliderTransition']         = $this->getFlexformData('general', 'sliderTransition', $debuglog);
-			$this->lConf['sliderTransitiondir']      = $this->getFlexformData('general', 'sliderTransitiondir', $debuglog);
-			$this->lConf['sliderTransitionduration'] = $this->getFlexformData('general', 'sliderTransitionduration', $debuglog);
-			$this->lConf['sliderAutoplay']           = $this->getFlexformData('general', 'sliderAutoplay', $debuglog);
+				$debuglog = ($this->lConf['style'] == 'slider');
+				$this->lConf['sliderWidth']              = $this->getFlexformData('general', 'sliderWidth', $debuglog);
+				$this->lConf['sliderHeight']             = $this->getFlexformData('general', 'sliderHeight', $debuglog);
+				$this->lConf['sliderResizeContents']     = $this->getFlexformData('general', 'sliderResizeContents', $debuglog);
+				$this->lConf['sliderTheme']              = $this->getFlexformData('general', 'sliderTheme', $debuglog);
+				$this->lConf['sliderMode']               = $this->getFlexformData('general', 'sliderMode', $debuglog);
+				$this->lConf['sliderOpen']               = $this->getFlexformData('general', 'sliderOpen', $debuglog);
+				$this->lConf['sliderRandomContent']      = $this->getFlexformData('general', 'sliderRandomContent', $debuglog);
+				$this->lConf['sliderHashTags']           = $this->getFlexformData('general', 'sliderHashTags', $debuglog);
+				$this->lConf['sliderBuildArrows']        = $this->getFlexformData('general', 'sliderBuildArrows', $debuglog);
+				$this->lConf['sliderToggleArrows']       = $this->getFlexformData('general', 'sliderToggleArrows', $debuglog);
+				$this->lConf['sliderNavigation']         = $this->getFlexformData('general', 'sliderNavigation', $debuglog);
+				$this->lConf['sliderStartStop']          = $this->getFlexformData('general', 'sliderStartStop', $debuglog);
+				$this->lConf['sliderPanelFromHeader']    = $this->getFlexformData('general', 'sliderPanelFromHeader', $debuglog);
+				$this->lConf['sliderToggleControls']     = $this->getFlexformData('general', 'sliderToggleControls', $debuglog);
+				$this->lConf['sliderAutoStart']          = $this->getFlexformData('general', 'sliderAutoStart', $debuglog);
+				$this->lConf['sliderPauseOnHover']       = $this->getFlexformData('general', 'sliderPauseOnHover', $debuglog);
+				$this->lConf['sliderAllowRapidChange']   = $this->getFlexformData('general', 'sliderAllowRapidChange', $debuglog);
+				$this->lConf['sliderResumeOnVideoEnd']   = $this->getFlexformData('general', 'sliderResumeOnVideoEnd', $debuglog);
+				$this->lConf['sliderStopAtEnd']          = $this->getFlexformData('general', 'sliderStopAtEnd', $debuglog);
+				$this->lConf['sliderPlayRtl']            = $this->getFlexformData('general', 'sliderPlayRtl', $debuglog);
+				$this->lConf['sliderTransition']         = $this->getFlexformData('general', 'sliderTransition', $debuglog);
+				$this->lConf['sliderTransitiondir']      = $this->getFlexformData('general', 'sliderTransitiondir', $debuglog);
+				$this->lConf['sliderTransitionduration'] = $this->getFlexformData('general', 'sliderTransitionduration', $debuglog);
+				$this->lConf['sliderAutoplay']           = $this->getFlexformData('general', 'sliderAutoplay', $debuglog);
 
-			$debuglog = ($this->lConf['style'] == 'slidedeck');
-			$this->lConf['slidedeckHeight']             = $this->getFlexformData('general', 'slidedeckHeight', $debuglog);
-			$this->lConf['slidedeckTransition']         = $this->getFlexformData('general', 'slidedeckTransition', $debuglog);
-			$this->lConf['slidedeckTransitiondir']      = $this->getFlexformData('general', 'slidedeckTransitiondir', $debuglog);
-			$this->lConf['slidedeckTransitionduration'] = $this->getFlexformData('general', 'slidedeckTransitionduration', $debuglog);
-			$this->lConf['slidedeckStart']              = $this->getFlexformData('general', 'slidedeckStart', $debuglog);
-			$this->lConf['slidedeckActivecorner']       = $this->getFlexformData('general', 'slidedeckActivecorner', $debuglog);
-			$this->lConf['slidedeckIndex']              = $this->getFlexformData('general', 'slidedeckIndex', $debuglog);
-			$this->lConf['slidedeckScroll']             = $this->getFlexformData('general', 'slidedeckScroll', $debuglog);
-			$this->lConf['slidedeckKeys']               = $this->getFlexformData('general', 'slidedeckKeys', $debuglog);
-			$this->lConf['slidedeckHidespines']         = $this->getFlexformData('general', 'slidedeckHidespines', $debuglog);
+				$debuglog = ($this->lConf['style'] == 'slidedeck');
+				$this->lConf['slidedeckHeight']             = $this->getFlexformData('general', 'slidedeckHeight', $debuglog);
+				$this->lConf['slidedeckTransition']         = $this->getFlexformData('general', 'slidedeckTransition', $debuglog);
+				$this->lConf['slidedeckTransitiondir']      = $this->getFlexformData('general', 'slidedeckTransitiondir', $debuglog);
+				$this->lConf['slidedeckTransitionduration'] = $this->getFlexformData('general', 'slidedeckTransitionduration', $debuglog);
+				$this->lConf['slidedeckStart']              = $this->getFlexformData('general', 'slidedeckStart', $debuglog);
+				$this->lConf['slidedeckActivecorner']       = $this->getFlexformData('general', 'slidedeckActivecorner', $debuglog);
+				$this->lConf['slidedeckIndex']              = $this->getFlexformData('general', 'slidedeckIndex', $debuglog);
+				$this->lConf['slidedeckScroll']             = $this->getFlexformData('general', 'slidedeckScroll', $debuglog);
+				$this->lConf['slidedeckKeys']               = $this->getFlexformData('general', 'slidedeckKeys', $debuglog);
+				$this->lConf['slidedeckHidespines']         = $this->getFlexformData('general', 'slidedeckHidespines', $debuglog);
 
-			$debuglog = ($this->lConf['style'] == 'easyaccordion');
-			$this->lConf['easyaccordionSkin']     = $this->getFlexformData('general', 'easyaccordionSkin', $debuglog);
-			$this->lConf['easyaccordionOpen']     = $this->getFlexformData('general', 'easyaccordionOpen', $debuglog);
-			$this->lConf['easyaccordionWidth']    = $this->getFlexformData('general', 'easyaccordionWidth', $debuglog);
-			$this->lConf['easyaccordionSlideNum'] = $this->getFlexformData('general', 'easyaccordionSlideNum', $debuglog);
+				$debuglog = ($this->lConf['style'] == 'easyaccordion');
+				$this->lConf['easyaccordionSkin']     = $this->getFlexformData('general', 'easyaccordionSkin', $debuglog);
+				$this->lConf['easyaccordionOpen']     = $this->getFlexformData('general', 'easyaccordionOpen', $debuglog);
+				$this->lConf['easyaccordionWidth']    = $this->getFlexformData('general', 'easyaccordionWidth', $debuglog);
+				$this->lConf['easyaccordionSlideNum'] = $this->getFlexformData('general', 'easyaccordionSlideNum', $debuglog);
 
-			$debuglog = ($this->lConf['style'] == 'booklet');
-			$this->lConf['bookletWidth']         = $this->getFlexformData('general', 'bookletWidth', $debuglog);
-			$this->lConf['bookletHeight']        = $this->getFlexformData('general', 'bookletHeight', $debuglog);
-			$this->lConf['bookletSpeed']         = $this->getFlexformData('general', 'bookletSpeed', $debuglog);
-			$this->lConf['bookletStartingPage']  = $this->getFlexformData('general', 'bookletStartingPage', $debuglog);
-			$this->lConf['bookletRTL']           = $this->getFlexformData('general', 'bookletRTL', $debuglog);
-			$this->lConf['bookletTransition']    = $this->getFlexformData('general', 'bookletTransition', $debuglog);
-			$this->lConf['bookletTransitiondir'] = $this->getFlexformData('general', 'bookletTransitiondir', $debuglog);
-			$this->lConf['bookletPagePadding']   = $this->getFlexformData('general', 'bookletPagePadding', $debuglog);
-			$this->lConf['bookletPageNumbers']   = $this->getFlexformData('general', 'bookletPageNumbers', $debuglog);
-			$this->lConf['bookletManual']        = $this->getFlexformData('general', 'bookletManual', $debuglog);
-			$this->lConf['bookletShadows']       = $this->getFlexformData('general', 'bookletShadows', $debuglog);
-			$this->lConf['bookletClosed']        = $this->getFlexformData('general', 'bookletClosed', $debuglog);
-			$this->lConf['bookletCovers']        = $this->getFlexformData('general', 'bookletCovers', $debuglog);
-			$this->lConf['bookletAutoCenter']    = $this->getFlexformData('general', 'bookletAutoCenter', $debuglog);
-			$this->lConf['bookletHash']          = $this->getFlexformData('general', 'bookletHash', $debuglog);
-			$this->lConf['bookletKeyboard']      = $this->getFlexformData('general', 'bookletKeyboard', $debuglog);
-			$this->lConf['bookletAuto']          = $this->getFlexformData('general', 'bookletAuto', $debuglog);
-			$this->lConf['bookletDelay']         = $this->getFlexformData('general', 'bookletDelay', $debuglog);
-			$this->lConf['bookletOverlays']      = $this->getFlexformData('general', 'bookletOverlays', $debuglog);
-			$this->lConf['bookletArrows']        = $this->getFlexformData('general', 'bookletArrows', $debuglog);
-			$this->lConf['bookletArrowsHide']    = $this->getFlexformData('general', 'bookletArrows', $debuglog);
-			$this->lConf['bookletHovers']        = $this->getFlexformData('general', 'bookletHovers', $debuglog);
+				$debuglog = ($this->lConf['style'] == 'booklet');
+				$this->lConf['bookletWidth']         = $this->getFlexformData('general', 'bookletWidth', $debuglog);
+				$this->lConf['bookletHeight']        = $this->getFlexformData('general', 'bookletHeight', $debuglog);
+				$this->lConf['bookletSpeed']         = $this->getFlexformData('general', 'bookletSpeed', $debuglog);
+				$this->lConf['bookletStartingPage']  = $this->getFlexformData('general', 'bookletStartingPage', $debuglog);
+				$this->lConf['bookletRTL']           = $this->getFlexformData('general', 'bookletRTL', $debuglog);
+				$this->lConf['bookletTransition']    = $this->getFlexformData('general', 'bookletTransition', $debuglog);
+				$this->lConf['bookletTransitiondir'] = $this->getFlexformData('general', 'bookletTransitiondir', $debuglog);
+				$this->lConf['bookletPagePadding']   = $this->getFlexformData('general', 'bookletPagePadding', $debuglog);
+				$this->lConf['bookletPageNumbers']   = $this->getFlexformData('general', 'bookletPageNumbers', $debuglog);
+				$this->lConf['bookletManual']        = $this->getFlexformData('general', 'bookletManual', $debuglog);
+				$this->lConf['bookletShadows']       = $this->getFlexformData('general', 'bookletShadows', $debuglog);
+				$this->lConf['bookletClosed']        = $this->getFlexformData('general', 'bookletClosed', $debuglog);
+				$this->lConf['bookletCovers']        = $this->getFlexformData('general', 'bookletCovers', $debuglog);
+				$this->lConf['bookletAutoCenter']    = $this->getFlexformData('general', 'bookletAutoCenter', $debuglog);
+				$this->lConf['bookletHash']          = $this->getFlexformData('general', 'bookletHash', $debuglog);
+				$this->lConf['bookletKeyboard']      = $this->getFlexformData('general', 'bookletKeyboard', $debuglog);
+				$this->lConf['bookletAuto']          = $this->getFlexformData('general', 'bookletAuto', $debuglog);
+				$this->lConf['bookletDelay']         = $this->getFlexformData('general', 'bookletDelay', $debuglog);
+				$this->lConf['bookletOverlays']      = $this->getFlexformData('general', 'bookletOverlays', $debuglog);
+				$this->lConf['bookletArrows']        = $this->getFlexformData('general', 'bookletArrows', $debuglog);
+				$this->lConf['bookletArrowsHide']    = $this->getFlexformData('general', 'bookletArrows', $debuglog);
+				$this->lConf['bookletHovers']        = $this->getFlexformData('general', 'bookletHovers', $debuglog);
 
-			$this->lConf['delayDuration']      = $this->getFlexformData('general', 'delayDuration', in_array($this->lConf['style'], array('tab','accordion','slider','slidedeck','easyaccordion')));
-			$this->lConf['autoplayContinuing'] = $this->getFlexformData('general', 'autoplayContinuing', ($this->lConf['style'] == 'tab'));
-			$this->lConf['autoplayCycle']      = $this->getFlexformData('general', 'autoplayCycle', ($this->lConf['style'] == 'slidedeck'));
+				$this->lConf['delayDuration']      = $this->getFlexformData('general', 'delayDuration', in_array($this->lConf['style'], array('tab','accordion','slider','slidedeck','easyaccordion')));
+				$this->lConf['autoplayContinuing'] = $this->getFlexformData('general', 'autoplayContinuing', ($this->lConf['style'] == 'tab'));
+				$this->lConf['autoplayCycle']      = $this->getFlexformData('general', 'autoplayCycle', ($this->lConf['style'] == 'slidedeck'));
+
+				// columns
+				$this->conf['config.']['column1']     = $this->lConf['column1'];
+				$this->conf['config.']['column2']     = $this->lConf['column2'];
+				$this->conf['config.']['column3']     = $this->lConf['column3'];
+				$this->conf['config.']['column4']     = $this->lConf['column4'];
+				$this->conf['config.']['column5']     = $this->lConf['column5'];
+				$this->conf['config.']['columnOrder'] = $this->lConf['columnOrder'];
+				if ($this->lConf['equalize'] < 2) {
+					$this->conf['config.']['equalize'] = $this->lConf['equalize'];
+				}
+				// tab
+				if ($this->lConf['tabCollapsible'] < 2) {
+					$this->conf['config.']['tabCollapsible'] = $this->lConf['tabCollapsible'];
+				}
+				if ($this->lConf['tabOpen'] >= 0) {
+					$this->conf['config.']['tabOpen'] = $this->lConf['tabOpen'];
+				}
+				if ($this->lConf['tabRandomContent'] < 2) {
+					$this->conf['config.']['tabRandomContent'] = $this->lConf['tabRandomContent'];
+				}
+				if (strlen($this->lConf['tabCookieExpires']) > 0) {
+					$this->conf['config.']['tabCookieExpires'] = $this->lConf['tabCookieExpires'];
+				}
+				if ($this->lConf['tabCookieRoot'] < 2) {
+					$this->conf['config.']['tabCookieRoot'] = $this->lConf['tabCookieRoot'];
+				}
+				if ($this->lConf['tabFxHeight'] < 2) {
+					$this->conf['config.']['tabFxHeight'] = $this->lConf['tabFxHeight'];
+				}
+				if ($this->lConf['tabFxOpacity'] < 2) {
+					$this->conf['config.']['tabFxOpacity'] = $this->lConf['tabFxOpacity'];
+				}
+				if ($this->lConf['tabFxDuration'] > 0) {
+					$this->conf['config.']['tabFxDuration'] = $this->lConf['tabFxDuration'];
+				}
+				// accordion
+				if ($this->lConf['accordionAutoHeight'] < 2) {
+					$this->conf['config.']['accordionAutoHeight'] = $this->lConf['accordionAutoHeight'];
+				}
+				if ($this->lConf['accordionCollapsible'] < 2) {
+					$this->conf['config.']['accordionCollapsible'] = $this->lConf['accordionCollapsible'];
+				}
+				if ($this->lConf['accordionClosed'] < 2) {
+					$this->conf['config.']['accordionClosed'] = $this->lConf['accordionClosed'];
+				}
+				if ($this->lConf['accordionOpen'] > 0) {
+					$this->conf['config.']['accordionOpen'] = $this->lConf['accordionOpen'];
+				}
+				if ($this->lConf['accordionRandomContent'] < 2) {
+					$this->conf['config.']['accordionRandomContent'] = $this->lConf['accordionRandomContent'];
+				}
+				if ($this->lConf['accordionEvent']) {
+					$this->conf['config.']['accordionEvent'] = $this->lConf['accordionEvent'];
+				}
+				if ($this->lConf['accordionAnimated']) {
+					$this->conf['config.']['accordionAnimated'] = $this->lConf['accordionAnimated'];
+				}
+				if ($this->lConf['accordionTransition']) {
+					$this->conf['config.']['accordionTransition'] = $this->lConf['accordionTransition'];
+				}
+				if ($this->lConf['accordionTransitiondir']) {
+					$this->conf['config.']['accordionTransitiondir'] = $this->lConf['accordionTransitiondir'];
+				}
+				if ($this->lConf['accordionTransitionduration'] > 0) {
+					$this->conf['config.']['accordionTransitionduration'] = $this->lConf['accordionTransitionduration'];
+				}
+				// slider
+				if ($this->lConf['sliderWidth']) {
+					$this->conf['config.']['sliderWidth'] = $this->lConf['sliderWidth'];
+				}
+				if ($this->lConf['sliderHeight']) {
+					$this->conf['config.']['sliderHeight'] = $this->lConf['sliderHeight'];
+				}
+				if ($this->lConf['sliderResizeContents'] < 2) {
+					$this->conf['config.']['sliderResizeContents'] = $this->lConf['sliderResizeContents'];
+				}
+				if ($this->lConf['sliderTheme']) {
+					$this->conf['config.']['sliderTheme'] = $this->lConf['sliderTheme'];
+				}
+				if ($this->lConf['sliderMode']) {
+					$this->conf['config.']['sliderMode'] = $this->lConf['sliderMode'];
+				}
+				if ($this->lConf['sliderOpen'] > 0) {
+					$this->conf['config.']['sliderOpen'] = $this->lConf['sliderOpen'];
+				}
+				if ($this->lConf['sliderRandomContent'] < 2) {
+					$this->conf['config.']['sliderRandomContent'] = $this->lConf['sliderRandomContent'];
+				}
+				if ($this->lConf['sliderHashTags'] < 2) {
+					$this->conf['config.']['sliderHashTags'] = $this->lConf['sliderHashTags'];
+				}
+				if ($this->lConf['sliderBuildArrows'] < 2) {
+					$this->conf['config.']['sliderBuildArrows'] = $this->lConf['sliderBuildArrows'];
+				}
+				if ($this->lConf['sliderToggleArrows'] < 2) {
+					$this->conf['config.']['sliderToggleArrows'] = $this->lConf['sliderToggleArrows'];
+				}
+				if ($this->lConf['sliderNavigation'] < 2) {
+					$this->conf['config.']['sliderNavigation'] = $this->lConf['sliderNavigation'];
+				}
+				if ($this->lConf['sliderStartStop'] < 2) {
+					$this->conf['config.']['sliderStartStop'] = $this->lConf['sliderStartStop'];
+				}
+				if ($this->lConf['sliderPanelFromHeader'] < 2) {
+					$this->conf['config.']['sliderPanelFromHeader'] = $this->lConf['sliderPanelFromHeader'];
+				}
+				if ($this->lConf['sliderToggleControls'] < 2) {
+					$this->conf['config.']['sliderToggleControls'] = $this->lConf['sliderToggleControls'];
+				}
+				if ($this->lConf['sliderAutoStart'] < 2) {
+					$this->conf['config.']['sliderAutoStart'] = $this->lConf['sliderAutoStart'];
+				}
+				if ($this->lConf['sliderPauseOnHover'] < 2) {
+					$this->conf['config.']['sliderPauseOnHover'] = $this->lConf['sliderPauseOnHover'];
+				}
+				if ($this->lConf['sliderAllowRapidChange'] < 2) {
+					$this->conf['config.']['sliderAllowRapidChange'] = $this->lConf['sliderAllowRapidChange'];
+				}
+				if ($this->lConf['sliderResumeOnVideoEnd'] < 2) {
+					$this->conf['config.']['sliderResumeOnVideoEnd'] = $this->lConf['sliderResumeOnVideoEnd'];
+				}
+				if ($this->lConf['sliderStopAtEnd'] < 2) {
+					$this->conf['config.']['sliderStopAtEnd'] = $this->lConf['sliderStopAtEnd'];
+				}
+				if ($this->lConf['sliderPlayRtl'] < 2) {
+					$this->conf['config.']['sliderPlayRtl'] = $this->lConf['sliderPlayRtl'];
+				}
+				if ($this->lConf['sliderTransition']) {
+					$this->conf['config.']['sliderTransition'] = $this->lConf['sliderTransition'];
+				}
+				if ($this->lConf['sliderTransitiondir']) {
+					$this->conf['config.']['sliderTransitiondir'] = $this->lConf['sliderTransitiondir'];
+				}
+				if ($this->lConf['sliderTransitionduration'] > 0) {
+					$this->conf['config.']['sliderTransitionduration'] = $this->lConf['sliderTransitionduration'];
+				}
+				if ($this->lConf['sliderAutoplay'] < 2) {
+					$this->conf['config.']['sliderAutoplay'] = $this->lConf['sliderAutoplay'];
+				}
+				// slidedeck
+				if ($this->lConf['slidedeckHeight'] > 0) {
+					$this->conf['config.']['slidedeckHeight'] = $this->lConf['slidedeckHeight'];
+				}
+				if ($this->lConf['slidedeckTransition']) {
+					$this->conf['config.']['slidedeckTransition'] = $this->lConf['slidedeckTransition'];
+				}
+				if ($this->lConf['slidedeckTransitiondir']) {
+					$this->conf['config.']['slidedeckTransitiondir'] = $this->lConf['slidedeckTransitiondir'];
+				}
+				if ($this->lConf['slidedeckTransitionduration'] > 0) {
+					$this->conf['config.']['slidedeckTransitionduration'] = $this->lConf['slidedeckTransitionduration'];
+				}
+				if ($this->lConf['slidedeckStart'] > 0) {
+					$this->conf['config.']['slidedeckStart'] = $this->lConf['slidedeckStart'];
+				}
+				if ($this->lConf['slidedeckActivecorner'] < 2) {
+					$this->conf['config.']['slidedeckActivecorner'] = $this->lConf['slidedeckActivecorner'];
+				}
+				if ($this->lConf['slidedeckIndex'] < 2) {
+					$this->conf['config.']['slidedeckIndex'] = $this->lConf['slidedeckIndex'];
+				}
+				if ($this->lConf['slidedeckScroll'] < 2) {
+					$this->conf['config.']['slidedeckScroll'] = $this->lConf['slidedeckScroll'];
+				}
+				if ($this->lConf['slidedeckKeys'] < 2) {
+					$this->conf['config.']['slidedeckKeys'] = $this->lConf['slidedeckKeys'];
+				}
+				if ($this->lConf['slidedeckHidespines'] < 2) {
+					$this->conf['config.']['slidedeckHidespines'] = $this->lConf['slidedeckHidespines'];
+				}
+				// easyAccordion
+				if ($this->lConf['easyaccordionSkin']) {
+					$this->conf['config.']['easyaccordionSkin'] = $this->lConf['easyaccordionSkin'];
+				}
+				if ($this->lConf['easyaccordionOpen'] > 0) {
+					$this->conf['config.']['easyaccordionOpen'] = $this->lConf['easyaccordionOpen'];
+				}
+				if ($this->lConf['easyaccordionWidth'] > 0) {
+					$this->conf['config.']['easyaccordionWidth'] = $this->lConf['easyaccordionWidth'];
+				}
+				if ($this->lConf['easyaccordionSlideNum'] < 2) {
+					$this->conf['config.']['easyaccordionSlideNum'] = $this->lConf['easyaccordionSlideNum'];
+				}
+				// booklet
+				if ($this->lConf['bookletWidth'] > 0) {
+					$this->conf['config.']['bookletWidth'] = $this->lConf['bookletWidth'];
+				}
+				if ($this->lConf['bookletHeight'] > 0) {
+					$this->conf['config.']['bookletHeight'] = $this->lConf['bookletHeight'];
+				}
+				if ($this->lConf['bookletSpeed'] > 0) {
+					$this->conf['config.']['bookletSpeed'] = $this->lConf['bookletSpeed'];
+				}
+				if ($this->lConf['bookletStartingPage'] > 0) {
+					$this->conf['config.']['bookletStartingPage'] = $this->lConf['bookletStartingPage'];
+				}
+				if ($this->lConf['bookletRTL'] < 2) {
+					$this->conf['config.']['bookletRTL'] = $this->lConf['bookletRTL'];
+				}
+				if ($this->lConf['bookletTransition']) {
+					$this->conf['config.']['bookletTransition']    = $this->lConf['bookletTransition'];
+				}
+				if ($this->lConf['bookletTransitiondir']) {
+					$this->conf['config.']['bookletTransitiondir'] = $this->lConf['bookletTransitiondir'];
+				}
+				if ($this->lConf['bookletPagePadding'] != '') {
+					$this->conf['config.']['bookletPagePadding'] = $this->lConf['bookletPagePadding'];
+				}
+				if ($this->lConf['bookletPageNumbers'] < 2) {
+					$this->conf['config.']['bookletPageNumbers'] = $this->lConf['bookletPageNumbers'];
+				}
+				if ($this->lConf['bookletManual'] < 2) {
+					$this->conf['config.']['bookletManual'] = $this->lConf['bookletManual'];
+				}
+				if ($this->lConf['bookletShadows'] < 2) {
+					$this->conf['config.']['bookletShadows'] = $this->lConf['bookletShadows'];
+				}
+				if ($this->lConf['bookletClosed'] < 2) {
+					$this->conf['config.']['bookletClosed'] = $this->lConf['bookletClosed'];
+				}
+				if ($this->lConf['bookletCovers'] < 2) {
+					$this->conf['config.']['bookletCovers'] = $this->lConf['bookletCovers'];
+				}
+				if ($this->lConf['bookletAutoCenter'] < 2) {
+					$this->conf['config.']['bookletAutoCenter'] = $this->lConf['bookletAutoCenter'];
+				}
+				if ($this->lConf['bookletHash'] < 2) {
+					$this->conf['config.']['bookletHash'] = $this->lConf['bookletHash'];
+				}
+				if ($this->lConf['bookletKeyboard'] < 2) {
+					$this->conf['config.']['bookletKeyboard'] = $this->lConf['bookletKeyboard'];
+				}
+				if ($this->lConf['bookletAuto'] < 2) {
+					$this->conf['config.']['bookletAuto'] = $this->lConf['bookletAuto'];
+				}
+				if ($this->lConf['bookletDelay'] < 2) {
+					$this->conf['config.']['bookletDelay'] = $this->lConf['bookletDelay'];
+				}
+				if ($this->lConf['bookletOverlays'] < 2) {
+					$this->conf['config.']['bookletOverlays'] = $this->lConf['bookletOverlays'];
+				}
+				if ($this->lConf['bookletArrows'] < 2) {
+					$this->conf['config.']['bookletArrows'] = $this->lConf['bookletArrows'];
+				}
+				if ($this->lConf['bookletArrowsHide'] < 2) {
+					$this->conf['config.']['bookletArrowsHide'] = $this->lConf['bookletArrowsHide'];
+				}
+				if ($this->lConf['bookletHovers'] < 2) {
+					$this->conf['config.']['bookletHovers'] = $this->lConf['bookletHovers'];
+				}
+				// autoplay
+				if ($this->lConf['delayDuration'] > 0) {
+					$this->conf['config.']['delayDuration'] = $this->lConf['delayDuration'];
+				}
+				if ($this->lConf['autoplayContinuing'] < 2) {
+					$this->conf['config.']['autoplayContinuing'] = $this->lConf['autoplayContinuing'];
+				}
+				if ($this->lConf['autoplayCycle'] < 2) {
+					$this->conf['config.']['autoplayCycle'] = $this->lConf['autoplayCycle'];
+				}
+
+				$this->conf['config.']['style'] = $this->lConf['style'];
+			}
 
 			$this->lConf['titles']     = $this->getFlexformData('title', 'titles');
 			$this->lConf['attributes'] = $this->getFlexformData('attribute', 'attributes');
@@ -193,273 +458,12 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 			$this->lConf['options']         = $this->getFlexformData('special', 'options');
 			$this->lConf['optionsOverride'] = $this->getFlexformData('special', 'optionsOverride');
 
-			// Override the config with flexform data
-			$this->conf['config.']['style'] = $this->lConf['style'];
 			if ($this->cObj->data['tx_jfmulticontent_view']) {
 				$this->conf['config.']['view'] = $this->cObj->data['tx_jfmulticontent_view'];
 			} else {
 				$this->conf['config.']['view'] = 'content';
 			}
-			// columns
-			$this->conf['config.']['column1']     = $this->lConf['column1'];
-			$this->conf['config.']['column2']     = $this->lConf['column2'];
-			$this->conf['config.']['column3']     = $this->lConf['column3'];
-			$this->conf['config.']['column4']     = $this->lConf['column4'];
-			$this->conf['config.']['column5']     = $this->lConf['column5'];
-			$this->conf['config.']['columnOrder'] = $this->lConf['columnOrder'];
-			if ($this->lConf['equalize'] < 2) {
-				$this->conf['config.']['equalize'] = $this->lConf['equalize'];
-			}
-			// tab
-			if ($this->lConf['tabCollapsible'] < 2) {
-				$this->conf['config.']['tabCollapsible'] = $this->lConf['tabCollapsible'];
-			}
-			if ($this->lConf['tabOpen'] >= 0) {
-				$this->conf['config.']['tabOpen'] = $this->lConf['tabOpen'];
-			}
-			if ($this->lConf['tabRandomContent'] < 2) {
-				$this->conf['config.']['tabRandomContent'] = $this->lConf['tabRandomContent'];
-			}
-			if (strlen($this->lConf['tabCookieExpires']) > 0) {
-				$this->conf['config.']['tabCookieExpires'] = $this->lConf['tabCookieExpires'];
-			}
-			if ($this->lConf['tabCookieRoot'] < 2) {
-				$this->conf['config.']['tabCookieRoot'] = $this->lConf['tabCookieRoot'];
-			}
-			if ($this->lConf['tabFxHeight'] < 2) {
-				$this->conf['config.']['tabFxHeight'] = $this->lConf['tabFxHeight'];
-			}
-			if ($this->lConf['tabFxOpacity'] < 2) {
-				$this->conf['config.']['tabFxOpacity'] = $this->lConf['tabFxOpacity'];
-			}
-			if ($this->lConf['tabFxDuration'] > 0) {
-				$this->conf['config.']['tabFxDuration'] = $this->lConf['tabFxDuration'];
-			}
-			// accordion
-			if ($this->lConf['accordionAutoHeight'] < 2) {
-				$this->conf['config.']['accordionAutoHeight'] = $this->lConf['accordionAutoHeight'];
-			}
-			if ($this->lConf['accordionCollapsible'] < 2) {
-				$this->conf['config.']['accordionCollapsible'] = $this->lConf['accordionCollapsible'];
-			}
-			if ($this->lConf['accordionClosed'] < 2) {
-				$this->conf['config.']['accordionClosed'] = $this->lConf['accordionClosed'];
-			}
-			if ($this->lConf['accordionOpen'] > 0) {
-				$this->conf['config.']['accordionOpen'] = $this->lConf['accordionOpen'];
-			}
-			if ($this->lConf['accordionRandomContent'] < 2) {
-				$this->conf['config.']['accordionRandomContent'] = $this->lConf['accordionRandomContent'];
-			}
-			if ($this->lConf['accordionEvent']) {
-				$this->conf['config.']['accordionEvent'] = $this->lConf['accordionEvent'];
-			}
-			if ($this->lConf['accordionAnimated']) {
-				$this->conf['config.']['accordionAnimated'] = $this->lConf['accordionAnimated'];
-			}
-			if ($this->lConf['accordionTransition']) {
-				$this->conf['config.']['accordionTransition'] = $this->lConf['accordionTransition'];
-			}
-			if ($this->lConf['accordionTransitiondir']) {
-				$this->conf['config.']['accordionTransitiondir'] = $this->lConf['accordionTransitiondir'];
-			}
-			if ($this->lConf['accordionTransitionduration'] > 0) {
-				$this->conf['config.']['accordionTransitionduration'] = $this->lConf['accordionTransitionduration'];
-			}
-			// slider
-			if ($this->lConf['sliderWidth']) {
-				$this->conf['config.']['sliderWidth'] = $this->lConf['sliderWidth'];
-			}
-			if ($this->lConf['sliderHeight']) {
-				$this->conf['config.']['sliderHeight'] = $this->lConf['sliderHeight'];
-			}
-			if ($this->lConf['sliderResizeContents'] < 2) {
-				$this->conf['config.']['sliderResizeContents'] = $this->lConf['sliderResizeContents'];
-			}
-			if ($this->lConf['sliderTheme']) {
-				$this->conf['config.']['sliderTheme'] = $this->lConf['sliderTheme'];
-			}
-			if ($this->lConf['sliderMode']) {
-				$this->conf['config.']['sliderMode'] = $this->lConf['sliderMode'];
-			}
-			if ($this->lConf['sliderOpen'] > 0) {
-				$this->conf['config.']['sliderOpen'] = $this->lConf['sliderOpen'];
-			}
-			if ($this->lConf['sliderRandomContent'] < 2) {
-				$this->conf['config.']['sliderRandomContent'] = $this->lConf['sliderRandomContent'];
-			}
-			if ($this->lConf['sliderHashTags'] < 2) {
-				$this->conf['config.']['sliderHashTags'] = $this->lConf['sliderHashTags'];
-			}
-			if ($this->lConf['sliderBuildArrows'] < 2) {
-				$this->conf['config.']['sliderBuildArrows'] = $this->lConf['sliderBuildArrows'];
-			}
-			if ($this->lConf['sliderToggleArrows'] < 2) {
-				$this->conf['config.']['sliderToggleArrows'] = $this->lConf['sliderToggleArrows'];
-			}
-			if ($this->lConf['sliderNavigation'] < 2) {
-				$this->conf['config.']['sliderNavigation'] = $this->lConf['sliderNavigation'];
-			}
-			if ($this->lConf['sliderStartStop'] < 2) {
-				$this->conf['config.']['sliderStartStop'] = $this->lConf['sliderStartStop'];
-			}
-			if ($this->lConf['sliderPanelFromHeader'] < 2) {
-				$this->conf['config.']['sliderPanelFromHeader'] = $this->lConf['sliderPanelFromHeader'];
-			}
-			if ($this->lConf['sliderToggleControls'] < 2) {
-				$this->conf['config.']['sliderToggleControls'] = $this->lConf['sliderToggleControls'];
-			}
-			if ($this->lConf['sliderAutoStart'] < 2) {
-				$this->conf['config.']['sliderAutoStart'] = $this->lConf['sliderAutoStart'];
-			}
-			if ($this->lConf['sliderPauseOnHover'] < 2) {
-				$this->conf['config.']['sliderPauseOnHover'] = $this->lConf['sliderPauseOnHover'];
-			}
-			if ($this->lConf['sliderAllowRapidChange'] < 2) {
-				$this->conf['config.']['sliderAllowRapidChange'] = $this->lConf['sliderAllowRapidChange'];
-			}
-			if ($this->lConf['sliderResumeOnVideoEnd'] < 2) {
-				$this->conf['config.']['sliderResumeOnVideoEnd'] = $this->lConf['sliderResumeOnVideoEnd'];
-			}
-			if ($this->lConf['sliderStopAtEnd'] < 2) {
-				$this->conf['config.']['sliderStopAtEnd'] = $this->lConf['sliderStopAtEnd'];
-			}
-			if ($this->lConf['sliderPlayRtl'] < 2) {
-				$this->conf['config.']['sliderPlayRtl'] = $this->lConf['sliderPlayRtl'];
-			}
-			if ($this->lConf['sliderTransition']) {
-				$this->conf['config.']['sliderTransition'] = $this->lConf['sliderTransition'];
-			}
-			if ($this->lConf['sliderTransitiondir']) {
-				$this->conf['config.']['sliderTransitiondir'] = $this->lConf['sliderTransitiondir'];
-			}
-			if ($this->lConf['sliderTransitionduration'] > 0) {
-				$this->conf['config.']['sliderTransitionduration'] = $this->lConf['sliderTransitionduration'];
-			}
-			if ($this->lConf['sliderAutoplay'] < 2) {
-				$this->conf['config.']['sliderAutoplay'] = $this->lConf['sliderAutoplay'];
-			}
-			// slidedeck
-			if ($this->lConf['slidedeckHeight'] > 0) {
-				$this->conf['config.']['slidedeckHeight'] = $this->lConf['slidedeckHeight'];
-			}
-			if ($this->lConf['slidedeckTransition']) {
-				$this->conf['config.']['slidedeckTransition'] = $this->lConf['slidedeckTransition'];
-			}
-			if ($this->lConf['slidedeckTransitiondir']) {
-				$this->conf['config.']['slidedeckTransitiondir'] = $this->lConf['slidedeckTransitiondir'];
-			}
-			if ($this->lConf['slidedeckTransitionduration'] > 0) {
-				$this->conf['config.']['slidedeckTransitionduration'] = $this->lConf['slidedeckTransitionduration'];
-			}
-			if ($this->lConf['slidedeckStart'] > 0) {
-				$this->conf['config.']['slidedeckStart'] = $this->lConf['slidedeckStart'];
-			}
-			if ($this->lConf['slidedeckActivecorner'] < 2) {
-				$this->conf['config.']['slidedeckActivecorner'] = $this->lConf['slidedeckActivecorner'];
-			}
-			if ($this->lConf['slidedeckIndex'] < 2) {
-				$this->conf['config.']['slidedeckIndex'] = $this->lConf['slidedeckIndex'];
-			}
-			if ($this->lConf['slidedeckScroll'] < 2) {
-				$this->conf['config.']['slidedeckScroll'] = $this->lConf['slidedeckScroll'];
-			}
-			if ($this->lConf['slidedeckKeys'] < 2) {
-				$this->conf['config.']['slidedeckKeys'] = $this->lConf['slidedeckKeys'];
-			}
-			if ($this->lConf['slidedeckHidespines'] < 2) {
-				$this->conf['config.']['slidedeckHidespines'] = $this->lConf['slidedeckHidespines'];
-			}
-			// easyAccordion
-			if ($this->lConf['easyaccordionSkin']) {
-				$this->conf['config.']['easyaccordionSkin'] = $this->lConf['easyaccordionSkin'];
-			}
-			if ($this->lConf['easyaccordionOpen'] > 0) {
-				$this->conf['config.']['easyaccordionOpen'] = $this->lConf['easyaccordionOpen'];
-			}
-			if ($this->lConf['easyaccordionWidth'] > 0) {
-				$this->conf['config.']['easyaccordionWidth'] = $this->lConf['easyaccordionWidth'];
-			}
-			if ($this->lConf['easyaccordionSlideNum'] < 2) {
-				$this->conf['config.']['easyaccordionSlideNum'] = $this->lConf['easyaccordionSlideNum'];
-			}
-			// booklet
-			if ($this->lConf['bookletWidth'] > 0) {
-				$this->conf['config.']['bookletWidth'] = $this->lConf['bookletWidth'];
-			}
-			if ($this->lConf['bookletHeight'] > 0) {
-				$this->conf['config.']['bookletHeight'] = $this->lConf['bookletHeight'];
-			}
-			if ($this->lConf['bookletSpeed'] > 0) {
-				$this->conf['config.']['bookletSpeed'] = $this->lConf['bookletSpeed'];
-			}
-			if ($this->lConf['bookletStartingPage'] > 0) {
-				$this->conf['config.']['bookletStartingPage'] = $this->lConf['bookletStartingPage'];
-			}
-			if ($this->lConf['bookletRTL'] < 2) {
-				$this->conf['config.']['bookletRTL'] = $this->lConf['bookletRTL'];
-			}
-			if ($this->lConf['bookletTransition']) {
-				$this->conf['config.']['bookletTransition']    = $this->lConf['bookletTransition'];
-			}
-			if ($this->lConf['bookletTransitiondir']) {
-				$this->conf['config.']['bookletTransitiondir'] = $this->lConf['bookletTransitiondir'];
-			}
-			if ($this->lConf['bookletPagePadding'] != '') {
-				$this->conf['config.']['bookletPagePadding'] = $this->lConf['bookletPagePadding'];
-			}
-			if ($this->lConf['bookletPageNumbers'] < 2) {
-				$this->conf['config.']['bookletPageNumbers'] = $this->lConf['bookletPageNumbers'];
-			}
-			if ($this->lConf['bookletManual'] < 2) {
-				$this->conf['config.']['bookletManual'] = $this->lConf['bookletManual'];
-			}
-			if ($this->lConf['bookletShadows'] < 2) {
-				$this->conf['config.']['bookletShadows'] = $this->lConf['bookletShadows'];
-			}
-			if ($this->lConf['bookletClosed'] < 2) {
-				$this->conf['config.']['bookletClosed'] = $this->lConf['bookletClosed'];
-			}
-			if ($this->lConf['bookletCovers'] < 2) {
-				$this->conf['config.']['bookletCovers'] = $this->lConf['bookletCovers'];
-			}
-			if ($this->lConf['bookletAutoCenter'] < 2) {
-				$this->conf['config.']['bookletAutoCenter'] = $this->lConf['bookletAutoCenter'];
-			}
-			if ($this->lConf['bookletHash'] < 2) {
-				$this->conf['config.']['bookletHash'] = $this->lConf['bookletHash'];
-			}
-			if ($this->lConf['bookletKeyboard'] < 2) {
-				$this->conf['config.']['bookletKeyboard'] = $this->lConf['bookletKeyboard'];
-			}
-			if ($this->lConf['bookletAuto'] < 2) {
-				$this->conf['config.']['bookletAuto'] = $this->lConf['bookletAuto'];
-			}
-			if ($this->lConf['bookletDelay'] < 2) {
-				$this->conf['config.']['bookletDelay'] = $this->lConf['bookletDelay'];
-			}
-			if ($this->lConf['bookletOverlays'] < 2) {
-				$this->conf['config.']['bookletOverlays'] = $this->lConf['bookletOverlays'];
-			}
-			if ($this->lConf['bookletArrows'] < 2) {
-				$this->conf['config.']['bookletArrows'] = $this->lConf['bookletArrows'];
-			}
-			if ($this->lConf['bookletArrowsHide'] < 2) {
-				$this->conf['config.']['bookletArrowsHide'] = $this->lConf['bookletArrowsHide'];
-			}
-			if ($this->lConf['bookletHovers'] < 2) {
-				$this->conf['config.']['bookletHovers'] = $this->lConf['bookletHovers'];
-			}
-			// autoplay
-			if ($this->lConf['delayDuration'] > 0) {
-				$this->conf['config.']['delayDuration'] = $this->lConf['delayDuration'];
-			}
-			if ($this->lConf['autoplayContinuing'] < 2) {
-				$this->conf['config.']['autoplayContinuing'] = $this->lConf['autoplayContinuing'];
-			}
-			if ($this->lConf['autoplayCycle'] < 2) {
-				$this->conf['config.']['autoplayCycle'] = $this->lConf['autoplayCycle'];
-			}
+
 			// define the titles to overwrite
 			if (trim($this->lConf['titles'])) {
 				$this->titles = t3lib_div::trimExplode(chr(10), $this->lConf['titles']);

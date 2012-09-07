@@ -111,6 +111,11 @@ class tx_jfmulticontent_itemsProcFunc
 				'booklet',
 				'EXT:jfmulticontent/selicon_tt_content_tx_jfmulticontent_style_9.gif',
 			),
+			array(
+				$GLOBALS['LANG']->sL('LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.style.I.10'),
+				'typoscript',
+				'EXT:jfmulticontent/selicon_tt_content_tx_jfmulticontent_style_10.png',
+			),
 		);
 		$confArr = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['jfmulticontent']);
 		$styles = $confArr['style.'];

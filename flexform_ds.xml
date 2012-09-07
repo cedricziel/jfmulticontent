@@ -1495,6 +1495,20 @@
 						</TCEforms>
 					</bookletHovers>
 					
+					<!-- TYPOSCRIPT -->
+					
+					<typoscriptInfo>
+						<TCEforms>
+							<exclude>1</exclude>
+							<displayCond>FIELD:style:=:typoscript</displayCond>
+							<config>
+								<form_type>user</form_type>
+								<userFunc><![CDATA[EXT:jfmulticontent/lib/class.tx_jfmulticontent_tceFunc.php:&tx_jfmulticontent_tceFunc->getTypoScriptInfo]]></userFunc>
+								<checked>0</checked>
+							</config>
+						</TCEforms>
+					</typoscriptInfo>
+					
 					<!-- AUTOPLAY -->
 					
 					<delayDuration>

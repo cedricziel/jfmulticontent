@@ -28,32 +28,35 @@ colPosOfIrreContent = 93
 # cat=basic/basic/10; type=boolean; label=Enable 2column: Enables the 2column-Style for the backend
 style.2column = 1
 
-# cat=basic/basic/10; type=boolean; label=Enable 3column: Enables the 3column-Style for the backend
+# cat=basic/basic/20; type=boolean; label=Enable 3column: Enables the 3column-Style for the backend
 style.3column = 1
 
-# cat=basic/basic/10; type=boolean; label=Enable 4column: Enables the 4column-Style for the backend
+# cat=basic/basic/30; type=boolean; label=Enable 4column: Enables the 4column-Style for the backend
 style.4column = 1
 
-# cat=basic/basic/10; type=boolean; label=Enable 5column: Enables the 5column-Style for the backend
+# cat=basic/basic/40; type=boolean; label=Enable 5column: Enables the 5column-Style for the backend
 style.5column = 1
 
-# cat=basic/basic/10; type=boolean; label=Enable tab: Enables the tab-Style for the backend
+# cat=basic/basic/50; type=boolean; label=Enable tab: Enables the tab-Style for the backend
 style.tab = 1
 
-# cat=basic/basic/10; type=boolean; label=Enable accordion: Enables the accordion-Style for the backend
+# cat=basic/basic/60; type=boolean; label=Enable accordion: Enables the accordion-Style for the backend
 style.accordion = 1
 
-# cat=basic/basic/10; type=boolean; label=Enable slider: Enables the slider-Style for the backend
+# cat=basic/basic/70; type=boolean; label=Enable slider: Enables the slider-Style for the backend
 style.slider = 1
 
-# cat=basic/basic/10; type=boolean; label=Enable slidedeck: Enables the slidedeck-Style for the backend
+# cat=basic/basic/80; type=boolean; label=Enable slidedeck: Enables the slidedeck-Style for the backend
 style.slidedeck = 1
 
-# cat=basic/basic/10; type=boolean; label=Enable easyaccordion: Enables the easyaccordion-Style for the backend
+# cat=basic/basic/90; type=boolean; label=Enable easyaccordion: Enables the easyaccordion-Style for the backend
 style.easyaccordion = 1
 
-# cat=basic/basic/10; type=boolean; label=Enable booklet: Enables the booklet-Style for the backend
+# cat=basic/basic/100; type=boolean; label=Enable booklet: Enables the booklet-Style for the backend
 style.booklet = 1
+
+# cat=basic/basic/110; type=boolean; label=Enable typoscript: Enables the typoscript-Style for the backend
+style.typoscript = 0
 
 
 

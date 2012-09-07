@@ -61,6 +61,23 @@ class tx_jfmulticontent_tceFunc
 		$tceforms = &$PA['pObj'];
 		return $tceforms->getSingleField_SW($PA['table'], $PA['field'], $PA['row'], $PA);
 	}
+	
+	/**
+	 * This will render the info text for the typoscript-style
+	 *
+	 * @param	array		$PA An array with additional configuration options.
+	 * @param	object		$fobj TCEForms object reference
+	 * @return	string		The HTML code for the TCEform field
+	 */
+	public function getTypoScriptInfo($PA, &$fObj)
+	{
+		return '
+<div class="typo3-message message-information">
+	<div class="message-body">
+		' . $GLOBALS['LANG']->sL('LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.typoscriptInfo') . '
+	</div>
+</div>';
+	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/jfmulticontent/lib/class.tx_jfmulticontent_tceFunc.php']) {
