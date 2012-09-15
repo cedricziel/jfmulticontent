@@ -1193,7 +1193,9 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 		$this->pagerenderer->addCssFile($this->conf['cssFile']);
 
 		// Add the ressources
-		$this->pagerenderer->addResources();
+		if (! $this->conf['disableJs']) {
+			$this->pagerenderer->addResources();
+		}
 
 		// Render the Template
 		$content = $this->renderTemplate();

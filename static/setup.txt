@@ -64,6 +64,8 @@ plugin.tx_jfmulticontent_pi1 {
 		wrap = |
 	}
 
+	disableJs = 0
+
 	config {
 		contentKey = jfmulticontent_ts1
 		style = 2column
@@ -180,6 +182,7 @@ plugin.tx_jfmulticontent_pi1 {
 		delayDuration = 0
 		autoplayContinuing = 0
 		autoplayCycle = 0
+
 	}
 	views {
 		page {
