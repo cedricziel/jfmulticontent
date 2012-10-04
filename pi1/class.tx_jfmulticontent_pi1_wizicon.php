@@ -63,10 +63,15 @@ class tx_jfmulticontent_pi1_wizicon
 	public function includeLocalLang()
 	{
 		$llFile = t3lib_extMgm::extPath('jfmulticontent') . 'locallang.xml';
-		if (class_exists(t3lib_l10n_parser_Llxml)) {
-			$LOCAL_LANG = t3lib_l10n_parser_Llxml::getParsedData($llFile, $GLOBALS['LANG']->lang);
-		} else {
+		$version = class_exists('t3lib_utility_VersionNumber')
+			? t3lib_utility_VersionNumber::convertVersionNumberToInteger(TYPO3_version)
+			: t3lib_div::int_from_ver(TYPO3_version);
+		if ($version < 4006000) {
 			$LOCAL_LANG = t3lib_div::readLLXMLfile($llFile, $GLOBALS['LANG']->lang);
+		} else {
+			/** @var $llxmlParser t3lib_l10n_parser_Llxml */
+			$llxmlParser = t3lib_div::makeInstance('t3lib_l10n_parser_Llxml');
+			$LOCAL_LANG = $llxmlParser->getParsedData($llFile, $GLOBALS['LANG']->lang);
 		}
 
 		return $LOCAL_LANG;
