@@ -96,6 +96,8 @@ class tx_jfmulticontent_tsparserext
 			'useOwnUserFuncForPages',
 			'openExternalLink',
 			'showEmptyContent',
+			'addBrowseLinks',
+			'tabSelectByHash',
 			'colPosOfIrreContent',
 			'style.',
 			'classInner',

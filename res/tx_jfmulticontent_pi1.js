@@ -21,6 +21,7 @@ OPEN_EXTERNAL_LINK - Subpart for the JS to open the url in the rel-attribute (on
 PREG_QUOTE_KEY - Unique key of the multicontent preg_quoted
 FIX_HREF - Subpart to fix hrefs when config.prefixLocalAnchors is set
 ROTATE - Set the JS for autoplay
+TAB_SELECTOR - Set the selection of a panel by hash
 
 <em>Accordion markers:</em>
 OPEN_EXTERNAL_LINK - Subpart for the JS to open the url in the rel-attribute (only if openExternalLink is set in EXT-Config)
@@ -57,6 +58,15 @@ jQuery(document).ready(function(){
 	jQuery('####KEY###').tabs({
 		###OPTIONS###
 	})###ROTATE###;
+	<!-- ###TAB_SELECT_BY_HASH### -->
+	if (location.hash.toLowerCase()) {
+		jQuery('####KEY###').tabs("select", location.hash.toLowerCase());
+		jQuery('####KEY###').tabs("rotate", 0);
+		jQuery('####KEY###').bind("tabsshow", function(event, ui) {
+			location.hash = ui.tab.hash;
+		});
+	}
+	<!-- ###TAB_SELECT_BY_HASH### -->
 	<!-- ###OPEN_EXTERNAL_LINK### -->
 	jQuery('####KEY###').bind('tabsselect', function(e, ui) {
 		var rel = jQuery(ui.tab).attr('rel');

@@ -749,6 +749,14 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 				}
 				$templateCode = trim($this->cObj->substituteSubpart($templateCode, '###FIX_HREF###', $fixTabHref, 0));
 
+				// open tab by hash
+				if ($this->confArr['tabSelectByHash']) {
+					$tabSelector = trim($this->cObj->getSubpart($templateCode, "###TAB_SELECT_BY_HASH###"));
+				} else {
+					$tabSelector = NULL;
+				}
+				$templateCode = trim($this->cObj->substituteSubpart($templateCode, '###TAB_SELECT_BY_HASH###', $tabSelector, 0));
+
 				// app the open-link-template
 				if ($this->confArr['openExternalLink']) {
 					$openExtLink = trim($this->cObj->getSubpart($templateCode, "###OPEN_EXTERNAL_LINK###"));

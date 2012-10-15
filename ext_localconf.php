@@ -33,5 +33,13 @@ $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['cms/layout/class.tx_cms_layout.php'][
 // Save the content
 $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['processDatamapClass'][$_EXTKEY] = 'EXT:'.$_EXTKEY.'/lib/class.tx_jfmulticontent_tcemain.php:&tx_jfmulticontent_tcemain';
 
+if ($confArr['addBrowseLinks']) {
+	// Add browseLinksHook
+	$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['typo3/class.browse_links.php']['browseLinksHook'][] = 'EXT:'.$_EXTKEY.'/lib/class.tx_jfmulticontent_browselinkshooks.php:&tx_jfmulticontent_browselinkshooks';
+	if (t3lib_extMgm::isLoaded('rtehtmlarea')) {
+		$TYPO3_CONF_VARS['SC_OPTIONS']['ext/rtehtmlarea/mod3/class.tx_rtehtmlarea_browse_links.php']['browseLinksHook'][] = 'EXT:'.$_EXTKEY.'/lib/class.tx_jfmulticontent_browselinkshooks.php:&tx_jfmulticontent_browselinkshooks';
+	}
+}
+
 t3lib_extMgm::addPItoST43($_EXTKEY, 'pi1/class.tx_jfmulticontent_pi1.php', '_pi1', 'list_type', 1);
 ?>

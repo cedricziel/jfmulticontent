@@ -1,26 +1,32 @@
 
-# cat=basic/enable/10; type=boolean; label=Use General Record Storage page only: If set, only content can be choosen from the defined General Record Storage page
+# cat=basic/enable/010; type=boolean; label=Use General Record Storage page only: If set, only content can be choosen from the defined General Record Storage page
 useStoragePidOnly = 1
 
-# cat=basic/enable/20; type=boolean; label=Activate tt_news codes: Enables the additional codes in tt_news
+# cat=basic/enable/020; type=boolean; label=Activate tt_news codes: Enables the additional codes in tt_news
 ttNewsCodes = 0
 
-# cat=basic/enable/30; type=boolean; label=Enable FE-Errormessages: If set, messages in case of missing templates are displayed in FE (Turn of in production)
+# cat=basic/enable/030; type=boolean; label=Enable FE-Errormessages: If set, messages in case of missing templates are displayed in FE (Turn of in production)
 frontendErrorMsg = 1
 
-# cat=basic/enable/40; type=boolean; label=Enable select instead of checkbox: If set, most of checkboxes will turn into selectboxes, so you can choose "from TS"
+# cat=basic/enable/040; type=boolean; label=Enable select instead of checkbox: If set, most of checkboxes will turn into selectboxes, so you can choose "from TS"
 useSelectInsteadCheckbox = 0
 
-# cat=basic/enable/50; type=boolean; label=Enable own userFunc in page mode: If set, you have to do the pagerendering with a own userFunc (e.g.: TemplaVoila, see documentation)
+# cat=basic/enable/050; type=boolean; label=Enable own userFunc in page mode: If set, you have to do the pagerendering with a own userFunc (e.g.: TemplaVoila, see documentation)
 useOwnUserFuncForPages = 0
 
-# cat=basic/enable/60; type=boolean; label=Open external links in page-view: If set, the external link in page-view will be opened
+# cat=basic/enable/060; type=boolean; label=Open external links in page-view: If set, the external link in page-view will be opened
 openExternalLink = 0
 
-# cat=basic/enable/70; type=boolean; label=Show empty content: if set, an empty content will be shown as well
+# cat=basic/enable/070; type=boolean; label=Show empty content: If set, an empty content will be shown as well
 showEmptyContent = 0
 
-# cat=basic/enable/80; type=integer; label=colPos of IRRE Content: Select the colPos where the tt_content will be saved in IRRE-view
+# cat=basic/enable/080; type=boolean; label=Add Browse Links: If set, there will be an additional tab in the link-browser
+addBrowseLinks = 0
+
+# cat=basic/enable/090; type=boolean; label=Select tab by Hash-Value: If set, the tabs can be selected by hash-value in URL
+tabSelectByHash = 0
+
+# cat=basic/enable/100; type=integer; label=colPos of IRRE Content: Select the colPos where the tt_content will be saved in IRRE-view
 colPosOfIrreContent = 93
 
 
