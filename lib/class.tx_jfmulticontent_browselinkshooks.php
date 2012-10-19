@@ -233,7 +233,7 @@ class tx_jfmulticontent_browselinkshooks implements t3lib_browseLinksHook {
 					$out .= '<img'.t3lib_iconWorks::skinImg($GLOBALS['BACK_PATH'],'gfx/ol/line.gif','width="18" height="16"').' alt="" />'.
 							'<img'.t3lib_iconWorks::skinImg($GLOBALS['BACK_PATH'],'gfx/ol/blank.gif','width="18" height="16"').' alt="" />';
 					foreach ($contents as $key => $content) {
-						$out .= '<a href="#" onclick="return link_typo3Page(\''.$expPageId.'\',\'#jfmulticontent_c'.$row['uid'].'-'.$key.'\');">'.
+						$out .= '<a href="#" onclick="return link_typo3Page(\''.$expPageId.'\',\'#jfmulticontent_c'.$row['uid'].'-'.($key+1).'\');">'.
 								'&nbsp;' . ($key + 1) . '&nbsp;' .
 								'</a>';
 					}

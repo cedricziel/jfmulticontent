@@ -100,9 +100,21 @@ jQuery(document).ready(function(){
 	<!-- ###SETTIMEOUT### -->
 	<!-- ###CONTINUING### -->
 	jQuery('####KEY###').click(function(){
-		jQuery('####KEY###').accordion('option','change','');
+		jQuery('####KEY###').accordion('option', 'change', '');
 	});
 	<!-- ###CONTINUING### -->
+	<!-- ###TAB_SELECT_BY_HASH### -->
+	var hash = location.hash.toLowerCase();
+	if (hash) {
+		var split = hash.split('-');
+		if (split[0] == '####KEY###' && parseInt(split[1]) > 0) {
+			jQuery('####KEY###').accordion('option', 'active', (parseInt(split[1]) - 1));
+		}
+	}
+	jQuery('####KEY###').bind("accordionchange", function(event, ui) {
+		location.hash = '####KEY###-' + (jQuery('####KEY###').accordion('option', 'active') + 1);
+	});
+	<!-- ###TAB_SELECT_BY_HASH### -->
 });
 <!-- ###AUTO_PLAY### -->
 function tx_jfmulticontent_next_accordion(id, max) {

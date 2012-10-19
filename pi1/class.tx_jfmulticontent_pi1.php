@@ -834,6 +834,14 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 				}
 				$templateCode = trim($this->cObj->substituteSubpart($templateCode, '###OPEN_EXTERNAL_LINK###', $openExtLink, 0));
 
+				// open tab by hash
+				if ($this->confArr['tabSelectByHash']) {
+					$tabSelector = trim($this->cObj->getSubpart($templateCode, "###TAB_SELECT_BY_HASH###"));
+				} else {
+					$tabSelector = NULL;
+				}
+				$templateCode = trim($this->cObj->substituteSubpart($templateCode, '###TAB_SELECT_BY_HASH###', $tabSelector, 0));
+
 				// set the easing animation script
 				$templateCode = $this->cObj->substituteSubpart($templateCode, '###EASING_ANIMATION###', $easingAnimation, 0);
 				$continuing = NULL;
