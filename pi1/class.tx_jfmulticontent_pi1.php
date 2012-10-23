@@ -523,7 +523,14 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 				// get the informations for every content
 				for ($a=0; $a < count($content_ids); $a++) {
 					// Select the content
-					$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery('*', 'tt_content', 'uid='.intval($content_ids[$a]), '', '', 1);
+					$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
+						'*',
+						'tt_content',
+						'uid='.intval($content_ids[$a]),
+						'',
+						'',
+						1
+					);
 					$row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res);
 					if ($GLOBALS['TSFE']->sys_language_content) {
 						$row = $GLOBALS['TSFE']->sys_page->getRecordOverlay('tt_content', $row, $GLOBALS['TSFE']->sys_language_content, $GLOBALS['TSFE']->sys_language_contentOL);
@@ -541,7 +548,13 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 			} else if ($this->conf['config.']['view'] == 'irre') {
 				// get the content ID's
 				$elementUID = ($this->cObj->data['_LOCALIZED_UID'])?$this->cObj->data['_LOCALIZED_UID']:$this->cObj->data['uid'];
-				$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery('*', 'tt_content', 'tx_jfmulticontent_irre_parentid='.intval($elementUID).' AND deleted = 0 AND hidden = 0', '', '');// AND tx_jfmulticontent_irre_parenttable=\'tt_content\'
+				$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
+					'*',
+					'tt_content',
+					'tx_jfmulticontent_irre_parentid='.intval($elementUID).' AND deleted = 0 AND hidden = 0',
+					'',
+					'sorting ASC'
+				);
 				$a = 0;
 				while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res)) {
 					if ($GLOBALS['TSFE']->sys_language_content) {
