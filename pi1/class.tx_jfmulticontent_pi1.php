@@ -98,20 +98,27 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 				$this->lConf['tabCollapsible']   = $this->getFlexformData('general', 'tabCollapsible', $debuglog);
 				$this->lConf['tabOpen']          = $this->getFlexformData('general', 'tabOpen', $debuglog);
 				$this->lConf['tabRandomContent'] = $this->getFlexformData('general', 'tabRandomContent', $debuglog);
+				$this->lConf['tabEvent']         = $this->getFlexformData('general', 'tabEvent', $debuglog);
+				$this->lConf['tabHeightStyle']   = $this->getFlexformData('general', 'tabHeightStyle', $debuglog);
 				$this->lConf['tabCookieExpires'] = $this->getFlexformData('general', 'tabCookieExpires', $debuglog);
 				$this->lConf['tabCookieRoot']    = $this->getFlexformData('general', 'tabCookieRoot', $debuglog);
-				$this->lConf['tabFxHeight']      = $this->getFlexformData('general', 'tabFxHeight', $debuglog);
-				$this->lConf['tabFxOpacity']     = $this->getFlexformData('general', 'tabFxOpacity', $debuglog);
-				$this->lConf['tabFxDuration']    = $this->getFlexformData('general', 'tabFxDuration', $debuglog);
+				$this->lConf['tabHideEffect']             = $this->getFlexformData('general', 'tabHideEffect', $debuglog);
+				$this->lConf['tabHideTransition']         = $this->getFlexformData('general', 'tabHideTransition', $debuglog);
+				$this->lConf['tabHideTransitiondir']      = $this->getFlexformData('general', 'tabHideTransitiondir', $debuglog);
+				$this->lConf['tabHideTransitionduration'] = $this->getFlexformData('general', 'tabHideTransitionduration', $debuglog);
+				$this->lConf['tabShowEffect']             = $this->getFlexformData('general', 'tabShowEffect', $debuglog);
+				$this->lConf['tabShowTransition']         = $this->getFlexformData('general', 'tabShowTransition', $debuglog);
+				$this->lConf['tabShowTransitiondir']      = $this->getFlexformData('general', 'tabShowTransitiondir', $debuglog);
+				$this->lConf['tabShowTransitionduration'] = $this->getFlexformData('general', 'tabShowTransitionduration', $debuglog);
 
 				$debuglog = ($this->lConf['style'] == 'accordion');
-				$this->lConf['accordionAutoHeight']         = $this->getFlexformData('general', 'accordionAutoHeight', $debuglog);
 				$this->lConf['accordionCollapsible']        = $this->getFlexformData('general', 'accordionCollapsible', $debuglog);
 				$this->lConf['accordionClosed']             = $this->getFlexformData('general', 'accordionClosed', $debuglog);
 				$this->lConf['accordionOpen']               = $this->getFlexformData('general', 'accordionOpen', $debuglog);
 				$this->lConf['accordionRandomContent']      = $this->getFlexformData('general', 'accordionRandomContent', $debuglog);
 				$this->lConf['accordionEvent']              = $this->getFlexformData('general', 'accordionEvent', $debuglog);
-				$this->lConf['accordionAnimated']           = $this->getFlexformData('general', 'accordionAnimated', $debuglog);
+				$this->lConf['accordionHeightStyle']        = $this->getFlexformData('general', 'accordionHeightStyle', $debuglog);
+				$this->lConf['accordionAnimate']            = $this->getFlexformData('general', 'accordionAnimate', $debuglog);
 				$this->lConf['accordionTransition']         = $this->getFlexformData('general', 'accordionTransition', $debuglog);
 				$this->lConf['accordionTransitiondir']      = $this->getFlexformData('general', 'accordionTransitiondir', $debuglog);
 				$this->lConf['accordionTransitionduration'] = $this->getFlexformData('general', 'accordionTransitionduration', $debuglog);
@@ -184,9 +191,8 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 				$this->lConf['bookletArrowsHide']    = $this->getFlexformData('general', 'bookletArrows', $debuglog);
 				$this->lConf['bookletHovers']        = $this->getFlexformData('general', 'bookletHovers', $debuglog);
 
-				$this->lConf['delayDuration']      = $this->getFlexformData('general', 'delayDuration', in_array($this->lConf['style'], array('tab','accordion','slider','slidedeck','easyaccordion')));
-				$this->lConf['autoplayContinuing'] = $this->getFlexformData('general', 'autoplayContinuing', ($this->lConf['style'] == 'tab'));
-				$this->lConf['autoplayCycle']      = $this->getFlexformData('general', 'autoplayCycle', ($this->lConf['style'] == 'slidedeck'));
+				$this->lConf['delayDuration'] = $this->getFlexformData('general', 'delayDuration', in_array($this->lConf['style'], array('slider','slidedeck','easyaccordion')));
+				$this->lConf['autoplayCycle'] = $this->getFlexformData('general', 'autoplayCycle', ($this->lConf['style'] == 'slidedeck'));
 
 				// columns
 				$this->conf['config.']['column1']     = $this->lConf['column1'];
@@ -214,19 +220,38 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 				if ($this->lConf['tabCookieRoot'] < 2) {
 					$this->conf['config.']['tabCookieRoot'] = $this->lConf['tabCookieRoot'];
 				}
-				if ($this->lConf['tabFxHeight'] < 2) {
-					$this->conf['config.']['tabFxHeight'] = $this->lConf['tabFxHeight'];
+				if ($this->lConf['tabHideEffect']) {
+					$this->conf['config.']['tabHideEffect'] = $this->lConf['tabHideEffect'];
 				}
-				if ($this->lConf['tabFxOpacity'] < 2) {
-					$this->conf['config.']['tabFxOpacity'] = $this->lConf['tabFxOpacity'];
+				if ($this->lConf['tabHideTransition']) {
+					$this->conf['config.']['tabHideTransition'] = $this->lConf['tabHideTransition'];
 				}
-				if ($this->lConf['tabFxDuration'] > 0) {
-					$this->conf['config.']['tabFxDuration'] = $this->lConf['tabFxDuration'];
+				if ($this->lConf['tabHideTransitiondir']) {
+					$this->conf['config.']['tabHideTransitiondir'] = $this->lConf['tabHideTransitiondir'];
 				}
+				if ($this->lConf['tabHideTransitionduration'] > 0) {
+					$this->conf['config.']['tabHideTransitionduration'] = $this->lConf['tabHideTransitionduration'];
+				}
+				if ($this->lConf['tabShowEffect']) {
+					$this->conf['config.']['tabShowEffect'] = $this->lConf['tabShowEffect'];
+				}
+				if ($this->lConf['tabShowTransition']) {
+					$this->conf['config.']['tabShowTransition'] = $this->lConf['tabShowTransition'];
+				}
+				if ($this->lConf['tabShowTransitiondir']) {
+					$this->conf['config.']['tabShowTransitiondir'] = $this->lConf['tabShowTransitiondir'];
+				}
+				if ($this->lConf['tabShowTransitionduration'] > 0) {
+					$this->conf['config.']['tabShowTransitionduration'] = $this->lConf['tabShowTransitionduration'];
+				}
+				if (in_array($this->lConf['tabEvent'], array('click', 'mouseover'))) {
+					$this->conf['config.']['tabEvent'] = $this->lConf['tabEvent'];
+				}
+				if (in_array($this->lConf['tabHeightStyle'], array('auto', 'fill', 'content'))) {
+					$this->conf['config.']['tabHeightStyle'] = $this->lConf['tabHeightStyle'];
+				}
+
 				// accordion
-				if ($this->lConf['accordionAutoHeight'] < 2) {
-					$this->conf['config.']['accordionAutoHeight'] = $this->lConf['accordionAutoHeight'];
-				}
 				if ($this->lConf['accordionCollapsible'] < 2) {
 					$this->conf['config.']['accordionCollapsible'] = $this->lConf['accordionCollapsible'];
 				}
@@ -242,8 +267,11 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 				if ($this->lConf['accordionEvent']) {
 					$this->conf['config.']['accordionEvent'] = $this->lConf['accordionEvent'];
 				}
-				if ($this->lConf['accordionAnimated']) {
-					$this->conf['config.']['accordionAnimated'] = $this->lConf['accordionAnimated'];
+				if (in_array($this->lConf['accordionHeightStyle'], array('auto', 'fill', 'content'))) {
+					$this->conf['config.']['accordionHeightStyle'] = $this->lConf['accordionHeightStyle'];
+				}
+				if ($this->lConf['accordionAnimate'] < 2) {
+					$this->conf['config.']['accordionAnimate'] = $this->lConf['accordionAnimate'];
 				}
 				if ($this->lConf['accordionTransition']) {
 					$this->conf['config.']['accordionTransition'] = $this->lConf['accordionTransition'];
@@ -441,9 +469,6 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 				// autoplay
 				if ($this->lConf['delayDuration'] > 0) {
 					$this->conf['config.']['delayDuration'] = $this->lConf['delayDuration'];
-				}
-				if ($this->lConf['autoplayContinuing'] < 2) {
-					$this->conf['config.']['autoplayContinuing'] = $this->lConf['autoplayContinuing'];
 				}
 				if ($this->lConf['autoplayCycle'] < 2) {
 					$this->conf['config.']['autoplayCycle'] = $this->lConf['autoplayCycle'];
@@ -701,30 +726,23 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 					}
 				}
 				$this->pagerenderer->addJS($jQueryNoConflict);
-				$fx = array();
-				if ($this->conf['config.']['tabFxHeight']) {
-					$fx[] = "height: 'toggle'";
-				}
-				if ($this->conf['config.']['tabFxOpacity']) {
-					$fx[] = "opacity: 'toggle'";
-				}
-				if ($this->conf['config.']['tabFxDuration']) {
-					$fx[] = "duration: '{$this->conf['config.']['tabFxDuration']}'";
-				}
-				if ($this->conf['config.']['delayDuration'] > 0) {
-					$rotate = ".tabs('rotate' , {$this->conf['config.']['delayDuration']}, ".($this->conf['config.']['autoplayContinuing'] ? 'true' : 'false').")";
-				}
 				$options = array();
-				if (count($fx) > 0) {
-					$options['fx'] = "fx:{".implode(",", $fx)."}";
-				}
 				if ($this->conf['config.']['tabCollapsible']) {
-					$options['collapsible'] = "collapsible: true";
+					$options['collapsible'] = "collapsible:true";
+					if (! $this->conf['config.']['tabOpen']) {
+						$options['active'] = "active:false";
+					}
 				}
 				if ($this->conf['config.']['tabRandomContent']) {
-					$options['selected'] = "selected:Math.floor(Math.random()*{$this->contentCount})";
+					$options['active'] = "active:Math.floor(Math.random()*{$this->contentCount})";
 				} elseif (is_numeric($this->conf['config.']['tabOpen'])) {
-					$options['selected'] = "selected: ".($this->conf['config.']['tabOpen'] - 1);
+					$options['active'] = "active:".($this->conf['config.']['tabOpen'] - 1);
+				}
+				if (in_array($this->conf['config.']['tabEvent'], array('click', 'mouseover'))) {
+					$options['event'] = "event:'{$this->conf['config.']['tabEvent']}'";
+				}
+				if (in_array($this->conf['config.']['tabHeightStyle'], array('auto', 'fill', 'content'))) {
+					$options['heightStyle'] = "heightStyle:'{$this->conf['config.']['tabHeightStyle']}'";
 				}
 
 				// overwrite all options if set
@@ -738,13 +756,44 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 
 				// Add Cookies script, if cookie is active
 				if ($this->conf['config.']['tabCookieExpires'] > 0 && $this->conf['config.']['tabOpen'] != -1) {
-					$this->pagerenderer->addJsFile($this->conf['jQueryCookies']);
-					unset($options['selected']);
+					if (T3JQUERY !== TRUE) {
+						$this->pagerenderer->addJsFile($this->conf['jQueryCookies']);
+					}
+					unset($options['active']);
 					$cookie_path = t3lib_div::getIndpEnv('REQUEST_URI');
 					if ($this->lConf['tabCookieRoot'] || preg_match("/^\/index.php/i", $cookie_path)) {
 						$cookie_path = "/";
 					}
-					$options['cookie'] = "cookie: { expires: ".$this->conf['config.']['tabCookieExpires'].", path:'$cookie_path' }";
+					$options['activate'] = "activate:function(e,ui) { jQuery.cookie('{$this->getContentKey()}', ui.newTab.index(), { expires: ".$this->conf['config.']['tabCookieExpires'].", path:'$cookie_path' }); }";
+					$options['active'] = "active:jQuery.cookie('{$this->getContentKey()}')";
+				}
+
+				if ($this->conf['config.']['tabHideEffect'] == 'none') {
+					$options['hide'] = "hide:false";
+				} elseif ($this->conf['config.']['tabHideEffect']) {
+					$fx = array();
+					$fx[] = "effect:'{$this->conf['config.']['tabHideEffect']}'";
+					if (is_numeric($this->conf['config.']['tabHideTransitionduration'])) {
+						$fx[] = "duration:'{$this->conf['config.']['tabHideTransitionduration']}'";
+					}
+					if ($this->conf['config.']['tabHideTransition']) {
+						$fx[] = "easing:'".(in_array($this->conf['config.']['tabHideTransition'], array("swing", "linear")) ? "" : "ease{$this->conf['config.']['tabHideTransitiondir']}")."{$this->conf['config.']['tabHideTransition']}'";
+					}
+					$options['hide'] = "hide:{".implode(',', $fx)."}";
+				}
+
+				if ($this->conf['config.']['tabShowEffect'] == 'none') {
+					$options['show'] = "show:false";
+				} elseif ($this->conf['config.']['tabShowEffect']) {
+					$fx = array();
+					$fx[] = "effect:'{$this->conf['config.']['tabShowEffect']}'";
+					if (is_numeric($this->conf['config.']['tabShowTransitionduration'])) {
+						$fx[] = "duration:'{$this->conf['config.']['tabShowTransitionduration']}'";
+					}
+					if ($this->conf['config.']['tabShowTransition']) {
+						$fx[] = "easing:'".(in_array($this->conf['config.']['tabShowTransition'], array("swing", "linear")) ? "" : "ease{$this->conf['config.']['tabShowTransitiondir']}")."{$this->conf['config.']['tabShowTransition']}'";
+					}
+					$options['show'] = "show:{".implode(',', $fx)."}";
 				}
 
 				// get the Template of the Javascript
@@ -753,14 +802,6 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 				if (! $templateCode = trim($this->cObj->getSubpart($this->templateFileJS, "###TEMPLATE_TAB_JS###"))) {
 					$templateCode = $this->outputError("Template TEMPLATE_TAB_JS is missing", TRUE);
 				}
-
-				// Fix the href problem (config.prefixLocalAnchors = all)
-				if ($GLOBALS['TSFE']->config['config']['prefixLocalAnchors']) {
-					$fixTabHref = trim($this->cObj->getSubpart($templateCode, "###FIX_HREF###"));
-				} else {
-					$fixTabHref = NULL;
-				}
-				$templateCode = trim($this->cObj->substituteSubpart($templateCode, '###FIX_HREF###', $fixTabHref, 0));
 
 				// open tab by hash
 				if ($this->confArr['tabSelectByHash']) {
@@ -782,7 +823,6 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 				$markerArray["KEY"] = $this->getContentKey();
 				$markerArray["PREG_QUOTE_KEY"] = preg_quote($this->getContentKey(), "/");
 				$markerArray["OPTIONS"] = implode(", ", $options);
-				$markerArray["ROTATE"] = $rotate;
 				$templateCode = $this->cObj->substituteMarkerArray($templateCode, $markerArray, '###|###', 0);
 
 				// Add all CSS and JS files
@@ -790,6 +830,7 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 					tx_t3jquery::addJqJS();
 				} else {
 					$this->pagerenderer->addJsFile($this->conf['jQueryLibrary'], TRUE);
+					$this->pagerenderer->addJsFile($this->conf['jQueryEasing']);
 					$this->pagerenderer->addJsFile($this->conf['jQueryUI']);
 				}
 				$this->pagerenderer->addCssFile($this->conf['jQueryUIstyle']);
@@ -802,9 +843,6 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 				$this->contentWrap = t3lib_div::trimExplode("|*|", $this->conf['accordionWrap.']['wrap']);
 				$this->pagerenderer->addJS($jQueryNoConflict);
 				$options = array();
-				if ($this->conf['config.']['accordionAutoHeight'] < 1) {
-					$options['autoHeight'] = "autoHeight:false";
-				}
 				if ($this->conf['config.']['accordionCollapsible']) {
 					$options['collapsible'] = "collapsible:true";
 				}
@@ -816,8 +854,11 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 				} elseif ($this->conf['config.']['accordionOpen'] > 0) {
 					$options['active'] = "active:".($this->conf['config.']['accordionOpen'] - 1);
 				}
-				if ($this->conf['config.']['accordionEvent']) {
+				if (in_array($this->conf['config.']['accordionEvent'], array('click', 'mouseover'))) {
 					$options['event'] = "event:'{$this->conf['config.']['accordionEvent']}'";
+				}
+				if (in_array($this->conf['config.']['accordionHeightStyle'], array('auto', 'fill', 'content'))) {
+					$options['heightStyle'] = "heightStyle:'{$this->conf['config.']['accordionHeightStyle']}'";
 				}
 				// get the Template of the Javascript
 				$markerArray = array();
@@ -825,18 +866,23 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 				$markerArray["CONTENT_COUNT"]  = $this->contentCount;
 				$markerArray["EASING"]         = (in_array($this->conf['config.']['accordionTransition'], array("swing", "linear")) ? "" : "ease".$this->conf['config.']['accordionTransitiondir'].$this->conf['config.']['accordionTransition']);
 				$markerArray["TRANS_DURATION"] = (is_numeric($this->conf['config.']['accordionTransitionduration']) ? $this->conf['config.']['accordionTransitionduration'] : 1000);
-				$markerArray["DELAY_DURATION"] = (is_numeric($this->conf['config.']['delayDuration']) ? $this->conf['config.']['delayDuration'] : '0');
 
 				// get the template for the Javascript
 				if (! $templateCode = trim($this->cObj->getSubpart($this->templateFileJS, "###TEMPLATE_ACCORDION_JS###"))) {
 					$templateCode = $this->outputError("Template TEMPLATE_ACCORDION_JS is missing", TRUE);
 				}
 				$easingAnimation = NULL;
-				if ($this->conf['config.']['accordionTransition']) {
-					$options['animated'] = "animated:'{$this->getContentKey()}'";
-					$easingAnimation = trim($this->cObj->getSubpart($templateCode, "###EASING_ANIMATION###"));
-				} else if ($this->conf['config.']['accordionAnimated']) {
-					$options['animated'] = "animated:'{$this->conf['config.']['accordionAnimated']}'";
+				if (! $this->conf['config.']['accordionAnimate']) {
+					$options['animate'] = "animate:false";
+				} else {
+					$fx = array();
+					if (is_numeric($this->conf['config.']['accordionTransitionduration'])) {
+						$fx[] = "duration:'{$this->conf['config.']['accordionTransitionduration']}'";
+					}
+					if ($this->conf['config.']['accordionTransition']) {
+						$fx[] = "easing:'".(in_array($this->conf['config.']['accordionTransition'], array("swing", "linear")) ? "" : "ease{$this->conf['config.']['accordionTransitiondir']}")."{$this->conf['config.']['accordionTransition']}'";
+					}
+					$options['animate'] = "animate:{".implode(',', $fx)."}";
 				}
 
 				// app the open-link-template
@@ -854,23 +900,6 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 					$tabSelector = NULL;
 				}
 				$templateCode = trim($this->cObj->substituteSubpart($templateCode, '###TAB_SELECT_BY_HASH###', $tabSelector, 0));
-
-				// set the easing animation script
-				$templateCode = $this->cObj->substituteSubpart($templateCode, '###EASING_ANIMATION###', $easingAnimation, 0);
-				$continuing = NULL;
-				$autoPlay = NULL;
-				$settimeout = NULL;
-				if ($this->conf['config.']['delayDuration'] > 0) {
-					// does not work if (! $this->conf['config.']['autoplayContinuing']) {}
-					$continuing = trim($this->cObj->getSubpart($templateCode, "###CONTINUING###"));
-					$autoPlay   = trim($this->cObj->getSubpart($templateCode, "###AUTO_PLAY###"));
-					$settimeout = trim($this->cObj->getSubpart($templateCode, "###SETTIMEOUT###"));
-					$settimeout = $this->cObj->substituteMarkerArray($settimeout, $markerArray, '###|###', 0);
-					$options['change'] = "change:function(event,ui){{$settimeout}}";
-				}
-				$templateCode = $this->cObj->substituteSubpart($templateCode, '###CONTINUING###', $continuing, 0);
-				$templateCode = $this->cObj->substituteSubpart($templateCode, '###AUTO_PLAY###',  $autoPlay, 0);
-				$templateCode = $this->cObj->substituteSubpart($templateCode, '###SETTIMEOUT###', $settimeout, 0);
 
 				// overwrite all options if set
 				if ($this->conf['config.']['accordionOptionsOverride']) {
@@ -1006,17 +1035,12 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 				if (! $templateCode = trim($this->cObj->getSubpart($this->templateFileJS, "###TEMPLATE_SLIDER_JS###"))) {
 					$templateCode = $this->outputError("Template TEMPLATE_SLIDER_JS is missing", TRUE);
 				}
+
 				// Replace default values
 				$markerArray["KEY"] = $this->getContentKey();
 				$markerArray["OPTIONS"] = implode(", ", $options);
 				$templateCode = $this->cObj->substituteMarkerArray($templateCode, $markerArray, '###|###', 0);
-				// Fix the href problem (config.prefixLocalAnchors = all)
-				if ($GLOBALS['TSFE']->config['config']['prefixLocalAnchors']) {
-					$fixTabHref = trim($this->cObj->getSubpart($templateCode, "###FIX_HREF###"));
-				} else {
-					$fixTabHref = NULL;
-				}
-				$templateCode = trim($this->cObj->substituteSubpart($templateCode, '###FIX_HREF###', $fixTabHref, 0));
+
 				// Add all CSS and JS files
 				if (T3JQUERY === TRUE) {
 					tx_t3jquery::addJqJS();
@@ -1351,7 +1375,11 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 			$GLOBALS['TSFE']->register['content_id'] = $markerArray["CONTENT_ID"];
 			$GLOBALS['TSFE']->register['id']         = $markerArray["ID"];
 			$GLOBALS['TSFE']->register['title']      = $markerArray["TITLE"];
+
+			$prefixLocalAnchors = $GLOBALS['TSFE']->config['config']['prefixLocalAnchors'];
+			$GLOBALS['TSFE']->config['config']['prefixLocalAnchors'] = NULL;
 			$markerArray["TAB_KEY"] = $this->cObj->cObjGetSingle($this->conf['tabKey'], $this->conf['tabKey.']);
+			$GLOBALS['TSFE']->config['config']['prefixLocalAnchors'] = $prefixLocalAnchors;
 
 			// define the used wrap
 			if ($a == 0) {

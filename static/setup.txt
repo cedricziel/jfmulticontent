@@ -80,22 +80,29 @@ plugin.tx_jfmulticontent_pi1 {
 		tabCollapsible = 1
 		tabOpen = 1
 		tabRandomContent = 0
+		tabEvent = 
+		tabHeightStyle = auto
 		tabCookieExpires = 
 		tabCookieRoot = 0
-		tabFxHeight = 0
-		tabFxOpacity = 1
-		tabFxDuration = 
+		tabHideEffect = fadeOut
+		tabHideTransition = 
+		tabHideTransitiondir = 
+		tabHideTransitionduration = 
+		tabShowEffect = fadeIn
+		tabShowTransition = 
+		tabShowTransitiondir = 
+		tabShowTransitionduration = 
 		tabOptions (
 		)
 		tabOptionsOverride = 0
 
-		accordionAutoHeight = 0
 		accordionCollapsible = 0
 		accordionClosed = 0
 		accordionOpen = 1
 		accordionRandomContent = 0
 		accordionEvent = 
-		accordionAnimated = slide
+		accordionHeightStyle = auto
+		accordionAnimate = 1
 		accordionTransition = 
 		accordionTransitiondir = In
 		accordionTransitionduration = 1000
@@ -180,7 +187,6 @@ plugin.tx_jfmulticontent_pi1 {
 		bookletOptionsOverride = 0
 
 		delayDuration = 0
-		autoplayContinuing = 0
 		autoplayCycle = 0
 
 	}
@@ -320,18 +326,12 @@ plugin.tx_jfmulticontent_pi1 {
 	config {
 		contentKey = jfmulticontent_accordion
 		style = accordion
-		accordionAutoHeight = 1
 		accordionCollapsible = 0
 		accordionClosed = 0
 		accordionOpen = 1
 		accordionRandomContent = 0
 		accordionEvent = 
-		accordionAnimated = slide
-		accordionTransition = 
-		accordionTransitiondir = In
-		accordionTransitionduration = 1000
 		delayDuration = 0
-		autoplayContinuing = 0
 		options (
 		)
 		optionsOverride = 0
@@ -380,11 +380,7 @@ plugin.tx_jfmulticontent_pi1 {
 		tabCollapsible = 0
 		tabOpen = 1
 		tabRandomContent = 0
-		tabFxHeight = 0
-		tabFxOpacity = 0
-		tabFxDuration = 
 		delayDuration = 0
-		autoplayContinuing = 0
 		options (
 		)
 		optionsOverride = 0

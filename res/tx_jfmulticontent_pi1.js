@@ -19,7 +19,6 @@ OPTIONS - Set the JS-options defined in FlexForm
 <em>Tabs markers:</em>
 OPEN_EXTERNAL_LINK - Subpart for the JS to open the url in the rel-attribute (only if openExternalLink is set in EXT-Config)
 PREG_QUOTE_KEY - Unique key of the multicontent preg_quoted
-FIX_HREF - Subpart to fix hrefs when config.prefixLocalAnchors is set
 ROTATE - Set the JS for autoplay
 TAB_SELECTOR - Set the selection of a panel by hash
 
@@ -29,8 +28,6 @@ CONTENT_COUNT - Count of the contents
 EASING_ANIMATION - Subpart for the easing definition
 EASING - Used easing transition
 TRANS_DURATION - Duration of the transition
-DELAY_DURATION - Delay of the autolpay
-AUTO_PLAY - Subpart for the autoplay
 SETTIMEOUT - Subpart for timer of autoplay
 CONTINUING - Subpart to stop the autoplay in case of user action
 
@@ -46,30 +43,20 @@ WIDTH - Set the defined width of the easyaccordion
 
 <!-- ###TEMPLATE_TAB_JS### begin -->
 jQuery(document).ready(function(){
-	<!-- ###FIX_HREF### -->
-	jQuery('####KEY### > ul li a').each(function(id, item){
-		var temp = item.href.split('#');
-		var temp_last = temp[temp.length-1];
-		if (jQuery('####KEY### #'+temp_last).length) {
-			item.href = '#'+temp_last;
-		}
-	});
-	<!-- ###FIX_HREF### -->
 	jQuery('####KEY###').tabs({
 		###OPTIONS###
-	})###ROTATE###;
+	});
 	<!-- ###TAB_SELECT_BY_HASH### -->
 	if (location.hash.toLowerCase()) {
-		jQuery('####KEY###').tabs("select", location.hash.toLowerCase());
-		jQuery('####KEY###').tabs("rotate", 0);
-		jQuery('####KEY###').bind("tabsshow", function(event, ui) {
-			location.hash = ui.tab.hash;
+		jQuery('####KEY###').tabs('option', 'active', location.hash.toLowerCase());
+		jQuery('####KEY###').tabs('option', 'activate', function(e, ui) {
+			location.hash = ui.newPanel.selector;
 		});
 	}
 	<!-- ###TAB_SELECT_BY_HASH### -->
 	<!-- ###OPEN_EXTERNAL_LINK### -->
-	jQuery('####KEY###').bind('tabsselect', function(e, ui) {
-		var rel = jQuery(ui.tab).attr('rel');
+	jQuery('####KEY###').tabs('option', 'beforeActivate', function(e, ui) {
+		var rel = jQuery(ui.newTab.context).attr('rel');
 		if (typeof(rel) != 'undefined' && rel.length > 0) {
 			document.location.href = rel;
 		}
@@ -95,14 +82,6 @@ jQuery(document).ready(function(){
 		}
 	});
 	<!-- ###OPEN_EXTERNAL_LINK### -->
-	<!-- ###SETTIMEOUT### -->
-	setTimeout("tx_jfmulticontent_next_accordion(jQuery('####KEY###'),###CONTENT_COUNT###)", ###DELAY_DURATION###);
-	<!-- ###SETTIMEOUT### -->
-	<!-- ###CONTINUING### -->
-	jQuery('####KEY###').click(function(){
-		jQuery('####KEY###').accordion('option', 'change', '');
-	});
-	<!-- ###CONTINUING### -->
 	<!-- ###TAB_SELECT_BY_HASH### -->
 	var hash = location.hash.toLowerCase();
 	if (hash) {
@@ -116,23 +95,6 @@ jQuery(document).ready(function(){
 	});
 	<!-- ###TAB_SELECT_BY_HASH### -->
 });
-<!-- ###AUTO_PLAY### -->
-function tx_jfmulticontent_next_accordion(id, max) {
-	if (jQuery(id).accordion('option', 'change') != '') {
-		active = jQuery(id).accordion('option', 'active') + 1;
-		active = (active >= max ? 0 : active);
-		jQuery(id).accordion('activate', active);
-	}
-}
-<!-- ###AUTO_PLAY### -->
-<!-- ###EASING_ANIMATION### -->
-jQuery.ui.accordion.animations.###KEY### = function(options) {
-	this.slide(options, {
-		easing: '###EASING###',
-		duration: '###TRANS_DURATION###'
-	});
-};
-<!-- ###EASING_ANIMATION### -->
 <!-- ###TEMPLATE_ACCORDION_JS### end -->
 
 

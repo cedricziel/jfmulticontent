@@ -5,7 +5,7 @@
  * Dual licensed under the MIT (http://www.opensource.org/licenses/mit-license.php)
  * and GPL (http://www.opensource.org/licenses/gpl-license.php) licenses.
  *
- * Version : 1.4.0
+ * Version : 1.4.0a
  *
  * Originally based on the work of:
  *	1) Charles Mangin (http://clickheredammit.com/pageflip/)
@@ -1191,7 +1191,10 @@
                 isHoveringRight = isHoveringLeft = p3drag = p0drag = false;
 
                 // manual page turning, check if jQuery UI is loaded
-                target.find('.b-page').draggable('destroy').removeClass('b-grab b-grabbing');
+                if (target.find('.b-page').data('draggable')) {
+                    target.find('.b-page').draggable('destroy').removeClass('b-grab b-grabbing');
+                }
+
                 if(options.manual && $.ui) {
 
                     // implement draggable forward
@@ -1513,7 +1516,9 @@
             },
             destroyManualControls = function () {
                 // remove old draggables
-                target.find('.b-page').draggable('destroy').removeClass('b-grab b-grabbing');
+                if (target.find('.b-page').data('draggable')) {
+                    target.find('.b-page').draggable('destroy').removeClass('b-grab b-grabbing');
+                }
                 // remove mouse tracking for page movement
                 target.unbind('.booklet');
             },
