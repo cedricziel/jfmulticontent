@@ -745,15 +745,6 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 					$options['heightStyle'] = "heightStyle:'{$this->conf['config.']['tabHeightStyle']}'";
 				}
 
-				// overwrite all options if set
-				if ($this->conf['config.']['tabOptionsOverride']) {
-					$options = array($this->conf['config.']['tabOptions']);
-				} else {
-					if ($this->conf['config.']['tabOptions']) {
-						$options['options'] = $this->conf['config.']['tabOptions'];
-					}
-				}
-
 				// Add Cookies script, if cookie is active
 				if ($this->conf['config.']['tabCookieExpires'] > 0 && $this->conf['config.']['tabOpen'] != -1) {
 					if (T3JQUERY !== TRUE) {
@@ -794,6 +785,15 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 						$fx[] = "easing:'".(in_array($this->conf['config.']['tabShowTransition'], array("swing", "linear")) ? "" : "ease{$this->conf['config.']['tabShowTransitiondir']}")."{$this->conf['config.']['tabShowTransition']}'";
 					}
 					$options['show'] = "show:{".implode(',', $fx)."}";
+				}
+
+				// overwrite all options if set
+				if ($this->conf['config.']['tabOptionsOverride']) {
+					$options = array($this->conf['config.']['tabOptions']);
+				} else {
+					if ($this->conf['config.']['tabOptions']) {
+						$options['options'] = $this->conf['config.']['tabOptions'];
+					}
 				}
 
 				// get the Template of the Javascript
@@ -932,7 +932,7 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 				$this->templatePart = "TEMPLATE_SLIDER";
 				$this->contentWrap = t3lib_div::trimExplode("|*|", $this->conf['sliderWrap.']['wrap']);
 				$this->pagerenderer->addJS($jQueryNoConflict);
-				// 
+				//
 				if ($this->conf['config.']['sliderTransition']) {
 					$options[] = "easing: '".(in_array($this->conf['config.']['sliderTransition'], array("swing", "linear")) ? "" : "ease{$this->conf['config.']['sliderTransitiondir']}")."{$this->conf['config.']['sliderTransition']}'";
 				}
@@ -962,7 +962,7 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 					if (is_numeric($sliderHeight)) {
 						$sliderHeight .= 'px';
 					}
-					$this->pagerenderer->addCSS("#{$this->getContentKey()} {\n" . 
+					$this->pagerenderer->addCSS("#{$this->getContentKey()} {\n" .
 ($sliderWidth ?  "	width: {$sliderWidth};\n"   : "") .
 ($sliderHeight ? "	height: {$sliderHeight};\n" : "") .
 "}");
@@ -994,7 +994,7 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 				$options[] = "pauseOnHover: ".($this->conf['config.']['sliderPauseOnHover'] ? 'true' : 'false');
 				$options[] = "buildNavigation: ".($this->conf['config.']['sliderNavigation'] ? 'true' : 'false');
 				$options[] = "buildStartStop: ".($this->conf['config.']['sliderStartStop'] ? 'true' : 'false');
-				
+
 				$options[] = "startText: '".t3lib_div::slashJS($this->pi_getLL('slider_start'))."'";
 				$options[] = "stopText: '".t3lib_div::slashJS($this->pi_getLL('slider_stop'))."'";
 				if ($this->pi_getLL('slider_forward')) {
@@ -1150,7 +1150,7 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 				$markerArray["OPTIONS"] = implode(", ", $options);
 				// Replace all markers
 				$templateCode = $this->cObj->substituteMarkerArray($templateCode, $markerArray, '###|###', 0);
-				
+
 				// Add all CSS and JS files
 				if (T3JQUERY === TRUE) {
 					tx_t3jquery::addJqJS();
@@ -1276,7 +1276,7 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 
 	/**
 	 * Render the template with the defined contents
-	 * 
+	 *
 	 * @return string
 	 */
 	public function renderTemplate()
@@ -1417,12 +1417,12 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 					}
 					case 3 : {
 						// top to down, left to right
-						
+
 						break;
 					}
 					case 4 : {
 						// top to down, right to left
-						
+
 						break;
 					}
 				}
