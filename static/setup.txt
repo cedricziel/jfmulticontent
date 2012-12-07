@@ -72,26 +72,26 @@ plugin.tx_jfmulticontent_pi1 {
 		columnOrder =
 		column1 = 50
 		column2 = 50
-		column3 = 
-		column4 = 
-		column5 = 
+		column3 =
+		column4 =
+		column5 =
 		equalize = 0
 
 		tabCollapsible = 1
 		tabOpen = 1
 		tabRandomContent = 0
-		tabEvent = 
+		tabEvent =
 		tabHeightStyle = auto
-		tabCookieExpires = 
+		tabCookieExpires =
 		tabCookieRoot = 0
 		tabHideEffect = fadeOut
-		tabHideTransition = 
-		tabHideTransitiondir = 
-		tabHideTransitionduration = 
+		tabHideTransition =
+		tabHideTransitiondir =
+		tabHideTransitionduration =
 		tabShowEffect = fadeIn
-		tabShowTransition = 
-		tabShowTransitiondir = 
-		tabShowTransitionduration = 
+		tabShowTransition =
+		tabShowTransitiondir =
+		tabShowTransitionduration =
 		tabOptions (
 		)
 		tabOptionsOverride = 0
@@ -100,20 +100,20 @@ plugin.tx_jfmulticontent_pi1 {
 		accordionClosed = 0
 		accordionOpen = 1
 		accordionRandomContent = 0
-		accordionEvent = 
+		accordionEvent =
 		accordionHeightStyle = auto
 		accordionAnimate = 1
-		accordionTransition = 
+		accordionTransition =
 		accordionTransitiondir = In
 		accordionTransitionduration = 1000
 		accordionOptions (
 		)
 		accordionOptionsOverride = 0
 
-		sliderWidth = 
-		sliderHeight = 
+		sliderWidth =
+		sliderHeight =
 		sliderResizeContents = 0
-		sliderTheme = 
+		sliderTheme =
 		sliderMode = horizontal
 		sliderOpen = 1
 		sliderRandomContent = 0
@@ -140,7 +140,7 @@ plugin.tx_jfmulticontent_pi1 {
 
 		slidedeckHeight = 300
 		slidedeckTransition = swing
-		slidedeckTransitiondir = 
+		slidedeckTransitiondir =
 		slidedeckTransitionduration = 500
 		slidedeckStart = 1
 		slidedeckActivecorner = 1
@@ -165,8 +165,8 @@ plugin.tx_jfmulticontent_pi1 {
 		bookletSpeed = 1000
 		bookletStartingPage = 0
 		bookletRTL = 0
-		bookletTransition = 
-		bookletTransitiondir = 
+		bookletTransition =
+		bookletTransitiondir =
 		bookletPagePadding = 10
 		bookletPageNumbers = 1
 		bookletManual = 0
@@ -219,7 +219,7 @@ plugin.tx_jfmulticontent_pi1 {
 					3.value = mailto:
 					4 = TEXT
 					4.value = https://
-					default.value = 
+					default.value =
 				}
 				20 = TEXT
 				20 {
@@ -330,7 +330,7 @@ plugin.tx_jfmulticontent_pi1 {
 		accordionClosed = 0
 		accordionOpen = 1
 		accordionRandomContent = 0
-		accordionEvent = 
+		accordionEvent =
 		delayDuration = 0
 		options (
 		)

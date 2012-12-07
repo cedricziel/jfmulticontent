@@ -7,7 +7,7 @@
  *	Dual licensed under the MIT (MIT-LICENSE.txt) and GPL (GPL-LICENSE.txt) licenses.
  *	Built for jQuery library http://jquery.com
  */
- 
+
 (function($) {
 	$.fn.easyAccordion = function(options) {
 
@@ -42,7 +42,19 @@
 
 			if ($.browser.safari){ var dtTop = (dlHeight-dtWidth)/2; var dtOffset = -dtTop;  /* Safari and Chrome */ }
 			if ($.browser.mozilla){ var dtTop = dlHeight - 20; var dtOffset = - 20; /* FF */ }
-			if ($.browser.msie){ var dtTop = 0; var dtOffset = 0; /* IE */ }
+			if ($.browser.msie){
+				/* IE */
+				var dtTop = 0;
+				var dtOffset = 0;
+				if($.browser.version >= 10.0){
+					dtWidth = 30;
+					$('.easy-accordion dt').css('-ms-transform', 'rotate(-90deg)');
+					$('.easy-accordion dt').css('-ms-transform-origin', '123px 122px');
+					$('.easy-accordion .slide-number').css('-ms-transform', 'rotate(90deg)');
+					$('.easy-accordion .slide-number').css('-ms-transform-origin', '15px 21px');
+					ddWidth = dlWidth - (dtWidth*slideTotal) - ($(this).find('dd').outerWidth(true)-$(this).find('dd').width());
+				}
+			}
 
 
 			// -------- Getting things ready ------------------------------------------------------------------------------
@@ -52,7 +64,7 @@
 				$(this).css({'width':dtHeight,'top':dtTop,'margin-left':dtOffset});
 				if(settings.slideNum == true){
 					$('<span class="slide-number">'+(f<10?'0':'')+f+'</span>').appendTo(this);
-					if($.browser.msie){	
+					if($.browser.msie){
 						var slideNumLeft = parseInt($(this).find('.slide-number').css('left')) - 14;
 						$(this).find('.slide-number').css({'left': slideNumLeft})
 						if($.browser.version == 6.0 || $.browser.version == 7.0){
@@ -72,7 +84,7 @@
 				f = f + 1;
 			});
 
-			if($(this).find('.active').size()) { 
+			if($(this).find('.active').size()) {
 				$(this).find('.active').next('dd').addClass('active');
 			} else {
 				$(this).find('dt:first').addClass('active').next('dd').addClass('active');
@@ -121,16 +133,16 @@
 						$(this).css({'display':'none'});
 					});
 				}, 400);
-				
+
 			};
 
 			$.fn.activateSlide = function() {
-				this.parent('dl').setVariables();	
+				this.parent('dl').setVariables();
 				this.parent('dl').find('dd').css({'display':'block'});
 				this.parent('dl').find('dd.plus').removeClass('plus');
 				this.parent('dl').find('.no-more-active').removeClass('no-more-active');
 				this.parent('dl').find('.active').removeClass('active').addClass('no-more-active');
-				this.addClass('active').next().addClass('active');	
+				this.addClass('active').next().addClass('active');
 				this.parent('dl').findActiveSlide();
 				if(activeID < noMoreActiveID){
 					this.parent('dl').find('dd.no-more-active').addClass('plus');
@@ -169,9 +181,9 @@
 			$(this).find('dt').not('active').click(function(){
 				$(this).activateSlide();
 				clearTimeout(timerInstance.value);
-			});	
+			});
 
-			if (!($.browser.msie && $.browser.version == 6.0)){ 
+			if (!($.browser.msie && $.browser.version == 6.0)){
 				$('dt').hover(function(){
 					$(this).addClass('hover');
 				}, function(){

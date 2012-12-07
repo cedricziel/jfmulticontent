@@ -1437,6 +1437,18 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 			$markerArray["TAB_QUOTE_TITLE"]       = htmlspecialchars($this->cObj->substituteMarkerArray($this->pi_getLL('tab_quote_title_template'), $markerArray, '###|###', 0));
 			$markerArray["ACCORDION_QUOTE_TITLE"] = htmlspecialchars($this->cObj->substituteMarkerArray($this->pi_getLL('accordion_quote_title_template'), $markerArray, '###|###', 0));
 
+			if (isset($this->conf['additionalContentMarkers'])) {
+				$additonalMarkerArray = array();
+				// get additional markers
+				$additionalMarkers = t3lib_div::trimExplode(',', $this->conf['additionalContentMarkers']);
+				// get additional marker configuration
+				if(count($additionalMarkers) > 0) {
+					foreach($additionalMarkers as $additonalMarker) {
+						$markerArray[strtoupper($additonalMarker)] = $this->cObj->cObjGetSingle($this->conf['additionalMarkerConf.'][$additonalMarker], $this->conf['additionalMarkerConf.'][$additonalMarker.'.']);
+					}
+				}
+			}
+
 			if ($markerArray["CONTENT"] || ($addContent && $this->confArr['showEmptyContent'])) {
 				// add content to COLUMNS
 				$columns .= $this->cObj->substituteMarkerArray($columnCode, $markerArray, '###|###', 0);
