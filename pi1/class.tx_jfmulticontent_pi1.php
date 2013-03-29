@@ -803,6 +803,14 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 					$templateCode = $this->outputError("Template TEMPLATE_TAB_JS is missing", TRUE);
 				}
 
+				// Fix the href problem (config.baseURL = http://www.example.com)
+				if ($GLOBALS['TSFE']->config['config']['baseURL']) {
+					$fixTabHref = trim($this->cObj->getSubpart($templateCode, "###FIX_HREF###"));
+				} else {
+					$fixTabHref = NULL;
+				}
+				$templateCode = trim($this->cObj->substituteSubpart($templateCode, '###FIX_HREF###', $fixTabHref, 0));
+
 				// open tab by hash
 				if ($this->confArr['tabSelectByHash']) {
 					$tabSelector = trim($this->cObj->getSubpart($templateCode, "###TAB_SELECT_BY_HASH###"));
@@ -1376,10 +1384,7 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 			$GLOBALS['TSFE']->register['id']         = $markerArray["ID"];
 			$GLOBALS['TSFE']->register['title']      = $markerArray["TITLE"];
 
-			$prefixLocalAnchors = $GLOBALS['TSFE']->config['config']['prefixLocalAnchors'];
-			$GLOBALS['TSFE']->config['config']['prefixLocalAnchors'] = NULL;
 			$markerArray["TAB_KEY"] = $this->cObj->cObjGetSingle($this->conf['tabKey'], $this->conf['tabKey.']);
-			$GLOBALS['TSFE']->config['config']['prefixLocalAnchors'] = $prefixLocalAnchors;
 
 			// define the used wrap
 			if ($a == 0) {

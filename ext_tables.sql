@@ -11,5 +11,3 @@ CREATE TABLE tt_content (
 	KEY jfmulticontent (tx_jfmulticontent_irre_parentid,sorting)
 );
 
-CREATE TABLE tt_content (
-);
