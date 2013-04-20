@@ -17,7 +17,6 @@ KEY - Unique key of the multicontent
 OPTIONS - Set the JS-options defined in FlexForm
 
 <em>Tabs markers:</em>
-FIX_HREF - Fixes the href when using baseUrl
 OPEN_EXTERNAL_LINK - Subpart for the JS to open the url in the rel-attribute (only if openExternalLink is set in EXT-Config)
 PREG_QUOTE_KEY - Unique key of the multicontent preg_quoted
 ROTATE - Set the JS for autoplay
@@ -44,14 +43,14 @@ WIDTH - Set the defined width of the easyaccordion
 
 <!-- ###TEMPLATE_TAB_JS### begin -->
 jQuery(document).ready(function($) {
-	<!-- ###FIX_HREF### -->
 	$('####KEY### > ul > li a').each(function() {
 		var href = $(this).attr('href');
-		if (href.indexOf("#") == 0 ) {
-			$(this).attr('href', window.location.href + href);
+		var hrefProtocol = /^(?:(ht|f)tp(s?)\:\/\/)?/.exec(href);
+		if (hrefProtocol[0] == "") {
+			var temp = href.split("#");
+			$(this).attr('href', window.location.href + "#" + temp[1]);
 		}
 	});
-	<!-- ###FIX_HREF### -->
 	$('####KEY###').tabs({
 		###OPTIONS###
 	});

@@ -795,7 +795,7 @@ var SlideDeckSkin = {};
         
         var initialize = function(opts){
             // Halt all processing for unsupported browsers
-            if((self.browser.opera && self.browser.version < "10.5") || self.browser.msie6 || self.browser.firefox2 || self.browser.firefox30){
+            if((self.browser.opera && self.browser.version < "10.5") || self.browser.msie6 || self.browser.firefox30){
                 if(typeof(console) != "undefined"){
                     if(typeof(console.error) == "function"){
                         console.error("This web browser is not supported by SlideDeck. Please view this page in a modern, CSS3 capable browser or a current version of Inernet Explorer");
