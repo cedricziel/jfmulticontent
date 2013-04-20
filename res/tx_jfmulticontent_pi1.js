@@ -48,7 +48,8 @@ jQuery(document).ready(function($) {
 		var hrefProtocol = /^(?:(ht|f)tp(s?)\:\/\/)?/.exec(href);
 		if (hrefProtocol[0] == "") {
 			var temp = href.split("#");
-			$(this).attr('href', window.location.href + "#" + temp[1]);
+			var host = window.location.href.split("#");
+			$(this).attr('href', host[0] + "#" + temp[1]);
 		}
 	});
 	$('####KEY###').tabs({
