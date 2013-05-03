@@ -1,11 +1,10 @@
 /*
  * jQuery Booklet Plugin
- * Copyright (c) 2010 - 2012 W. Grauvogel (http://builtbywill.com/)
+ * Copyright (c) 2010 - 2013 William Grauvogel (http://builtbywill.com/)
  *
- * Dual licensed under the MIT (http://www.opensource.org/licenses/mit-license.php)
- * and GPL (http://www.opensource.org/licenses/gpl-license.php) licenses.
+ * Licensed under the MIT license (http://www.opensource.org/licenses/mit-license.php)
  *
- * Version : 1.4.0a
+ * Version : 1.4.2
  *
  * Originally based on the work of:
  *	1) Charles Mangin (http://clickheredammit.com/pageflip/)
@@ -219,7 +218,7 @@
                     pages: [pages[options.currentIndex].contentNode, pages[options.currentIndex+1].contentNode]
                 };
                 if(options.create) {
-                    target.unbind(events.create+'.booklet').bind(events.create+'.booklet', options.create);
+                    target.off(events.create+'.booklet').on(events.create+'.booklet', options.create);
                 }
                 target.trigger(events.create, callback);
             },
@@ -298,7 +297,7 @@
 
                     if(!isNaN(options.startingPage) && options.startingPage <= options.pageTotal && options.startingPage > 0) {
                         if((options.startingPage % 2) != 0) {
-                            options.startingPage--
+                            options.startingPage--;
                         }
                         options.currentIndex = options.startingPage;
                     }
@@ -570,7 +569,7 @@
                             pageListItem = $('<li><a href="#' + hashRoot + (i + 1) + '" id="selector-page-' + i + '"><span class="b-text">' + listItemTitle + '</span><span class="b-num">' + listItemNumbers + '</span></a></li>').appendTo(pageSelectorList);
 
                             if(!options.hash) {
-                                pageListItem.find('a').bind('click.booklet', function () {
+                                pageListItem.find('a').on('click.booklet', function () {
                                     if(options.direction == directions.rightToLeft) {
                                         pageSelector.find('.b-current').text($(this).find('.b-num').text());
                                         goToPage(Math.abs(parseInt($(this).attr('id').replace('selector-page-', '')) - options.pageTotal) - 2);
@@ -587,9 +586,9 @@
                         pageSelectorList.css({'height': 0, 'padding-bottom': 0});
 
                         // add hover effects
-                        pageSelector.bind('mouseenter.booklet', function () {
+                        pageSelector.on('mouseenter.booklet', function () {
                             pageSelectorList.stop().animate({height: pageSelectorHeight, paddingBottom: 10}, 500);
-                        }).bind('mouseleave.booklet', function () {
+                        }).on('mouseleave.booklet', function () {
                                 pageSelectorList.stop().animate({height: 0, paddingBottom: 0}, 500);
                             });
                     } else if (!options.pageSelector) {
@@ -621,13 +620,19 @@
                                     chapterListItem = $('<li><a href="#' + hashRoot + (i + 1) + '" id="selector-page-' + i + '"><span class="b-text">' + pages[i].chapter + '</span></a></li>').appendTo(chapterSelectorList);
                                 }
                                 if(!options.hash) {
-                                    chapterListItem.find('a').bind('click.booklet', function () {
+                                    chapterListItem.find('a').on('click.booklet', function () {
+                                        var index;
                                         if(options.direction == directions.rightToLeft) {
                                             chapterSelector.find('.b-current').text($(this).find('.b-text').text());
-                                            goToPage(Math.abs(parseInt($(this).attr('id').replace('selector-page-', '')) - options.pageTotal) - 2);
+                                            index = Math.abs(parseInt($(this).attr('id').replace('selector-page-', '')) - options.pageTotal) - 2;
                                         } else {
-                                            goToPage(parseInt($(this).attr('id').replace('selector-page-', '')));
+                                            index = parseInt($(this).attr('id').replace('selector-page-', ''));
                                         }
+                                        // adjust for odd page
+                                        if (index % 2 != 0) {
+                                            index -= 1;
+                                        }
+                                        goToPage(index);
                                         return false;
                                     });
                                 }
@@ -637,9 +642,9 @@
                         chapterSelectorHeight = chapterSelectorList.height();
                         chapterSelectorList.css({'height': 0, 'padding-bottom': 0});
 
-                        chapterSelector.bind('mouseenter.booklet', function () {
+                        chapterSelector.on('mouseenter.booklet', function () {
                             chapterSelectorList.stop().animate({height: chapterSelectorHeight, paddingBottom: 10}, 500);
-                        }).bind('mouseleave.booklet', function () {
+                        }).on('mouseleave.booklet', function () {
                                 chapterSelectorList.stop().animate({height: 0, paddingBottom: 0}, 500);
                             });
                     } else if (!options.chapterSelector) {
@@ -669,11 +674,11 @@
 
                 // user defined prev next controls
                 if (customN) {
-                    customN.unbind('click.booklet');
+                    customN.off('click.booklet');
                 }
                 if(options.next && $(options.next).length > 0) {
                     customN = $(options.next);
-                    customN.bind('click.booklet', function (e) {
+                    customN.on('click.booklet', function (e) {
                         e.preventDefault();
                         next();
                     });
@@ -681,11 +686,11 @@
                     customN = null;
                 }
                 if (customP) {
-                    customP.unbind('click.booklet');
+                    customP.off('click.booklet');
                 }
                 if(options.prev && $(options.prev).length > 0) {
                     customP = $(options.prev);
-                    customP.bind('click.booklet', function (e) {
+                    customP.on('click.booklet', function (e) {
                         e.preventDefault();
                         prev();
                     });
@@ -700,7 +705,7 @@
                     overlayN = $('<div class="b-overlay b-overlay-next b-next" title="' + options.nextControlTitle + '"></div>').appendTo(ctrls);
                     overlaysB = target.find('.b-overlay');
                     // ie fix
-                    if($.browser.msie) {
+                    if($.browser && $.browser.msie) {
                         overlaysB.css({'background': '#fff', 'filter': 'progid:DXImageTransform.Microsoft.Alpha(opacity=0) !important'});
                     }
                 } else if (!options.overlays) {
@@ -763,15 +768,15 @@
                 ctrlsP = ctrls.find('.b-prev');
 
                 // reset all bound events
-                ctrlsN.unbind(".booklet");
-                ctrlsP.unbind(".booklet");
+                ctrlsN.off(".booklet");
+                ctrlsP.off(".booklet");
 
                 // add click actions
-                ctrlsN.bind('click.booklet', function (e) {
+                ctrlsN.on('click.booklet', function (e) {
                     e.preventDefault();
                     next();
                 });
-                ctrlsP.bind('click.booklet', function (e) {
+                ctrlsP.on('click.booklet', function (e) {
                     e.preventDefault();
                     prev();
                 });
@@ -779,16 +784,16 @@
                 // add page hover animations
                 if(options.overlays && options.hovers) {
                     // hovers to start draggable forward
-                    ctrlsN.bind("mouseover.booklet", function () {
+                    ctrlsN.on("mouseover.booklet", function () {
                         startHoverAnimation(true);
-                    }).bind("mouseout.booklet", function () {
+                    }).on("mouseout.booklet", function () {
                             endHoverAnimation(true);
                         });
 
                     // hovers to start draggable backwards
-                    ctrlsP.bind("mouseover.booklet", function () {
+                    ctrlsP.on("mouseover.booklet", function () {
                         startHoverAnimation(false);
-                    }).bind("mouseout.booklet", function () {
+                    }).on("mouseout.booklet", function () {
                             endHoverAnimation(false);
                         });
                 }
@@ -797,25 +802,25 @@
                 if(options.arrows) {
                     if(options.arrowsHide) {
                         if($.support.opacity) {
-                            ctrlsN.bind('hover.booklet', function () {
+                            ctrlsN.on('mouseover.booklet', function () {
                                 arrowN.find('div').stop().fadeTo('fast', 1);
-                            }, function () {
+                            }).on('mouseout.booklet', function () {
                                 arrowN.find('div').stop().fadeTo('fast', 0);
                             });
-                            ctrlsP.bind('hover.booklet', function () {
+                            ctrlsP.on('mouseover.booklet', function () {
                                 arrowP.find('div').stop().fadeTo('fast', 1);
-                            }, function () {
+                            }).on('mouseout.booklet', function () {
                                 arrowP.find('div').stop().fadeTo('fast', 0);
                             });
                         } else {
-                            ctrlsN.bind('hover.booklet', function () {
+                            ctrlsN.on('mouseover.booklet', function () {
                                 arrowN.find('div').show();
-                            }, function () {
+                            }).on('mouseout.booklet', function () {
                                 arrowN.find('div').hide();
                             });
-                            ctrlsP.bind('hover.booklet', function () {
+                            ctrlsP.on('mouseover.booklet', function () {
                                 arrowP.find('div').show();
-                            }, function () {
+                            }).on('mouseout.booklet', function () {
                                 arrowP.find('div').hide();
                             });
                         }
@@ -828,7 +833,7 @@
                 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
                 // keyboard controls
-                $(document).bind('keyup.booklet', function (event) {
+                $(document).on('keyup.booklet', function (event) {
                     if(event.keyCode == 37 && options.keyboard && !isDisabled) {
                         prev();
                     } else if(event.keyCode == 39 && options.keyboard && !isDisabled) {
@@ -848,7 +853,7 @@
                 }
 
                 // percentage resizing
-                $(window).bind('resize.booklet', function () {
+                $(window).on('resize.booklet', function () {
                     if((wPercent || hPercent) && !isDisabled) {
                         updatePercentageSize();
                     }
@@ -868,8 +873,8 @@
 
                     if(options.pause && $(options.pause).length > 0) {
                         pause = $(options.pause);
-                        pause.unbind('click.booklet')
-                            .bind('click.booklet', function (e) {
+                        pause.off('click.booklet')
+                            .on('click.booklet', function (e) {
                                 e.preventDefault();
                                 if(isPlaying) {
                                     clearInterval(a);
@@ -880,8 +885,8 @@
 
                     if(options.play && $(options.play).length > 0) {
                         play = $(options.play);
-                        play.unbind('click.booklet')
-                            .bind('click.booklet', function (e) {
+                        play.off('click.booklet')
+                            .on('click.booklet', function (e) {
                                 e.preventDefault();
                                 if(!isPlaying) {
                                     clearInterval(a);
@@ -900,11 +905,11 @@
                     clearInterval(a);
                     a = null;
                     if(options.pause && $(options.pause).length > 0) {
-                        $(options.pause).unbind('click.booklet');
+                        $(options.pause).off('click.booklet');
                     }
                     pause = null;
                     if(options.play && $(options.play).length > 0) {
-                        $(options.play).unbind('click.booklet');
+                        $(options.play).off('click.booklet');
                     }
                     play = null;
                     isPlaying = false;
@@ -1191,10 +1196,9 @@
                 isHoveringRight = isHoveringLeft = p3drag = p0drag = false;
 
                 // manual page turning, check if jQuery UI is loaded
-                if (target.find('.b-page').data('draggable')) {
+                if (target.find('.b-page').draggable()) {
                     target.find('.b-page').draggable('destroy').removeClass('b-grab b-grabbing');
                 }
-
                 if(options.manual && $.ui) {
 
                     // implement draggable forward
@@ -1378,14 +1382,14 @@
                         }
                     });
 
-                    target.find('.b-page').unbind('click.booklet');
+                    target.find('.b-page').off('click.booklet');
                     if (options.hoverClick) {
-                        target.find('.b-pN, .b-p0').bind('click.booklet', prev).css({cursor:'pointer'});
-                        target.find('.b-p3, .b-p4').bind('click.booklet', next).css({cursor:'pointer'});
+                        target.find('.b-pN, .b-p0').on('click.booklet', prev).css({cursor:'pointer'});
+                        target.find('.b-p3, .b-p4').on('click.booklet', next).css({cursor:'pointer'});
                     }
 
                     // mouse tracking for page movement
-                    target.unbind('mousemove.booklet').bind('mousemove.booklet', function (e) {
+                    target.off('mousemove.booklet').on('mousemove.booklet', function (e) {
                         diff = e.pageX - target.offset().left;
                         if(diff < anim.hover.size) {
                             startHoverAnimation(false);
@@ -1397,7 +1401,7 @@
                         } else if(diff > options.width - anim.hover.size) {
                             startHoverAnimation(true);
                         }
-                    }).unbind('mouseleave.booklet').bind('mouseleave.booklet', function () {
+                    }).off('mouseleave.booklet').on('mouseleave.booklet', function () {
                             endHoverAnimation(false);
                             endHoverAnimation(true);
                         });
@@ -1465,32 +1469,41 @@
 
                 if(options.menu){
                     $(options.menu).removeClass('b-menu');
+
+                    if(options.pageSelector) {
+                        menu.find('.b-selector-page').remove();
+                        pageSelector = pageSelectorList = listItemNumbers = listItemTitle = pageListItem = pageSelectorHeight = null;
+                    }
+                    if (options.chapterSelector) {
+                        menu.find('.b-selector-chapter').remove();
+                        chapter = chapterSelector = chapterSelectorList = chapterListItem = chapterSelectorHeight = null;
+                    }
                 }
                 menu = null;
 
                 if (customN) {
-                    customN.unbind('click.booklet');
+                    customN.off('click.booklet');
                     customN = null;
                 }
 
                 if (customP) {
-                    customP.unbind('click.booklet');
+                    customP.off('click.booklet');
                     customP = null;
                 }
 
                 if (ctrlsN) {
-                    ctrlsN.unbind(".booklet");
+                    ctrlsN.off(".booklet");
                     ctrlsN = null;
                 }
                 if (ctrlsP) {
-                    ctrlsP.unbind(".booklet");
+                    ctrlsP.off(".booklet");
                     ctrlsP = null;
                 }
 
                 target.find('.b-selector, .b-controls').remove();
 
                 // keyboard
-                //$(document).unbind('keyup.booklet');
+                //$(document).off('keyup.booklet');
                 isDisabled = true;
 
                 // hash
@@ -1498,17 +1511,17 @@
                 h = null;
 
                 // window resize
-                //$(window).unbind('resize.booklet');
+                //$(window).off('resize.booklet');
 
                 // auto play
                 clearInterval(a);
                 a = null;
                 if(options.pause && $(options.pause).length > 0) {
-                    $(options.pause).unbind('click.booklet');
+                    $(options.pause).off('click.booklet');
                 }
                 pause = null;
                 if(options.play && $(options.play).length > 0) {
-                    $(options.play).unbind('click.booklet');
+                    $(options.play).off('click.booklet');
                 }
                 play = null;
 
@@ -1516,11 +1529,11 @@
             },
             destroyManualControls = function () {
                 // remove old draggables
-                if (target.find('.b-page').data('draggable')) {
+                if (target.find('.b-page').draggable()) {
                     target.find('.b-page').draggable('destroy').removeClass('b-grab b-grabbing');
                 }
                 // remove mouse tracking for page movement
-                target.unbind('.booklet');
+                target.off('.booklet');
             },
 
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1572,7 +1585,7 @@
                     page: target.children(':eq(' + index + ')')[0]
                 };
                 if(options.add) {
-                    target.unbind(events.add+'.booklet').bind(events.add+'.booklet', options.add);
+                    target.off(events.add+'.booklet').on(events.add+'.booklet', options.add);
                 }
                 target.trigger(events.add, callback);
 
@@ -1642,7 +1655,7 @@
                     page: removedPage[0]
                 };
                 if(options.remove) {
-                    target.unbind(events.remove+'.booklet').bind(events.remove+'.booklet', options.remove);
+                    target.off(events.remove+'.booklet').on(events.remove+'.booklet', options.remove);
                 }
                 target.trigger(events.remove, callback);
 
@@ -1696,7 +1709,7 @@
                         pages: [pages[newIndex].contentNode, pages[newIndex+1].contentNode]
                     };
                     if(options.start) {
-                        target.unbind(events.start+'.booklet').bind(events.start+'.booklet', options.start);
+                        target.off(events.start+'.booklet').on(events.start+'.booklet', options.start);
                     }
                     target.trigger(events.start, callback);
 
@@ -1746,7 +1759,7 @@
                         pages: [pages[newIndex].contentNode, pages[newIndex+1].contentNode]
                     };
                     if(options.start) {
-                        target.unbind(events.start+'.booklet').bind(events.start+'.booklet', options.start);
+                        target.off(events.start+'.booklet').on(events.start+'.booklet', options.start);
                     }
                     target.trigger(events.start, callback);
 
@@ -1976,7 +1989,7 @@
                     pages: [pages[options.currentIndex].contentNode, pages[options.currentIndex+1].contentNode]
                 };
                 if(options.change) {
-                    target.unbind(events.change+'.booklet').bind(events.change+'.booklet', options.change);
+                    target.off(events.change+'.booklet').on(events.change+'.booklet', options.change);
                 }
                 target.trigger(events.change, callback);
             };
@@ -1993,15 +2006,17 @@
             next: next,
             prev: prev,
             gotopage: function (index) {
+                // validate inputs
                 if(typeof index === 'string') {
-                    // validate inputs
                     if(index == "start") {
                         index = 0;
                     } else if(index == "end") {
-                        index = originalPageTotal - 1;
-                    }
+                        index = options.pageTotal - 2;
+                    } else {
+						this.gotopage(parseInt(index));
+					}
                 } else if(typeof index === "number") {
-                    if(index < 0 || index >= originalPageTotal) {
+                    if(index < 0 || index >= options.pageTotal) {
                         return;
                     }
                 } else if(typeof index === "undefined") {
