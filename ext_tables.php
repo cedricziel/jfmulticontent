@@ -25,7 +25,7 @@ $tempColumns = array(
 				array('LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.view.I.1', 'page'),
 				array('LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.view.I.2', 'irre'),
 			),
-			'itemsProcFunc' => 'tx_jfmulticontent_itemsProcFunc->getViews',
+			'itemsProcFunc' => 'EXT:jfmulticontent/lib/class.tx_jfmulticontent_itemsProcFunc.php:&tx_jfmulticontent_itemsProcFunc->getViews',
 		)
 	),
 	'tx_jfmulticontent_pages' => array(

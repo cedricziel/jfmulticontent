@@ -556,6 +556,8 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 					$row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res);
 					if ($GLOBALS['TSFE']->sys_language_content) {
 						$row = $GLOBALS['TSFE']->sys_page->getRecordOverlay('tt_content', $row, $GLOBALS['TSFE']->sys_language_content, $GLOBALS['TSFE']->sys_language_contentOL);
+					} elseif ($GLOBALS['TSFE']->sys_page->versioningPreview) {
+						$GLOBALS['TSFE']->sys_page->versionOL('tt_content', $row);
 					}
 					$GLOBALS['TSFE']->register['uid'] = $row['_LOCALIZED_UID'] ? $row['_LOCALIZED_UID'] : $row['uid'];
 					$GLOBALS['TSFE']->register['title'] = (strlen(trim($this->titles[$a])) > 0 ? $this->titles[$a] : $row['header']);
@@ -570,6 +572,9 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 			} else if ($this->conf['config.']['view'] == 'irre') {
 				// get the content ID's
 				$elementUID = ($this->cObj->data['_LOCALIZED_UID'])?$this->cObj->data['_LOCALIZED_UID']:$this->cObj->data['uid'];
+				if ($GLOBALS['TSFE']->sys_page->versioningPreview) {
+					$elementUID = $this->cObj->data['_ORIG_uid'];
+				}
 				$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 					'*',
 					'tt_content',
@@ -581,8 +586,14 @@ class tx_jfmulticontent_pi1 extends tslib_pibase
 				while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res)) {
 					if ($GLOBALS['TSFE']->sys_language_content) {
 						$row = $GLOBALS['TSFE']->sys_page->getRecordOverlay('tt_content', $row, $GLOBALS['TSFE']->sys_language_content, $GLOBALS['TSFE']->sys_language_contentOL);
+					} elseif ($GLOBALS['TSFE']->sys_page->versioningPreview) {
+						$GLOBALS['TSFE']->sys_page->versionOL('tt_content', $row);
 					}
-					$GLOBALS['TSFE']->register['uid'] = $row['_LOCALIZED_UID'] ? $row['_LOCALIZED_UID'] : $row['uid'];
+					$uid = $row['_LOCALIZED_UID'] ? $row['_LOCALIZED_UID'] : $row['uid'];
+					if ($row['t3ver_oid']) {
+						$uid = $row['t3ver_oid'];
+					}
+					$GLOBALS['TSFE']->register['uid'] = $uid;
 					$GLOBALS['TSFE']->register['title'] = (strlen(trim($this->titles[$a])) > 0 ? $this->titles[$a] : $row['header']);
 					if ($this->titles[$a] == '' || !isset($this->titles[$a])) {
 						$this->titles[$a] = $this->cObj->cObjGetSingle($view['title'], $view['title.']);
