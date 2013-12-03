@@ -22,9 +22,6 @@
 *  This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
-require_once(PATH_tslib.'class.tslib_pibase.php');
-require_once(t3lib_extMgm::extPath('jfmulticontent').'lib/class.tx_jfmulticontent_pagerenderer.php');
-
 /**
  * Plugin 'Multiple Content' for the 'jfmulticontent' extension.
  *

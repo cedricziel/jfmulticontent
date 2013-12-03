@@ -25,10 +25,6 @@
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-if (t3lib_extMgm::isLoaded('t3jquery')) {
-	require_once(t3lib_extMgm::extPath('t3jquery').'class.tx_t3jquery.php');
-}
-
 /**
  * This class implements a all needed functions to add Javascripts and Stylesheets to a page
  *

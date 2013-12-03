@@ -201,6 +201,4 @@ if (TYPO3_MODE == 'BE') {
 
 t3lib_extMgm::addStaticFile($_EXTKEY,'static/', 'Multi content');
 
-require_once(t3lib_extMgm::extPath($_EXTKEY).'lib/class.tx_jfmulticontent_itemsProcFunc.php');
-
 ?>
