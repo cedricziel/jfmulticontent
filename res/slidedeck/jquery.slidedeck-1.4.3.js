@@ -1,5 +1,22 @@
-/*!
- * SlideDeck 1.4.3 Pro - 2012-12-10
+/**
+ * SlideDeck 1.4.3 Lite - 2013-03-13
+ * Copyright (c) 2012 digital-telepathy (http://www.dtelepathy.com)
+ * 
+ * Support the developers by purchasing the Pro version at http://www.slidedeck.com/download
+ * 
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  * 
  * More information on this project:
  * http://www.slidedeck.com/
@@ -14,25 +31,6 @@
  * @param {Object} opts      An object to pass custom override options to
  */
 
-/*!
-Copyright 2012 digital-telepathy  (email : support@digital-telepathy.com)
-
-This file is part of SlideDeck.
-
-SlideDeck is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-SlideDeck is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with SlideDeck.  If not, see <http://www.gnu.org/licenses/>.
-*/
-
 var SlideDeck;
 var SlideDeckSkin = {};
 var SlideDeckLens = {};
@@ -42,15 +40,7 @@ var SlideDeckLens = {};
         var self = this,
             el = $(el),
             versionPrefix = '',
-            distribution = 'pro';
-        
-        if( typeof(window.slideDeck2Version) != 'undefined' ){
-            versionPrefix  = 'sd2-' + window.slideDeck2Version + '-';
-        }
-        
-        if( typeof(window.slideDeck2Distribution) != 'undefined' ){
-            distribution  = window.slideDeck2Distribution;
-        }
+            distribution = 'lite';
         
         var VERSION = versionPrefix + "1.4.3";
         
@@ -66,10 +56,7 @@ var SlideDeckLens = {};
             autoPlayInterval: 5000,
             hideSpines: false,
             cycle: false,
-            slideTransition: 'slide',
-            touchThreshold: { x: 50, y: 30 },
-            touch: true,
-            controlProgress: false
+            slideTransition: 'slide'
         };
         
         this.classes = {
@@ -206,200 +193,78 @@ var SlideDeckLens = {};
         };
         
         
-        var updateAddons = function(){
-            // Handle Cufon
-            if(typeof(Cufon) != "undefined"){
-                Cufon.DOM.ready(function(){
-                    if(typeof(self.options.cufonRefresh) != "undefined"){
-                        var cufon_arr = [];
-                        if(typeof(self.options.cufonRefresh) == "string"){
-                            cufon_arr.push(self.options.cufonRefresh);
-                        } else {
-                            cufon_arr = self.options.cufonRefresh;
-                        }
-                        
-                        for(var i=0; i<cufon_arr.length; i++){
-                            Cufon.refresh(cufon_arr[i]);
-                        }
-                    }
-                    
-                    if(self.options.hideSpines === false){
-                        var sPad = 0;
-                        if(self.browser.msie8 && !self.browser.chromeFrame){
-                            sPad = Math.floor(($(self.spines[0]).outerWidth() - $($(self.spines[0]).find('cufon')[0]).height())/2);
-                        }
-                        if(self.browser.safari || self.browser.chrome || self.browser.chromeFrame){
-                            if(document.doctype.publicId.toLowerCase().match(/transitional/)){
-                                sPad = Math.floor(($(self.spines[0]).outerHeight() - $($(self.spines[0]).find('cufon')[0]).height())/2);
-                            }
-                        }
-                        self.spines.find('>cufon').css('margin-top',sPad);
-                    }
+        /**
+         * Visual Attribution "Bug"
+         * 
+         * This is a visual "bug" that is placed in the lower right of the SlideDeck to give
+         * visual recognition to SlideDeck and for us to see where any implementations that might
+         * be worth placing in our community examples page reside. To help keep this plugin free 
+         * we ask (although we cannot force) you to keep this visual "bug" on the page since it 
+         * helps support the author.
+         * 
+         * If you would like to remove the visual "bug", we recommend you comment out the 
+         * updateBug(); function and remove any references to the updateBug(); command.
+         */
+        var BUG = {
+            id: "SlideDeck_Bug"+(Math.round(Math.random()*100000000)),
+            styles: "position:absolute !important;height:"+13+"px !important;width:"+130+"px !important;display:block !important;margin:0 !important;overflow:hidden !important;visibility:visible !important;opacity:1 !important;padding:0 !important;z-index:20000 !important",
+            width: 130,
+            height: 13
+        };        
+        var updateBug = function(){
+            if(!document.getElementById(BUG.id)){
+                var bugLink = document.createElement('A');
+                    bugLink.id = BUG.id;
+                    bugLink.href = "http://www.slidedeck.com/ref?utm_source=LiteUser&utm_medium=Link&utm_campaign=SDbug";
+                    bugLink.target = "_blank";
+                var bugImg = document.createElement('IMG');
+                    bugImg.src = (document.location.protocol == "https:" ? "https:" : "http:") + "//www.slidedeck.com/6885858486f31043e5839c735d99457f045affd0/" + VERSION + "/lite";
+                    bugImg.alt = "Powered by SlideDeck&trade;";
+                    bugImg.width = BUG.width;
+                    bugImg.height = BUG.height;
+                    bugImg.border = "0";
+                bugLink.appendChild(bugImg);
+                
+                BUG.top = (el.offset().top + el.height() + 5);
+                BUG.left = el.offset().left + el.width() - BUG.width;
+
+                var s = document.createElement('STYLE');
+                    s.type = "text/css";
+                var sText = '#' + BUG.id + '{top:' + BUG.top + 'px;left:' + BUG.left + 'px;' + BUG.styles + '}' + '#' + BUG.id + ' img{top:0 !important;left:0 !important;' + BUG.styles + '}';
+                if(s.styleSheet){
+                    s.styleSheet.cssText = sText;
+                } else {
+                    s.appendChild(document.createTextNode(sText));
+                }
+                $('head').append(s);
+                
+                if(Math.random() < 0.5){
+                    $(document.body).prepend(bugLink);
+                } else {
+                    $(document.body).append(bugLink);
+                }
+
+                $(window).resize(function(){
+                    updateBug();
                 });
             }
-        };
-        
-        
-        var bugSet = true;
-        var updateBug = function(){
-            /**
-             * This code loads a small image (but does not place it in the DOM) to help
-             * us see where SlideDeck is being deployed and keep apprised of issues people
-             * may be encountering. This also allows us to see deployment examples that
-             * we may want to include in our featured community examples.
-             */
-            
-            var scripts = document.getElementsByTagName('script');
-            for(var i = 0; i < scripts.length; i++){
-                var src = scripts[i].src;
-                if(src.match(/slidedeck\.jquery(\.dev)?\.js/)){
-                    var srcSplit = src.split('?');
-                    if(srcSplit.length > 1){
-                        if(srcSplit[1].match(/noping/)){
-                            bugSet = true;
-                        }
-                    }
-                }
-            }
-            
-            if(bugSet === false){
-                bugSet = true;
-                var bug = new Image();
-                    bug.src = (document.location.protocol == "https:" ? "https:" : "http:") + "//" + VERSION + "/" + distribution;
-            }
-        };
-        
+            BUG.top = (el.offset().top + el.height() + 5);
+            BUG.left = el.offset().left + el.width() - BUG.width;
 
-        var updateControl = function(){
-            if(self.options.controlProgress === true){
-                for(var i=0; i<self.spines.length; i++){
-                    if(i < self.controlTo){
-                        $(self.spines[i]).removeClass(self.classes.disabled);
-                    } else {
-                        $(self.spines[i]).addClass(self.classes.disabled);
-                    }
-                }
-            }
+            $('#' + BUG.id).css({
+                top: BUG.top + "px",
+                left: BUG.left + "px"
+            });
         };
         
         
-        var hasVertical = function(event){
-            var vertical = false;
-
-            if(typeof(self.verticalSlides) != 'undefined'){
-                if(typeof(self.vertical().options) != 'undefined'){
-                    if(self.vertical().options.scroll === true && $(event.target).parents('.' + self.classes.vertical).length > 0){
-                        vertical = true;
-                    }
-                }
-            }
-            
-            return vertical;
-        };
-        
-
-        var tracker = {
-            timestamp: function(){
-                var date = new Date();
-                var timestamp_local = date.getUTCFullYear() + "-" + date.getUTCMonth() + "-" + date.getUTCDate() + " " + date.getUTCHours() + ":" + date.getUTCMinutes() + ":" + date.getUTCSeconds();
-                var gmtHours = (0-date.getTimezoneOffset()/60);
-                var gmtHoursDiff = Math.floor(gmtHours);
-                var gmtMinDiff = "00";
-                if(gmtHoursDiff != gmtHours){
-                    gmtMinDiff = (gmtHours - gmtHoursDiff) * 60;
-                }
-                return timestamp_local + gmtHoursDiff + ":" + gmtMinDiff;
-            },
-            
-            track: function(ind){
-                if (self.session.length === 0 || self.session[self.session.length - 1].slide != ind) {
-                    self.session.push({
-                        slide: ind,
-                        timestamp: this.timestamp()
-                    });
-                }
-            }
-        };
-        
-        
-        var autoPlay = function(){
-            // Assume no vertical slides in the current slide by default
-            var vertical = false,
-                // Assume we do not reset vertical slides by default
-                resetVertical = false;
-            
-            var gotoNext = function(){
-                // Assume no vertical slides in this slide
-                vertical = false;
-                
-                // Only progress forward if we are not paused
+        var autoPlay = function(){           
+            var gotoNext = function(){                
                 if(self.pauseAutoPlay === false && self.options.autoPlay === true){
-                    // Check if we need to progress through a vertical slide
-                    if(typeof(self.vertical()) != 'undefined'){
-                        if(self.vertical().navChildren){
-                            // Only flag for vertical movement if we are not on the last vertical slide already
-                            if(self.vertical().current + 1 != self.vertical().slides.length){
-                                vertical = true;
-                            }
-                        }
-                    }
-                    
-                    // Move forward by default
-                    var moveForward = true;
-                    // If cycle is boolean(false) and we are on the last slide set moveFoward to boolean(false)
-                    if(self.options.cycle === false && self.current == self.slides.length){
-                        // Check if we need to go through vertical slides on the last horizontal slide
-                        if(vertical === true){
-                            if(self.vertical().current + 1 === self.vertical().slides.length){
-                                // Last horizontal, last vertical slide
-                                moveForward = false;
-                            }
-                        } else {
-                            // Last horizontal no vertical movement
-                            moveForward = false;
-                        }
-                    }
-                    
-                    if(moveForward === false){
-                        // Stop auto-playing through SlideDeck
+                    if(self.options.cycle === false && self.current == self.slides.length){                        
                         self.pauseAutoPlay = true;
                     } else {
-                        // Move through vertical slides
-                        if( vertical === true ){
-                            if(self.vertical().current + 2 == self.vertical().slides.length){
-                                vertical = false;
-                                resetVertical = self.current;
-                            }
-                            self.vertical().next();
-                        }
-                        // Move through horizontal slides
-                        else {
-                            // Animate back to first vertical slide if this is a single horizontal slide SlideDeck
-                            if(self.slides.length == 1 && self.current == self.slides.length){
-                                if(resetVertical !== false){
-                                    self.resetVertical(resetVertical, false);
-                                    resetVertical = false;
-                                }
-                            }
-                            // Snap to the first vertical slide in the last looped through vertical slide
-                            else {
-                                // Fall back to reset previous vertical slide (to accommodate for race condition)
-                                if(self.former != -1){
-                                    if(typeof(self.verticalSlides[self.former]) != 'undefined'){
-                                        if(typeof(self.verticalSlides[self.former].navChildren) != 'undefined'){
-                                            self.resetVertical(self.former + 1);
-                                        }
-                                    }
-                                }
-                                // Animate and reset vertical slide in previous vertical slide
-                                self.next(function(deck){
-                                    if(resetVertical !== false){
-                                        deck.resetVertical(resetVertical);
-                                        resetVertical = false;
-                                    }
-                                });
-                            }
-                        }
+                        self.next();
                     }
                 }
                 
@@ -440,37 +305,6 @@ var SlideDeckLens = {};
             }
 
             switch(transition){
-                case "stack":
-                    slideCSS.zIndex = self.slides.length - i;
-                    slideCSS.left = 0;
-                break;
-                case "fade":
-                    var $currentSlide = self.slides.eq(self.current - 1);
-                    slideCSS.zIndex = self.slides.length - i;
-                    slideCSS.left = 0;
-                    
-                    // Fade out other slides
-                    self.slides.not($currentSlide).css({
-                        opacity: 0
-                    });
-                break;
-                
-                case "flip":
-                    slideCSS.zIndex = self.slides.length - i;
-                    slideCSS.left = 0;
-                    if(i != (self.current - 1)){
-                        slideCSS[prefix + 'transform'] = "scaleY(0)";
-                    }
-                break;
-                
-                case "flipHorizontal":
-                    slideCSS.zIndex = self.slides.length - i;
-                    slideCSS.left = 0;
-                    if(i != (self.current - 1)){
-                        slideCSS[prefix + 'transform'] = "scaleX(0)";
-                    }
-                break;
-                
                 case "slide":
                 default:
                     slideCSS.left = offset;
@@ -523,6 +357,7 @@ var SlideDeckLens = {};
                 
                 var slideCSS = {
                     position: 'absolute',
+                    zIndex: 1,
                     height: (height - sPad.top - sPad.bottom - sBorder.top - sBorder.bottom) + "px",
                     width: self.slide_width + "px",
                     margin: 0,
@@ -681,58 +516,56 @@ var SlideDeckLens = {};
                 }
             });
             
+            // Setup Mouse Wheel Interaction
             if(typeof($.event.special.mousewheel) != "undefined"){
-                // Setup Mouse Wheel Interaction
                 el.bind("mousewheel", function(event, mousewheeldelta){
                     if(self.options.scroll !== false){
-                        if(!hasVertical(event)){
-                            //Initial mousewheel assignment (legacy)
-                            var delta = event.detail ? event.detail : event.wheelDelta;
-                            // Try new mousewheel assignment:
-                            if( typeof(delta) == 'undefined' ){
-                                delta = 0 - mousewheeldelta;
+                        //Initial mousewheel assignment (legacy)
+                        var delta = event.detail ? event.detail : event.wheelDelta;
+                        // Try new mousewheel assignment:
+                        if( typeof(delta) == 'undefined' ){
+                            delta = 0 - mousewheeldelta;
+                        }
+
+                        var internal = false;
+                        if($(event.originalTarget).parents(self.deck).length){
+                            if($.inArray(event.originalTarget.nodeName.toLowerCase(),['input','select','option','textarea']) != -1){
+                                internal = true;
                             }
-    
-                            var internal = false;
-                            if($(event.originalTarget).parents(self.deck).length){
-                                if($.inArray(event.originalTarget.nodeName.toLowerCase(),['input','select','option','textarea']) != -1){
-                                    internal = true;
-                                }
-                            }
-    
-                            if (internal !== true) {
-                                if (delta > 0) {
-                                    switch (self.options.scroll) {
-                                        case "stop":
+                        }
+
+                        if (internal !== true) {
+                            if (delta > 0) {
+                                switch (self.options.scroll) {
+                                    case "stop":
+                                        event.preventDefault();
+                                    break;
+                                    case true:
+                                    default:
+                                        if (self.current < self.slides.length || self.options.cycle === true) {
                                             event.preventDefault();
-                                        break;
-                                        case true:
-                                        default:
-                                            if (self.current < self.slides.length || self.options.cycle === true) {
-                                                event.preventDefault();
-                                            }
-                                        break;
-                                    }
-                                    self.pauseAutoPlay = true;
-                                    self.next();
+                                        }
+                                    break;
                                 }
-                                else {
-                                    switch (self.options.scroll) {
-                                        case "stop":
-                                            event.preventDefault();
-                                        break;
-                                        case true:
-                                        default:
-                                            if (self.current != 1 || self.options.cycle === true) {
-                                                event.preventDefault();
-                                            }
-                                        break;
-                                    }
-                                    self.pauseAutoPlay = true;
-                                    self.prev();
-                                }
+                                self.pauseAutoPlay = true;
+                                self.next();
                             }
-                        }    
+                            else {
+                                switch (self.options.scroll) {
+                                    case "stop":
+                                        event.preventDefault();
+                                    break;
+                                    case true:
+                                    default:
+                                        if (self.current != 1 || self.options.cycle === true) {
+                                            event.preventDefault();
+                                        }
+                                    break;
+                                }
+                                self.pauseAutoPlay = true;
+                                self.prev();
+                            }
+                        }
                     }
                 });
             }
@@ -784,9 +617,6 @@ var SlideDeckLens = {};
             $(self.spines[self.current - 2]).addClass(self.classes.previous);
             $(self.spines[self.current]).addClass(self.classes.next);
             
-            updateAddons();
-            updateControl();
-            tracker.track(self.current);
             autoPlay();
 
             self.isLoaded = true;
@@ -844,7 +674,6 @@ var SlideDeckLens = {};
                     afterFunctions.push(function(){ params.complete(self); });
                 break;
             }
-            tracker.track(self.current);
             
             var callbackFunction = function(){
                 self.looping = false;
@@ -859,237 +688,6 @@ var SlideDeckLens = {};
         
         
         var transitions = {
-            /**
-             * Cross-fade animation
-             * 
-             * Fades between slides. This is used as a fall-back in most cases for those transitions
-             * that are not supported by the user's browser (Internet Explorer in most cases).
-             */
-            fade: function(ind, params, forward){
-                var $currentSlide = self.slides.eq(self.current - 1);
-                
-                // Fade out other slides
-                self.slides.not($currentSlide).stop().animate({
-                    opacity: 0
-                }, self.options.speed, function(){
-                    this.style.display = "none";
-                });
-                
-                // Fade in the current slide
-                $currentSlide.css({
-                    display: 'block',
-                    opacity: 0
-                }).addClass(self.classes.active).stop().animate({
-                    opacity: 1
-                }, self.options.speed, function(){
-                    this.style.display = "block";
-                    // Run the complete callback functions
-                    completeCallback(params)();
-                });
-            },
-            
-            /**
-             * Flip animation
-             * 
-             * Creates a flipping effect to move between slides. This is currently only supported
-             * by those browsers which have support for CSS transition effects, in other words, 
-             * pretty much everything but Internet Explorer.
-             */
-            flip: function(ind, params, forward, horizontal){
-                var secondsSpeed = (self.options.speed / 1000) / 2;
-                var $formerSlide = self.slides.eq(self.former - 1);
-                var $currentSlide = self.slides.eq(self.current - 1);
-                
-                if(typeof(horizontal) == 'undefined'){
-                    horizontal = false;
-                }
-                
-                var direction = horizontal == true ? "X" : "Y";
-                
-                // Mask styles
-                var maskCSS = {
-                    position: 'absolute',
-                    zIndex: 999,
-                    top: 0,
-                    right: 0,
-                    bottom: 0,
-                    left: 0,
-                    width: '100%',
-                    height: '100%',
-                    opacity: 0
-                };
-                // Former slide mask
-                var $formerMask = $formerSlide.find('.slidedeck-slide-mask');
-                // If a mask was left over for some reason, remove it so we can start the CSS from scratch
-                if($formerMask.length){
-                    $formerMask.remove();
-                }
-                $formerSlide.append('<div class="slidedeck-slide-mask mask-out"></div>');
-                $formerMask = $formerSlide.find('.slidedeck-slide-mask').css(maskCSS);
-                
-                // Current slide mask
-                var $currentMask = $currentSlide.find('.slidedeck-slide-mask');
-                // If a mask was left over for some reason, remove it so we can start the CSS from scratch
-                if($currentMask.length){
-                    $formerMask.remove();
-                }
-                $currentSlide.addClass(self.classes.active).append('<div class="slidedeck-slide-mask mask-in"></div>');
-                maskCSS.opacity = 1;
-                $currentMask = $currentSlide.find('.slidedeck-slide-mask').css(maskCSS);
-                
-                // Hide all other slides first so the transition happens properly
-                var resetCSS = {};
-                    resetCSS[prefix + 'transition'] = "";
-                    resetCSS[prefix + 'transform-origin'] = "50% 50%";
-                    resetCSS[prefix + 'transform'] = "scale" + direction + "(0)";
-                self.slides.not($formerSlide).css(resetCSS);
-                
-                // Default animation CSS transform properties
-                var animateCSS = {};
-                    animateCSS[prefix + 'transform-origin'] = "50% 50%";
-                
-                // Currently viewed slide (the slide we're moving away from)
-                animateCSS[prefix + 'transform'] = "scale" + direction + "(0)";
-                $formerSlide.css(prefix + 'transition', prefix + 'transform ' + secondsSpeed + 's ease-out').css(animateCSS);
-                $formerMask.animate({
-                    opacity: 1
-                }, {
-                    duration: self.options.speed/2,
-                    complete: function(){
-                        $formerMask.remove();
-                    }
-                });
-
-                // The slide we're moving to
-                // Static animation to wait until this slide begins showing itself
-                $currentMask.animate({
-                    opacity: 1
-                }, {
-                    duration: self.options.speed/2,
-                    complete: function(){
-                        animateCSS[prefix + 'transform'] = "scale" + direction + "(1)";
-                        $currentSlide.addClass(self.classes.active).css(prefix + 'transition', prefix + 'transform ' + secondsSpeed + 's ease-out').css(animateCSS);
-                        
-                        // Start an animation to fade out slide
-                        $currentMask.animate({
-                            opacity: 0
-                        }, {
-                            dureation: self.options.speed/2,
-                            complete: function(){
-                                // Remove all transition effects
-                                self.slides.css(prefix + 'transition', "");
-                                
-                                // Snap current slide to open - maybe?
-                                var finishCSS = {};
-                                    finishCSS[prefix + 'transform-origin'] = "50% 50%";
-                                    finishCSS[prefix + 'transform'] = "scale" + direction + "(1)";
-                                self.slides.eq(self.current - 1).css(finishCSS);
-            
-                                completeCallback(params)();
-                                
-                                // Clean up the masks that may be left over
-                                $formerMask.remove();
-                                $currentMask.remove();
-                            }
-                        });
-                    }
-                });
-            },
-            
-            flipHorizontal: function(ind, params, forward){
-                this.flip(ind, params, forward, true);
-            },
-            
-            stack: function(ind, params, forward){
-                if(
-                    // Looping from first to last
-                    (self.current == self.slides.length && self.former == 1) ||
-                    // Looping from last to first
-                    (self.former == self.slides.length && self.current == 1)
-                ){
-                    self.looping = true;
-                }
-                
-                for (var i = 0; i < self.slides.length; i++) {
-                    var pos = 0;
-                    var slide = self.slides.eq(i);
-                    
-                    if(self.looping === false){
-                        if(i < self.current - 1) {
-                            if (i == (self.current - 1)) {
-                                slide.addClass(self.classes.active);
-                                updateAddons();
-                            }
-                            pos = (0 - width);
-                        }
-                        else {
-                            pos = 0;
-                        }
-                    } else {
-                        // Going from last to first
-                        if(self.former == self.slides.length && self.current == 1){
-                            if(i == (self.current) -1){
-                                slide.css({
-                                    left: 0,
-                                    zIndex: 5
-                                }).addClass(self.classes.active);
-                                updateAddons();
-                                pos = 0;
-                            } else {
-                                if(i == (self.former - 1)){
-                                    slide.css('z-index', 10);
-                                    pos = 0 - width;
-                                } else {
-                                    slide.css('z-index', 1);
-                                    pos = 0;
-                                }
-                            }
-                        } else 
-                        // Going from first to last
-                        if(self.former == 1 && self.current == self.slides.length) {
-                            if(i != self.former - 1){
-                                if(i == (self.current - 1)) {
-                                    slide.css({
-                                        left: (0 - width),
-                                        zIndex: 100
-                                    });
-                                    slide.addClass(self.classes.active);
-                                    updateAddons();
-                                    pos = 0;
-                                }
-                            }
-                        }
-                    }
-                    
-                    var animOpts = {
-                        duration: self.options.speed,
-                        easing: self.options.transition
-                    };
-
-                    // Detect a function to run after animating
-                    if(i == (forward === true && self.current - 1) || i == (forward === false && self.current)){
-                        if(i == self.current -1) {
-                            animOpts.complete = function(){
-                                if(self.looping === true){
-                                    self.slides.each(function(ind){
-                                        if(ind != (self.current - 1)) {
-                                            this.style.left = (self.current == 1 ? 0 : (0 - width)) + "px";
-                                        }
-                                        this.style.zIndex = self.slides.length - ind;
-                                    });
-                                }
-                                completeCallback(params)();
-                            };
-                        }
-                    }
-
-                    slide.stop().animate({
-                        left: pos,
-                        width: self.slide_width
-                    }, animOpts);
-                }
-            },
-            
             /**
              * Classic SlideDeck transition: Slide
              * 
@@ -1110,7 +708,6 @@ var SlideDeckLens = {};
                                 spine.addClass(self.classes.active);
                                 spine.next('.' + self.classes.activeCorner).show();
                             }
-                            updateAddons();
                         }
                         pos = i * spine_outer_width;
                     }
@@ -1236,14 +833,12 @@ var SlideDeckLens = {};
                     case "scroll":
                     case "keys":
                     case "activeCorner":
-                    case "controlProgress":
                     case "hideSpines":
                     case "cycle":
                         if(typeof(val) !== "boolean"){
                             val = self.options[key];
                         }
-                    break;                    
-                    case "cufonRefresh":
+                    break;
                     case "transition":
                         if(typeof(val) !== "string"){
                             val = self.options[key];
@@ -1261,345 +856,10 @@ var SlideDeckLens = {};
                                 val = self.options[key];
                             }
                         }
-                    break;
-                    case "slideTransition":
-                        for(var k in transitions){
-                            if(val == k){
-                                // Fallback adjustments
-                                switch(self.browser._this){
-                                    case "msie":
-                                    case "msie7":
-                                    case "msie8":
-                                    case "msie9":
-                                    case "msie10":
-                                      switch(val){
-                                            case "flip":
-                                            case "flipHorizontal":
-                                                val = "fade";
-                                            break;
-                                        }
-                                    break;
-                                }
-                                
-                                self.options.slideTransition = val;
-                                
-                                for(var i = 0; i < self.slides.length; i++){
-                                    buildSlideTransition(self.options.slideTransition, i);
-                                }
-                            }
-                        }
                     break;                    
                 }
                 
                 self.options[key] = val;
-            }
-        };
-        
-        
-        var disableSlide = function(ind){
-            if($.inArray(ind,self.disabledSlides) == -1 && ind !== 1 && ind !== 0){
-                self.disabledSlides.push(ind);
-            }
-        };
-        
-        
-        var enableSlide = function(ind){
-            var indIndex = $.inArray(ind,self.disabledSlides);
-            if(indIndex != -1){
-                self.disabledSlides.splice(indIndex,1);
-            }
-        };
-        
-        
-        /**
-         * VerticalSlide Class
-         * 
-         * @author: John Botica
-         * @contributors: John Botica, Dave Shepard, Jamie Hamel-Smith 
-         * @version: 1.0
-         */
-        var VerticalSlide = function(el, deck, opts){
-            var self = this;
-            
-            var el = $(el);
-            
-            var elChildren = el.children();
-            if(el[0].nodeName == "DL"){
-                elChildren = el.children('dd');
-                var elNavTitles = el.children('dt').hide();
-            }
-            
-            var total = elChildren.length;
-            var parentSlide = el.parents('dd.slide');
-            var elParent = el.parent();
-            var height = parentSlide.innerHeight();
-            var zIndex = 100;
-
-            if(deck.deck.find('.' + deck.classes.activeCorner).length){
-                zIndex = deck.deck.find('.' + deck.classes.activeCorner).css('z-index') - 1;
-            }
-            
-            this.navParent = null;
-            this.navChildren = null;
-            this.current = 0;
-            this.slides = elChildren;
-            
-            this.options = {
-                speed: 500,
-                scroll: true,
-                continueScrolling: deck.options.continueScrolling
-            };
-            if(typeof(opts) == 'object'){
-                for(var k in opts){
-                    this.options[k] = opts[k];
-                }
-            }
-            
-            this.classes = {
-                navContainer: 'verticalSlideNav',
-                arrow: 'arrow',
-                prefix: 'verticalSlide'
-            };
-                        
-            var slide = function(index, snap, callback){
-                self.current = index;
-
-                if(typeof(self.options.before) == 'function'){
-                    self.options.before(self);
-                }
-                
-                if(typeof(callback) == 'object'){
-                    if(typeof(callback.before) == 'function'){
-                        callback.before(self);
-                    }
-                }
-                
-                var speed = self.options.speed;
-                if(typeof(snap) != 'undefined'){
-                    speed = 0;
-                }
-                
-                speed = parseInt(speed, 10);
-                
-                parentSlide.find('ul.' + self.classes.navContainer + ' li.' + self.classes.arrow).stop().animate({
-                    top: $(self.navChildren[self.current]).position().top + 'px'
-                }, speed);
-
-                self.navChildren.removeClass('active');
-                $(self.navChildren[self.current]).addClass('active');
-                
-                el.stop().animate({
-                   top: 0 - (self.current * height) + 'px'
-                }, {
-                    duration: speed,
-                    easing: deck.options.transition,
-                    complete: function(){
-                        if(typeof(self.options.complete) == 'function'){
-                            self.options.complete(self);
-                        }
-                        if(typeof(callback) == 'object'){
-                            if(typeof(callback.complete) == 'function'){
-                                callback.complete(self);
-                            }
-                        }else if(typeof(callback) == 'function'){
-                            callback(deck);
-                        }
-                    } 
-                });
-            };
-            
-            var createVerticalNav = function(){
-                var navParent = document.createElement('UL');
-                    navParent.className = self.classes.navContainer;
-                    navParent.style.position = 'absolute';
-                    navParent.style.zIndex = zIndex;
-                    navParent.style.listStyleType = 'none';
-                
-                for(var a = 0; a < total; a++){
-                    var navLi = document.createElement('LI');
-                        navLi.className = 'nav_' + (a + 1) + (a === 0 ? ' active' : '');
-                        navLi.style.listStyleType = 'none';
-
-                    var navChild = document.createElement('A');
-                    
-                    if(elChildren[a].id){
-                        navChild.href = "#" + elChildren[a].id;
-                    } else {
-                        navChild.href = "#" + (a + 1);
-                    }
-                    navChild.className = 'nav_' + (a + 1);
-                    
-                    var navTitle = "Nav " + (a + 1);
-                    if(typeof(elNavTitles) != 'undefined'){
-                        navTitle = elNavTitles.eq(a).html();
-                    }
-                    
-                    navChild.innerHTML = navTitle;
-                    navLi.appendChild(navChild);
-                    navParent.appendChild(navLi);
-                }
-
-                var arrow = document.createElement('LI');
-                    arrow.className = self.classes.arrow;
-                    arrow.style.top = 0;
-                    arrow.appendChild(document.createTextNode(' '));
-                navParent.appendChild(arrow);
-                
-                parentSlide.append(navParent);
-                self.navChildren = parentSlide.find('.' + navParent.className + ' li');
-                
-                parentSlide.find('.' + navParent.className + ' li a').click(function(event){
-                    event.preventDefault();
-                    deck.pauseAutoPlay = true;
-                    slide(this.className.match('nav_([0-9]+)')[1] - 1);
-                });
-            };
-            
-            this.goTo = function(v, h, snap){
-                v = Math.min(total - 1, Math.max(0, v - 1));
-                h = Math.min(deck.slides.length - 1, Math.max(0, v));
-                $(deck.slides[h]).find('.' + this.classes.navContainer + ' a:eq(' + v + ')').addClass(deck.classes.active).siblings().removeClass(deck.classes.active);
-                slide(v, snap);
-            };
-            
-            this.next = function(callback){
-                slide(Math.min(total - 1, self.current + 1), undefined, callback);
-            };
-            
-            this.prev = function(callback){
-                slide(Math.max(0, self.current - 1), undefined, callback);
-            };
-            
-            this.snapTo = function(v, callback){
-                slide(Math.max(0, Math.min(total - 1, v)), true, callback);
-            };
-            
-            var initialize = function(){
-                if(!parentSlide.find('.' + self.classes.navContainer).length){
-                    
-                    // If not less than or equal to IE8, or is Chrome Frame, or is IE9
-                    var spineOffset = (( (deck.browser.msie !== true) || deck.browser.msie9 || deck.browser.msie10 ) ? $(deck.spines[0]).outerHeight() : $(deck.spines[0]).outerWidth());
-                    if(deck.options.hideSpines === true){
-                        spineOffset = 0;
-                    }
-                    el.css({
-                        position: 'absolute',
-                        zIndex: zIndex - 1,
-                        top: '0px',
-                        left: spineOffset,
-                        listStyleType: 'none',
-                        padding: '0px',
-                        margin: '0px',
-                        width: elParent.innerWidth() - spineOffset,
-                        height: height * total
-                    });
-                    
-                    var slidePadding = {
-                        top: parseInt(elChildren.css('padding-top'),10),
-                        right: parseInt(elChildren.css('padding-right'),10),
-                        bottom: parseInt(elChildren.css('padding-bottom'),10),
-                        left: parseInt(elChildren.css('padding-left'),10)
-                    };
-                    var slideBorder = {
-                        top: parseInt(elChildren.css('border-top-width'),10),
-                        right: parseInt(elChildren.css('border-right-width'),10),
-                        bottom: parseInt(elChildren.css('border-bottom-width'),10),
-                        left: parseInt(elChildren.css('border-left-width'),10)
-                    };
-                    for(var k in slideBorder){
-                        if(isNaN(slideBorder[k])){
-                            slideBorder[k] = 0;
-                        }
-                    }
-                    
-                    var slideHeight = height - slidePadding.top - slidePadding.bottom - slideBorder.top - slideBorder.bottom;
-                    var slideWidth = el.width() - slidePadding.right - slidePadding.left - slideBorder.right - slideBorder.left;
-                    
-                    elChildren.each(function(ind, e){
-                        $(e).css({
-                            listStyleType: 'none',
-                            position: 'absolute',
-                            top: ind * height,
-                            width: slideWidth,
-                            height: slideHeight
-                        }).addClass(self.classes.prefix + '_' + (ind + 1));
-                    });
-                    elParent.css({
-                        overflow: 'hidden'
-                    });
-                    
-                    createVerticalNav();
-                    
-                    if(typeof($.event.special.mousewheel) != "undefined"){
-                        el.bind("mousewheel", function(event, mousewheeldelta){
-                            if(self.options.scroll !== false){
-                                //Initial mousewheel assignment (legacy)
-                                var delta = event.detail ? event.detail : event.wheelDelta;
-                                // Try new mousewheel assignment:
-                                if( typeof(delta) == 'undefined' ){
-                                    delta = 0 - mousewheeldelta;
-                                }
-                                
-                                var internal = false;
-                                if($(event.originalTarget).parents(self.deck).length){
-                                    if($.inArray(event.originalTarget.nodeName.toLowerCase(),['input','select','option','textarea']) != -1){
-                                        internal = true;
-                                    }
-                                }
-                
-                                if (internal !== true) {
-                                    var firstSlide, lastSlide = false;
-                                    if( self.options.continueScrolling === true ){
-                                        if( (self.current + 1) == 1 ){
-                                            firstSlide = true;
-                                        }else if( (self.current + 1) == self.slides.length ){
-                                            lastSlide = true;
-                                        }
-                                    }
-                                    
-                                    if (delta > 0) {
-                                        event.preventDefault();
-                                        deck.pauseAutoPlay = true;
-                                        if( lastSlide ){
-                                            deck.next();
-                                            return false;
-                                        }else{
-                                            self.next();
-                                        }
-                                    } else {
-                                        event.preventDefault();
-                                        deck.pauseAutoPlay = true;
-                                        if( firstSlide ){
-                                            deck.prev();
-                                            return false;
-                                        }else{
-                                            self.prev();
-                                        }
-                                    }
-                                }
-                            }
-                        });
-                    }
-                }
-            };
-            
-            if(height > 0){
-                initialize();
-            } else {
-                var startupTimer;
-                startupTimer = setInterval(function(){
-                    el = $(el);
-                    elChildren = el.children();
-                    total = elChildren.length;
-                    parentSlide = el.parents('dd.slide');
-                    elParent = el.parent();
-                    height = parentSlide.innerHeight();
-
-                    if (height > 0) {
-                        clearInterval(startupTimer);
-                        initialize();
-                    }
-                }, 20);
             }
         };
         
@@ -1647,39 +907,14 @@ var SlideDeckLens = {};
             if(self.spines.length < 1){
                 self.options.hideSpines = true;
             }
-
-            // Fallback adjustments
-            switch(self.browser._this){
-                case "msie":
-                case "msie7":
-                case "msie8":
-                case "msie9":
-                case "msie10":
-                   switch(self.options.slideTransition){
-                        case "flip":
-                        case "flipHorizontal":
-                            self.options.slideTransition = "fade";
-                        break;
-                    }
-                break;
-            }
-            
-            // Transition option adjustments (certain transitions only work with certain settings, we accommodate for them here)
-            switch(self.options.slideTransition){
-                case "flip":
-                case "flipHorizontal":
-                case "fade":
-                case "stack":
-                    // Flip and fade only work with spines off, so force this
-                    self.options.hideSpines = true;
-                break;
-            }
-            
             // Turn off activeCorner if hideSpines is on
             if(self.options.hideSpines === true){
                 self.options.activeCorner = false;
             }
-        
+            
+            // Force self.options.slideTransition to "slide" as it is the only option for Lite
+            self.options.slideTransition = 'slide';
+            
             self.current = Math.min(self.slides.length,Math.max(1,self.options.start));
             
             if(el.height() > 0){
@@ -1768,86 +1003,16 @@ var SlideDeckLens = {};
             return self;
         };
         
-        this.progressTo = function(ind,params){
-            self.pauseAutoPlay = true;
-            self.updateControlTo(ind);
-            self.goTo(ind,params);
-            return self;
-        };
-        
-        this.updateControlTo = function(ind){
-            self.controlTo = ind;
-            updateControl();
-            return self;
-        };
-        
-        this.disableSlide = function(ind){
-            disableSlide(ind);
-            return self;
-        };
-        
-        this.enableSlide = function(ind){
-            enableSlide(ind);
-            return self;
-        };
-        
         this.setOption = function(opts,val){
             setOption(opts,val);
             return self;
         };
         
-        this.vertical = function(opts){
-            var self = this;
-            
-            if(typeof(this.verticalSlides) == 'undefined'){
-                this.verticalSlides = {};
-                
-                for(var i = 0; i < this.slides.length; i++){
-                    var slideElem = $(this.slides[i]).find('.' + this.classes.vertical);
-                    var v = {
-                        next: function(){ return false; },
-                        prev: function(){ return false; },
-                        goTo: function(){ return false; }
-                    };
-                    if(slideElem.length){
-                        v = new VerticalSlide(slideElem, this, opts);
-                    }
-                    this.verticalSlides[i] = v;
-                }
-            } else {
-                return this.verticalSlides[this.current - 1];
-            }
+        // Fallback for vertical function calls to prevent trigger of JavaScript error when run even with Lite library
+        this.vertical = function(){
+            return false;
         };
-        
-        this.goToVertical = function(v, h){
-            if(typeof(h) != 'undefined'){
-                if(this.verticalSlides[h - 1] !== false){
-                    if(this.current == h){
-                        this.vertical().goTo(v);
-                    } else {
-                        this.verticalSlides[h - 1].goTo(v, h, true);
-                        this.goTo(h);
-                    }
-                }
-            } else {
-                this.vertical().goTo(v);
-            }
-        };
-        
-        this.resetVertical = function(h, snapTo){
-            if(typeof(snapTo) == 'undefined'){
-                snapTo = true;
-            }
-            if(typeof(h) == 'undefined'){
-                h = this.current;
-            }
-            if(snapTo == true){
-                this.verticalSlides[h-1].snapTo(0);
-            } else {
-                this.verticalSlides[h-1].goTo(0);
-            }
-        };
-        
+                        
         initialize(opts);
     };
     
