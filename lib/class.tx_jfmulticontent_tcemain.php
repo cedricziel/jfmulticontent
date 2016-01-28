@@ -40,10 +40,10 @@ class tx_jfmulticontent_tcemain
      * @param array $incomingFieldArray
      * @param string $table
      * @param int $id
-     * @param t3lib_TCEmain $pObj
+     * @param \TYPO3\CMS\Core\DataHandling\DataHandler $pObj
      * @see tx_templavoila_tcemain::processDatamap_afterDatabaseOperations()
      */
-    public function processDatamap_preProcessFieldArray(array &$incomingFieldArray, $table, $id, t3lib_TCEmain &$pObj)
+    public function processDatamap_preProcessFieldArray(array &$incomingFieldArray, $table, $id, \TYPO3\CMS\Core\DataHandling\DataHandler &$pObj)
     {
         if ($incomingFieldArray['list_type'] != 'jfmulticontent_pi1') {
             if (is_array($pObj->datamap['tt_content'])) {
@@ -53,7 +53,7 @@ class tx_jfmulticontent_tcemain
                         $confArr = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['jfmulticontent']);
                         $incomingFieldArray['colPos'] = $confArr['colPosOfIrreContent'];
                         // Workaround for templavoila
-                        if (t3lib_extMgm::isLoaded('templavoila')) {
+                        if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('templavoila')) {
                             $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['tx_templavoila_tcemain']['doNotInsertElementRefsToPage'] = true;
                         }
                     }
