@@ -133,9 +133,24 @@
 							<displayCond>FIELD:style:IN:,2column,3column,4column,5column</displayCond>
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.equalize</label>
 							<config>
-								<form_type>user</form_type>
-								<userFunc><![CDATA[EXT:jfmulticontent/lib/class.tx_jfmulticontent_tceFunc.php:&tx_jfmulticontent_tceFunc->getCheckbox]]></userFunc>
-								<checked>0</checked>
+								<type>select</type>
+								<renderType>selectSingle</renderType>
+								<size>1</size>
+								<maxitems>1</maxitems>
+								<items type="array">
+									<numIndex index="2" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.from_ts</numIndex>
+										<numIndex index="1">2</numIndex>
+									</numIndex>
+									<numIndex index="1" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.yes</numIndex>
+										<numIndex index="1">1</numIndex>
+									</numIndex>
+									<numIndex index="0" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.no</numIndex>
+										<numIndex index="1">0</numIndex>
+									</numIndex>
+								</items>
 							</config>
 						</TCEforms>
 					</equalize>
@@ -148,9 +163,24 @@
 							<displayCond>FIELD:style:=:tab</displayCond>
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.tabCollapsible</label>
 							<config>
-								<form_type>user</form_type>
-								<userFunc><![CDATA[EXT:jfmulticontent/lib/class.tx_jfmulticontent_tceFunc.php:&tx_jfmulticontent_tceFunc->getCheckbox]]></userFunc>
-								<checked>0</checked>
+								<type>select</type>
+								<renderType>selectSingle</renderType>
+								<size>1</size>
+								<maxitems>1</maxitems>
+								<items type="array">
+									<numIndex index="2" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.from_ts</numIndex>
+										<numIndex index="1">2</numIndex>
+									</numIndex>
+									<numIndex index="1" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.yes</numIndex>
+										<numIndex index="1">1</numIndex>
+									</numIndex>
+									<numIndex index="0" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.no</numIndex>
+										<numIndex index="1">0</numIndex>
+									</numIndex>
+								</items>
 							</config>
 						</TCEforms>
 					</tabCollapsible>
@@ -174,9 +204,24 @@
 							<displayCond>FIELD:style:=:tab</displayCond>
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.tabRandomContent</label>
 							<config>
-								<form_type>user</form_type>
-								<userFunc><![CDATA[EXT:jfmulticontent/lib/class.tx_jfmulticontent_tceFunc.php:&tx_jfmulticontent_tceFunc->getCheckbox]]></userFunc>
-								<checked>0</checked>
+								<type>select</type>
+								<renderType>selectSingle</renderType>
+								<size>1</size>
+								<maxitems>1</maxitems>
+								<items type="array">
+									<numIndex index="2" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.from_ts</numIndex>
+										<numIndex index="1">2</numIndex>
+									</numIndex>
+									<numIndex index="1" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.yes</numIndex>
+										<numIndex index="1">1</numIndex>
+									</numIndex>
+									<numIndex index="0" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.no</numIndex>
+										<numIndex index="1">0</numIndex>
+									</numIndex>
+								</items>
 							</config>
 						</TCEforms>
 					</tabRandomContent>
@@ -259,9 +304,24 @@
 							<displayCond>FIELD:style:=:tab</displayCond>
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.tabCookieRoot</label>
 							<config>
-								<form_type>user</form_type>
-								<userFunc><![CDATA[EXT:jfmulticontent/lib/class.tx_jfmulticontent_tceFunc.php:&tx_jfmulticontent_tceFunc->getCheckbox]]></userFunc>
-								<checked>0</checked>
+								<type>select</type>
+								<renderType>selectSingle</renderType>
+								<size>1</size>
+								<maxitems>1</maxitems>
+								<items type="array">
+									<numIndex index="2" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.from_ts</numIndex>
+										<numIndex index="1">2</numIndex>
+									</numIndex>
+									<numIndex index="1" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.yes</numIndex>
+										<numIndex index="1">1</numIndex>
+									</numIndex>
+									<numIndex index="0" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.no</numIndex>
+										<numIndex index="1">0</numIndex>
+									</numIndex>
+								</items>
 							</config>
 						</TCEforms>
 					</tabCookieRoot>
@@ -562,9 +622,24 @@
 							<displayCond>FIELD:style:=:accordion</displayCond>
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.accordionCollapsible</label>
 							<config>
-								<form_type>user</form_type>
-								<userFunc><![CDATA[EXT:jfmulticontent/lib/class.tx_jfmulticontent_tceFunc.php:&tx_jfmulticontent_tceFunc->getCheckbox]]></userFunc>
-								<checked>0</checked>
+								<type>select</type>
+								<renderType>selectSingle</renderType>
+								<size>1</size>
+								<maxitems>1</maxitems>
+								<items type="array">
+									<numIndex index="2" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.from_ts</numIndex>
+										<numIndex index="1">2</numIndex>
+									</numIndex>
+									<numIndex index="1" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.yes</numIndex>
+										<numIndex index="1">1</numIndex>
+									</numIndex>
+									<numIndex index="0" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.no</numIndex>
+										<numIndex index="1">0</numIndex>
+									</numIndex>
+								</items>
 							</config>
 						</TCEforms>
 					</accordionCollapsible>
@@ -574,9 +649,24 @@
 							<displayCond>FIELD:style:=:accordion</displayCond>
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.accordionClosed</label>
 							<config>
-								<form_type>user</form_type>
-								<userFunc><![CDATA[EXT:jfmulticontent/lib/class.tx_jfmulticontent_tceFunc.php:&tx_jfmulticontent_tceFunc->getCheckbox]]></userFunc>
-								<checked>0</checked>
+								<type>select</type>
+								<renderType>selectSingle</renderType>
+								<size>1</size>
+								<maxitems>1</maxitems>
+								<items type="array">
+									<numIndex index="2" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.from_ts</numIndex>
+										<numIndex index="1">2</numIndex>
+									</numIndex>
+									<numIndex index="1" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.yes</numIndex>
+										<numIndex index="1">1</numIndex>
+									</numIndex>
+									<numIndex index="0" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.no</numIndex>
+										<numIndex index="1">0</numIndex>
+									</numIndex>
+								</items>
 							</config>
 						</TCEforms>
 					</accordionClosed>
@@ -601,9 +691,24 @@
 							<displayCond>FIELD:style:=:accordion</displayCond>
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.accordionRandomContent</label>
 							<config>
-								<form_type>user</form_type>
-								<userFunc><![CDATA[EXT:jfmulticontent/lib/class.tx_jfmulticontent_tceFunc.php:&tx_jfmulticontent_tceFunc->getCheckbox]]></userFunc>
-								<checked>0</checked>
+								<type>select</type>
+								<renderType>selectSingle</renderType>
+								<size>1</size>
+								<maxitems>1</maxitems>
+								<items type="array">
+									<numIndex index="2" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.from_ts</numIndex>
+										<numIndex index="1">2</numIndex>
+									</numIndex>
+									<numIndex index="1" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.yes</numIndex>
+										<numIndex index="1">1</numIndex>
+									</numIndex>
+									<numIndex index="0" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.no</numIndex>
+										<numIndex index="1">0</numIndex>
+									</numIndex>
+								</items>
 							</config>
 						</TCEforms>
 					</accordionRandomContent>
@@ -671,9 +776,17 @@
 							<displayCond>FIELD:style:=:accordion</displayCond>
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.accordionAnimate</label>
 							<config>
-								<form_type>user</form_type>
-								<userFunc><![CDATA[EXT:jfmulticontent/lib/class.tx_jfmulticontent_tceFunc.php:&tx_jfmulticontent_tceFunc->getCheckbox]]></userFunc>
-								<checked>1</checked>
+								<type>select</type>
+								<renderType>selectSingle</renderType>
+								<size>1</size>
+								<maxitems>1</maxitems>
+								<items type="array">
+									<numIndex index="0" type="array">
+										<numIndex index="2">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.from_ts</numIndex>
+										<numIndex index="1">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.yes</numIndex>
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.yes</numIndex>
+									</numIndex>
+								</items>
 							</config>
 						</TCEforms>
 					</accordionAnimate>
@@ -825,9 +938,24 @@
 							<displayCond>FIELD:style:=:slider</displayCond>
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.sliderResizeContents</label>
 							<config>
-								<form_type>user</form_type>
-								<userFunc><![CDATA[EXT:jfmulticontent/lib/class.tx_jfmulticontent_tceFunc.php:&tx_jfmulticontent_tceFunc->getCheckbox]]></userFunc>
-								<checked>0</checked>
+								<type>select</type>
+								<renderType>selectSingle</renderType>
+								<size>1</size>
+								<maxitems>1</maxitems>
+								<items type="array">
+									<numIndex index="2" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.from_ts</numIndex>
+										<numIndex index="1">2</numIndex>
+									</numIndex>
+									<numIndex index="1" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.yes</numIndex>
+										<numIndex index="1">1</numIndex>
+									</numIndex>
+									<numIndex index="0" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.no</numIndex>
+										<numIndex index="1">0</numIndex>
+									</numIndex>
+								</items>
 							</config>
 						</TCEforms>
 					</sliderResizeContents>
@@ -892,9 +1020,24 @@
 							<displayCond>FIELD:style:=:slider</displayCond>
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.sliderRandomContent</label>
 							<config>
-								<form_type>user</form_type>
-								<userFunc><![CDATA[EXT:jfmulticontent/lib/class.tx_jfmulticontent_tceFunc.php:&tx_jfmulticontent_tceFunc->getCheckbox]]></userFunc>
-								<checked>0</checked>
+								<type>select</type>
+								<renderType>selectSingle</renderType>
+								<size>1</size>
+								<maxitems>1</maxitems>
+								<items type="array">
+									<numIndex index="2" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.from_ts</numIndex>
+										<numIndex index="1">2</numIndex>
+									</numIndex>
+									<numIndex index="1" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.yes</numIndex>
+										<numIndex index="1">1</numIndex>
+									</numIndex>
+									<numIndex index="0" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.no</numIndex>
+										<numIndex index="1">0</numIndex>
+									</numIndex>
+								</items>
 							</config>
 						</TCEforms>
 					</sliderRandomContent>
@@ -904,9 +1047,24 @@
 							<displayCond>FIELD:style:=:slider</displayCond>
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.sliderHashTags</label>
 							<config>
-								<form_type>user</form_type>
-								<userFunc><![CDATA[EXT:jfmulticontent/lib/class.tx_jfmulticontent_tceFunc.php:&tx_jfmulticontent_tceFunc->getCheckbox]]></userFunc>
-								<checked>0</checked>
+								<type>select</type>
+								<renderType>selectSingle</renderType>
+								<size>1</size>
+								<maxitems>1</maxitems>
+								<items type="array">
+									<numIndex index="2" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.from_ts</numIndex>
+										<numIndex index="1">2</numIndex>
+									</numIndex>
+									<numIndex index="1" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.yes</numIndex>
+										<numIndex index="1">1</numIndex>
+									</numIndex>
+									<numIndex index="0" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.no</numIndex>
+										<numIndex index="1">0</numIndex>
+									</numIndex>
+								</items>
 							</config>
 						</TCEforms>
 					</sliderHashTags>
@@ -916,9 +1074,24 @@
 							<displayCond>FIELD:style:=:slider</displayCond>
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.sliderBuildArrows</label>
 							<config>
-								<form_type>user</form_type>
-								<userFunc><![CDATA[EXT:jfmulticontent/lib/class.tx_jfmulticontent_tceFunc.php:&tx_jfmulticontent_tceFunc->getCheckbox]]></userFunc>
-								<checked>1</checked>
+								<type>select</type>
+								<renderType>selectSingle</renderType>
+								<size>1</size>
+								<maxitems>1</maxitems>
+								<items type="array">
+									<numIndex index="2" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.from_ts</numIndex>
+										<numIndex index="1">2</numIndex>
+									</numIndex>
+									<numIndex index="1" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.yes</numIndex>
+										<numIndex index="1">1</numIndex>
+									</numIndex>
+									<numIndex index="0" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.no</numIndex>
+										<numIndex index="1">0</numIndex>
+									</numIndex>
+								</items>
 							</config>
 						</TCEforms>
 					</sliderBuildArrows>
@@ -928,9 +1101,24 @@
 							<displayCond>FIELD:style:=:slider</displayCond>
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.sliderToggleArrows</label>
 							<config>
-								<form_type>user</form_type>
-								<userFunc><![CDATA[EXT:jfmulticontent/lib/class.tx_jfmulticontent_tceFunc.php:&tx_jfmulticontent_tceFunc->getCheckbox]]></userFunc>
-								<checked>0</checked>
+								<type>select</type>
+								<renderType>selectSingle</renderType>
+								<size>1</size>
+								<maxitems>1</maxitems>
+								<items type="array">
+									<numIndex index="2" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.from_ts</numIndex>
+										<numIndex index="1">2</numIndex>
+									</numIndex>
+									<numIndex index="1" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.yes</numIndex>
+										<numIndex index="1">1</numIndex>
+									</numIndex>
+									<numIndex index="0" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.no</numIndex>
+										<numIndex index="1">0</numIndex>
+									</numIndex>
+								</items>
 							</config>
 						</TCEforms>
 					</sliderToggleArrows>
@@ -940,9 +1128,24 @@
 							<displayCond>FIELD:style:=:slider</displayCond>
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.sliderNavigation</label>
 							<config>
-								<form_type>user</form_type>
-								<userFunc><![CDATA[EXT:jfmulticontent/lib/class.tx_jfmulticontent_tceFunc.php:&tx_jfmulticontent_tceFunc->getCheckbox]]></userFunc>
-								<checked>1</checked>
+								<type>select</type>
+								<renderType>selectSingle</renderType>
+								<size>1</size>
+								<maxitems>1</maxitems>
+								<items type="array">
+									<numIndex index="2" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.from_ts</numIndex>
+										<numIndex index="1">2</numIndex>
+									</numIndex>
+									<numIndex index="1" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.yes</numIndex>
+										<numIndex index="1">1</numIndex>
+									</numIndex>
+									<numIndex index="0" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.no</numIndex>
+										<numIndex index="1">0</numIndex>
+									</numIndex>
+								</items>
 							</config>
 						</TCEforms>
 					</sliderNavigation>
@@ -952,9 +1155,24 @@
 							<displayCond>FIELD:style:=:slider</displayCond>
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.sliderStartStop</label>
 							<config>
-								<form_type>user</form_type>
-								<userFunc><![CDATA[EXT:jfmulticontent/lib/class.tx_jfmulticontent_tceFunc.php:&tx_jfmulticontent_tceFunc->getCheckbox]]></userFunc>
-								<checked>1</checked>
+								<type>select</type>
+								<renderType>selectSingle</renderType>
+								<size>1</size>
+								<maxitems>1</maxitems>
+								<items type="array">
+									<numIndex index="2" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.from_ts</numIndex>
+										<numIndex index="1">2</numIndex>
+									</numIndex>
+									<numIndex index="1" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.yes</numIndex>
+										<numIndex index="1">1</numIndex>
+									</numIndex>
+									<numIndex index="0" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.no</numIndex>
+										<numIndex index="1">0</numIndex>
+									</numIndex>
+								</items>
 							</config>
 						</TCEforms>
 					</sliderStartStop>
@@ -964,9 +1182,24 @@
 							<displayCond>FIELD:style:=:slider</displayCond>
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.sliderPanelFromHeader</label>
 							<config>
-								<form_type>user</form_type>
-								<userFunc><![CDATA[EXT:jfmulticontent/lib/class.tx_jfmulticontent_tceFunc.php:&tx_jfmulticontent_tceFunc->getCheckbox]]></userFunc>
-								<checked>0</checked>
+								<type>select</type>
+								<renderType>selectSingle</renderType>
+								<size>1</size>
+								<maxitems>1</maxitems>
+								<items type="array">
+									<numIndex index="2" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.from_ts</numIndex>
+										<numIndex index="1">2</numIndex>
+									</numIndex>
+									<numIndex index="1" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.yes</numIndex>
+										<numIndex index="1">1</numIndex>
+									</numIndex>
+									<numIndex index="0" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.no</numIndex>
+										<numIndex index="1">0</numIndex>
+									</numIndex>
+								</items>
 							</config>
 						</TCEforms>
 					</sliderPanelFromHeader>
@@ -976,9 +1209,24 @@
 							<displayCond>FIELD:style:=:slider</displayCond>
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.sliderToggleControls</label>
 							<config>
-								<form_type>user</form_type>
-								<userFunc><![CDATA[EXT:jfmulticontent/lib/class.tx_jfmulticontent_tceFunc.php:&tx_jfmulticontent_tceFunc->getCheckbox]]></userFunc>
-								<checked>0</checked>
+								<type>select</type>
+								<renderType>selectSingle</renderType>
+								<size>1</size>
+								<maxitems>1</maxitems>
+								<items type="array">
+									<numIndex index="2" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.from_ts</numIndex>
+										<numIndex index="1">2</numIndex>
+									</numIndex>
+									<numIndex index="1" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.yes</numIndex>
+										<numIndex index="1">1</numIndex>
+									</numIndex>
+									<numIndex index="0" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.no</numIndex>
+										<numIndex index="1">0</numIndex>
+									</numIndex>
+								</items>
 							</config>
 						</TCEforms>
 					</sliderToggleControls>
@@ -988,9 +1236,24 @@
 							<displayCond>FIELD:style:=:slider</displayCond>
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.sliderAutoStart</label>
 							<config>
-								<form_type>user</form_type>
-								<userFunc><![CDATA[EXT:jfmulticontent/lib/class.tx_jfmulticontent_tceFunc.php:&tx_jfmulticontent_tceFunc->getCheckbox]]></userFunc>
-								<checked>0</checked>
+								<type>select</type>
+								<renderType>selectSingle</renderType>
+								<size>1</size>
+								<maxitems>1</maxitems>
+								<items type="array">
+									<numIndex index="2" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.from_ts</numIndex>
+										<numIndex index="1">2</numIndex>
+									</numIndex>
+									<numIndex index="1" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.yes</numIndex>
+										<numIndex index="1">1</numIndex>
+									</numIndex>
+									<numIndex index="0" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.no</numIndex>
+										<numIndex index="1">0</numIndex>
+									</numIndex>
+								</items>
 							</config>
 						</TCEforms>
 					</sliderAutoStart>
@@ -1000,9 +1263,24 @@
 							<displayCond>FIELD:style:=:slider</displayCond>
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.sliderPauseOnHover</label>
 							<config>
-								<form_type>user</form_type>
-								<userFunc><![CDATA[EXT:jfmulticontent/lib/class.tx_jfmulticontent_tceFunc.php:&tx_jfmulticontent_tceFunc->getCheckbox]]></userFunc>
-								<checked>0</checked>
+								<type>select</type>
+								<renderType>selectSingle</renderType>
+								<size>1</size>
+								<maxitems>1</maxitems>
+								<items type="array">
+									<numIndex index="2" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.from_ts</numIndex>
+										<numIndex index="1">2</numIndex>
+									</numIndex>
+									<numIndex index="1" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.yes</numIndex>
+										<numIndex index="1">1</numIndex>
+									</numIndex>
+									<numIndex index="0" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.no</numIndex>
+										<numIndex index="1">0</numIndex>
+									</numIndex>
+								</items>
 							</config>
 						</TCEforms>
 					</sliderPauseOnHover>
@@ -1012,9 +1290,24 @@
 							<displayCond>FIELD:style:=:slider</displayCond>
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.sliderAllowRapidChange</label>
 							<config>
-								<form_type>user</form_type>
-								<userFunc><![CDATA[EXT:jfmulticontent/lib/class.tx_jfmulticontent_tceFunc.php:&tx_jfmulticontent_tceFunc->getCheckbox]]></userFunc>
-								<checked>0</checked>
+								<type>select</type>
+								<renderType>selectSingle</renderType>
+								<size>1</size>
+								<maxitems>1</maxitems>
+								<items type="array">
+									<numIndex index="2" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.from_ts</numIndex>
+										<numIndex index="1">2</numIndex>
+									</numIndex>
+									<numIndex index="1" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.yes</numIndex>
+										<numIndex index="1">1</numIndex>
+									</numIndex>
+									<numIndex index="0" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.no</numIndex>
+										<numIndex index="1">0</numIndex>
+									</numIndex>
+								</items>
 							</config>
 						</TCEforms>
 					</sliderAllowRapidChange>
@@ -1024,9 +1317,24 @@
 							<displayCond>FIELD:style:=:slider</displayCond>
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.sliderResumeOnVideoEnd</label>
 							<config>
-								<form_type>user</form_type>
-								<userFunc><![CDATA[EXT:jfmulticontent/lib/class.tx_jfmulticontent_tceFunc.php:&tx_jfmulticontent_tceFunc->getCheckbox]]></userFunc>
-								<checked>0</checked>
+								<type>select</type>
+								<renderType>selectSingle</renderType>
+								<size>1</size>
+								<maxitems>1</maxitems>
+								<items type="array">
+									<numIndex index="2" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.from_ts</numIndex>
+										<numIndex index="1">2</numIndex>
+									</numIndex>
+									<numIndex index="1" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.yes</numIndex>
+										<numIndex index="1">1</numIndex>
+									</numIndex>
+									<numIndex index="0" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.no</numIndex>
+										<numIndex index="1">0</numIndex>
+									</numIndex>
+								</items>
 							</config>
 						</TCEforms>
 					</sliderResumeOnVideoEnd>
@@ -1036,9 +1344,24 @@
 							<displayCond>FIELD:style:=:slider</displayCond>
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.sliderStopAtEnd</label>
 							<config>
-								<form_type>user</form_type>
-								<userFunc><![CDATA[EXT:jfmulticontent/lib/class.tx_jfmulticontent_tceFunc.php:&tx_jfmulticontent_tceFunc->getCheckbox]]></userFunc>
-								<checked>0</checked>
+								<type>select</type>
+								<renderType>selectSingle</renderType>
+								<size>1</size>
+								<maxitems>1</maxitems>
+								<items type="array">
+									<numIndex index="2" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.from_ts</numIndex>
+										<numIndex index="1">2</numIndex>
+									</numIndex>
+									<numIndex index="1" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.yes</numIndex>
+										<numIndex index="1">1</numIndex>
+									</numIndex>
+									<numIndex index="0" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.no</numIndex>
+										<numIndex index="1">0</numIndex>
+									</numIndex>
+								</items>
 							</config>
 						</TCEforms>
 					</sliderStopAtEnd>
@@ -1048,9 +1371,24 @@
 							<displayCond>FIELD:style:=:slider</displayCond>
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.sliderPlayRtl</label>
 							<config>
-								<form_type>user</form_type>
-								<userFunc><![CDATA[EXT:jfmulticontent/lib/class.tx_jfmulticontent_tceFunc.php:&tx_jfmulticontent_tceFunc->getCheckbox]]></userFunc>
-								<checked>0</checked>
+								<type>select</type>
+								<renderType>selectSingle</renderType>
+								<size>1</size>
+								<maxitems>1</maxitems>
+								<items type="array">
+									<numIndex index="2" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.from_ts</numIndex>
+										<numIndex index="1">2</numIndex>
+									</numIndex>
+									<numIndex index="1" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.yes</numIndex>
+										<numIndex index="1">1</numIndex>
+									</numIndex>
+									<numIndex index="0" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.no</numIndex>
+										<numIndex index="1">0</numIndex>
+									</numIndex>
+								</items>
 							</config>
 						</TCEforms>
 					</sliderPlayRtl>
@@ -1173,9 +1511,24 @@
 							<displayCond>FIELD:style:=:slider</displayCond>
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.sliderAutoplay</label>
 							<config>
-								<form_type>user</form_type>
-								<userFunc><![CDATA[EXT:jfmulticontent/lib/class.tx_jfmulticontent_tceFunc.php:&tx_jfmulticontent_tceFunc->getCheckbox]]></userFunc>
-								<checked>0</checked>
+								<type>select</type>
+								<renderType>selectSingle</renderType>
+								<size>1</size>
+								<maxitems>1</maxitems>
+								<items type="array">
+									<numIndex index="2" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.from_ts</numIndex>
+										<numIndex index="1">2</numIndex>
+									</numIndex>
+									<numIndex index="1" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.yes</numIndex>
+										<numIndex index="1">1</numIndex>
+									</numIndex>
+									<numIndex index="0" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.no</numIndex>
+										<numIndex index="1">0</numIndex>
+									</numIndex>
+								</items>
 							</config>
 						</TCEforms>
 					</sliderAutoplay>
@@ -1331,9 +1684,24 @@
 							<displayCond>FIELD:style:=:slidedeck</displayCond>
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.slidedeckActivecorner</label>
 							<config>
-								<form_type>user</form_type>
-								<userFunc><![CDATA[EXT:jfmulticontent/lib/class.tx_jfmulticontent_tceFunc.php:&tx_jfmulticontent_tceFunc->getCheckbox]]></userFunc>
-								<checked>1</checked>
+								<type>select</type>
+								<renderType>selectSingle</renderType>
+								<size>1</size>
+								<maxitems>1</maxitems>
+								<items type="array">
+									<numIndex index="2" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.from_ts</numIndex>
+										<numIndex index="1">2</numIndex>
+									</numIndex>
+									<numIndex index="1" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.yes</numIndex>
+										<numIndex index="1">1</numIndex>
+									</numIndex>
+									<numIndex index="0" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.no</numIndex>
+										<numIndex index="1">0</numIndex>
+									</numIndex>
+								</items>
 							</config>
 						</TCEforms>
 					</slidedeckActivecorner>
@@ -1343,9 +1711,24 @@
 							<displayCond>FIELD:style:=:slidedeck</displayCond>
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.slidedeckIndex</label>
 							<config>
-								<form_type>user</form_type>
-								<userFunc><![CDATA[EXT:jfmulticontent/lib/class.tx_jfmulticontent_tceFunc.php:&tx_jfmulticontent_tceFunc->getCheckbox]]></userFunc>
-								<checked>1</checked>
+								<type>select</type>
+								<renderType>selectSingle</renderType>
+								<size>1</size>
+								<maxitems>1</maxitems>
+								<items type="array">
+									<numIndex index="2" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.from_ts</numIndex>
+										<numIndex index="1">2</numIndex>
+									</numIndex>
+									<numIndex index="1" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.yes</numIndex>
+										<numIndex index="1">1</numIndex>
+									</numIndex>
+									<numIndex index="0" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.no</numIndex>
+										<numIndex index="1">0</numIndex>
+									</numIndex>
+								</items>
 							</config>
 						</TCEforms>
 					</slidedeckIndex>
@@ -1355,9 +1738,24 @@
 							<displayCond>FIELD:style:=:slidedeck</displayCond>
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.slidedeckScroll</label>
 							<config>
-								<form_type>user</form_type>
-								<userFunc><![CDATA[EXT:jfmulticontent/lib/class.tx_jfmulticontent_tceFunc.php:&tx_jfmulticontent_tceFunc->getCheckbox]]></userFunc>
-								<checked>0</checked>
+								<type>select</type>
+								<renderType>selectSingle</renderType>
+								<size>1</size>
+								<maxitems>1</maxitems>
+								<items type="array">
+									<numIndex index="2" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.from_ts</numIndex>
+										<numIndex index="1">2</numIndex>
+									</numIndex>
+									<numIndex index="1" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.yes</numIndex>
+										<numIndex index="1">1</numIndex>
+									</numIndex>
+									<numIndex index="0" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.no</numIndex>
+										<numIndex index="1">0</numIndex>
+									</numIndex>
+								</items>
 							</config>
 						</TCEforms>
 					</slidedeckScroll>
@@ -1367,9 +1765,24 @@
 							<displayCond>FIELD:style:=:slidedeck</displayCond>
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.slidedeckKeys</label>
 							<config>
-								<form_type>user</form_type>
-								<userFunc><![CDATA[EXT:jfmulticontent/lib/class.tx_jfmulticontent_tceFunc.php:&tx_jfmulticontent_tceFunc->getCheckbox]]></userFunc>
-								<checked>0</checked>
+								<type>select</type>
+								<renderType>selectSingle</renderType>
+								<size>1</size>
+								<maxitems>1</maxitems>
+								<items type="array">
+									<numIndex index="2" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.from_ts</numIndex>
+										<numIndex index="1">2</numIndex>
+									</numIndex>
+									<numIndex index="1" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.yes</numIndex>
+										<numIndex index="1">1</numIndex>
+									</numIndex>
+									<numIndex index="0" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.no</numIndex>
+										<numIndex index="1">0</numIndex>
+									</numIndex>
+								</items>
 							</config>
 						</TCEforms>
 					</slidedeckKeys>
@@ -1379,9 +1792,24 @@
 							<displayCond>FIELD:style:=:slidedeck</displayCond>
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.slidedeckHidespines</label>
 							<config>
-								<form_type>user</form_type>
-								<userFunc><![CDATA[EXT:jfmulticontent/lib/class.tx_jfmulticontent_tceFunc.php:&tx_jfmulticontent_tceFunc->getCheckbox]]></userFunc>
-								<checked>0</checked>
+								<type>select</type>
+								<renderType>selectSingle</renderType>
+								<size>1</size>
+								<maxitems>1</maxitems>
+								<items type="array">
+									<numIndex index="2" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.from_ts</numIndex>
+										<numIndex index="1">2</numIndex>
+									</numIndex>
+									<numIndex index="1" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.yes</numIndex>
+										<numIndex index="1">1</numIndex>
+									</numIndex>
+									<numIndex index="0" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.no</numIndex>
+										<numIndex index="1">0</numIndex>
+									</numIndex>
+								</items>
 							</config>
 						</TCEforms>
 					</slidedeckHidespines>
@@ -1444,9 +1872,24 @@
 							<displayCond>FIELD:style:=:easyaccordion</displayCond>
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.easyaccordionSlideNum</label>
 							<config>
-								<form_type>user</form_type>
-								<userFunc><![CDATA[EXT:jfmulticontent/lib/class.tx_jfmulticontent_tceFunc.php:&tx_jfmulticontent_tceFunc->getCheckbox]]></userFunc>
-								<checked>1</checked>
+								<type>select</type>
+								<renderType>selectSingle</renderType>
+								<size>1</size>
+								<maxitems>1</maxitems>
+								<items type="array">
+									<numIndex index="2" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.from_ts</numIndex>
+										<numIndex index="1">2</numIndex>
+									</numIndex>
+									<numIndex index="1" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.yes</numIndex>
+										<numIndex index="1">1</numIndex>
+									</numIndex>
+									<numIndex index="0" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.no</numIndex>
+										<numIndex index="1">0</numIndex>
+									</numIndex>
+								</items>
 							</config>
 						</TCEforms>
 					</easyaccordionSlideNum>
@@ -1519,9 +1962,24 @@
 							<displayCond>FIELD:style:=:booklet</displayCond>
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.bookletRTL</label>
 							<config>
-								<form_type>user</form_type>
-								<userFunc><![CDATA[EXT:jfmulticontent/lib/class.tx_jfmulticontent_tceFunc.php:&tx_jfmulticontent_tceFunc->getCheckbox]]></userFunc>
-								<checked>0</checked>
+								<type>select</type>
+								<renderType>selectSingle</renderType>
+								<size>1</size>
+								<maxitems>1</maxitems>
+								<items type="array">
+									<numIndex index="2" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.from_ts</numIndex>
+										<numIndex index="1">2</numIndex>
+									</numIndex>
+									<numIndex index="1" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.yes</numIndex>
+										<numIndex index="1">1</numIndex>
+									</numIndex>
+									<numIndex index="0" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.no</numIndex>
+										<numIndex index="1">0</numIndex>
+									</numIndex>
+								</items>
 							</config>
 						</TCEforms>
 					</bookletRTL>
@@ -1644,9 +2102,24 @@
 							<displayCond>FIELD:style:=:booklet</displayCond>
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.bookletPageNumbers</label>
 							<config>
-								<form_type>user</form_type>
-								<userFunc><![CDATA[EXT:jfmulticontent/lib/class.tx_jfmulticontent_tceFunc.php:&tx_jfmulticontent_tceFunc->getCheckbox]]></userFunc>
-								<checked>1</checked>
+								<type>select</type>
+								<renderType>selectSingle</renderType>
+								<size>1</size>
+								<maxitems>1</maxitems>
+								<items type="array">
+									<numIndex index="2" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.from_ts</numIndex>
+										<numIndex index="1">2</numIndex>
+									</numIndex>
+									<numIndex index="1" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.yes</numIndex>
+										<numIndex index="1">1</numIndex>
+									</numIndex>
+									<numIndex index="0" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.no</numIndex>
+										<numIndex index="1">0</numIndex>
+									</numIndex>
+								</items>
 							</config>
 						</TCEforms>
 					</bookletPageNumbers>
@@ -1656,9 +2129,24 @@
 							<displayCond>FIELD:style:=:booklet</displayCond>
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.bookletManual</label>
 							<config>
-								<form_type>user</form_type>
-								<userFunc><![CDATA[EXT:jfmulticontent/lib/class.tx_jfmulticontent_tceFunc.php:&tx_jfmulticontent_tceFunc->getCheckbox]]></userFunc>
-								<checked>1</checked>
+								<type>select</type>
+								<renderType>selectSingle</renderType>
+								<size>1</size>
+								<maxitems>1</maxitems>
+								<items type="array">
+									<numIndex index="2" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.from_ts</numIndex>
+										<numIndex index="1">2</numIndex>
+									</numIndex>
+									<numIndex index="1" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.yes</numIndex>
+										<numIndex index="1">1</numIndex>
+									</numIndex>
+									<numIndex index="0" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.no</numIndex>
+										<numIndex index="1">0</numIndex>
+									</numIndex>
+								</items>
 							</config>
 						</TCEforms>
 					</bookletManual>
@@ -1668,9 +2156,24 @@
 							<displayCond>FIELD:style:=:booklet</displayCond>
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.bookletShadows</label>
 							<config>
-								<form_type>user</form_type>
-								<userFunc><![CDATA[EXT:jfmulticontent/lib/class.tx_jfmulticontent_tceFunc.php:&tx_jfmulticontent_tceFunc->getCheckbox]]></userFunc>
-								<checked>1</checked>
+								<type>select</type>
+								<renderType>selectSingle</renderType>
+								<size>1</size>
+								<maxitems>1</maxitems>
+								<items type="array">
+									<numIndex index="2" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.from_ts</numIndex>
+										<numIndex index="1">2</numIndex>
+									</numIndex>
+									<numIndex index="1" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.yes</numIndex>
+										<numIndex index="1">1</numIndex>
+									</numIndex>
+									<numIndex index="0" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.no</numIndex>
+										<numIndex index="1">0</numIndex>
+									</numIndex>
+								</items>
 							</config>
 						</TCEforms>
 					</bookletShadows>
@@ -1680,9 +2183,24 @@
 							<displayCond>FIELD:style:=:booklet</displayCond>
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.bookletClosed</label>
 							<config>
-								<form_type>user</form_type>
-								<userFunc><![CDATA[EXT:jfmulticontent/lib/class.tx_jfmulticontent_tceFunc.php:&tx_jfmulticontent_tceFunc->getCheckbox]]></userFunc>
-								<checked>0</checked>
+								<type>select</type>
+								<renderType>selectSingle</renderType>
+								<size>1</size>
+								<maxitems>1</maxitems>
+								<items type="array">
+									<numIndex index="2" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.from_ts</numIndex>
+										<numIndex index="1">2</numIndex>
+									</numIndex>
+									<numIndex index="1" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.yes</numIndex>
+										<numIndex index="1">1</numIndex>
+									</numIndex>
+									<numIndex index="0" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.no</numIndex>
+										<numIndex index="1">0</numIndex>
+									</numIndex>
+								</items>
 							</config>
 						</TCEforms>
 					</bookletClosed>
@@ -1692,9 +2210,24 @@
 							<displayCond>FIELD:style:=:booklet</displayCond>
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.bookletCovers</label>
 							<config>
-								<form_type>user</form_type>
-								<userFunc><![CDATA[EXT:jfmulticontent/lib/class.tx_jfmulticontent_tceFunc.php:&tx_jfmulticontent_tceFunc->getCheckbox]]></userFunc>
-								<checked>0</checked>
+								<type>select</type>
+								<renderType>selectSingle</renderType>
+								<size>1</size>
+								<maxitems>1</maxitems>
+								<items type="array">
+									<numIndex index="2" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.from_ts</numIndex>
+										<numIndex index="1">2</numIndex>
+									</numIndex>
+									<numIndex index="1" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.yes</numIndex>
+										<numIndex index="1">1</numIndex>
+									</numIndex>
+									<numIndex index="0" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.no</numIndex>
+										<numIndex index="1">0</numIndex>
+									</numIndex>
+								</items>
 							</config>
 						</TCEforms>
 					</bookletCovers>
@@ -1704,9 +2237,24 @@
 							<displayCond>FIELD:style:=:booklet</displayCond>
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.bookletAutoCenter</label>
 							<config>
-								<form_type>user</form_type>
-								<userFunc><![CDATA[EXT:jfmulticontent/lib/class.tx_jfmulticontent_tceFunc.php:&tx_jfmulticontent_tceFunc->getCheckbox]]></userFunc>
-								<checked>0</checked>
+								<type>select</type>
+								<renderType>selectSingle</renderType>
+								<size>1</size>
+								<maxitems>1</maxitems>
+								<items type="array">
+									<numIndex index="2" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.from_ts</numIndex>
+										<numIndex index="1">2</numIndex>
+									</numIndex>
+									<numIndex index="1" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.yes</numIndex>
+										<numIndex index="1">1</numIndex>
+									</numIndex>
+									<numIndex index="0" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.no</numIndex>
+										<numIndex index="1">0</numIndex>
+									</numIndex>
+								</items>
 							</config>
 						</TCEforms>
 					</bookletAutoCenter>
@@ -1716,9 +2264,24 @@
 							<displayCond>FIELD:style:=:booklet</displayCond>
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.bookletHash</label>
 							<config>
-								<form_type>user</form_type>
-								<userFunc><![CDATA[EXT:jfmulticontent/lib/class.tx_jfmulticontent_tceFunc.php:&tx_jfmulticontent_tceFunc->getCheckbox]]></userFunc>
-								<checked>0</checked>
+								<type>select</type>
+								<renderType>selectSingle</renderType>
+								<size>1</size>
+								<maxitems>1</maxitems>
+								<items type="array">
+									<numIndex index="2" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.from_ts</numIndex>
+										<numIndex index="1">2</numIndex>
+									</numIndex>
+									<numIndex index="1" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.yes</numIndex>
+										<numIndex index="1">1</numIndex>
+									</numIndex>
+									<numIndex index="0" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.no</numIndex>
+										<numIndex index="1">0</numIndex>
+									</numIndex>
+								</items>
 							</config>
 						</TCEforms>
 					</bookletHash>
@@ -1728,9 +2291,24 @@
 							<displayCond>FIELD:style:=:booklet</displayCond>
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.bookletKeyboard</label>
 							<config>
-								<form_type>user</form_type>
-								<userFunc><![CDATA[EXT:jfmulticontent/lib/class.tx_jfmulticontent_tceFunc.php:&tx_jfmulticontent_tceFunc->getCheckbox]]></userFunc>
-								<checked>0</checked>
+								<type>select</type>
+								<renderType>selectSingle</renderType>
+								<size>1</size>
+								<maxitems>1</maxitems>
+								<items type="array">
+									<numIndex index="2" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.from_ts</numIndex>
+										<numIndex index="1">2</numIndex>
+									</numIndex>
+									<numIndex index="1" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.yes</numIndex>
+										<numIndex index="1">1</numIndex>
+									</numIndex>
+									<numIndex index="0" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.no</numIndex>
+										<numIndex index="1">0</numIndex>
+									</numIndex>
+								</items>
 							</config>
 						</TCEforms>
 					</bookletKeyboard>
@@ -1740,9 +2318,24 @@
 							<displayCond>FIELD:style:=:booklet</displayCond>
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.bookletAuto</label>
 							<config>
-								<form_type>user</form_type>
-								<userFunc><![CDATA[EXT:jfmulticontent/lib/class.tx_jfmulticontent_tceFunc.php:&tx_jfmulticontent_tceFunc->getCheckbox]]></userFunc>
-								<checked>0</checked>
+								<type>select</type>
+								<renderType>selectSingle</renderType>
+								<size>1</size>
+								<maxitems>1</maxitems>
+								<items type="array">
+									<numIndex index="2" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.from_ts</numIndex>
+										<numIndex index="1">2</numIndex>
+									</numIndex>
+									<numIndex index="1" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.yes</numIndex>
+										<numIndex index="1">1</numIndex>
+									</numIndex>
+									<numIndex index="0" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.no</numIndex>
+										<numIndex index="1">0</numIndex>
+									</numIndex>
+								</items>
 							</config>
 						</TCEforms>
 					</bookletAuto>
@@ -1767,9 +2360,24 @@
 							<displayCond>FIELD:style:=:booklet</displayCond>
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.bookletOverlays</label>
 							<config>
-								<form_type>user</form_type>
-								<userFunc><![CDATA[EXT:jfmulticontent/lib/class.tx_jfmulticontent_tceFunc.php:&tx_jfmulticontent_tceFunc->getCheckbox]]></userFunc>
-								<checked>1</checked>
+								<type>select</type>
+								<renderType>selectSingle</renderType>
+								<size>1</size>
+								<maxitems>1</maxitems>
+								<items type="array">
+									<numIndex index="2" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.from_ts</numIndex>
+										<numIndex index="1">2</numIndex>
+									</numIndex>
+									<numIndex index="1" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.yes</numIndex>
+										<numIndex index="1">1</numIndex>
+									</numIndex>
+									<numIndex index="0" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.no</numIndex>
+										<numIndex index="1">0</numIndex>
+									</numIndex>
+								</items>
 							</config>
 						</TCEforms>
 					</bookletOverlays>
@@ -1779,9 +2387,24 @@
 							<displayCond>FIELD:style:=:booklet</displayCond>
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.bookletArrows</label>
 							<config>
-								<form_type>user</form_type>
-								<userFunc><![CDATA[EXT:jfmulticontent/lib/class.tx_jfmulticontent_tceFunc.php:&tx_jfmulticontent_tceFunc->getCheckbox]]></userFunc>
-								<checked>0</checked>
+								<type>select</type>
+								<renderType>selectSingle</renderType>
+								<size>1</size>
+								<maxitems>1</maxitems>
+								<items type="array">
+									<numIndex index="2" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.from_ts</numIndex>
+										<numIndex index="1">2</numIndex>
+									</numIndex>
+									<numIndex index="1" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.yes</numIndex>
+										<numIndex index="1">1</numIndex>
+									</numIndex>
+									<numIndex index="0" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.no</numIndex>
+										<numIndex index="1">0</numIndex>
+									</numIndex>
+								</items>
 							</config>
 						</TCEforms>
 					</bookletArrows>
@@ -1791,9 +2414,24 @@
 							<displayCond>FIELD:style:=:booklet</displayCond>
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.bookletArrowsHide</label>
 							<config>
-								<form_type>user</form_type>
-								<userFunc><![CDATA[EXT:jfmulticontent/lib/class.tx_jfmulticontent_tceFunc.php:&tx_jfmulticontent_tceFunc->getCheckbox]]></userFunc>
-								<checked>0</checked>
+								<type>select</type>
+								<renderType>selectSingle</renderType>
+								<size>1</size>
+								<maxitems>1</maxitems>
+								<items type="array">
+									<numIndex index="2" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.from_ts</numIndex>
+										<numIndex index="1">2</numIndex>
+									</numIndex>
+									<numIndex index="1" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.yes</numIndex>
+										<numIndex index="1">1</numIndex>
+									</numIndex>
+									<numIndex index="0" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.no</numIndex>
+										<numIndex index="1">0</numIndex>
+									</numIndex>
+								</items>
 							</config>
 						</TCEforms>
 					</bookletArrowsHide>
@@ -1803,9 +2441,24 @@
 							<displayCond>FIELD:style:=:booklet</displayCond>
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.bookletHovers</label>
 							<config>
-								<form_type>user</form_type>
-								<userFunc><![CDATA[EXT:jfmulticontent/lib/class.tx_jfmulticontent_tceFunc.php:&tx_jfmulticontent_tceFunc->getCheckbox]]></userFunc>
-								<checked>1</checked>
+								<type>select</type>
+								<renderType>selectSingle</renderType>
+								<size>1</size>
+								<maxitems>1</maxitems>
+								<items type="array">
+									<numIndex index="2" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.from_ts</numIndex>
+										<numIndex index="1">2</numIndex>
+									</numIndex>
+									<numIndex index="1" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.yes</numIndex>
+										<numIndex index="1">1</numIndex>
+									</numIndex>
+									<numIndex index="0" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.no</numIndex>
+										<numIndex index="1">0</numIndex>
+									</numIndex>
+								</items>
 							</config>
 						</TCEforms>
 					</bookletHovers>
@@ -1817,9 +2470,24 @@
 							<exclude>1</exclude>
 							<displayCond>FIELD:style:=:typoscript</displayCond>
 							<config>
-								<form_type>user</form_type>
-								<userFunc><![CDATA[EXT:jfmulticontent/lib/class.tx_jfmulticontent_tceFunc.php:&tx_jfmulticontent_tceFunc->getTypoScriptInfo]]></userFunc>
-								<checked>0</checked>
+								<type>select</type>
+								<renderType>selectSingle</renderType>
+								<size>1</size>
+								<maxitems>1</maxitems>
+								<items type="array">
+									<numIndex index="2" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.from_ts</numIndex>
+										<numIndex index="1">2</numIndex>
+									</numIndex>
+									<numIndex index="1" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.yes</numIndex>
+										<numIndex index="1">1</numIndex>
+									</numIndex>
+									<numIndex index="0" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.no</numIndex>
+										<numIndex index="1">0</numIndex>
+									</numIndex>
+								</items>
 							</config>
 						</TCEforms>
 					</typoscriptInfo>
@@ -1847,9 +2515,24 @@
 							<displayCond>FIELD:style:IN:slidedeck</displayCond>
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.autoplayCycle</label>
 							<config>
-								<form_type>user</form_type>
-								<userFunc><![CDATA[EXT:jfmulticontent/lib/class.tx_jfmulticontent_tceFunc.php:&tx_jfmulticontent_tceFunc->getCheckbox]]></userFunc>
-								<checked>0</checked>
+								<type>select</type>
+								<renderType>selectSingle</renderType>
+								<size>1</size>
+								<maxitems>1</maxitems>
+								<items type="array">
+									<numIndex index="2" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.from_ts</numIndex>
+										<numIndex index="1">2</numIndex>
+									</numIndex>
+									<numIndex index="1" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.yes</numIndex>
+										<numIndex index="1">1</numIndex>
+									</numIndex>
+									<numIndex index="0" type="array">
+										<numIndex index="0">LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.pi_flexform.no</numIndex>
+										<numIndex index="1">0</numIndex>
+									</numIndex>
+								</items>
 							</config>
 						</TCEforms>
 					</autoplayCycle>

@@ -55,6 +55,8 @@ class tx_jfmulticontent_tceFunc
                 'type' => 'check',
             );
         }
+
+        \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($PA);
         $tceforms = &$PA['pObj'];
         return $tceforms->getSingleField_SW($PA['table'], $PA['field'], $PA['row'], $PA);
     }
