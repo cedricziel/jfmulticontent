@@ -26,39 +26,34 @@
  * 'cms_layout' for the 'jfmulticontent' extension.
  *
  * @author     Juergen Furrer <juergen.furrer@gmail.com>
- * @package    TYPO3
- * @subpackage tx_jfmulticontent
  */
 class tx_jfmulticontent_cms_layout
 {
-	/**
-	 * Returns information about this extension's pi1 plugin
-	 *
-	 * @param  array  $params Parameters to the hook
-	 * @param  object $pObj   A reference to calling object
-	 * @return string Information about pi1 plugin
-	 */
-	function getExtensionSummary($params, &$pObj)
-	{
-		if ($params['row']['list_type'] == 'jfmulticontent_pi1') {
-			$data = t3lib_div::xml2array($params['row']['pi_flexform']);
-			if (is_array($data) && $data['data']['general']['lDEF']['style']['vDEF']) {
-				$result = sprintf($GLOBALS['LANG']->sL('LLL:EXT:jfmulticontent/locallang.xml:cms_layout.style'), '<strong>'.$data['data']['general']['lDEF']['style']['vDEF'].'</strong><br/>');
-			}
-			if (!$result) {
-				$result = $GLOBALS['LANG']->sL('LLL:EXT:jfmulticontent/locallang.xml:cms_layout.not_configured').'<br/>';
-			}
-		}
-		if (t3lib_extMgm::isLoaded("templavoila")) {
-			$result = strip_tags($result);
-		}
-		return $result;
-	}
+    /**
+     * Returns information about this extension's pi1 plugin
+     *
+     * @param  array  $params Parameters to the hook
+     * @param  object $pObj   A reference to calling object
+     * @return string Information about pi1 plugin
+     */
+    public function getExtensionSummary($params, &$pObj)
+    {
+        if ($params['row']['list_type'] == 'jfmulticontent_pi1') {
+            $data = t3lib_div::xml2array($params['row']['pi_flexform']);
+            if (is_array($data) && $data['data']['general']['lDEF']['style']['vDEF']) {
+                $result = sprintf($GLOBALS['LANG']->sL('LLL:EXT:jfmulticontent/locallang.xml:cms_layout.style'), '<strong>' . $data['data']['general']['lDEF']['style']['vDEF'] . '</strong><br/>');
+            }
+            if (!$result) {
+                $result = $GLOBALS['LANG']->sL('LLL:EXT:jfmulticontent/locallang.xml:cms_layout.not_configured') . '<br/>';
+            }
+        }
+        if (t3lib_extMgm::isLoaded('templavoila')) {
+            $result = strip_tags($result);
+        }
+        return $result;
+    }
 }
 
-
-if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/jfmulticontent/lib/class.tx_jfmulticontent_cms_layout.php'])	{
-	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/jfmulticontent/lib/class.tx_jfmulticontent_cms_layout.php']);
+if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/jfmulticontent/lib/class.tx_jfmulticontent_cms_layout.php']) {
+    include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/jfmulticontent/lib/class.tx_jfmulticontent_cms_layout.php']);
 }
-
-?>

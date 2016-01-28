@@ -29,44 +29,42 @@
  * Class that renders fields for the extensionmanager configuration
  *
  * @author     Juergen Furrer <juergen.furrer@gmail.com>
- * @package    TYPO3
- * @subpackage tx_jfmulticontent
  */
 class tx_jfmulticontent_tsparserext
 {
-	/**
-	 * Shows the update Message
-	 *
-	 * @return	string
-	 */
-	function displayMessage(&$params, &$tsObj)
-	{
-		$out = '';
+    /**
+     * Shows the update Message
+     *
+     * @return	string
+     */
+    public function displayMessage(&$params, &$tsObj)
+    {
+        $out = '';
 
-		if (class_exists(t3lib_utility_VersionNumber) && t3lib_utility_VersionNumber::convertVersionNumberToInteger(TYPO3_version) < 4003000) {
-			// 4.3.0 comes with flashmessages styles. For older versions we include the needed styles here
-			$cssPath = $GLOBALS['BACK_PATH'] . t3lib_extMgm::extRelPath('jfmulticontent');
-			$out .= '<link rel="stylesheet" type="text/css" href="' . $cssPath . 'compat/flashmessages.css" media="screen" />';
-		}
+        if (class_exists(t3lib_utility_VersionNumber) && t3lib_utility_VersionNumber::convertVersionNumberToInteger(TYPO3_version) < 4003000) {
+            // 4.3.0 comes with flashmessages styles. For older versions we include the needed styles here
+            $cssPath = $GLOBALS['BACK_PATH'] . t3lib_extMgm::extRelPath('jfmulticontent');
+            $out .= '<link rel="stylesheet" type="text/css" href="' . $cssPath . 'compat/flashmessages.css" media="screen" />';
+        }
 
-		$checkConfig = NULL;
-		if ($this->checkConfig() === FALSE) {
-			$checkConfig = '
+        $checkConfig = null;
+        if ($this->checkConfig() === false) {
+            $checkConfig = '
 	<div class="typo3-message message-warning">
 		<div class="message-header">' . $GLOBALS['LANG']->sL('LLL:EXT:jfmulticontent/locallang.xml:extmng.classInnerHeader') . '</div>
 		<div class="message-body">
 			' . $GLOBALS['LANG']->sL('LLL:EXT:jfmulticontent/locallang.xml:extmng.classInner') . '
 		</div>
 	</div>';
-		}
+        }
 
-		if (class_exists(t3lib_utility_VersionNumber) && t3lib_utility_VersionNumber::convertVersionNumberToInteger(TYPO3_version) < 4005000) {
-			$url = 'index.php?&amp;id=0&amp;CMD[showExt]=jfmulticontent&amp;SET[singleDetails]=updateModule';
-		} else {
-			$url = 'mod.php?&id=0&M=tools_em&CMD[showExt]=jfmulticontent&SET[singleDetails]=updateModule';
-		}
+        if (class_exists(t3lib_utility_VersionNumber) && t3lib_utility_VersionNumber::convertVersionNumberToInteger(TYPO3_version) < 4005000) {
+            $url = 'index.php?&amp;id=0&amp;CMD[showExt]=jfmulticontent&amp;SET[singleDetails]=updateModule';
+        } else {
+            $url = 'mod.php?&id=0&M=tools_em&CMD[showExt]=jfmulticontent&SET[singleDetails]=updateModule';
+        }
 
-		$out .= '
+        $out .= '
 <div style="position:absolute;top:10px;right:10px; width:300px;">
 	<div class="typo3-message message-information">
 		<div class="message-header">' . $GLOBALS['LANG']->sL('LLL:EXT:jfmulticontent/locallang.xml:extmng.updatermsgHeader') . '</div>
@@ -79,45 +77,43 @@ class tx_jfmulticontent_tsparserext
 	' . $checkConfig . '
 </div>';
 
-		return $out;
-	}
+        return $out;
+    }
 
-	/**
-	 * Check the config for a gifen feature
-	 * 
-	 * @return boolean
-	 */
-	function checkConfig()
-	{
-		$confDefault = array(
-			'useStoragePidOnly',
-			'ttNewsCodes',
-			'useSelectInsteadCheckbox',
-			'useOwnUserFuncForPages',
-			'openExternalLink',
-			'showEmptyContent',
-			'addBrowseLinks',
-			'tabSelectByHash',
-			'colPosOfIrreContent',
-			'style.',
-			'classInner',
-			'frontendErrorMsg',
-			'anythingSliderThemeFolder',
-			'anythingSliderModes',
-			'easyAccordionSkinFolder',
-		);
-		$confArr = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['jfmulticontent']);
-		foreach ($confDefault as $val) {
-			if (! isset($confArr[$val]) && ! isset($_POST['data'][$val])) {
-				return FALSE;
-			}
-		}
-		return TRUE;
-	}
+    /**
+     * Check the config for a gifen feature
+     * 
+     * @return bool
+     */
+    public function checkConfig()
+    {
+        $confDefault = array(
+            'useStoragePidOnly',
+            'ttNewsCodes',
+            'useSelectInsteadCheckbox',
+            'useOwnUserFuncForPages',
+            'openExternalLink',
+            'showEmptyContent',
+            'addBrowseLinks',
+            'tabSelectByHash',
+            'colPosOfIrreContent',
+            'style.',
+            'classInner',
+            'frontendErrorMsg',
+            'anythingSliderThemeFolder',
+            'anythingSliderModes',
+            'easyAccordionSkinFolder',
+        );
+        $confArr = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['jfmulticontent']);
+        foreach ($confDefault as $val) {
+            if (! isset($confArr[$val]) && ! isset($_POST['data'][$val])) {
+                return false;
+            }
+        }
+        return true;
+    }
 }
-
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/jfmulticontent/lib/class.tx_jfmulticontent_tsparserext.php']) {
-	include_once ($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/jfmulticontent/lib/class.tx_jfmulticontent_tsparserext.php']);
+    include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/jfmulticontent/lib/class.tx_jfmulticontent_tsparserext.php']);
 }
-?>
