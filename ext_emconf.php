@@ -35,8 +35,8 @@ $EM_CONF[$_EXTKEY] = array(
     'constraints' => array(
         'depends' => array(
             'cms' => '',
-            'php' => '5.0.0-0.0.0',
-            'typo3' => '4.3.0-6.2.99',
+            'php' => '5.5.0-0.0.0',
+            'typo3' => '4.3.0-7.6.99',
         ),
         'conflicts' => array(
         ),
