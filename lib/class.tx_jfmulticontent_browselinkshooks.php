@@ -25,7 +25,7 @@
 /**
  * @author	Juergen Furrer <juergen.furrer@gmail.com>
  */
-class tx_jfmulticontent_browselinkshooks implements t3lib_browseLinksHook
+class tx_jfmulticontent_browselinkshooks implements \TYPO3\CMS\Core\ElementBrowser\ElementBrowserHookInterface
 {
 
     protected $invokingObject;
@@ -58,7 +58,7 @@ class tx_jfmulticontent_browselinkshooks implements t3lib_browseLinksHook
      * Replaces the 'file' item with the 'jfmulticontent' item
      * Adds DAM upload tab
      *
-     * @param	array	currently allowed items
+     * @param	array	$currentlyAllowedItems currently allowed items
      * @return	array	currently allowed items plus added items
      */
     public function addAllowedItems($currentlyAllowedItems)
@@ -71,7 +71,7 @@ class tx_jfmulticontent_browselinkshooks implements t3lib_browseLinksHook
      * Modifies the menu definition and returns it
      * Adds definition of the 'jfmulticontent' menu item
      *
-     * @param	array	menu definition
+     * @param	array	$menuDefinition menu definition
      * @return	array	modified menu definition
      */
     public function modifyMenuDefinition($menuDefinition)
@@ -88,7 +88,7 @@ class tx_jfmulticontent_browselinkshooks implements t3lib_browseLinksHook
      * Returns a new tab for the browse links wizard
      * Returns the 'media' tab to the RTE link browser
      *
-     * @param	string		current link selector action
+     * @param	string		$linkSelectorAction current link selector action
      * @return	string		a tab for the selected link action
      */
     public function getTab($linkSelectorAction)
@@ -98,12 +98,12 @@ class tx_jfmulticontent_browselinkshooks implements t3lib_browseLinksHook
             return false;
         }
 
-        $this->browseLinks = t3lib_div::makeInstance('tx_rtehtmlarea_browse_links');
+        $this->browseLinks = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('tx_rtehtmlarea_browse_links');
         $this->browseLinks->init();
 
         $content .= $this->browseLinks->addAttributesForm();
 
-        $pagetree = t3lib_div::makeInstance('tx_rtehtmlarea_pageTree');
+        $pagetree = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('tx_rtehtmlarea_pageTree');
         $pagetree->ext_showNavTitle = $GLOBALS['BE_USER']->getTSConfigVal('options.pageTree.showNavTitle');
         $pagetree->ext_showPageId = $GLOBALS['BE_USER']->getTSConfigVal('options.pageTree.showPageIdWithTitle');
         $pagetree->addField('nav_title');
@@ -112,10 +112,10 @@ class tx_jfmulticontent_browselinkshooks implements t3lib_browseLinksHook
 
         // Outputting Temporary DB mount notice:
         if (intval($GLOBALS['BE_USER']->getSessionData('pageTree_temporaryMountPoint'))) {
-            $link = '<a href="' . htmlspecialchars(t3lib_div::linkThisScript(array('setTempDBmount' => 0))) . '">' .
+            $link = '<a href="' . htmlspecialchars(\TYPO3\CMS\Core\Utility\GeneralUtility::linkThisScript(array('setTempDBmount' => 0))) . '">' .
                                 $GLOBALS['LANG']->sl('LLL:EXT:lang/locallang_core.xml:labels.temporaryDBmount', 1) .
                             '</a>';
-            $flashMessage = t3lib_div::makeInstance(
+            $flashMessage = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
                 't3lib_FlashMessage',
                 $link,
                 '',
@@ -170,16 +170,16 @@ class tx_jfmulticontent_browselinkshooks implements t3lib_browseLinksHook
         }
 
             // Draw the record list IF there is a page id to expand:
-        if ($expPageId && t3lib_utility_Math::canBeInterpretedAsInteger($expPageId) && $GLOBALS['BE_USER']->isInWebMount($expPageId)) {
+        if ($expPageId && \TYPO3\CMS\Core\Utility\MathUtility::canBeInterpretedAsInteger($expPageId) && $GLOBALS['BE_USER']->isInWebMount($expPageId)) {
 
                 // Set header:
             $out .= $this->browseLinks->barheader($GLOBALS['LANG']->getLL('contentElements') . ':');
 
                 // Create header for listing, showing the page title/icon:
             $titleLen=intval($GLOBALS['BE_USER']->uc['titleLen']);
-            $mainPageRec = t3lib_BEfunc::getRecordWSOL('pages', $expPageId);
-            $picon = t3lib_iconWorks::getSpriteIconForRecord('pages', $mainPageRec);
-            $picon .= t3lib_BEfunc::getRecordTitle('pages', $mainPageRec, true);
+            $mainPageRec = \TYPO3\CMS\Backend\Utility\BackendUtility::getRecordWSOL('pages', $expPageId);
+            $picon = \TYPO3\CMS\Backend\Utility\IconUtility::getSpriteIconForRecord('pages', $mainPageRec);
+            $picon .= \TYPO3\CMS\Backend\Utility\BackendUtility::getRecordTitle('pages', $mainPageRec, true);
             $out .= $picon . '<br />';
 
                 // Look up tt_content elements from the expanded page:
@@ -187,8 +187,8 @@ class tx_jfmulticontent_browselinkshooks implements t3lib_browseLinksHook
                             'uid,header,hidden,starttime,endtime,fe_group,CType,colPos,bodytext,tx_jfmulticontent_view,tx_jfmulticontent_pages,tx_jfmulticontent_contents',
                             'tt_content',
                             'pid=' . intval($expPageId) .
-                                t3lib_BEfunc::deleteClause('tt_content') .
-                                t3lib_BEfunc::versioningPlaceholderClause('tt_content'),
+                                \TYPO3\CMS\Backend\Utility\BackendUtility::deleteClause('tt_content') .
+                                \TYPO3\CMS\Backend\Utility\BackendUtility::versioningPlaceholderClause('tt_content'),
                             '',
                             'colPos,sorting'
                         );
@@ -198,29 +198,29 @@ class tx_jfmulticontent_browselinkshooks implements t3lib_browseLinksHook
             $c = 0;
             while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res)) {
                 $c++;
-                $icon = t3lib_iconWorks::getSpriteIconForRecord('tt_content', $row);
+                $icon = \TYPO3\CMS\Backend\Utility\IconUtility::getSpriteIconForRecord('tt_content', $row);
                 if ($this->browseLinks->curUrlInfo['act'] == 'page' && $this->browseLinks->curUrlInfo['cElement'] == $row['uid']) {
-                    $arrCol='<img' . t3lib_iconWorks::skinImg($GLOBALS['BACK_PATH'], 'gfx/blinkarrow_left.gif', 'width="5" height="9"') . ' class="c-blinkArrowL" alt="" />';
+                    $arrCol='<img' . \TYPO3\CMS\Backend\Utility\IconUtility::skinImg($GLOBALS['BACK_PATH'], 'gfx/blinkarrow_left.gif', 'width="5" height="9"') . ' class="c-blinkArrowL" alt="" />';
                 } else {
                     $arrCol='';
                 }
                     // Putting list element HTML together:
-                $out.='<img' . t3lib_iconWorks::skinImg($GLOBALS['BACK_PATH'], 'gfx/ol/join' . ($c==$cc?'bottom':'') . '.gif', 'width="18" height="16"') . ' alt="" />' .
+                $out.='<img' . \TYPO3\CMS\Backend\Utility\IconUtility::skinImg($GLOBALS['BACK_PATH'], 'gfx/ol/join' . ($c==$cc?'bottom':'') . '.gif', 'width="18" height="16"') . ' alt="" />' .
                         $arrCol .
                         '<a href="#" onclick="return link_typo3Page(\'' . $expPageId . '\',\'#' . $row['uid'] . '\');">' .
                         $icon .
-                        t3lib_BEfunc::getRecordTitle('tt_content', $row, true) .
+                        \TYPO3\CMS\Backend\Utility\BackendUtility::getRecordTitle('tt_content', $row, true) .
                         '</a><br />';
 
                 $contents = array();
                 // get all contents
                 switch ($row['tx_jfmulticontent_view']) {
                     case 'page' : {
-                        $contents = t3lib_div::trimExplode(',', $row['tx_jfmulticontent_pages']);
+                        $contents = \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode(',', $row['tx_jfmulticontent_pages']);
                         break;
                     }
                     case 'content' : {
-                        $contents = t3lib_div::trimExplode(',', $row['tx_jfmulticontent_contents']);
+                        $contents = \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode(',', $row['tx_jfmulticontent_contents']);
                         break;
                     }
                     case 'irre' : {
@@ -234,8 +234,8 @@ class tx_jfmulticontent_browselinkshooks implements t3lib_browseLinksHook
                 }
 
                 if (count($contents) > 0) {
-                    $out .= '<img' . t3lib_iconWorks::skinImg($GLOBALS['BACK_PATH'], 'gfx/ol/line.gif', 'width="18" height="16"') . ' alt="" />' .
-                            '<img' . t3lib_iconWorks::skinImg($GLOBALS['BACK_PATH'], 'gfx/ol/blank.gif', 'width="18" height="16"') . ' alt="" />';
+                    $out .= '<img' . \TYPO3\CMS\Backend\Utility\IconUtility::skinImg($GLOBALS['BACK_PATH'], 'gfx/ol/line.gif', 'width="18" height="16"') . ' alt="" />' .
+                            '<img' . \TYPO3\CMS\Backend\Utility\IconUtility::skinImg($GLOBALS['BACK_PATH'], 'gfx/ol/blank.gif', 'width="18" height="16"') . ' alt="" />';
                     foreach ($contents as $key => $content) {
                         $out .= '<a href="#" onclick="return link_typo3Page(\'' . $expPageId . '\',\'#jfmulticontent_c' . $row['uid'] . '-' . ($key+1) . '\');">' .
                                 '&nbsp;' . ($key + 1) . '&nbsp;' .

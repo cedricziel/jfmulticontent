@@ -13,6 +13,7 @@ $tempColumns = array(
         'label' => 'LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.view',
         'config' => array(
             'type' => 'select',
+            'renderType' => 'selectSingle',
             'size' => 1,
             'maxitems' => 1,
             'default' => 'content',
@@ -77,6 +78,7 @@ if ($confArr['useStoragePidOnly']) {
         'label' => 'LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.contents',
         'config' => array(
             'type' => 'select',
+            'renderType' => 'selectMultipleSideBySide',
             'foreign_table' => 'tt_content',
             'foreign_table_where' => 'AND tt_content.pid=###STORAGE_PID### AND tt_content.hidden=0 AND tt_content.deleted=0 AND tt_content.sys_language_uid IN (0,-1) ORDER BY tt_content.uid',
             'size' => 12,

@@ -41,4 +41,10 @@ if ($confArr['addBrowseLinks']) {
     }
 }
 
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPItoST43($_EXTKEY, 'pi1/class.tx_jfmulticontent_pi1.php', '_pi1', 'list_type', 1);
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPItoST43(
+    $_EXTKEY,
+    'pi1/class.tx_jfmulticontent_pi1.php',
+    '_pi1',
+    'list_type',
+    1
+);

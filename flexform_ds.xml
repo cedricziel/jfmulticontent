@@ -16,15 +16,16 @@
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.style</label>
 							<config>
 								<type>select</type>
+								<renderType>selectSingle</renderType>
 								<size>1</size>
 								<maxitems>1</maxitems>
 								<itemsProcFunc>tx_jfmulticontent_itemsProcFunc->getStyle</itemsProcFunc>
 							</config>
 						</TCEforms>
 					</style>
-					
+
 					<!-- COLUMN -->
-					
+
 					<columnOrder>
 						<TCEforms>
 							<exclude>1</exclude>
@@ -32,6 +33,7 @@
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.columnOrder</label>
 							<config>
 								<type>select</type>
+								<renderType>selectSingle</renderType>
 								<size>1</size>
 								<maxitems>1</maxitems>
 								<default></default>
@@ -62,6 +64,7 @@
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.column1</label>
 							<config>
 								<type>select</type>
+								<renderType>selectSingle</renderType>
 								<size>1</size>
 								<maxitems>1</maxitems>
 								<itemsProcFunc>tx_jfmulticontent_itemsProcFunc->getClassInner</itemsProcFunc>
@@ -75,6 +78,7 @@
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.column2</label>
 							<config>
 								<type>select</type>
+								<renderType>selectSingle</renderType>
 								<size>1</size>
 								<maxitems>1</maxitems>
 								<itemsProcFunc>tx_jfmulticontent_itemsProcFunc->getClassInner</itemsProcFunc>
@@ -88,6 +92,7 @@
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.column3</label>
 							<config>
 								<type>select</type>
+								<renderType>selectSingle</renderType>
 								<size>1</size>
 								<maxitems>1</maxitems>
 								<itemsProcFunc>tx_jfmulticontent_itemsProcFunc->getClassInner</itemsProcFunc>
@@ -101,6 +106,7 @@
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.column4</label>
 							<config>
 								<type>select</type>
+								<renderType>selectSingle</renderType>
 								<size>1</size>
 								<maxitems>1</maxitems>
 								<itemsProcFunc>tx_jfmulticontent_itemsProcFunc->getClassInner</itemsProcFunc>
@@ -114,6 +120,7 @@
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.column5</label>
 							<config>
 								<type>select</type>
+								<renderType>selectSingle</renderType>
 								<size>1</size>
 								<maxitems>1</maxitems>
 								<itemsProcFunc>tx_jfmulticontent_itemsProcFunc->getClassInner</itemsProcFunc>
@@ -132,9 +139,9 @@
 							</config>
 						</TCEforms>
 					</equalize>
-					
+
 					<!-- TAB -->
-					
+
 					<tabCollapsible>
 						<TCEforms>
 							<exclude>1</exclude>
@@ -180,6 +187,7 @@
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.tabEvent</label>
 							<config>
 								<type>select</type>
+								<renderType>selectSingle</renderType>
 								<size>1</size>
 								<maxitems>1</maxitems>
 								<items type="array">
@@ -206,6 +214,7 @@
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.tabHeightStyle</label>
 							<config>
 								<type>select</type>
+								<renderType>selectSingle</renderType>
 								<size>1</size>
 								<maxitems>1</maxitems>
 								<items type="array">
@@ -263,6 +272,7 @@
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.tabHideEffect</label>
 							<config>
 								<type>select</type>
+								<renderType>selectSingle</renderType>
 								<size>1</size>
 								<maxitems>1</maxitems>
 								<items type="array">
@@ -293,6 +303,7 @@
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.tabHideTransition</label>
 							<config>
 								<type>select</type>
+								<renderType>selectSingle</renderType>
 								<size>1</size>
 								<maxitems>1</maxitems>
 								<items type="array">
@@ -359,6 +370,7 @@
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.tabHideTransitiondir</label>
 							<config>
 								<type>select</type>
+								<renderType>selectSingle</renderType>
 								<size>1</size>
 								<maxitems>1</maxitems>
 								<items type="array">
@@ -404,6 +416,7 @@
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.tabShowEffect</label>
 							<config>
 								<type>select</type>
+								<renderType>selectSingle</renderType>
 								<size>1</size>
 								<maxitems>1</maxitems>
 								<items type="array">
@@ -434,6 +447,7 @@
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.tabShowTransition</label>
 							<config>
 								<type>select</type>
+								<renderType>selectSingle</renderType>
 								<size>1</size>
 								<maxitems>1</maxitems>
 								<items type="array">
@@ -500,6 +514,7 @@
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.tabShowTransitiondir</label>
 							<config>
 								<type>select</type>
+								<renderType>selectSingle</renderType>
 								<size>1</size>
 								<maxitems>1</maxitems>
 								<items type="array">
@@ -538,9 +553,9 @@
 							</config>
 						</TCEforms>
 					</tabShowTransitionduration>
-					
+
 					<!-- ACCORDION -->
-					
+
 					<accordionCollapsible>
 						<TCEforms>
 							<exclude>1</exclude>
@@ -599,6 +614,7 @@
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.accordionEvent</label>
 							<config>
 								<type>select</type>
+								<renderType>selectSingle</renderType>
 								<size>1</size>
 								<maxitems>1</maxitems>
 								<items type="array">
@@ -625,6 +641,7 @@
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.accordionHeightStyle</label>
 							<config>
 								<type>select</type>
+								<renderType>selectSingle</renderType>
 								<size>1</size>
 								<maxitems>1</maxitems>
 								<items type="array">
@@ -667,6 +684,7 @@
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.accordionTransition</label>
 							<config>
 								<type>select</type>
+								<renderType>selectSingle</renderType>
 								<size>1</size>
 								<maxitems>1</maxitems>
 								<items type="array">
@@ -733,6 +751,7 @@
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.accordionTransitiondir</label>
 							<config>
 								<type>select</type>
+								<renderType>selectSingle</renderType>
 								<size>1</size>
 								<maxitems>1</maxitems>
 								<items type="array">
@@ -771,9 +790,9 @@
 							</config>
 						</TCEforms>
 					</accordionTransitionduration>
-					
+
 					<!-- SLIDER -->
-					
+
 					<sliderWidth>
 						<TCEforms>
 							<exclude>1</exclude>
@@ -819,6 +838,7 @@
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.sliderTheme</label>
 							<config>
 								<type>select</type>
+								<renderType>selectSingle</renderType>
 								<size>1</size>
 								<maxitems>1</maxitems>
 								<items type="array">
@@ -838,6 +858,7 @@
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.sliderMode</label>
 							<config>
 								<type>select</type>
+								<renderType>selectSingle</renderType>
 								<size>1</size>
 								<maxitems>1</maxitems>
 								<items type="array">
@@ -1040,6 +1061,7 @@
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.sliderTransition</label>
 							<config>
 								<type>select</type>
+								<renderType>selectSingle</renderType>
 								<size>1</size>
 								<maxitems>1</maxitems>
 								<items type="array">
@@ -1106,6 +1128,7 @@
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.sliderTransitiondir</label>
 							<config>
 								<type>select</type>
+								<renderType>selectSingle</renderType>
 								<size>1</size>
 								<maxitems>1</maxitems>
 								<items type="array">
@@ -1156,9 +1179,9 @@
 							</config>
 						</TCEforms>
 					</sliderAutoplay>
-					
+
 					<!-- SLIDEDECK -->
-					
+
 					<slidedeckHeight>
 						<TCEforms>
 							<exclude>1</exclude>
@@ -1181,6 +1204,7 @@
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.slidedeckTransition</label>
 							<config>
 								<type>select</type>
+								<renderType>selectSingle</renderType>
 								<size>1</size>
 								<maxitems>1</maxitems>
 								<items type="array">
@@ -1247,6 +1271,7 @@
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.slidedeckTransitiondir</label>
 							<config>
 								<type>select</type>
+								<renderType>selectSingle</renderType>
 								<size>1</size>
 								<maxitems>1</maxitems>
 								<items type="array">
@@ -1360,9 +1385,9 @@
 							</config>
 						</TCEforms>
 					</slidedeckHidespines>
-					
+
 					<!-- EASYACCORDION -->
-					
+
 					<easyaccordionSkin>
 						<TCEforms>
 							<exclude>1</exclude>
@@ -1370,6 +1395,7 @@
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.easyaccordionSkin</label>
 							<config>
 								<type>select</type>
+								<renderType>selectSingle</renderType>
 								<size>1</size>
 								<maxitems>1</maxitems>
 								<items type="array">
@@ -1424,9 +1450,9 @@
 							</config>
 						</TCEforms>
 					</easyaccordionSlideNum>
-					
+
 					<!-- BOOKLET -->
-					
+
 					<bookletWidth>
 						<TCEforms>
 							<exclude>1</exclude>
@@ -1506,6 +1532,7 @@
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.bookletTransition</label>
 							<config>
 								<type>select</type>
+								<renderType>selectSingle</renderType>
 								<size>1</size>
 								<maxitems>1</maxitems>
 								<items type="array">
@@ -1572,6 +1599,7 @@
 							<label>LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.bookletTransitiondir</label>
 							<config>
 								<type>select</type>
+								<renderType>selectSingle</renderType>
 								<size>1</size>
 								<maxitems>1</maxitems>
 								<items type="array">
@@ -1781,9 +1809,9 @@
 							</config>
 						</TCEforms>
 					</bookletHovers>
-					
+
 					<!-- TYPOSCRIPT -->
-					
+
 					<typoscriptInfo>
 						<TCEforms>
 							<exclude>1</exclude>
@@ -1795,9 +1823,9 @@
 							</config>
 						</TCEforms>
 					</typoscriptInfo>
-					
+
 					<!-- AUTOPLAY -->
-					
+
 					<delayDuration>
 						<TCEforms>
 							<exclude>1</exclude>
