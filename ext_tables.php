@@ -91,7 +91,9 @@ if ($confArr['useStoragePidOnly']) {
                     'type'   => 'script',
                     'title'  => 'LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.contents_add',
                     'icon'   => 'EXT:backend/Resources/Public/Images/FormFieldWizard/wizard_add.gif',
-                    'script' => 'wizard_add.php',
+                    'module' => array(
+			'name' => 'wizard_add'
+		    ),
                     'params' => array(
                         'table'    => 'tt_content',
                         'pid'      => '###STORAGE_PID###',
@@ -102,7 +104,9 @@ if ($confArr['useStoragePidOnly']) {
                     'type'   => 'script',
                     'title'  => 'List',
                     'icon'   => 'EXT:backend/Resources/Public/Images/FormFieldWizard/wizard_list.gif',
-                    'script' => 'wizard_list.php',
+                    'module' => array(
+               		'name' => 'wizard_list'
+                    ),
                     'params' => array(
                         'table' => 'tt_content',
                         'pid'   => '###STORAGE_PID###',
@@ -112,7 +116,9 @@ if ($confArr['useStoragePidOnly']) {
                     'type'   => 'popup',
                     'title'  => 'LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.contents_edit',
                     'icon'   => 'EXT:backend/Resources/Public/Images/FormFieldWizard/wizard_edit.gif',
-                    'script' => 'wizard_edit.php',
+                    'module' => array(
+                        'name' => 'wizard_edit',
+                    ),
                     'popup_onlyOpenIfSelected' => 1,
                     'JSopenParams' => 'height=600,width=800,status=0,menubar=0,scrollbars=1',
                 ),
@@ -138,7 +144,9 @@ if ($confArr['useStoragePidOnly']) {
                     'type'   => 'script',
                     'title'  => 'LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.contents_add',
                     'icon'   => 'EXT:backend/Resources/Public/Images/FormFieldWizard/wizard_add.gif',
-                    'script' => 'wizard_add.php',
+                    'module' => array(
+			'name' => 'wizard_add'
+		    ),
                     'params' => array(
                         'table'    => 'tt_content',
                         'pid'      => '###STORAGE_PID###',
@@ -149,7 +157,9 @@ if ($confArr['useStoragePidOnly']) {
                     'type'   => 'script',
                     'title'  => 'List',
                     'icon'   => 'EXT:backend/Resources/Public/Images/FormFieldWizard/wizard_list.gif',
-                    'script' => 'wizard_list.php',
+                    'module' => array(
+               		'name' => 'wizard_list'
+                    ),
                     'params' => array(
                         'table' => 'tt_content',
                         'pid'   => '###STORAGE_PID###',
@@ -159,7 +169,9 @@ if ($confArr['useStoragePidOnly']) {
                     'type'   => 'popup',
                     'title'  => 'LLL:EXT:jfmulticontent/locallang_db.xml:tt_content.tx_jfmulticontent.contents_edit',
                     'icon'   => 'EXT:backend/Resources/Public/Images/FormFieldWizard/wizard_edit.gif',
-                    'script' => 'wizard_edit.php',
+                    'module' => array(
+                        'name' => 'wizard_edit',
+                    ),
                     'popup_onlyOpenIfSelected' => 1,
                     'JSopenParams' => 'height=600,width=800,status=0,menubar=0,scrollbars=1',
                 ),
@@ -183,7 +195,7 @@ $TCA['tt_content']['ctrl']['requestUpdate'] .= ($TCA['tt_content']['ctrl']['requ
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPiFlexFormValue($_EXTKEY . '_pi1', 'FILE:EXT:' . $_EXTKEY . '/flexform_ds.xml');
 
 if (TYPO3_MODE == 'BE') {
-    $TBE_MODULES_EXT['xMOD_db_new_content_el']['addElClasses']['tx_jfmulticontent_pi1_wizicon'] = t3lib_extMgm::extPath($_EXTKEY) . 'pi1/class.tx_jfmulticontent_pi1_wizicon.php';
+    $TBE_MODULES_EXT['xMOD_db_new_content_el']['addElClasses']['tx_jfmulticontent_pi1_wizicon'] = \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKEY) . 'pi1/class.tx_jfmulticontent_pi1_wizicon.php';
     if (! isset($TCA['tt_content']['columns']['colPos']['config']['items'][$confArr['colPosOfIrreContent']])) {
         // Add the new colPos to the array, only if the ID does not exist...
         $TCA['tt_content']['columns']['colPos']['config']['items'][$confArr['colPosOfIrreContent']] = array($_EXTKEY, $confArr['colPosOfIrreContent']);

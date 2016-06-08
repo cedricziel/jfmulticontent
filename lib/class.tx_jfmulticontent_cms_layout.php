@@ -39,7 +39,7 @@ class tx_jfmulticontent_cms_layout
     public function getExtensionSummary($params, &$pObj)
     {
         if ($params['row']['list_type'] == 'jfmulticontent_pi1') {
-            $data = t3lib_div::xml2array($params['row']['pi_flexform']);
+            $data = \TYPO3\CMS\Core\Utility\GeneralUtility::xml2array($params['row']['pi_flexform']);
             if (is_array($data) && $data['data']['general']['lDEF']['style']['vDEF']) {
                 $result = sprintf($GLOBALS['LANG']->sL('LLL:EXT:jfmulticontent/locallang.xml:cms_layout.style'), '<strong>' . $data['data']['general']['lDEF']['style']['vDEF'] . '</strong><br/>');
             }
@@ -47,7 +47,7 @@ class tx_jfmulticontent_cms_layout
                 $result = $GLOBALS['LANG']->sL('LLL:EXT:jfmulticontent/locallang.xml:cms_layout.not_configured') . '<br/>';
             }
         }
-        if (t3lib_extMgm::isLoaded('templavoila')) {
+        if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('templavoila')) {
             $result = strip_tags($result);
         }
         return $result;
