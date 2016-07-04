@@ -68,7 +68,7 @@ class tx_jfmulticontent_pi1_wizicon
             $LOCAL_LANG = \TYPO3\CMS\Core\Localization\Parser\LocallangXmlParser::readLLXMLfile($llFile, $GLOBALS['LANG']->lang);
         } else {
             /** @var $llxmlParser  */
-            $llxmlParser = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('t3lib_l10n_parser_Llxml');
+            $llxmlParser = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\CMS\Core\Localization\Parser\LocallangXmlParser');
             $LOCAL_LANG = $llxmlParser->getParsedData($llFile, $GLOBALS['LANG']->lang);
         }
 
