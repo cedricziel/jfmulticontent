@@ -1,6 +1,6 @@
 
 # cat=basic/enable/010; type=boolean; label=Use General Record Storage page only: If set, only content can be choosen from the defined General Record Storage page
-useStoragePidOnly = 1
+useStoragePidOnly = 0
 
 # cat=basic/enable/020; type=boolean; label=Activate tt_news codes: Enables the additional codes in tt_news
 ttNewsCodes = 0
