@@ -166,7 +166,7 @@ class tx_jfmulticontent_ttnews_extend
                             }
                         }
                     } else {
-                        t3lib_div::devLog("'{$jsToLoad}' does not exists!", $this->extKey, 2);
+                        \TYPO3\CMS\Core\Utility\GeneralUtility::devLog("'{$jsToLoad}' does not exists!", $this->extKey, 2);
                     }
                 }
             }
@@ -196,12 +196,12 @@ class tx_jfmulticontent_ttnews_extend
                     }
                 } else {
                     if ($this->conf['jsMinify']) {
-                        $temp_js = t3lib_div::minifyJavaScript($temp_js);
+                        $temp_js = \TYPO3\CMS\Core\Utility\GeneralUtility::minifyJavaScript($temp_js);
                     }
                     if ($this->conf['jsInFooter'] || $allJsInFooter) {
-                        $GLOBALS['TSFE']->additionalFooterData['js_' . $this->extKey . '_' . $hash] = t3lib_div::wrapJS($temp_js, true);
+                        $GLOBALS['TSFE']->additionalFooterData['js_' . $this->extKey . '_' . $hash] = \TYPO3\CMS\Core\Utility\GeneralUtility::wrapJS($temp_js, true);
                     } else {
-                        $GLOBALS['TSFE']->additionalHeaderData['js_' . $this->extKey . '_' . $hash] = t3lib_div::wrapJS($temp_js, true);
+                        $GLOBALS['TSFE']->additionalHeaderData['js_' . $this->extKey . '_' . $hash] = \TYPO3\CMS\Core\Utility\GeneralUtility::wrapJS($temp_js, true);
                     }
                 }
             }
@@ -218,7 +218,7 @@ class tx_jfmulticontent_ttnews_extend
                         $GLOBALS['TSFE']->additionalHeaderData['cssFile_' . $this->extKey . '_' . $file] = '<link rel="stylesheet" type="text/css" href="' . $file . '" media="all" />' . chr(10);
                     }
                 } else {
-                    t3lib_div::devLog("'{$cssToLoad}' does not exists!", $this->extKey, 2);
+                    \TYPO3\CMS\Core\Utility\GeneralUtility::devLog("'{$cssToLoad}' does not exists!", $this->extKey, 2);
                 }
             }
         }
@@ -345,19 +345,19 @@ class tx_jfmulticontent_ttnews_extend
         $this->setFlexFormData();
         if (! isset($this->piFlexForm['data'])) {
             if ($devlog === true) {
-                t3lib_div::devLog('Flexform Data not set', $this->extKey, 1);
+                \TYPO3\CMS\Core\Utility\GeneralUtility::devLog('Flexform Data not set', $this->extKey, 1);
             }
             return null;
         }
         if (! isset($this->piFlexForm['data'][$sheet])) {
             if ($devlog === true) {
-                t3lib_div::devLog("Flexform sheet '{$sheet}' not defined", $this->extKey, 1);
+                \TYPO3\CMS\Core\Utility\GeneralUtility::devLog("Flexform sheet '{$sheet}' not defined", $this->extKey, 1);
             }
             return null;
         }
         if (! isset($this->piFlexForm['data'][$sheet]['lDEF'][$name])) {
             if ($devlog === true) {
-                t3lib_div::devLog("Flexform Data [{$sheet}][{$name}] does not exist", $this->extKey, 1);
+                \TYPO3\CMS\Core\Utility\GeneralUtility::devLog("Flexform Data [{$sheet}][{$name}] does not exist", $this->extKey, 1);
             }
             return null;
         }

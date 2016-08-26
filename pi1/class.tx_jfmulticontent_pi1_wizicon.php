@@ -61,9 +61,7 @@ class tx_jfmulticontent_pi1_wizicon
     public function includeLocalLang()
     {
         $llFile = \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath('jfmulticontent') . 'locallang.xml';
-        $version = class_exists('t3lib_utility_VersionNumber')
-            ? \TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger(TYPO3_version)
-            : \TYPO3\CMS\Core\Utility\GeneralUtility::int_from_ver(TYPO3_version);
+        $version = \TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger(TYPO3_version);
         if ($version < 4006000) {
             $LOCAL_LANG = \TYPO3\CMS\Core\Localization\Parser\LocallangXmlParser::readLLXMLfile($llFile, $GLOBALS['LANG']->lang);
         } else {
