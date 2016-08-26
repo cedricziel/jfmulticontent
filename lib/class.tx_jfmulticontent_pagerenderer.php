@@ -122,12 +122,12 @@ class tx_jfmulticontent_pagerenderer
                     }
                 } else {
                     if ($this->conf['jsMinify']) {
-                        $temp_js = t3lib_div::minifyJavaScript($temp_js);
+                        $temp_js = \TYPO3\CMS\Core\Utility\GeneralUtility::minifyJavaScript($temp_js);
                     }
                     if ($this->conf['jsInFooter'] || $allJsInFooter) {
-                        $GLOBALS['TSFE']->additionalFooterData['js_' . $this->extKey . '_' . $hash] = t3lib_div::wrapJS($temp_js, true);
+                        $GLOBALS['TSFE']->additionalFooterData['js_' . $this->extKey . '_' . $hash] = \TYPO3\CMS\Core\Utility\GeneralUtility::wrapJS($temp_js, true);
                     } else {
-                        $GLOBALS['TSFE']->additionalHeaderData['js_' . $this->extKey . '_' . $hash] = t3lib_div::wrapJS($temp_js, true);
+                        $GLOBALS['TSFE']->additionalHeaderData['js_' . $this->extKey . '_' . $hash] = \TYPO3\CMS\Core\Utility\GeneralUtility::wrapJS($temp_js, true);
                     }
                 }
             }
@@ -157,7 +157,7 @@ class tx_jfmulticontent_pagerenderer
                     // Theres no possibility to add conditions for IE by pagerenderer, so this will be added in additionalHeaderData
                     $GLOBALS['TSFE']->additionalHeaderData['cssFile_' . $this->extKey . '_' . $file] = '<!--[if ' . $cssToLoad['rule'] . ']><link rel="stylesheet" type="text/css" href="' . $file . '" media="all" /><![endif]-->' . chr(10);
                 } else {
-                    t3lib_div::devLog("'{$cssToLoad['file']}' does not exists!", $this->extKey, 2);
+                    \TYPO3\CMS\Core\Utility\GeneralUtility::devLog("'{$cssToLoad['file']}' does not exists!", $this->extKey, 2);
                 }
             }
         }
