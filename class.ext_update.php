@@ -64,7 +64,7 @@ class ext_update
             $cssPath = $GLOBALS['BACK_PATH'] . t3lib_extMgm::extRelPath('jfmulticontent');
             $out .= '<link rel="stylesheet" type="text/css" href="' . $cssPath . 'compat/flashmessages.css" media="screen" />';
         }
-        $this->flexObj = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('t3lib_flexformtools');
+        $this->flexObj = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Configuration\FlexForm\FlexFormTools::class);
         // analyze
         $this->contentElements = $this->getContentElements();
         $this->wrongLanguage   = $this->getWrongLanguage();
@@ -92,7 +92,7 @@ class ext_update
             }
         } else {
             $out .= '<a href="' . \TYPO3\CMS\Core\Utility\GeneralUtility::linkThisScript(array('do_update' => '', 'func' => '')) . '">' . $GLOBALS['LANG']->sL($this->ll . 'reload') . '
-			<img style="vertical-align:bottom;" ' . t3lib_iconWorks::skinImg($GLOBALS['BACK_PATH'], 'gfx/refresh_n.gif', 'width="18" height="16"') . '></a><br/>';
+			<img style="vertical-align:bottom;" src="/typo3/sysext/t3skin/extjs/images/grid/refresh.gif" width="18" height="16"></a><br/>';
             $out .= $this->displayWarning();
             $out .= '<h3>' . $GLOBALS['LANG']->sL($this->ll . 'actions') . '</h3>';
             // Update all flexform
@@ -117,7 +117,7 @@ class ext_update
     {
         $msg = $GLOBALS['LANG']->sL($this->ll . 'msg_' . $k) . ' ';
         $msg .= '<br/><strong>' . str_replace('###COUNT###', $count, $GLOBALS['LANG']->sL($this->ll . 'foundMsg_' . $k)) . '</strong>';
-        $msg .= ' <img ' . t3lib_iconWorks::skinImg($GLOBALS['BACK_PATH'], 'gfx/icon_' . ($count == 0 ? 'ok' : 'warning2') . '.gif', 'width="18" height="16"') . '>';
+        $msg .= ' <img src="/typo3conf/ext/jfmulticontent/compat/gfx/' . ($count == 0 ? 'ok' : 'warning') . '.png" width="18" height="16">';
         if ($count) {
             $msg .= '<p style="margin:5px 0;">' . $GLOBALS['LANG']->sL($this->ll . 'question_' . $k) . '<p>';
             $msg .= '<p style="margin-bottom:10px;"><em>' . $GLOBALS['LANG']->sL($this->ll . 'questionInfo_' . $k) . '</em><p>';
