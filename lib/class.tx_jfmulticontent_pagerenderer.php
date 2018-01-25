@@ -57,7 +57,7 @@ class tx_jfmulticontent_pagerenderer
     public function addResources()
     {
         /** @var \TYPO3\CMS\Core\Page\PageRenderer $pagerender */
-        $pagerender = $GLOBALS['TSFE']->getPageRenderer();
+        $pagerender = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Page\PageRenderer::class);
         // Fix moveJsFromHeaderToFooter (add all scripts to the footer)
         if ($GLOBALS['TSFE']->config['config']['moveJsFromHeaderToFooter']) {
             $allJsInFooter = true;
